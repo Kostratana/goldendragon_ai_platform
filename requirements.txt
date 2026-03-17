@@ -63,4 +63,4 @@ cffi
 
 # --- Streamlit website ---
 streamlit
-altair
+altair==4.2.2
