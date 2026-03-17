@@ -63,3 +63,4 @@ cffi
 
 # --- Streamlit website ---
 streamlit
+altair
