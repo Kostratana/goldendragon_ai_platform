@@ -1,0 +1,65 @@
+# --- Core AI ---
+torch
+torchvision
+torchaudio
+
+# --- Computer Vision ---
+opencv-python
+pillow
+easyocr
+pytesseract
+ultralytics
+
+# --- OCR / Documents ---
+pdf2image
+pdfplumber
+pymupdf
+PyPDF2
+python-docx
+docx2txt
+pypandoc
+mammoth
+striprtf
+cairosvg
+
+# --- HTML / Web parsing ---
+beautifulsoup4
+lxml
+html2text
+EbookLib
+
+# --- Dataset processing ---
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+
+# --- NLP ---
+sentencepiece
+langdetect
+pyspellchecker
+
+# --- Async / API ---
+fastapi
+uvicorn
+aiofiles
+aiohttp
+
+# --- Utilities ---
+requests
+cachetools
+nest_asyncio
+olefile
+rarfile
+py7zr
+
+# --- Parsing / language tools ---
+lark
+lark-parser
+pygments
+astunparse
+cffi
+
+# --- Streamlit website ---
+streamlit
