@@ -4,7 +4,7 @@ torchvision
 torchaudio
 
 # --- Computer Vision ---
-opencv-python
+opencv-python-headless
 pillow
 easyocr
 pytesseract
@@ -54,13 +54,12 @@ olefile
 rarfile
 py7zr
 
-# --- Parsing / language tools ---
+# --- Parsing ---
 lark
-lark-parser
 pygments
 astunparse
 cffi
 
-# --- Streamlit website ---
-streamlit
+# --- Streamlit ---
+streamlit==1.32.0
 altair==4.2.2
