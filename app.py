@@ -145,6 +145,7 @@ def groq_llm(prompt: str) -> str:
     except Exception as e:
         return f"⚠️ Groq error: {str(e)}"
 
+
 def get_image_base64(path: str) -> str:
     import base64
     if not os.path.exists(path):
@@ -209,12 +210,10 @@ def load_image(path: str) -> str:
 
 def safe_image(path: str, caption: str = "") -> None:
     if os.path.exists(path):
-        if caption and caption.strip():
-            st.image(load_image(path), caption=caption, width="stretch", output_format="JPEG")
-        else:
-            st.image(load_image(path), width="stretch", output_format="JPEG")
+        st.image(load_image(path), use_column_width=True, output_format="PNG")
     else:
         st.markdown(tr("Image not found"))
+
 
 def demo_neural_network(file):
     return """Neural Network Analysis:
@@ -259,12 +258,15 @@ def add_model_log(message: str) -> None:
 
 def reset_model_outputs() -> None:
     st.session_state.model_logs = []
-
 st.markdown("""
 <style>
 html, body, .stApp { background: #000000; color: #ffffff; }
 .stApp { background: radial-gradient(circle at center, rgba(255,215,0,0.08), #000000 70%); animation: appFadeIn 0.8s ease; }
 @keyframes appFadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+
+label, .stMarkdown, .stText, .stCaption, .stTextArea label, .stSelectbox label, .stFileUploader label {
+    color: #ffffff !important;
+}
 
 button, .stDownloadButton button, div[data-baseweb="select"] {
     background: rgba(20,20,20,0.6) !important;
@@ -306,10 +308,72 @@ div[data-baseweb="select"] span {
     color: #fff !important;
 }
 
+div[data-baseweb="popover"] {
+    background: #000000 !important;
+    border: 1px solid #d4af37 !important;
+}
+ul[data-baseweb="menu"] {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+ul[data-baseweb="menu"] li {
+    color: #ffffff !important;
+}
+ul[data-baseweb="menu"] li:hover {
+    background: #222222 !important;
+    color: #fff1a8 !important;
+}
+
 [data-testid="stFileUploader"] {
     background: rgba(20,20,20,0.9) !important;
     border: 1px solid #d4af37 !important;
     border-radius: 12px !important;
+}
+[data-testid="stFileUploader"] * {
+    color: #ffffff !important;
+}
+
+textarea {
+    background: rgba(20,20,20,0.9) !important;
+    color: #ffffff !important;
+    border: 1px solid #d4af37 !important;
+    border-radius: 12px !important;
+}
+
+.stCodeBlock, pre, code {
+    background: rgba(20,20,20,0.9) !important;
+    color: #ffffff !important;
+    border: 1px solid #d4af37 !important;
+    border-radius: 12px !important;
+}
+
+.stImage > img {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.contact-block {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.6;
+}
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.contact-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.contact-icon {
+    width: 20px;
+    height: 20px;
 }
 
 /* BANNER */
@@ -447,7 +511,7 @@ def render_navbar() -> None:
         ("contact", tr("Contact"))
     ]
 
-    cols = st.columns([1, 1, 1, 1, 1, 1, 1, 1, 1])
+    cols = st.columns([1, 1, 1, 1, 1, 1, 1, 1])
 
     with cols[0]:
         st.markdown('<a class="arrow-link" href="#bottom">▼</a>', unsafe_allow_html=True)
@@ -622,12 +686,11 @@ FINAL RULES:
     st.session_state.murzik_memory.append(f"Murzik: {response}")
     st.session_state.murzik_memory = st.session_state.murzik_memory[-20:]
 
-def on_enter_send() -> None:
+def handle_chat_send() -> None:
     message = st.session_state.chat_input_line
     if message.strip():
         send_chat_message(message)
-        st.session_state.chat_input_line = ""
-        st.rerun()
+    st.session_state.chat_input_line = ""
 
 def render_chat_component() -> None:
     st.markdown('<div class="chat-shell">', unsafe_allow_html=True)
@@ -645,14 +708,9 @@ def render_chat_component() -> None:
         else:
             content = msg
             role = "agent"
-        safe_content = html.escape(content).replace("\\n", "<br>")
+        safe_content = html.escape(content).replace("\n", "<br>")
         if role == "agent":
-            bubbles_html += f'''
-            <div class="chat-row">
-                <img src="data:image/png;base64,{avatar_base64}" class="murzik-avatar">
-                <div class="bubble agent">{safe_content}</div>
-            </div>
-            '''
+            bubbles_html += f'''\n            <div class="chat-row">\n                <img src="data:image/png;base64,{avatar_base64}" class="murzik-avatar">\n                <div class="bubble agent">{safe_content}</div>\n            </div>\n            '''
         else:
             bubbles_html += f'<div class="bubble user">{safe_content}</div>'
     bubbles_html += "</div>"
@@ -660,14 +718,13 @@ def render_chat_component() -> None:
 
     col_input, col_send, col_upload, col_download, col_clear = st.columns([5, 1, 1, 1, 1])
     with col_input:
-        st.text_input(tr("Message"), key="chat_input_line")
+        st.text_input(tr("Message"), key="chat_input_line", on_change=handle_chat_send)
     with col_send:
-        if st.button(tr("Send"), key="chat_send"):
-            on_enter_send()
+        st.button(tr("Send"), key="chat_send", on_click=handle_chat_send)
     with col_upload:
         uploaded_file = st.file_uploader(tr("File"), type=["txt"], key="chat_file")
     with col_download:
-        st.download_button(tr("Save"), data="\\n".join(st.session_state.chat_messages), file_name="chat_history.txt", mime="text/plain", key="chat_download")
+        st.download_button(tr("Save"), data="\n".join(st.session_state.chat_messages), file_name="chat_history.txt", mime="text/plain", key="chat_download")
     with col_clear:
         if st.button(tr("Clean Chat"), key="chat_clear"):
             st.session_state.chat_messages = []
@@ -779,7 +836,7 @@ if st.session_state.page == "models":
     )
 
     allowed_types = ["png", "jpg", "jpeg", "pdf", "txt", "csv", "json", "zip"]
-    uploaded = st.file_uploader(tr("Upload file (supported formats:)") + " " + ", ".join(allowed_types), type=allowed_types, key="file_uploader_models")
+    uploaded = st.file_uploader(tr("Upload file (supported formats:") + " " + ", ".join(allowed_types), type=allowed_types, key="file_uploader_models")
     if uploaded is not None:
         st.session_state.uploaded_file_name = uploaded.name.replace(" ", "_")
 
@@ -1361,7 +1418,7 @@ if st.session_state.page == "chat":
     render_arrows_top_bottom()
 
     st.markdown('<div class="section-title">Murzik AI Assistant 🐉</div>', unsafe_allow_html=True)
-    st.markdown("""
+    st.markdown(""")
     <div class="description chat-intro">
     Welcome — I am Murzik, your AI assistant.<br><br>
     I represent advanced AI systems designed and developed by Svetlana Rumyantseva.<br><br>
@@ -1443,4 +1500,4 @@ st.markdown("""
 ">
 © 2026 Svetlana Rumyantseva. All rights reserved.
 </div>
-""", unsafe_allow_html=True)        
+""", unsafe_allow_html=True)
