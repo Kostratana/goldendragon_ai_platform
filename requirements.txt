@@ -1,16 +1,16 @@
-# --- Core AI ---
-torch
+# --- Core AI (опционально, тяжелые) ---
+torch>=2.0
 torchvision
 torchaudio
 
 # --- Computer Vision ---
 opencv-python-headless
 pillow
-easyocr
-pytesseract
 ultralytics
 
 # --- OCR / Documents ---
+easyocr
+pytesseract
 pdf2image
 pdfplumber
 pymupdf
@@ -32,8 +32,9 @@ EbookLib
 numpy
 pandas
 scikit-learn
+
+# --- Visualization (облегчено) ---
 matplotlib
-seaborn
 
 # --- NLP ---
 sentencepiece
@@ -63,3 +64,6 @@ cffi
 # --- Streamlit ---
 streamlit==1.32.0
 altair==4.2.2
+
+# --- Translation ---
+deep-translator==1.11.4
