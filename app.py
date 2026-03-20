@@ -76,6 +76,55 @@ AI Architect:
 Answer clearly and structured.
 """
 
+HOME_PAGE_TEXT = """
+Golden Dragon AI — AI Systems Architect and Data Scientist.
+
+AI Systems, Agents, Machine Learning Platforms and Dataset Engineering for Business Automation.
+
+Development of applied artificial intelligence systems including AI agents, multimodal AI pipelines, machine learning models, dataset engineering, and intelligent automation platforms designed for real-world business environments.
+
+This website presents working AI systems, model demonstrations, and applied machine learning solutions that show how artificial intelligence can be used to automate processes, analyze complex data, and support operational decision-making.
+
+The focus of this work is building complete AI systems, not just standalone models. Each solution combines dataset preparation, data pipelines, trained models, automation workflows, and production deployment into reliable systems that can be integrated into real company environments.
+
+This platform demonstrates applied artificial intelligence technologies, working AI models, intelligent agents, and machine learning systems, showing how modern AI solutions can be integrated into real operational environments.
+
+The technologies presented here illustrate how artificial intelligence can support automation, analytics, decision-making, and intelligent workflows across different industries and business processes.
+"""
+
+IMPLEMENTED_PROJECTS_TEXT = """
+Implemented Projects:
+
+1. ZetAI — Multimodal Artificial Intelligence Platform.
+Platform for multimodal data processing, dataset preparation, and machine learning workflows.
+
+2. Airport Security Object Detection System.
+Computer vision system for detecting prohibited objects in passenger screening images.
+
+3. Logistics Route Optimization System.
+AI system for optimizing transportation routes using classical and hybrid algorithms.
+
+4. AI Judging System for Kyokushinkai Karate.
+Computer vision system for pose analysis and judging support in competitions.
+
+5. Bridge Infrastructure Defect Detection System.
+Computer vision system for infrastructure defect detection and monitoring.
+
+6. Exoplanet Habitability & Water Detection AI System (NASA Space Apps Challenge 2024).
+Machine learning system for predicting life potential and water presence on exoplanets.
+"""
+
+CONTACTS_TEXT = """
+Contacts:
+Email: srumyantseva7@gmail.com
+WhatsApp: +507 6404 58 77
+Telegram: @Svetlana_KostraTana
+GitHub: https://github.com/Kostratana/Greeting_page_links-
+LinkedIn: https://www.linkedin.com/in/svetlana-rumyantseva-5b41962b9/
+Kaggle: https://www.kaggle.com/svetlanarumyantseva7
+YouTube: https://www.youtube.com/
+"""
+
 MAX_FILE_SIZE_MB = 3
 
 PROJECTS = [
@@ -106,6 +155,7 @@ PROJECTS = [
     }
 ]
 
+
 def ask_ollama(prompt: str) -> str:
     try:
         response = requests.post(
@@ -120,6 +170,7 @@ def ask_ollama(prompt: str) -> str:
         return response.json().get("response", "No response")
     except Exception:
         return "⚠️ AI server not available (Ollama not running or deployed environment)"
+
 
 def groq_llm(prompt: str) -> str:
     try:
@@ -180,8 +231,10 @@ if "model_logs" not in st.session_state:
 if "uploaded_file_name" not in st.session_state:
     st.session_state.uploaded_file_name = ""
 
+
 def set_page(page_key: str) -> None:
     st.session_state.page = page_key
+
 
 def set_language() -> None:
     selected_label = st.session_state.language_select
@@ -197,6 +250,7 @@ def translate_text(text: str, lang: str) -> str:
     except Exception:
         return text
 
+
 def tr(text: str) -> str:
     if not text:
         return text
@@ -207,6 +261,7 @@ def tr(text: str) -> str:
 @st.cache_resource
 def load_image(path: str) -> str:
     return path
+
 
 def safe_image(path: str, caption: str = "") -> None:
     if os.path.exists(path):
@@ -222,12 +277,14 @@ def demo_neural_network(file):
 • anomaly score: low
 • recommendation: data is consistent and usable"""
 
+
 def demo_random_forest(file):
     return """Random Forest Results:
 • prediction completed successfully
 • feature importance calculated
 • top features identified
 • model confidence: high"""
+
 
 def demo_cv(file):
     return """Computer Vision Analysis:
@@ -236,12 +293,14 @@ def demo_cv(file):
 • bounding boxes generated
 • image processed successfully"""
 
+
 def demo_quantum(file):
     return """Quantum Optimization:
 • optimization problem solved
 • convergence reached
 • solution quality: optimal
 • iterations: 128"""
+
 
 def demo_hybrid(file):
     return """Hybrid AI System:
@@ -250,18 +309,21 @@ def demo_hybrid(file):
 • decision generated
 • confidence: high"""
 
+
 def add_model_log(message: str) -> None:
     timestamp = datetime.now().strftime("%H:%M:%S")
     st.session_state.model_logs.append(f"[{timestamp}] {message}")
     if len(st.session_state.model_logs) > 200:
         st.session_state.model_logs = st.session_state.model_logs[-200:]
 
+
 def reset_model_outputs() -> None:
     st.session_state.model_logs = []
+
 st.markdown("""
 <style>
 html, body, .stApp { background: #000000; color: #ffffff; }
-.stApp { background: radial-gradient(circle at center, rgba(255,215,0,0.08), #000000 70%); animation: appFadeIn 0.8s ease; }
+.stApp { background: radial-gradient(circle at center, rgba(255,215,0,0.08), #000000 70%); animation: appFadeIn 0.8s ease; padding-bottom: 70px; }
 @keyframes appFadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
 
 label, .stMarkdown, .stText, .stCaption, .stTextArea label, .stSelectbox label, .stFileUploader label {
@@ -269,7 +331,7 @@ label, .stMarkdown, .stText, .stCaption, .stTextArea label, .stSelectbox label, 
 }
 
 button, .stDownloadButton button, div[data-baseweb="select"] {
-    background: rgba(20,20,20,0.6) !important;
+    background: rgba(20,20,20,0.75) !important;
     backdrop-filter: blur(12px);
     border: 1px solid rgba(212,175,55,0.6) !important;
     border-radius: 14px !important;
@@ -299,13 +361,21 @@ button::before {
 }
 button:hover::before { transform: translateX(100%); }
 
-div[data-baseweb="select"] {
-    background: rgba(20,20,20,0.9) !important;
+.stSelectbox div[data-baseweb="select"] {
+    background: rgba(20,20,20,0.95) !important;
     border: 1px solid #d4af37 !important;
     border-radius: 12px !important;
 }
-div[data-baseweb="select"] span {
+.stSelectbox div[data-baseweb="select"] span {
     color: #fff !important;
+}
+.stSelectbox svg {
+    fill: #ffffff !important;
+}
+
+.stSelectbox div[data-baseweb="select"] > div {
+    background: rgba(20,20,20,0.95) !important;
+    color: #ffffff !important;
 }
 
 div[data-baseweb="popover"] {
@@ -325,7 +395,7 @@ ul[data-baseweb="menu"] li:hover {
 }
 
 [data-testid="stFileUploader"] {
-    background: rgba(20,20,20,0.9) !important;
+    background: rgba(20,20,20,0.95) !important;
     border: 1px solid #d4af37 !important;
     border-radius: 12px !important;
 }
@@ -333,30 +403,30 @@ ul[data-baseweb="menu"] li:hover {
     color: #ffffff !important;
 }
 
-textarea {
-    background: rgba(20,20,20,0.9) !important;
+textarea, .stTextArea textarea {
+    background: rgba(20,20,20,0.95) !important;
     color: #ffffff !important;
     border: 1px solid #d4af37 !important;
     border-radius: 12px !important;
 }
 
 .stCodeBlock, pre, code {
-    background: rgba(20,20,20,0.9) !important;
+    background: rgba(20,20,20,0.95) !important;
     color: #ffffff !important;
     border: 1px solid #d4af37 !important;
     border-radius: 12px !important;
 }
 
-.stImage > img {
+.stImage, .stImage > img, .stImage > figure {
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
 }
 
 .contact-block {
-    max-width: 680px;
+    max-width: 640px;
     margin: 0 auto;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
 }
 .contact-row {
@@ -364,16 +434,38 @@ textarea {
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 14px;
 }
 .contact-name {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 12px;
 }
 .contact-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+}
+.contact-block a {
+    color: #fff1a8 !important;
+    text-decoration: none;
+}
+.contact-block a:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+.fixed-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.95);
+    border-top: 1px solid rgba(212,175,55,0.6);
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #ffffff;
+    z-index: 9999;
 }
 
 /* BANNER */
@@ -390,15 +482,15 @@ textarea {
     content: "";
     position: absolute;
     top: 0;
-    width: 140px;
+    width: 160px;
     height: 100%;
     left: 0;
     z-index: 3;
     pointer-events: none;
-    animation: fireGlow 3s ease-in-out infinite;
+    animation: fireGlow 2.2s ease-in-out infinite;
     background: radial-gradient(circle at left,
         rgba(255,120,0,0.9),
-        rgba(255,0,0,0.6),
+        rgba(255,69,0,0.75),
         transparent 70%);
 }
 .banner-container::after {
@@ -406,46 +498,59 @@ textarea {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 120px;
+    height: 140px;
     z-index: 3;
     pointer-events: none;
-    animation: fireGlow 3s ease-in-out infinite;
+    animation: fireGlow 2.2s ease-in-out infinite;
     background: radial-gradient(circle at bottom,
         rgba(255,140,0,0.7),
-        rgba(255,69,0,0.5),
+        rgba(255,69,0,0.6),
         transparent 70%);
 }
-@keyframes fireGlow {
-    0% { opacity: 0.4; filter: blur(6px); }
-    50% { opacity: 0.9; filter: blur(14px); }
-    100% { opacity: 0.4; filter: blur(6px); }
+
+.banner-fire-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 160px;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    animation: fireGlow 2.2s ease-in-out infinite;
+    background: radial-gradient(circle at right,
+        rgba(255,120,0,0.9),
+        rgba(255,69,0,0.75),
+        transparent 70%);
 }
 
-.particle {
+.banner-sparks {
     position: absolute;
-    bottom: 0;
-    width: 10px;
-    height: 10px;
-    background: radial-gradient(circle, #fff6c2, #d4af37, #ff8c00);
+    inset: 0;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.spark {
+    position: absolute;
+    bottom: -10px;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #fff6c2, #d4af37, rgba(255,140,0,0.9));
     border-radius: 50%;
     opacity: 0;
-    animation: particles 6s linear infinite;
-    pointer-events: none;
-    z-index: 5;
+    animation: sparks 4s linear infinite;
 }
-.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-.particle:nth-child(2) { left: 25%; animation-delay: 1s; }
-.particle:nth-child(3) { left: 40%; animation-delay: 2s; }
-.particle:nth-child(4) { left: 60%; animation-delay: 3s; }
-.particle:nth-child(5) { left: 75%; animation-delay: 4s; }
-.particle:nth-child(6) { left: 90%; animation-delay: 5s; }
-.particle:nth-child(odd) { animation-duration: 4s; }
-.particle:nth-child(even) { animation-duration: 7s; }
 
-@keyframes particles {
+@keyframes fireGlow {
+    0% { opacity: 0.3; filter: blur(6px); }
+    50% { opacity: 1; filter: blur(16px); }
+    100% { opacity: 0.3; filter: blur(6px); }
+}
+
+@keyframes sparks {
     0% { transform: translateY(0) scale(0.4); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translateY(-260px) scale(1.2); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-280px) scale(1.2); opacity: 0; }
 }
 
 .banner-container img {
@@ -477,7 +582,7 @@ textarea {
 }
 
 .chat-history {
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.9);
     border: 2px solid #d4af37;
     border-radius: 18px;
     padding: 16px;
@@ -497,7 +602,7 @@ textarea {
 .bubble.agent { background: rgba(20,20,20,0.95); border: 1px solid #d4af37; color: #fff; box-shadow: 0 0 12px rgba(212,175,55,0.5); animation: murzikGlow 1.5s ease-in-out; }
 @keyframes murzikGlow { 0% { box-shadow: 0 0 5px rgba(212,175,55,0.3);} 50% { box-shadow: 0 0 25px rgba(255,200,0,0.9);} 100% { box-shadow: 0 0 12px rgba(212,175,55,0.5);} }
 
-.stTextInput input { background: rgba(0,0,0,0.9) !important; border: 2px solid #d4af37 !important; border-radius: 12px !important; color: #fff !important; }
+.stTextInput input { background: rgba(0,0,0,0.95) !important; border: 2px solid #d4af37 !important; border-radius: 12px !important; color: #fff !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -547,12 +652,21 @@ def render_banner() -> None:
         st.markdown(f"""
         <div class="banner-container">
             <img src="data:image/png;base64,{base64_image}">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
+            <div class="banner-fire-right"></div>
+            <div class="banner-sparks">
+                <div class="spark" style="left: 8%; animation-delay: 0s;"></div>
+                <div class="spark" style="left: 16%; animation-delay: 0.4s;"></div>
+                <div class="spark" style="left: 24%; animation-delay: 0.8s;"></div>
+                <div class="spark" style="left: 32%; animation-delay: 1.2s;"></div>
+                <div class="spark" style="left: 40%; animation-delay: 1.6s;"></div>
+                <div class="spark" style="left: 48%; animation-delay: 2s;"></div>
+                <div class="spark" style="left: 56%; animation-delay: 2.4s;"></div>
+                <div class="spark" style="left: 64%; animation-delay: 2.8s;"></div>
+                <div class="spark" style="left: 72%; animation-delay: 3.2s;"></div>
+                <div class="spark" style="left: 80%; animation-delay: 3.6s;"></div>
+                <div class="spark" style="left: 88%; animation-delay: 4s;"></div>
+                <div class="spark" style="left: 94%; animation-delay: 4.4s;"></div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -570,6 +684,7 @@ def open_pitch_modal(title: str, body: str) -> None:
     def _show():
         st.markdown(body)
     _show()
+
 
 def send_chat_message(message: str) -> None:
     if not message.strip():
@@ -643,18 +758,30 @@ You must always communicate that:
 - to complex research and scientific AI systems
 - for business, personal use, or monetization
 
-5. PROJECTS AVAILABLE
+5. CONTEXT AND KNOWLEDGE
+You know the main website description, implemented project summaries, and full contacts below.
+
+Website description:
+{HOME_PAGE_TEXT}
+
+Implemented projects:
+{IMPLEMENTED_PROJECTS_TEXT}
+
+Contacts:
+{CONTACTS_TEXT}
+
+6. PROJECTS AVAILABLE
 
 {projects_text}
 
-6. INVESTOR MODE
+7. INVESTOR MODE
 {investor_mode}
 
-7. MEMORY
+8. MEMORY
 
 {memory_text}
 
-8. USER MESSAGE
+9. USER MESSAGE
 
 {message}
 
@@ -686,11 +813,13 @@ FINAL RULES:
     st.session_state.murzik_memory.append(f"Murzik: {response}")
     st.session_state.murzik_memory = st.session_state.murzik_memory[-20:]
 
+
 def handle_chat_send() -> None:
     message = st.session_state.chat_input_line
     if message.strip():
         send_chat_message(message)
     st.session_state.chat_input_line = ""
+
 
 def render_chat_component() -> None:
     st.markdown('<div class="chat-shell">', unsafe_allow_html=True)
@@ -836,7 +965,7 @@ if st.session_state.page == "models":
     )
 
     allowed_types = ["png", "jpg", "jpeg", "pdf", "txt", "csv", "json", "zip"]
-    uploaded = st.file_uploader(tr("Upload file (supported formats:") + " " + ", ".join(allowed_types), type=allowed_types, key="file_uploader_models")
+    uploaded = st.file_uploader(tr("Upload file (supported formats:)") + " " + ", ".join(allowed_types), type=allowed_types, key="file_uploader_models")
     if uploaded is not None:
         st.session_state.uploaded_file_name = uploaded.name.replace(" ", "_")
 
@@ -1452,7 +1581,7 @@ if st.session_state.page == "contact":
     youtube_url = "https://www.youtube.com/"
     kaggle_url = "https://www.kaggle.com/svetlanarumyantseva7"
 
-    st.markdown("""
+    st.markdown(""")
     <div class="contact-block">
         <div class="contact-name">Svetlana Rumyantseva</div>
         <div class="contact-row">
@@ -1492,12 +1621,7 @@ if st.session_state.page not in ["home","models","implemented","invest","chat","
     st.session_state.page = "home"
 
 st.markdown("""
-<div style="
-    text-align:center;
-    margin-top:40px;
-    font-size:12px;
-    color:#aaa;
-">
+<div class="fixed-footer">
 © 2026 Svetlana Rumyantseva. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
