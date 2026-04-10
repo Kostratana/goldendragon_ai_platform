@@ -1,289 +1,214 @@
-# 🐉 Golden Dragon AI Platform
+🐉 Golden Dragon AI Platform
 
 Advanced agent-based AI platform for multimodal processing, dynamic routing, and quantum-inspired reasoning systems.
 
----
+⸻
 
-## 🚀 Overview
+🚀 Overview
 
 Golden Dragon is a next-generation AI platform designed as a unified intelligent system, where a single agent coordinates multiple AI models, pipelines, and reasoning layers.
 
-The platform is not a chatbot.
+Unlike traditional chatbots, the platform functions as an AI execution environment capable of orchestrating models, pipelines, and reasoning flows.
 
-It is an AI execution environment combining:
+It combines:
+	•	multimodal AI (vision, text, audio, video)
+	•	agent-based intelligence (Murzik)
+	•	dynamic routing and tool orchestration
+	•	quantum-inspired optimization and reasoning
+	•	real-time explainability
 
-- multimodal AI (vision, text, audio, video)
-- agent-based intelligence (Murzik)
-- dynamic routing and tool orchestration
-- quantum-inspired optimization and reasoning
-- real-time explainability
+The system acts as a live interactive AI environment, capable of demonstrating complex AI workflows through a single interface.
 
-The system acts as a live interactive AI presentation, capable of demonstrating complex AI workflows through a single interface.
+The platform is designed with production-oriented constraints in mind, including modularity, scalability, and integration readiness.
 
----
+⸻
 
-## 🧠 Core Architecture
+🧠 Core Architecture
 
-The platform is structured as a layered execution system:
+User → Murzik (Agent System) → Quantum Orchestrator → Optimization Layer → Routing Layer → Tools / Models (CV models, LLMs, multimodal pipelines) → Post-processing → Murzik Explainer → Output + Logs
 
-User  
-↓  
-Murzik (Agent System)  
-↓  
-Quantum Orchestrator  
-↓  
-Optimization Layer  
-↓  
-Routing Layer  
-↓  
-Tools / Models (YOLO / LLaMA / Qwen / etc.)  
-↓  
-Post-processing  
-↓  
-Murzik Explainer  
-↓  
-Output + Logs  
+⸻
 
-This separation enables:
+🧠 Murzik — Multi-Head AI Agent
 
-- independent evolution of components  
-- modular scaling  
-- hybrid and experimental pipelines  
+Murzik is the central intelligence of the platform and operates as a multi-layered agent system.
 
----
+Interaction Layer:
+	•	conversational interface
+	•	user intent understanding
+	•	adaptive communication
 
-## 🧠 Murzik — Multi-Head AI Agent
+Execution Layer:
+	•	routing decisions
+	•	pipeline selection
+	•	tool orchestration
 
-Murzik is the central intelligence of the platform.
+Explanation Layer:
+	•	structured output interpretation
+	•	simple / detailed / technical explanations
 
-It is designed as a multi-layered agent system, not a single model.
+Murzik acts as both an orchestrator and an interpreter, bridging execution and human-understandable reasoning.
 
-### Three Operational Layers
+⸻
 
-Murzik operates through three core "heads":
+🎮 AI Console
 
-1. Interaction Layer  
-- conversational interface  
-- user intent understanding  
-- adaptive communication  
+[1] Image Model (YOLO)
+[2] Text Model (LLM)
+[3] Audio Model (ASR)
+[4] Video Model (CV pipeline)
+[5] Animal AI (MVP)
+[6] Quantum Mode (Experimental)
 
-2. Execution Layer  
-- routing decisions  
-- pipeline selection  
-- tool orchestration  
+⸻
 
-3. Explanation Layer  
-- structured output interpretation  
-- multi-level explanations:
-  - simple  
-  - detailed  
-  - technical  
+⚙️ Routing & Execution System
 
-This creates a system that not only responds — but thinks, executes, and explains.
+The platform uses a context-aware routing system that dynamically selects execution pipelines.
 
----
+Flow:
 
-## 🎮 AI Console (Live System Interface)
+input → context detection → candidate pipeline generation → scoring → quantum-inspired selection → adaptive pipeline composition → execution
 
-The platform includes an interactive AI Console:
+Routing logic is based on probabilistic scoring and multi-path evaluation rather than static rules.
 
-[1] Image Model (YOLO)  
-[2] Text Model (LLaMA)  
-[3] Audio Model (ASR)  
-[4] Video Model (CV pipeline)  
-[5] Animal AI (MVP)  
-[6] Quantum Mode (Experimental)  
+Capabilities:
+	•	context-aware routing
+	•	multi-path reasoning
+	•	probabilistic selection
+	•	dynamic pipeline composition
 
-The console acts as a control layer for AI execution, allowing real-time switching between capabilities.
+⸻
 
----
+🛠 Tools & Pipelines
 
-## ⚙️ Routing & Execution System
+tools/
+image_tool.py
+text_tool.py
+audio_tool.py
+video_tool.py
+animal_pipeline.py
+quantum_pipeline.py
 
-A lightweight routing layer dynamically selects processing pipelines:
+Each module acts as an independent execution unit, enabling modular extensibility and system scalability.
 
-if mode == "image":
-    return "image_tool"
-elif mode == "text":
-    return "text_tool"
+⸻
 
-Routing enables:
-
-- modular extensibility  
-- separation of logic and execution  
-- scalable architecture  
-
----
-
-## 🛠 Tools & Pipelines
-
-tools/  
- ├── image_tool.py  
- ├── text_tool.py  
- ├── audio_tool.py  
- ├── video_tool.py  
- ├── animal_pipeline.py  
- └── quantum_pipeline.py  
-
-Each module is an independent execution unit.
-
----
-
-## 🐶 Animal AI (MVP System)
+🐶 Animal AI (MVP)
 
 Pipeline:
 
-input  
-↓  
-CV / audio analysis  
-↓  
-behavior signal extraction  
-↓  
-LLM interpretation  
-↓  
-neural simulation layer  
-↓  
-final state  
+input → CV / audio analysis → behavior signal extraction → LLM interpretation → neural simulation layer → final state
 
-Focus: interpreting animal condition and behavior.
+Focus: interpretation of animal condition and behavioral signals through multimodal analysis.
 
----
+⸻
 
-## ⚛️ Quantum Orchestrator (Experimental Core)
+⚛️ Quantum Orchestrator
 
-Instead of single-pass inference, the system performs:
+Pipeline:
 
-input  
-↓  
-multi-response generation  
-↓  
-candidate pool  
-↓  
-scoring & evaluation  
-↓  
-quantum-inspired reranking  
-↓  
-best output  
+input → multi-response generation → candidate pool → scoring → quantum-inspired reranking → best output
 
-This creates a multi-path reasoning system, improving:
+This layer simulates multi-path reasoning and probabilistic selection over candidate outputs.
 
-- robustness  
-- output quality  
-- decision confidence  
+It enables non-linear reasoning and improves robustness under uncertain or ambiguous inputs.
 
----
+⸻
 
-## ⚛️ Murzik 2 — Experimental Model
+⚛️ Murzik 2 (Experimental)
+	•	dual-model system (LLM + multimodal model)
+	•	embedding-level transformations
+	•	quantum-inspired optimization
+	•	alternative reasoning pipeline
 
-The platform includes a second experimental system:
+Designed for:
+	•	research experimentation
+	•	model comparison
+	•	advanced reasoning exploration
 
-- dual-model architecture (LLaMA + Qwen)  
-- embedding-level transformations  
-- quantum-inspired optimization  
-- alternative reasoning pipeline  
+⸻
 
-This system is designed for:
+📂 Prompt System
+	•	system prompt
+	•	chat style
+	•	response format
+	•	clarity engine
+	•	investor explanation
+	•	strategic analysis
+	•	assistant mode
+	•	console mode
+	•	voice mode
+	•	adaptive behavior
 
-- research experimentation  
-- model comparison  
-- advanced reasoning exploration  
+Prompts are dynamically combined at runtime and enable controllable behavior, adaptive reasoning, and role-based interaction.
 
----
+⸻
 
-## 📂 Prompt Execution System
+📊 Logging
 
-Murzik behavior is controlled through a modular prompt system:
+mode: animal
+model: CV + LLM
+input_type: image
+latency: 120ms
+result: …
 
-- system prompt  
-- chat style  
-- response format  
-- clarity engine  
-- investor explanation  
-- strategic analysis  
-- assistant mode  
-- AI console mode  
-- voice mode  
-- adaptive behavior  
+⸻
 
-Prompts are dynamically combined at runtime.
+🧠 Explainability
 
----
+Outputs include:
+	•	simple explanation
+	•	detailed explanation
+	•	technical explanation
 
-## 📊 Logging & Transparency
+⸻
 
-All system operations are tracked:
+🔐 Investor Mode
+	•	token-based access
+	•	interactive project presentation
+	•	AI-driven explanation
 
-{
-  "mode": "animal",
-  "model": "YOLO + LLaMA",
-  "input_type": "image",
-  "latency": "120ms",
-  "result": "..."
-}
+⸻
 
-This enables:
+⚡ MVP Principles
+	•	one model per request
+	•	minimal configuration
+	•	fast response
+	•	transparent logs
+	•	explainable outputs
 
-- debugging  
-- explainability  
-- system transparency  
+⸻
 
----
+🧪 Research Direction
+	•	agent-based AI systems
+	•	multimodal orchestration
+	•	dynamic routing architectures
+	•	explainable AI
+	•	quantum-inspired reasoning
+	•	hybrid model systems
 
-## 🧠 Explainability Layer
+⸻
 
-Murzik generates structured explanations:
+🚀 Future Development
+	•	React frontend
+	•	backend API architecture
+	•	multimodal scaling
+	•	voice interaction
+	•	real-time pipelines
+	•	advanced reasoning systems
 
-- simple  
-- detailed  
-- technical  
+⸻
 
----
+🚀 Positioning
 
-## 🔐 Investor Mode
+Golden Dragon is a unified AI system combining agent orchestration, multimodal processing, and experimental reasoning.
 
-The platform includes a restricted access layer:
+It demonstrates production-oriented AI engineering, system-level architecture design, and advanced reasoning strategies beyond standard single-model systems.
 
-- token-based entry  
-- interactive project presentation  
-- AI-assisted explanation  
+⸻
 
----
+👤 Author
 
-## ⚡ Design Principles (MVP)
-
-- one model per request  
-- minimal configuration  
-- fast response  
-- transparent logs  
-- explainable outputs  
-
----
-
-## 🧪 Research Direction
-
-Golden Dragon explores:
-
-- agent-based AI systems  
-- multimodal orchestration  
-- dynamic routing architectures  
-- explainable AI  
-- quantum-inspired reasoning  
-- hybrid model systems  
-
----
-
-## 🚀 Future Development
-
-- React frontend (migration from Streamlit)  
-- backend API architecture  
-- multimodal scaling  
-- voice interaction  
-- real-time pipelines  
-- advanced reasoning systems  
-
----
-
-## 👤 Author
-
-Svetlana Rumyantseva  
+Svetlana Rumyantseva
 AI Systems Engineer | Multimodal AI | Agent Systems
