@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Golden Dragon AI</title>
+
+    <!-- ROUND FAVICON -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="/favicon.png"
+    />
+
+    <!-- fonts -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    />
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- GOOGLE TRANSLATE -->
+    <script type="text/javascript">
+
+        function googleTranslateElementInit() {
+
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: "en",
+
+                    includedLanguages:
+                        "en,ru,es,fr,de",
+
+                    autoDisplay: false
+                },
+
+                "google_translate_element"
+            );
+        }
+
+    </script>
+
+    <script
+        type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <style>
+
+        html {
+            margin: 0;
+            padding: 0;
+
+            background: #050505;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+
+            background: #050505;
+
+            overflow-x: hidden;
+
+            font-family: "Inter", sans-serif;
+
+            position: relative;
+        }
+
+        #root {
+            min-height: 100vh;
+        }
+
+        /* GLOBAL NAVBAR PORTAL */
+        #navbar-root {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            z-index: 999999;
+
+            pointer-events: none;
+        }
+
+        /* REMOVE GOOGLE TOP BAR */
+        iframe.skiptranslate {
+            display: none !important;
+        }
+
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* HIDE GOOGLE LOGO */
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0px !important;
+        }
+
+        /* HIDE DEFAULT DROPDOWN */
+        .goog-te-combo {
+            display: none !important;
+        }
+
+        /* TRANSLATE WRAPPER */
+        #google_translate_element {
+            position: fixed;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            z-index: -9999;
+        }
+
+        /* FIX FAVICON ROUND DISPLAY */
+        link[rel="icon"] {
+            border-radius: 9999px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- GOOGLE TRANSLATE -->
+    <div id="google_translate_element"></div>
+
+    <!-- GLOBAL NAVBAR PORTAL -->
+    <div id="navbar-root"></div>
+
+    <!-- APP -->
+    <div id="root"></div>
+
+    <script
+        type="module"
+        src="/src/main.jsx"
+    ></script>
+
+</body>
+
+</html>
