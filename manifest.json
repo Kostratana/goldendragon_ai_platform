@@ -1,0 +1,20 @@
+{
+  "name": "Golden Dragon AI",
+  "short_name": "GoldenDragonAI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/assets/murzik_180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/murzik_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
