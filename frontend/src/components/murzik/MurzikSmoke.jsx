@@ -9,7 +9,6 @@ export default function MurzikSmoke() {
         transform: "translate3d(0,0,0)",
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden",
-        mixBlendMode: "screen",
     };
 
     return (
@@ -17,95 +16,94 @@ export default function MurzikSmoke() {
         <div
             style={{
                 position: "absolute",
-                right: "10%",
-                top: "2%",
-                zIndex: 99999,
-                isolation: "isolate",
+                right: "6%",
+                top: "0%",
+                zIndex: 999999,
                 pointerEvents: "none",
-                width: "900px",
-                height: "900px",
+                width: "1200px",
+                height: "1200px",
                 overflow: "visible",
             }}
         >
 
-            {/* MASSIVE SMOKE LAYER 1 */}
+            {/* SMOKE LAYER 1 */}
             <motion.div
 
                 animate={{
-                    y: [0, -260],
-                    x: [0, 60],
-                    opacity: [0, 0.32, 0],
-                    scale: [0.8, 2.8],
+                    y: [0, -220],
+                    x: [0, 40],
+                    opacity: [0.15, 0.55, 0.12],
+                    scale: [1, 2.2],
                 }}
 
                 transition={{
-                    duration: 10,
+                    duration: 8,
                     repeat: Infinity,
-                    ease: "easeOut",
+                    ease: "easeInOut",
                 }}
 
                 style={{
                     ...smokeBaseStyle,
-                    width: "320px",
-                    height: "520px",
-                    background: "rgba(255,255,255,0.28)",
-                    filter: "blur(120px)",
+                    width: "420px",
+                    height: "620px",
+                    background: "rgba(255,255,255,0.55)",
+                    filter: "blur(70px)",
                 }}
             />
 
-            {/* MASSIVE SMOKE LAYER 2 */}
+            {/* SMOKE LAYER 2 */}
             <motion.div
 
                 animate={{
                     y: [0, -320],
-                    x: [0, -80],
-                    opacity: [0, 0.26, 0],
-                    scale: [0.9, 3.4],
+                    x: [0, -60],
+                    opacity: [0.12, 0.48, 0.1],
+                    scale: [1.2, 2.8],
                 }}
 
                 transition={{
-                    duration: 13,
+                    duration: 11,
                     repeat: Infinity,
                     delay: 1,
-                    ease: "easeOut",
+                    ease: "easeInOut",
                 }}
 
                 style={{
                     ...smokeBaseStyle,
                     left: "120px",
                     top: "40px",
-                    width: "420px",
-                    height: "620px",
-                    background: "rgba(255,240,220,0.24)",
-                    filter: "blur(150px)",
+                    width: "520px",
+                    height: "720px",
+                    background: "rgba(255,240,220,0.42)",
+                    filter: "blur(90px)",
                 }}
             />
 
-            {/* MASSIVE SMOKE LAYER 3 */}
+            {/* SMOKE LAYER 3 */}
             <motion.div
 
                 animate={{
-                    y: [0, -380],
+                    y: [0, -420],
                     x: [0, 90],
-                    opacity: [0, 0.18, 0],
-                    scale: [1, 3.8],
+                    opacity: [0.08, 0.34, 0.06],
+                    scale: [1.1, 3.2],
                 }}
 
                 transition={{
-                    duration: 15,
+                    duration: 14,
                     repeat: Infinity,
                     delay: 2,
-                    ease: "easeOut",
+                    ease: "easeInOut",
                 }}
 
                 style={{
                     ...smokeBaseStyle,
-                    right: "40px",
-                    top: "80px",
-                    width: "520px",
-                    height: "720px",
-                    background: "rgba(240,240,240,0.18)",
-                    filter: "blur(180px)",
+                    right: "60px",
+                    top: "100px",
+                    width: "620px",
+                    height: "820px",
+                    background: "rgba(240,240,240,0.30)",
+                    filter: "blur(110px)",
                 }}
             />
 
