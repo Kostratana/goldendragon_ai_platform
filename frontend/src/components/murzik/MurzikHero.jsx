@@ -53,9 +53,9 @@ export default function MurzikHero() {
                     height: "120%",
                     objectFit: "cover",
                     opacity: 0.32,
-                    mixBlendMode: "screen",
+                    mixBlendMode: "normal",
                     pointerEvents: "none",
-                    zIndex: 50,
+                    zIndex: 999,
                     filter: "blur(18px)",
                 }}
             />
@@ -117,7 +117,7 @@ export default function MurzikHero() {
             <div
                 className="
                     relative
-                    z-20
+                    z-[10]
                     mx-auto
                     flex
                     h-full
