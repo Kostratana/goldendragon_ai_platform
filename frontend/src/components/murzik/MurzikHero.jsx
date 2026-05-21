@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
 import murzikImage from "../../assets/murzik/murzik-main.png";
-import smokeVideo from "../../assets/murzik/murzik-smoke-v2.mp4";
 
 import MurzikSmoke from "./MurzikSmoke";
 import MurzikVoiceButton from "./MurzikVoiceButton";
@@ -34,6 +33,31 @@ export default function MurzikHero() {
                     inset-0
                     bg-[radial-gradient(circle_at_70%_35%,rgba(255,140,0,0.22),transparent_42%)]
                 "
+            />
+
+            {/* cinematic smoke video */}
+            <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+
+                src="/videos/murzik-smoke-v2.mp4"
+
+                style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    opacity: 0.22,
+                    mixBlendMode: "screen",
+                    pointerEvents: "none",
+                    zIndex: 5,
+                    filter: "blur(14px)",
+                    transform: "scale(1.15)",
+                }}
             />
 
             {/* cinematic overlay */}
@@ -250,33 +274,6 @@ export default function MurzikHero() {
                         justify-end
                     "
                 >
-
-                    {/* cinematic smoke video */}
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-
-                        style={{
-                            position: "absolute",
-                            inset: 0,
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            opacity: 0.22,
-                            mixBlendMode: "screen",
-                            pointerEvents: "none",
-                            zIndex: 15,
-                            filter: "blur(14px)",
-                            transform: "scale(1.15)",
-                        }}
-                    >
-                        <source
-                            src={smokeVideo}
-                            type="video/mp4"
-                        />
-                    </video>
 
                     {/* massive cinematic glow */}
                     <motion.div
