@@ -12,34 +12,10 @@ export default function MurzikHero() {
             className="
                 relative
                 h-[820px]
-                overflow-hidden
+                overflow-visible
                 bg-[#050505]
             "
         >
-
-            {/* VIDEO MUST BE FIRST */}
-            <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-
-                src="/videos/murzik-smoke-v2.mp4"
-
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    width: "100vw",
-                    height: "100vh",
-                    objectFit: "cover",
-                    opacity: 1,
-                    pointerEvents: "none",
-                    zIndex: 999999,
-                    border: "10px solid red",
-                }}
-            />
 
             {/* animated ambient background */}
             <motion.div
@@ -325,7 +301,7 @@ export default function MurzikHero() {
                         "
                     />
 
-                    {/* smoke particles */}
+                    {/* CINEMATIC SMOKE */}
                     <MurzikSmoke />
 
                     {/* breathing shadow */}
