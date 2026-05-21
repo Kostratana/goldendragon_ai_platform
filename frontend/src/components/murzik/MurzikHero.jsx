@@ -260,14 +260,16 @@ export default function MurzikHero() {
 
                         style={{
                             position: "absolute",
-                            right: "2%",
-                            top: "8%",
-                            width: "900px",
-                            opacity: 0.34,
+                            inset: 0,
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            opacity: 0.22,
                             mixBlendMode: "screen",
                             pointerEvents: "none",
-                            zIndex: 35,
-                            filter: "blur(8px)",
+                            zIndex: 15,
+                            filter: "blur(14px)",
+                            transform: "scale(1.15)",
                         }}
                     >
                         <source
