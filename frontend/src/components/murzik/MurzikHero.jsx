@@ -35,7 +35,7 @@ export default function MurzikHero() {
                 "
             />
 
-            {/* cinematic smoke video */}
+            {/* DEBUG FULLSCREEN VIDEO TEST */}
             <video
                 autoPlay
                 muted
@@ -46,17 +46,16 @@ export default function MurzikHero() {
                 src="/videos/murzik-smoke-v2.mp4"
 
                 style={{
-                    position: "absolute",
-                    top: "-10%",
-                    left: "-10%",
-                    width: "120%",
-                    height: "120%",
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
                     objectFit: "cover",
-                    opacity: 0.32,
-                    mixBlendMode: "normal",
+                    opacity: 1,
                     pointerEvents: "none",
-                    zIndex: 999,
-                    filter: "blur(18px)",
+                    zIndex: 999999,
+                    border: "10px solid red",
                 }}
             />
 
