@@ -301,9 +301,6 @@ export default function MurzikHero() {
                         "
                     />
 
-                    {/* CINEMATIC SMOKE */}
-                    <MurzikSmoke />
-
                     {/* breathing shadow */}
                     <motion.div
                         animate={{
@@ -385,6 +382,18 @@ export default function MurzikHero() {
                         />
 
                     </motion.div>
+
+                    {/* CINEMATIC SMOKE ABOVE IMAGE */}
+                    <div
+                        style={{
+                            position: "absolute",
+                            inset: 0,
+                            zIndex: 9999,
+                            pointerEvents: "none",
+                        }}
+                    >
+                        <MurzikSmoke />
+                    </div>
 
                 </div>
 
