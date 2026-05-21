@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 
 import murzikImage from "../../assets/murzik/murzik-main.png";
 
-import MurzikSmoke from "./MurzikSmoke";
 import MurzikVoiceButton from "./MurzikVoiceButton";
 
 export default function MurzikHero() {
+
+    console.log("MURZIK HERO PRODUCTION TEST");
 
     return (
         <section
@@ -250,6 +251,19 @@ export default function MurzikHero() {
                     "
                 >
 
+                    {/* DEBUG RED BLOCK */}
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "120px",
+                            right: "120px",
+                            width: "300px",
+                            height: "300px",
+                            background: "red",
+                            zIndex: 999999,
+                        }}
+                    />
+
                     {/* massive cinematic glow */}
                     <motion.div
                         animate={{
@@ -382,18 +396,6 @@ export default function MurzikHero() {
                         />
 
                     </motion.div>
-
-                    {/* CINEMATIC SMOKE ABOVE IMAGE */}
-                    <div
-                        style={{
-                            position: "absolute",
-                            inset: 0,
-                            zIndex: 9999,
-                            pointerEvents: "none",
-                        }}
-                    >
-                        <MurzikSmoke />
-                    </div>
 
                 </div>
 
