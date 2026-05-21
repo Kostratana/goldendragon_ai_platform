@@ -17,25 +17,7 @@ export default function MurzikHero() {
             "
         >
 
-            {/* animated ambient background */}
-            <motion.div
-                animate={{
-                    scale: [1, 1.08, 1],
-                    opacity: [0.45, 0.7, 0.45],
-                }}
-                transition={{
-                    duration: 12,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-                className="
-                    absolute
-                    inset-0
-                    bg-[radial-gradient(circle_at_70%_35%,rgba(255,140,0,0.22),transparent_42%)]
-                "
-            />
-
-            {/* DEBUG FULLSCREEN VIDEO TEST */}
+            {/* VIDEO MUST BE FIRST */}
             <video
                 autoPlay
                 muted
@@ -57,6 +39,24 @@ export default function MurzikHero() {
                     zIndex: 999999,
                     border: "10px solid red",
                 }}
+            />
+
+            {/* animated ambient background */}
+            <motion.div
+                animate={{
+                    scale: [1, 1.08, 1],
+                    opacity: [0.45, 0.7, 0.45],
+                }}
+                transition={{
+                    duration: 12,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+                className="
+                    absolute
+                    inset-0
+                    bg-[radial-gradient(circle_at_70%_35%,rgba(255,140,0,0.22),transparent_42%)]
+                "
             />
 
             {/* cinematic overlay */}
