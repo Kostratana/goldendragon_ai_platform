@@ -5,14 +5,28 @@ export default function MurzikSmoke() {
     return (
 
         <div
-            className="
-                pointer-events-none
-                absolute
-                right-[14%]
-                top-[14%]
-                z-[80]
-            "
+            style={{
+                position: "absolute",
+                right: "14%",
+                top: "14%",
+                zIndex: 80,
+                pointerEvents: "none",
+                width: "400px",
+                height: "400px",
+            }}
         >
+
+            {/* DEBUG TEST */}
+            <div
+                style={{
+                    width: "80px",
+                    height: "80px",
+                    background: "red",
+                    position: "absolute",
+                    zIndex: 9999,
+                    opacity: 0.7,
+                }}
+            />
 
             {/* smoke layer 1 */}
             <motion.div
@@ -30,14 +44,14 @@ export default function MurzikSmoke() {
                     ease: "easeOut",
                 }}
 
-                className="
-                    absolute
-                    h-[260px]
-                    w-[140px]
-                    rounded-full
-                    bg-white/20
-                    blur-[55px]
-                "
+                style={{
+                    position: "absolute",
+                    width: "140px",
+                    height: "260px",
+                    borderRadius: "999px",
+                    background: "rgba(255,255,255,0.20)",
+                    filter: "blur(55px)",
+                }}
             />
 
             {/* smoke layer 2 */}
@@ -57,16 +71,16 @@ export default function MurzikSmoke() {
                     ease: "easeOut",
                 }}
 
-                className="
-                    absolute
-                    left-[30px]
-                    top-[10px]
-                    h-[300px]
-                    w-[160px]
-                    rounded-full
-                    bg-orange-100/20
-                    blur-[65px]
-                "
+                style={{
+                    position: "absolute",
+                    left: "30px",
+                    top: "10px",
+                    width: "160px",
+                    height: "300px",
+                    borderRadius: "999px",
+                    background: "rgba(255,240,220,0.20)",
+                    filter: "blur(65px)",
+                }}
             />
 
             {/* smoke layer 3 */}
@@ -86,16 +100,16 @@ export default function MurzikSmoke() {
                     ease: "easeOut",
                 }}
 
-                className="
-                    absolute
-                    right-[-10px]
-                    top-[20px]
-                    h-[340px]
-                    w-[180px]
-                    rounded-full
-                    bg-gray-100/15
-                    blur-[75px]
-                "
+                style={{
+                    position: "absolute",
+                    right: "-10px",
+                    top: "20px",
+                    width: "180px",
+                    height: "340px",
+                    borderRadius: "999px",
+                    background: "rgba(240,240,240,0.15)",
+                    filter: "blur(75px)",
+                }}
             />
 
         </div>
