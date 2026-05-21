@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 import murzikImage from "../../assets/murzik/murzik-main.png";
+import smokeVideo from "../../assets/murzik/murzik-smoke-v2.mp4";
 
 import MurzikSmoke from "./MurzikSmoke";
 import MurzikVoiceButton from "./MurzikVoiceButton";
@@ -250,6 +251,31 @@ export default function MurzikHero() {
                     "
                 >
 
+                    {/* cinematic smoke video */}
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+
+                        style={{
+                            position: "absolute",
+                            right: "2%",
+                            top: "8%",
+                            width: "900px",
+                            opacity: 0.34,
+                            mixBlendMode: "screen",
+                            pointerEvents: "none",
+                            zIndex: 35,
+                            filter: "blur(8px)",
+                        }}
+                    >
+                        <source
+                            src={smokeVideo}
+                            type="video/mp4"
+                        />
+                    </video>
+
                     {/* massive cinematic glow */}
                     <motion.div
                         animate={{
@@ -301,7 +327,7 @@ export default function MurzikHero() {
                         "
                     />
 
-                    {/* smoke */}
+                    {/* smoke particles */}
                     <MurzikSmoke />
 
                     {/* breathing shadow */}
@@ -377,13 +403,9 @@ export default function MurzikHero() {
                                 width: "1050px",
                                 maxWidth: "none",
                                 objectFit: "contain",
-
-                                transform:
-                                    "translateY(60px)",
-
+                                transform: "translateY(60px)",
                                 filter:
                                     "drop-shadow(0 0 120px rgba(255,140,0,0.42))",
-
                                 userSelect: "none",
                             }}
                         />
