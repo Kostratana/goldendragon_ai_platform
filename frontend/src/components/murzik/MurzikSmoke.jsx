@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 
 export default function MurzikSmoke() {
 
+    console.log("SMOKE VERSION PRODUCTION TEST");
+
     const smokeBaseStyle = {
         position: "absolute",
         borderRadius: "999px",
@@ -25,6 +27,20 @@ export default function MurzikSmoke() {
                 overflow: "visible",
             }}
         >
+
+            {/* DEBUG TEST BLOCK */}
+            <div
+                style={{
+                    position: "absolute",
+                    top: "120px",
+                    right: "220px",
+                    width: "240px",
+                    height: "240px",
+                    background: "red",
+                    opacity: 0.8,
+                    zIndex: 999999,
+                }}
+            />
 
             {/* SMOKE LAYER 1 */}
             <motion.div
