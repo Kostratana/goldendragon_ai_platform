@@ -450,22 +450,40 @@ export default function Home() {
                                     style={{
                                         position: "absolute",
 
-                                        inset: 0,
+                                        top:
+                                            isMobile
+                                                ? "4%"
+                                                : "2%",
 
-                                        width: "100%",
+                                        right:
+                                            isMobile
+                                                ? "12%"
+                                                : "18%",
 
-                                        height: "100%",
+                                        width:
+                                            isMobile
+                                                ? "58%"
+                                                : "42%",
 
-                                        objectFit: "cover",
+                                        height:
+                                            isMobile
+                                                ? "58%"
+                                                : "42%",
+
+                                        objectFit: "contain",
 
                                         pointerEvents: "none",
 
                                         zIndex: 3,
 
+                                        mixBlendMode: "screen",
+
+                                        filter: "brightness(1.15)",
+
                                         opacity:
                                             isMobile
-                                                ? 0.45
-                                                : 0.95
+                                                ? 0.32
+                                                : 0.75
                                     }}
                                 >
                                     <source
