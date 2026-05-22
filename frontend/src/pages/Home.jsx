@@ -452,25 +452,25 @@ export default function Home() {
 
                                         top:
                                             isMobile
-                                                ? "4%"
-                                                : "2%",
+                                                ? "-2%"
+                                                : "-6%",
 
                                         right:
                                             isMobile
-                                                ? "12%"
-                                                : "18%",
+                                                ? "-2%"
+                                                : "4%",
 
                                         width:
                                             isMobile
-                                                ? "58%"
-                                                : "42%",
+                                                ? "78%"
+                                                : "72%",
 
                                         height:
                                             isMobile
-                                                ? "58%"
-                                                : "42%",
+                                                ? "78%"
+                                                : "72%",
 
-                                        objectFit: "contain",
+                                        objectFit: "cover",
 
                                         pointerEvents: "none",
 
@@ -478,12 +478,13 @@ export default function Home() {
 
                                         mixBlendMode: "screen",
 
-                                        filter: "brightness(1.15)",
+                                        filter:
+                                            "brightness(1.18) blur(2px)",
 
                                         opacity:
                                             isMobile
-                                                ? 0.32
-                                                : 0.75
+                                                ? 0.34
+                                                : 0.82
                                     }}
                                 >
                                     <source
