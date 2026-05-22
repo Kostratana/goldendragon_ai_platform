@@ -462,8 +462,6 @@ export default function Home() {
 
                                         zIndex: 3,
 
-                                        mixBlendMode: "screen",
-
                                         opacity:
                                             isMobile
                                                 ? 0.45
@@ -471,8 +469,8 @@ export default function Home() {
                                     }}
                                 >
                                     <source
-                                        src="/src/assets/murzik/overlays/murzik-smoke.webm"
-                                        type="video/webm"
+                                        src="/videos/murzik-smoke-v2.mp4"
+                                        type="video/mp4"
                                     />
                                 </video>
 
