@@ -18,22 +18,15 @@ export default function Home() {
         <main
             style={{
                 minHeight: "100vh",
-
                 background:
                     "linear-gradient(to bottom, #050505 0%, #080603 100%)",
-
                 color: "white",
-
                 overflowX: "hidden",
-
                 position: "relative",
-
                 fontFamily:
                     "'Cormorant Garamond', serif"
             }}
         >
-
-            {/* ambient glow */}
 
             <motion.div
                 animate={{
@@ -47,87 +40,64 @@ export default function Home() {
                 }}
                 style={{
                     position: "absolute",
-
                     right:
                         isMobile
                             ? "-140px"
                             : "-260px",
-
                     top:
                         isMobile
                             ? "-120px"
                             : "-220px",
-
                     width:
                         isMobile
                             ? "320px"
                             : "900px",
-
                     height:
                         isMobile
                             ? "320px"
                             : "900px",
-
                     background:
                         "rgba(255,140,0,0.08)",
-
                     borderRadius: "9999px",
-
                     filter:
                         isMobile
                             ? "blur(80px)"
                             : "blur(200px)",
-
                     pointerEvents: "none"
                 }}
             />
 
-            {/* HERO */}
-
             <section
                 style={{
                     position: "relative",
-
                     zIndex: 10,
-
                     display: "flex",
-
                     flexDirection: "column",
-
                     alignItems: "center",
-
                     justifyContent: "flex-start",
-
                     minHeight:
                         isMobile
                             ? "760px"
                             : "100vh",
-
                     paddingTop:
                         isMobile
                             ? "110px"
                             : "130px",
-
                     paddingBottom:
                         isMobile
                             ? "20px"
                             : "20px",
-
                     paddingLeft:
                         isMobile
                             ? "14px"
                             : "40px",
-
                     paddingRight:
                         isMobile
                             ? "14px"
                             : "40px",
-
                     overflow: "hidden"
                 }}
             >
-
-                {/* particles */}
 
                 <div
                     style={{
@@ -160,26 +130,19 @@ export default function Home() {
                             }}
                             style={{
                                 position: "absolute",
-
                                 bottom: "-100px",
-
                                 left: `${4 + i * 8}%`,
-
                                 width:
                                     isMobile
                                         ? "2px"
                                         : "4px",
-
                                 height:
                                     isMobile
                                         ? "2px"
                                         : "4px",
-
                                 borderRadius: "9999px",
-
                                 background:
                                     "rgba(255,180,120,0.35)",
-
                                 filter: "blur(1px)"
                             }}
                         />
@@ -187,8 +150,6 @@ export default function Home() {
                     ))}
 
                 </div>
-
-                {/* text */}
 
                 <motion.div
                     initial={{
@@ -204,16 +165,12 @@ export default function Home() {
                     }}
                     style={{
                         position: "relative",
-
                         zIndex: 4,
-
                         textAlign: "center",
-
                         marginBottom:
                             isMobile
                                 ? "10px"
                                 : "10px",
-
                         maxWidth:
                             isMobile
                                 ? "100%"
@@ -232,36 +189,28 @@ export default function Home() {
                         }}
                         style={{
                             color: "#d8b07a",
-
                             fontSize:
                                 isMobile
                                     ? "10px"
                                     : isTablet
                                         ? "18px"
                                         : "22px",
-
                             lineHeight:
                                 isMobile
                                     ? "1.7"
                                     : "2",
-
                             fontWeight: "700",
-
                             letterSpacing:
                                 isMobile
                                     ? "0.10em"
                                     : "0.22em",
-
                             textTransform: "uppercase",
-
                             textShadow:
                                 "0 0 16px rgba(255,180,120,0.14)",
-
                             marginBottom:
                                 isMobile
                                     ? "10px"
                                     : "22px",
-
                             fontFamily:
                                 "'Cinzel', serif"
                         }}
@@ -274,34 +223,27 @@ export default function Home() {
                     <div
                         style={{
                             color: "#c9aa82",
-
                             fontSize:
                                 isMobile
                                     ? "11px"
                                     : isTablet
                                         ? "18px"
                                         : "24px",
-
                             lineHeight:
                                 isMobile
                                     ? "1.6"
                                     : "1.9",
-
                             fontWeight: "500",
-
                             letterSpacing:
                                 isMobile
                                     ? "0.01em"
                                     : "0.03em",
-
                             textShadow:
                                 "0 0 12px rgba(255,180,120,0.08)",
-
                             maxWidth:
                                 isMobile
                                     ? "100%"
                                     : "1000px",
-
                             margin: "0 auto"
                         }}
                     >
@@ -310,28 +252,19 @@ export default function Home() {
 
                 </motion.div>
 
-                {/* dragon area */}
-
                 <div
                     style={{
                         position: "relative",
-
                         width: "100%",
-
                         display: "flex",
-
                         justifyContent: "center",
-
                         alignItems: "center",
-
                         marginTop:
                             isMobile
                                 ? "0px"
                                 : "40px"
                     }}
                 >
-
-                    {/* cinematic glow */}
 
                     <motion.div
                         animate={{
@@ -345,32 +278,24 @@ export default function Home() {
                         }}
                         style={{
                             position: "absolute",
-
                             width:
                                 isMobile
                                     ? "340px"
                                     : "1200px",
-
                             height:
                                 isMobile
                                     ? "340px"
                                     : "1200px",
-
                             background:
                                 "rgba(255,140,0,0.10)",
-
                             borderRadius: "9999px",
-
                             filter:
                                 isMobile
                                     ? "blur(70px)"
                                     : "blur(190px)",
-
                             pointerEvents: "none"
                         }}
                     />
-
-                    {/* murzik */}
 
                     <div
                         style={{
@@ -393,27 +318,21 @@ export default function Home() {
                             <div
                                 style={{
                                     position: "relative",
-
                                     width:
                                         isMobile
                                             ? "115%"
                                             : "1350px",
-
                                     maxWidth:
                                         isMobile
                                             ? "115%"
                                             : "100%",
-
                                     marginLeft:
                                         isMobile
                                             ? "-7%"
                                             : "0",
-
                                     overflow: "visible"
                                 }}
                             >
-
-                                {/* image */}
 
                                 <img
                                     src={murzikImage}
@@ -421,27 +340,18 @@ export default function Home() {
                                     draggable={false}
                                     style={{
                                         position: "relative",
-
                                         width: "100%",
-
                                         objectFit: "contain",
-
                                         display: "block",
-
                                         userSelect: "none",
-
                                         pointerEvents: "none",
-
                                         zIndex: 1,
-
                                         filter:
                                             isMobile
                                                 ? "drop-shadow(0 0 40px rgba(255,140,0,0.12))"
                                                 : "drop-shadow(0 0 170px rgba(255,140,0,0.20))"
                                     }}
                                 />
-
-                                {/* cinematic smoke */}
 
                                 <video
                                     autoPlay
@@ -454,25 +364,25 @@ export default function Home() {
 
                                         top:
                                             isMobile
-                                                ? "-18%"
-                                                : "-24%",
+                                                ? "-10%"
+                                                : "-14%",
 
-                                        right:
+                                        left:
                                             isMobile
-                                                ? "-12%"
-                                                : "-10%",
+                                                ? "-10%"
+                                                : "-12%",
 
                                         width:
                                             isMobile
-                                                ? "120%"
-                                                : "105%",
+                                                ? "125%"
+                                                : "124%",
 
                                         height:
                                             isMobile
-                                                ? "120%"
-                                                : "105%",
+                                                ? "125%"
+                                                : "124%",
 
-                                        objectFit: "contain",
+                                        objectFit: "cover",
 
                                         pointerEvents: "none",
 
@@ -481,12 +391,18 @@ export default function Home() {
                                         mixBlendMode: "screen",
 
                                         filter:
-                                            "brightness(1.2) blur(3px)",
+                                            "brightness(1.2) contrast(1.05) blur(2px)",
 
                                         opacity:
                                             isMobile
                                                 ? 0.34
-                                                : 0.88
+                                                : 0.78,
+
+                                        WebkitMaskImage:
+                                            "radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 74%, rgba(0,0,0,0) 100%)",
+
+                                        maskImage:
+                                            "radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 74%, rgba(0,0,0,0) 100%)"
                                     }}
                                 >
                                     <source
