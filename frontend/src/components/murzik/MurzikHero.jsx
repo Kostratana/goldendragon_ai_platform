@@ -53,21 +53,18 @@ export default function MurzikHero() {
 
                     <motion.div
                         key={i}
-
                         animate={{
                             y: [0, -900],
                             opacity: [0, 0.9, 0],
                             x: [0, Math.random() * 120 - 60],
                             scale: [0.6, 1.4, 0.4],
                         }}
-
                         transition={{
                             duration: 12 + i,
                             repeat: Infinity,
                             ease: "linear",
                             delay: i * 0.4,
                         }}
-
                         className="
                             absolute
                             bottom-[-100px]
@@ -77,7 +74,6 @@ export default function MurzikHero() {
                             bg-orange-300/60
                             blur-[1px]
                         "
-
                         style={{
                             left: `${8 + i * 5}%`,
                         }}
@@ -116,16 +112,13 @@ export default function MurzikHero() {
                             opacity: 0,
                             y: 40,
                         }}
-
                         animate={{
                             opacity: 1,
                             y: 0,
                         }}
-
                         transition={{
                             duration: 1.2,
                         }}
-
                         className="
                             text-[110px]
                             font-black
@@ -142,13 +135,11 @@ export default function MurzikHero() {
                             width: [160, 240, 160],
                             opacity: [0.7, 1, 0.7],
                         }}
-
                         transition={{
                             duration: 5,
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-
                         className="
                             mt-7
                             h-[2px]
@@ -163,16 +154,13 @@ export default function MurzikHero() {
                         initial={{
                             opacity: 0,
                         }}
-
                         animate={{
                             opacity: 1,
                         }}
-
                         transition={{
                             delay: 0.5,
                             duration: 1.2,
                         }}
-
                         className="
                             mt-12
                             max-w-[620px]
@@ -208,11 +196,9 @@ export default function MurzikHero() {
                             whileHover={{
                                 scale: 1.04,
                             }}
-
                             whileTap={{
                                 scale: 0.97,
                             }}
-
                             className="
                                 rounded-2xl
                                 border
@@ -256,48 +242,20 @@ export default function MurzikHero() {
                             rotate: [0, -1.2, 0],
                             scale: [1, 1.015, 1],
                         }}
-
                         transition={{
                             duration: 7,
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-
                         whileHover={{
                             scale: 1.03,
                             rotate: -1,
                         }}
-
                         style={{
                             position: "relative",
                             zIndex: 20,
                         }}
                     >
-
-                        {/* SMOKE VIDEO */}
-                        <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            preload="auto"
-
-                            src="/videos/murzik-smoke-v2.mp4"
-
-                            style={{
-                                position: "absolute",
-                                top: "80px",
-                                right: "140px",
-                                width: "520px",
-                                height: "520px",
-                                objectFit: "cover",
-                                opacity: 0.55,
-                                pointerEvents: "none",
-                                zIndex: 25,
-                                filter:
-                                    "blur(1px)",
-                            }}
-                        />
 
                         {/* massive cinematic glow */}
                         <motion.div
@@ -305,13 +263,11 @@ export default function MurzikHero() {
                                 scale: [1, 1.12, 1],
                                 opacity: [0.25, 0.42, 0.25],
                             }}
-
                             transition={{
                                 duration: 8,
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
-
                             className="
                                 absolute
                                 right-[6%]
@@ -324,19 +280,39 @@ export default function MurzikHero() {
                             "
                         />
 
+                        {/* SMOKE VIDEO */}
+                        <video
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                            src="/videos/murzik-smoke-v2.mp4"
+                            style={{
+                                position: "absolute",
+                                top: "10px",
+                                right: "0px",
+                                width: "900px",
+                                height: "900px",
+                                objectFit: "cover",
+                                opacity: 1,
+                                pointerEvents: "none",
+                                zIndex: 9999,
+                                border: "4px solid red",
+                            }}
+                        />
+
                         {/* eye glow */}
                         <motion.div
                             animate={{
                                 opacity: [0.2, 1, 0.2],
                                 scale: [0.95, 1.1, 0.95],
                             }}
-
                             transition={{
                                 duration: 3,
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
-
                             className="
                                 absolute
                                 right-[32%]
@@ -356,13 +332,11 @@ export default function MurzikHero() {
                                 opacity: [0.18, 0.35, 0.18],
                                 scale: [1, 1.06, 1],
                             }}
-
                             transition={{
                                 duration: 6,
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
-
                             className="
                                 absolute
                                 bottom-[6%]
@@ -380,20 +354,15 @@ export default function MurzikHero() {
                                 opacity: 0,
                                 scale: 0.92,
                             }}
-
                             animate={{
                                 opacity: 1,
                                 scale: 1,
                             }}
-
                             transition={{
                                 duration: 1.4,
                             }}
-
                             src={murzikImage}
-
                             alt="Murzik"
-
                             style={{
                                 width: "1050px",
                                 maxWidth: "none",
