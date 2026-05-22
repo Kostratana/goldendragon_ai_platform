@@ -249,108 +249,6 @@ export default function MurzikHero() {
                     "
                 >
 
-                    {/* VIDEO SMOKE */}
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-
-                        src="/videos/murzik-smoke-v2.mp4"
-
-                        style={{
-                            position: "absolute",
-                            top: "4%",
-                            right: "2%",
-                            width: "820px",
-                            height: "820px",
-                            objectFit: "cover",
-                            opacity: 0.9,
-                            pointerEvents: "none",
-                            zIndex: 50,
-                            mixBlendMode: "screen",
-                            filter:
-                                "brightness(1.1) blur(2px)",
-                        }}
-                    />
-
-                    {/* massive cinematic glow */}
-                    <motion.div
-                        animate={{
-                            scale: [1, 1.12, 1],
-                            opacity: [0.25, 0.42, 0.25],
-                        }}
-
-                        transition={{
-                            duration: 8,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-
-                        className="
-                            absolute
-                            right-[6%]
-                            top-[14%]
-                            h-[620px]
-                            w-[620px]
-                            rounded-full
-                            bg-orange-500/25
-                            blur-[150px]
-                        "
-                    />
-
-                    {/* eye glow */}
-                    <motion.div
-                        animate={{
-                            opacity: [0.2, 1, 0.2],
-                            scale: [0.95, 1.1, 0.95],
-                        }}
-
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-
-                        className="
-                            absolute
-                            right-[32%]
-                            top-[30%]
-                            z-40
-                            h-[24px]
-                            w-[90px]
-                            rounded-full
-                            bg-orange-300
-                            blur-[18px]
-                        "
-                    />
-
-                    {/* breathing shadow */}
-                    <motion.div
-                        animate={{
-                            opacity: [0.18, 0.35, 0.18],
-                            scale: [1, 1.06, 1],
-                        }}
-
-                        transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-
-                        className="
-                            absolute
-                            bottom-[6%]
-                            right-[12%]
-                            h-[180px]
-                            w-[420px]
-                            rounded-full
-                            bg-orange-500/20
-                            blur-[70px]
-                        "
-                    />
-
                     {/* floating murzik */}
                     <motion.div
                         animate={{
@@ -372,9 +270,110 @@ export default function MurzikHero() {
 
                         style={{
                             position: "relative",
-                            zIndex: 30,
+                            zIndex: 20,
                         }}
                     >
+
+                        {/* SMOKE VIDEO */}
+                        <video
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+
+                            src="/videos/murzik-smoke-v2.mp4"
+
+                            style={{
+                                position: "absolute",
+                                top: "80px",
+                                right: "140px",
+                                width: "520px",
+                                height: "520px",
+                                objectFit: "cover",
+                                opacity: 0.55,
+                                pointerEvents: "none",
+                                zIndex: 25,
+                                filter:
+                                    "blur(1px)",
+                            }}
+                        />
+
+                        {/* massive cinematic glow */}
+                        <motion.div
+                            animate={{
+                                scale: [1, 1.12, 1],
+                                opacity: [0.25, 0.42, 0.25],
+                            }}
+
+                            transition={{
+                                duration: 8,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+
+                            className="
+                                absolute
+                                right-[6%]
+                                top-[14%]
+                                h-[620px]
+                                w-[620px]
+                                rounded-full
+                                bg-orange-500/25
+                                blur-[150px]
+                            "
+                        />
+
+                        {/* eye glow */}
+                        <motion.div
+                            animate={{
+                                opacity: [0.2, 1, 0.2],
+                                scale: [0.95, 1.1, 0.95],
+                            }}
+
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+
+                            className="
+                                absolute
+                                right-[32%]
+                                top-[30%]
+                                z-40
+                                h-[24px]
+                                w-[90px]
+                                rounded-full
+                                bg-orange-300
+                                blur-[18px]
+                            "
+                        />
+
+                        {/* breathing shadow */}
+                        <motion.div
+                            animate={{
+                                opacity: [0.18, 0.35, 0.18],
+                                scale: [1, 1.06, 1],
+                            }}
+
+                            transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+
+                            className="
+                                absolute
+                                bottom-[6%]
+                                right-[12%]
+                                h-[180px]
+                                w-[420px]
+                                rounded-full
+                                bg-orange-500/20
+                                blur-[70px]
+                            "
+                        />
 
                         <motion.img
                             initial={{
@@ -403,6 +402,8 @@ export default function MurzikHero() {
                                 filter:
                                     "drop-shadow(0 0 120px rgba(255,140,0,0.42))",
                                 userSelect: "none",
+                                position: "relative",
+                                zIndex: 20,
                             }}
                         />
 
