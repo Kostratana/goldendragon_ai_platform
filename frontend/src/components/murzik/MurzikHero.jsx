@@ -17,27 +17,39 @@ export default function MurzikHero() {
         >
 
             {/* VIDEO SMOKE OVERLAY */}
-            <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-
-                src="/videos/murzik-smoke-v2.mp4"
-
+            <div
                 style={{
                     position: "absolute",
                     inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    opacity: 0.95,
+                    zIndex: 9999,
                     pointerEvents: "none",
-                    zIndex: 200,
-                    mixBlendMode: "screen",
+                    overflow: "hidden",
                 }}
-            />
+            >
+
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+
+                    src="/videos/murzik-smoke-v2.mp4"
+
+                    style={{
+                        position: "absolute",
+                        top: "-8%",
+                        left: "-8%",
+                        width: "116%",
+                        height: "116%",
+                        objectFit: "cover",
+                        opacity: 0.95,
+                        mixBlendMode: "screen",
+                        filter: "brightness(1.15)",
+                    }}
+                />
+
+            </div>
 
             {/* animated ambient background */}
             <motion.div
@@ -114,7 +126,7 @@ export default function MurzikHero() {
             <div
                 className="
                     relative
-                    z-[20]
+                    z-[2]
                     mx-auto
                     flex
                     h-full
@@ -369,7 +381,7 @@ export default function MurzikHero() {
 
                         style={{
                             position: "relative",
-                            zIndex: 30,
+                            zIndex: 3,
                         }}
                     >
 
