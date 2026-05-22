@@ -2,22 +2,42 @@ import { motion } from "framer-motion";
 
 import murzikImage from "../../assets/murzik/murzik-main.png";
 
-import MurzikSmoke from "./MurzikSmoke";
 import MurzikVoiceButton from "./MurzikVoiceButton";
 
 export default function MurzikHero() {
-
-    console.log("MURZIK HERO PRODUCTION TEST");
 
     return (
         <section
             className="
                 relative
                 h-[820px]
-                overflow-visible
+                overflow-hidden
                 bg-[#050505]
             "
         >
+
+            {/* VIDEO SMOKE OVERLAY */}
+            <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+
+                src="/videos/murzik-smoke-v2.mp4"
+
+                style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    opacity: 0.95,
+                    pointerEvents: "none",
+                    zIndex: 200,
+                    mixBlendMode: "screen",
+                }}
+            />
 
             {/* animated ambient background */}
             <motion.div
@@ -94,7 +114,7 @@ export default function MurzikHero() {
             <div
                 className="
                     relative
-                    z-[10]
+                    z-[20]
                     mx-auto
                     flex
                     h-full
@@ -384,18 +404,6 @@ export default function MurzikHero() {
                         />
 
                     </motion.div>
-
-                    {/* CINEMATIC SMOKE */}
-                    <div
-                        style={{
-                            position: "absolute",
-                            inset: 0,
-                            zIndex: 999999,
-                            pointerEvents: "none",
-                        }}
-                    >
-                        <MurzikSmoke />
-                    </div>
 
                 </div>
 
