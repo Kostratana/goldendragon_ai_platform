@@ -16,41 +16,6 @@ export default function MurzikHero() {
             "
         >
 
-            {/* VIDEO SMOKE OVERLAY */}
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    zIndex: 9999,
-                    pointerEvents: "none",
-                    overflow: "hidden",
-                }}
-            >
-
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-
-                    src="/videos/murzik-smoke-v2.mp4"
-
-                    style={{
-                        position: "absolute",
-                        top: "-8%",
-                        left: "-8%",
-                        width: "116%",
-                        height: "116%",
-                        objectFit: "cover",
-                        opacity: 0.95,
-                        mixBlendMode: "screen",
-                        filter: "brightness(1.15)",
-                    }}
-                />
-
-            </div>
-
             {/* animated ambient background */}
             <motion.div
                 animate={{
@@ -126,7 +91,7 @@ export default function MurzikHero() {
             <div
                 className="
                     relative
-                    z-[2]
+                    z-[10]
                     mx-auto
                     flex
                     h-full
@@ -284,6 +249,32 @@ export default function MurzikHero() {
                     "
                 >
 
+                    {/* VIDEO SMOKE */}
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+
+                        src="/videos/murzik-smoke-v2.mp4"
+
+                        style={{
+                            position: "absolute",
+                            top: "4%",
+                            right: "2%",
+                            width: "820px",
+                            height: "820px",
+                            objectFit: "cover",
+                            opacity: 0.9,
+                            pointerEvents: "none",
+                            zIndex: 50,
+                            mixBlendMode: "screen",
+                            filter:
+                                "brightness(1.1) blur(2px)",
+                        }}
+                    />
+
                     {/* massive cinematic glow */}
                     <motion.div
                         animate={{
@@ -381,7 +372,7 @@ export default function MurzikHero() {
 
                         style={{
                             position: "relative",
-                            zIndex: 3,
+                            zIndex: 30,
                         }}
                     >
 
