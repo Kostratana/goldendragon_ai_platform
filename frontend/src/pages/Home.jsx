@@ -407,7 +407,9 @@ export default function Home() {
                                     marginLeft:
                                         isMobile
                                             ? "-7%"
-                                            : "0"
+                                            : "0",
+
+                                    overflow: "visible"
                                 }}
                             >
 
@@ -439,7 +441,7 @@ export default function Home() {
                                     }}
                                 />
 
-                                {/* smoke overlay */}
+                                {/* cinematic smoke */}
 
                                 <video
                                     autoPlay
@@ -452,25 +454,25 @@ export default function Home() {
 
                                         top:
                                             isMobile
-                                                ? "-2%"
-                                                : "-6%",
+                                                ? "-18%"
+                                                : "-24%",
 
                                         right:
                                             isMobile
-                                                ? "-2%"
-                                                : "4%",
+                                                ? "-12%"
+                                                : "-10%",
 
                                         width:
                                             isMobile
-                                                ? "78%"
-                                                : "72%",
+                                                ? "120%"
+                                                : "105%",
 
                                         height:
                                             isMobile
-                                                ? "78%"
-                                                : "72%",
+                                                ? "120%"
+                                                : "105%",
 
-                                        objectFit: "cover",
+                                        objectFit: "contain",
 
                                         pointerEvents: "none",
 
@@ -479,12 +481,12 @@ export default function Home() {
                                         mixBlendMode: "screen",
 
                                         filter:
-                                            "brightness(1.18) blur(2px)",
+                                            "brightness(1.2) blur(3px)",
 
                                         opacity:
                                             isMobile
                                                 ? 0.34
-                                                : 0.82
+                                                : 0.88
                                     }}
                                 >
                                     <source
