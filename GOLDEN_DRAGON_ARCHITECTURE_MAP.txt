@@ -1,0 +1,150 @@
+.
+├── .gitignore
+├── FULL_PROJECT_TREE.txt
+├── GOLDEN_DRAGON_ARCHITECTURE_MAP.txt
+├── GOLDEN_DRAGON_PROJECT_TREE_CLEAN.txt
+├── README.md
+├── backend
+│   ├── api
+│   │   └── router.py
+│   ├── configs
+│   │   ├── model_config.py
+│   │   ├── project_config.py
+│   │   └── runtime_config.py
+│   ├── core
+│   │   ├── context
+│   │   │   └── context_manager.py
+│   │   ├── memory
+│   │   │   ├── investor_memory.py
+│   │   │   ├── memory_manager.py
+│   │   │   ├── project_memory.py
+│   │   │   └── runtime_state.py
+│   │   ├── orchestrator
+│   │   │   ├── execution_engine.py
+│   │   │   ├── murzik_orchestrator.py
+│   │   │   ├── project_dispatcher.py
+│   │   │   └── task_router.py
+│   │   ├── routing
+│   │   │   ├── brain_router.py
+│   │   │   ├── model_router.py
+│   │   │   └── model_selector.py
+│   │   └── runtime
+│   │       ├── model_runtime.py
+│   │       ├── runtime_manager.py
+│   │       ├── session_runtime.py
+│   │       └── stream_runtime.py
+│   ├── logger
+│   │   ├── orchestration_logger.py
+│   │   └── runtime_logger.py
+│   ├── main.py
+│   ├── models
+│   │   ├── embeddings
+│   │   ├── llama
+│   │   ├── qwen
+│   │   └── vision
+│   ├── projects
+│   │   ├── horse_ai
+│   │   │   ├── api
+│   │   │   ├── configs
+│   │   │   ├── demo
+│   │   │   ├── prompts
+│   │   │   └── runtime
+│   │   ├── murzik_health
+│   │   │   ├── api
+│   │   │   ├── configs
+│   │   │   ├── demo
+│   │   │   ├── memory
+│   │   │   ├── prompts
+│   │   │   └── runtime
+│   │   ├── quantum_runtime
+│   │   └── trading_ai
+│   ├── prompts
+│   ├── services
+│   │   └── project_manager.py
+│   └── websocket
+│       ├── chat_stream.py
+│       ├── event_router.py
+│       ├── orchestrator_events.py
+│       ├── runtime_stream.py
+│       ├── stream_manager.py
+│       └── ws_manager.py
+├── clean_structure.txt
+├── docs
+├── final_architecture_v1.txt
+├── frontend
+│   ├── .gitignore
+│   ├── FRONTEND_DEPENDENCIES.md
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── favicon.png
+│   │   ├── icons.svg
+│   │   └── videos
+│   │       └── murzik-smoke-v2.mp4
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── api
+│   │   │   └── backend.js
+│   │   ├── assets
+│   │   │   ├── hero.png
+│   │   │   └── murzik
+│   │   ├── components
+│   │   │   ├── Footer.jsx
+│   │   │   ├── FounderSection.jsx
+│   │   │   ├── HeroBanner.jsx
+│   │   │   ├── ModelConsole.jsx
+│   │   │   ├── console
+│   │   │   ├── effects
+│   │   │   ├── murzik
+│   │   │   ├── navigation
+│   │   │   ├── ui
+│   │   │   └── voice
+│   │   ├── config
+│   │   │   └── murzik.config.js
+│   │   ├── features
+│   │   │   ├── chat
+│   │   │   └── index.js
+│   │   ├── hooks
+│   │   │   └── useDragResize.js
+│   │   ├── layouts
+│   │   │   └── MainLayout.jsx
+│   │   ├── logger
+│   │   │   └── LoggerPanel.jsx
+│   │   ├── main.jsx
+│   │   ├── pages
+│   │   │   ├── Chat.jsx
+│   │   │   └── Home.jsx
+│   │   ├── router
+│   │   │   └── AppRouter.jsx
+│   │   ├── runtime
+│   │   │   ├── MurzikRuntimePanel.jsx
+│   │   │   └── chatRuntime.js
+│   │   ├── store
+│   │   │   └── projectStore.js
+│   │   └── styles
+│   │       └── chat
+│   ├── tailwind.config.js
+│   └── vite.config.js
+├── models
+│   ├── embeddings
+│   ├── llama
+│   ├── qwen
+│   └── vision
+├── projects
+│   ├── horse_ai
+│   │   ├── demo
+│   │   └── runtime
+│   └── murzik_health
+│       ├── api
+│       ├── configs
+│       ├── demo
+│       ├── memory
+│       ├── prompts
+│       └── runtime
+└── vercel.json
+
+78 directories, 70 files

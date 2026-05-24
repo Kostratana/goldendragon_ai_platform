@@ -152,9 +152,21 @@ export default function HeroBanner() {
 
   const speakMurzik = () => {
 
-    const speech = new SpeechSynthesisUtterance(
-      voiceTexts[language]
-    );
+    if (!window.speechSynthesis) {
+
+      console.error(
+        "Speech synthesis not supported"
+      );
+
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+      new SpeechSynthesisUtterance(
+        voiceTexts[language]
+      );
 
     const languageMap = {
       en: "en-US",
@@ -166,27 +178,87 @@ export default function HeroBanner() {
 
     speech.lang = languageMap[language];
 
-    speech.rate = 0.82;
+    speech.rate = 1;
 
-    speech.pitch = 0.65;
+    speech.pitch = 1;
 
     speech.volume = 1;
 
-    const voices = window.speechSynthesis.getVoices();
+    const voices =
+      window.speechSynthesis.getVoices();
 
-    const selectedVoice =
+    console.log(
+      "Available voices:",
+      voices
+    );
+
+    let selectedVoice =
       voices.find(
         (voice) =>
-          voice.lang.includes(language)
+          voice.lang ===
+          languageMap[language]
       );
 
-    if (selectedVoice) {
-      speech.voice = selectedVoice;
+    if (!selectedVoice) {
+
+      selectedVoice =
+        voices.find(
+          (voice) =>
+            voice.lang.startsWith(
+              language
+            )
+        );
     }
 
-    window.speechSynthesis.cancel();
+    if (
+      !selectedVoice &&
+      voices.length > 0
+    ) {
 
-    window.speechSynthesis.speak(speech);
+      selectedVoice = voices[0];
+    }
+
+    if (selectedVoice) {
+
+      speech.voice = selectedVoice;
+
+      console.log(
+        "Selected voice:",
+        selectedVoice.name
+      );
+    }
+
+    speech.onstart = () => {
+
+      console.log(
+        "Murzik voice started"
+      );
+    };
+
+    speech.onend = () => {
+
+      console.log(
+        "Murzik voice ended"
+      );
+    };
+
+    speech.onerror = (event) => {
+
+      console.error(
+        "Speech synthesis error:",
+        event
+      );
+    };
+
+    window.speechSynthesis.resume();
+
+    setTimeout(() => {
+
+      window.speechSynthesis.speak(
+        speech
+      );
+
+    }, 120);
   };
 
   return (
@@ -231,23 +303,43 @@ export default function HeroBanner() {
 
           <div className="hero-language-switcher">
 
-            <button onClick={() => setLanguage("en")}>
+            <button
+              onClick={() =>
+                setLanguage("en")
+              }
+            >
               EN
             </button>
 
-            <button onClick={() => setLanguage("ru")}>
+            <button
+              onClick={() =>
+                setLanguage("ru")
+              }
+            >
               RU
             </button>
 
-            <button onClick={() => setLanguage("fr")}>
+            <button
+              onClick={() =>
+                setLanguage("fr")
+              }
+            >
               FR
             </button>
 
-            <button onClick={() => setLanguage("es")}>
+            <button
+              onClick={() =>
+                setLanguage("es")
+              }
+            >
               ES
             </button>
 
-            <button onClick={() => setLanguage("de")}>
+            <button
+              onClick={() =>
+                setLanguage("de")
+              }
+            >
               DE
             </button>
 

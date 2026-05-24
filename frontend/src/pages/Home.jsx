@@ -18,11 +18,20 @@ export default function Home() {
         <main
             style={{
                 minHeight: "100vh",
+
+                width: "100%",
+
+                maxWidth: "100vw",
+
+                overflowX: "hidden",
+
                 background:
                     "linear-gradient(to bottom, #050505 0%, #080603 100%)",
+
                 color: "white",
-                overflowX: "hidden",
+
                 position: "relative",
+
                 fontFamily:
                     "'Cormorant Garamond', serif"
             }}
@@ -40,29 +49,37 @@ export default function Home() {
                 }}
                 style={{
                     position: "absolute",
+
                     right:
                         isMobile
-                            ? "-140px"
+                            ? "-120px"
                             : "-260px",
+
                     top:
                         isMobile
                             ? "-120px"
                             : "-220px",
+
                     width:
                         isMobile
-                            ? "320px"
+                            ? "260px"
                             : "900px",
+
                     height:
                         isMobile
-                            ? "320px"
+                            ? "260px"
                             : "900px",
+
                     background:
                         "rgba(255,140,0,0.08)",
+
                     borderRadius: "9999px",
+
                     filter:
                         isMobile
-                            ? "blur(80px)"
+                            ? "blur(70px)"
                             : "blur(200px)",
+
                     pointerEvents: "none"
                 }}
             />
@@ -70,31 +87,39 @@ export default function Home() {
             <section
                 style={{
                     position: "relative",
+
                     zIndex: 10,
+
                     display: "flex",
+
                     flexDirection: "column",
+
                     alignItems: "center",
+
                     justifyContent: "flex-start",
-                    minHeight:
-                        isMobile
-                            ? "760px"
-                            : "100vh",
+
+                    minHeight: "100vh",
+
                     paddingTop:
                         isMobile
-                            ? "110px"
+                            ? "95px"
                             : "130px",
+
                     paddingBottom:
                         isMobile
-                            ? "20px"
-                            : "20px",
+                            ? "40px"
+                            : "40px",
+
                     paddingLeft:
                         isMobile
-                            ? "14px"
+                            ? "16px"
                             : "40px",
+
                     paddingRight:
                         isMobile
-                            ? "14px"
+                            ? "16px"
                             : "40px",
+
                     overflow: "hidden"
                 }}
             >
@@ -102,8 +127,11 @@ export default function Home() {
                 <div
                     style={{
                         position: "absolute",
+
                         inset: 0,
+
                         overflow: "hidden",
+
                         pointerEvents: "none"
                     }}
                 >
@@ -130,19 +158,26 @@ export default function Home() {
                             }}
                             style={{
                                 position: "absolute",
+
                                 bottom: "-100px",
+
                                 left: `${4 + i * 8}%`,
+
                                 width:
                                     isMobile
                                         ? "2px"
                                         : "4px",
+
                                 height:
                                     isMobile
                                         ? "2px"
                                         : "4px",
+
                                 borderRadius: "9999px",
+
                                 background:
                                     "rgba(255,180,120,0.35)",
+
                                 filter: "blur(1px)"
                             }}
                         />
@@ -165,12 +200,16 @@ export default function Home() {
                     }}
                     style={{
                         position: "relative",
+
                         zIndex: 4,
+
                         textAlign: "center",
+
                         marginBottom:
                             isMobile
-                                ? "10px"
+                                ? "20px"
                                 : "10px",
+
                         maxWidth:
                             isMobile
                                 ? "100%"
@@ -189,28 +228,36 @@ export default function Home() {
                         }}
                         style={{
                             color: "#d8b07a",
+
                             fontSize:
                                 isMobile
-                                    ? "10px"
+                                    ? "15px"
                                     : isTablet
                                         ? "18px"
                                         : "22px",
+
                             lineHeight:
                                 isMobile
                                     ? "1.7"
                                     : "2",
+
                             fontWeight: "700",
+
                             letterSpacing:
                                 isMobile
-                                    ? "0.10em"
+                                    ? "0.14em"
                                     : "0.22em",
+
                             textTransform: "uppercase",
+
                             textShadow:
                                 "0 0 16px rgba(255,180,120,0.14)",
+
                             marginBottom:
                                 isMobile
-                                    ? "10px"
+                                    ? "18px"
                                     : "22px",
+
                             fontFamily:
                                 "'Cinzel', serif"
                         }}
@@ -223,27 +270,34 @@ export default function Home() {
                     <div
                         style={{
                             color: "#c9aa82",
+
                             fontSize:
                                 isMobile
-                                    ? "11px"
+                                    ? "16px"
                                     : isTablet
                                         ? "18px"
                                         : "24px",
+
                             lineHeight:
                                 isMobile
-                                    ? "1.6"
+                                    ? "1.8"
                                     : "1.9",
+
                             fontWeight: "500",
+
                             letterSpacing:
                                 isMobile
                                     ? "0.01em"
                                     : "0.03em",
+
                             textShadow:
                                 "0 0 12px rgba(255,180,120,0.08)",
+
                             maxWidth:
                                 isMobile
                                     ? "100%"
                                     : "1000px",
+
                             margin: "0 auto"
                         }}
                     >
@@ -255,13 +309,18 @@ export default function Home() {
                 <div
                     style={{
                         position: "relative",
+
                         width: "100%",
+
                         display: "flex",
+
                         justifyContent: "center",
+
                         alignItems: "center",
+
                         marginTop:
                             isMobile
-                                ? "0px"
+                                ? "10px"
                                 : "40px"
                     }}
                 >
@@ -278,21 +337,27 @@ export default function Home() {
                         }}
                         style={{
                             position: "absolute",
+
                             width:
                                 isMobile
                                     ? "340px"
                                     : "1200px",
+
                             height:
                                 isMobile
                                     ? "340px"
                                     : "1200px",
+
                             background:
                                 "rgba(255,140,0,0.10)",
+
                             borderRadius: "9999px",
+
                             filter:
                                 isMobile
                                     ? "blur(70px)"
                                     : "blur(190px)",
+
                             pointerEvents: "none"
                         }}
                     />
@@ -300,7 +365,14 @@ export default function Home() {
                     <div
                         style={{
                             position: "relative",
-                            zIndex: 3
+
+                            zIndex: 3,
+
+                            width: "100%",
+
+                            display: "flex",
+
+                            justifyContent: "center"
                         }}
                     >
 
@@ -318,18 +390,16 @@ export default function Home() {
                             <div
                                 style={{
                                     position: "relative",
+
                                     width:
                                         isMobile
-                                            ? "115%"
+                                            ? "100%"
                                             : "1350px",
-                                    maxWidth:
-                                        isMobile
-                                            ? "115%"
-                                            : "100%",
-                                    marginLeft:
-                                        isMobile
-                                            ? "-7%"
-                                            : "0",
+
+                                    maxWidth: "100%",
+
+                                    marginLeft: "0",
+
                                     overflow: "visible"
                                 }}
                             >
@@ -340,12 +410,19 @@ export default function Home() {
                                     draggable={false}
                                     style={{
                                         position: "relative",
+
                                         width: "100%",
+
                                         objectFit: "contain",
+
                                         display: "block",
+
                                         userSelect: "none",
+
                                         pointerEvents: "none",
+
                                         zIndex: 1,
+
                                         filter:
                                             isMobile
                                                 ? "drop-shadow(0 0 40px rgba(255,140,0,0.12))"
@@ -364,22 +441,22 @@ export default function Home() {
 
                                         top:
                                             isMobile
-                                                ? "-10%"
+                                                ? "-6%"
                                                 : "-14%",
 
                                         left:
                                             isMobile
-                                                ? "-10%"
+                                                ? "0"
                                                 : "-12%",
 
                                         width:
                                             isMobile
-                                                ? "125%"
+                                                ? "100%"
                                                 : "124%",
 
                                         height:
                                             isMobile
-                                                ? "125%"
+                                                ? "112%"
                                                 : "124%",
 
                                         objectFit: "cover",

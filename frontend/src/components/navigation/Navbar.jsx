@@ -1,4 +1,5 @@
 import {
+    useEffect,
     useState
 } from "react";
 
@@ -6,10 +7,6 @@ import {
     Link,
     useLocation
 } from "react-router-dom";
-
-import {
-    createPortal
-} from "react-dom";
 
 import MurzikIntro from "../murzik/MurzikIntro";
 
@@ -21,12 +18,51 @@ export default function Navbar() {
     const [voiceEnabled, setVoiceEnabled] =
         useState(false);
 
+    const [screenWidth, setScreenWidth] =
+        useState(window.innerWidth);
+
+    useEffect(() => {
+
+        function handleResize() {
+
+            setScreenWidth(
+                window.innerWidth
+            );
+        }
+
+        window.addEventListener(
+            "resize",
+            handleResize
+        );
+
+        document.documentElement.style.overflowX =
+            "hidden";
+
+        document.body.style.overflowX =
+            "hidden";
+
+        document.body.style.margin =
+            "0";
+
+        document.body.style.padding =
+            "0";
+
+        return () => {
+
+            window.removeEventListener(
+                "resize",
+                handleResize
+            );
+        };
+
+    }, []);
+
     const isMobile =
-        window.innerWidth <= 768;
+        screenWidth <= 768;
 
     const isTablet =
-        window.innerWidth > 768 &&
-        window.innerWidth < 1200;
+        screenWidth > 768 &&
+        screenWidth <= 1200;
 
     function enableVoice() {
 
@@ -36,10 +72,7 @@ export default function Navbar() {
             return;
         }
 
-        const synth =
-            window.speechSynthesis;
-
-        synth.cancel();
+        window.speechSynthesis.cancel();
 
         setVoiceEnabled(false);
 
@@ -47,7 +80,7 @@ export default function Navbar() {
 
             setVoiceEnabled(true);
 
-        }, 120);
+        }, 100);
     }
 
     function disableVoice() {
@@ -57,14 +90,20 @@ export default function Navbar() {
         ) {
 
             window.speechSynthesis.cancel();
-
         }
 
         setVoiceEnabled(false);
     }
 
-    return createPortal(
+    const isHomeActive =
+        location.pathname === "/";
 
+    const isChatActive =
+        location.pathname.startsWith(
+            "/chat"
+        );
+
+    return (
         <>
             <MurzikIntro
                 enabled={voiceEnabled}
@@ -86,23 +125,43 @@ export default function Navbar() {
 
                     alignItems: "flex-start",
 
-                    pointerEvents: "none",
-
                     paddingTop:
                         isMobile
-                            ? "10px"
+                            ? "max(10px, env(safe-area-inset-top))"
                             : "18px",
 
-                    zIndex: 999999
+                    paddingLeft:
+                        isMobile
+                            ? "10px"
+                            : "20px",
+
+                    paddingRight:
+                        isMobile
+                            ? "10px"
+                            : "20px",
+
+                    boxSizing:
+                        "border-box",
+
+                    zIndex: 999999,
+
+                    pointerEvents: "none"
                 }}
             >
 
                 <nav
                     style={{
-                        pointerEvents: "all",
+                        pointerEvents: "auto",
 
-                        touchAction:
-                            "manipulation",
+                        width:
+                            isMobile
+                                ? "100%"
+                                : "fit-content",
+
+                        maxWidth:
+                            isMobile
+                                ? "100%"
+                                : "96vw",
 
                         display: "flex",
 
@@ -110,30 +169,26 @@ export default function Navbar() {
 
                         justifyContent: "center",
 
-                        gap:
-                            isMobile
-                                ? "6px"
-                                : "14px",
-
                         flexWrap:
                             isMobile
                                 ? "wrap"
                                 : "nowrap",
 
-                        width:
+                        gap:
                             isMobile
-                                ? "88vw"
-                                : "fit-content",
+                                ? "6px"
+                                : isTablet
+                                    ? "10px"
+                                    : "14px",
 
-                        maxWidth:
-                            isMobile
-                                ? "88vw"
-                                : "95vw",
+                        overflow: "hidden",
 
                         padding:
                             isMobile
-                                ? "8px 10px"
-                                : "14px 22px",
+                                ? "10px"
+                                : isTablet
+                                    ? "12px 16px"
+                                    : "14px 22px",
 
                         borderRadius:
                             isMobile
@@ -141,25 +196,21 @@ export default function Navbar() {
                                 : "24px",
 
                         background:
-                            "rgba(10,10,10,0.72)",
+                            "rgba(8,8,8,0.78)",
 
                         backdropFilter:
-                            isMobile
-                                ? "blur(8px)"
-                                : "blur(18px)",
+                            "blur(18px)",
 
                         WebkitBackdropFilter:
-                            isMobile
-                                ? "blur(8px)"
-                                : "blur(18px)",
+                            "blur(18px)",
 
                         border:
                             "1px solid rgba(255,140,0,0.12)",
 
                         boxShadow:
                             isMobile
-                                ? "0 0 20px rgba(255,140,0,0.05)"
-                                : "0 0 50px rgba(255,140,0,0.08)",
+                                ? "0 0 20px rgba(255,140,0,0.08)"
+                                : "0 0 50px rgba(255,140,0,0.12)",
 
                         boxSizing:
                             "border-box"
@@ -169,40 +220,45 @@ export default function Navbar() {
                     <NavButton
                         to="/"
                         text="HOME"
-                        active={
-                            location.pathname === "/"
-                        }
+                        active={isHomeActive}
+                        isMobile={isMobile}
+                        isTablet={isTablet}
                     />
 
                     <NavButton
                         to="/chat"
                         text="CHAT"
-                        active={
-                            location.pathname === "/chat"
-                        }
+                        active={isChatActive}
+                        isMobile={isMobile}
+                        isTablet={isTablet}
                     />
 
-                    <Divider />
+                    <Divider
+                        isMobile={isMobile}
+                    />
 
                     <button
                         onClick={enableVoice}
 
                         style={{
-                            ...buttonStyle,
+                            ...getButtonStyle(
+                                isMobile,
+                                isTablet
+                            ),
+
+                            color:
+                                "#ffcf7a",
 
                             background:
                                 "linear-gradient(to bottom, rgba(255,140,0,0.18), rgba(255,140,0,0.08))",
 
                             border:
-                                "1px solid rgba(255,140,0,0.16)",
-
-                            color:
-                                "#ffcf7a",
+                                "1px solid rgba(255,140,0,0.18)",
 
                             boxShadow:
                                 isMobile
-                                    ? "0 0 10px rgba(255,140,0,0.08)"
-                                    : "0 0 25px rgba(255,140,0,0.12)"
+                                    ? "0 0 12px rgba(255,140,0,0.10)"
+                                    : "0 0 24px rgba(255,140,0,0.14)"
                         }}
                     >
                         VOICE ON
@@ -212,21 +268,24 @@ export default function Navbar() {
                         onClick={disableVoice}
 
                         style={{
-                            ...buttonStyle,
-
-                            background:
-                                "linear-gradient(to bottom, rgba(255,60,60,0.25), rgba(255,20,20,0.08))",
-
-                            border:
-                                "1px solid rgba(255,60,60,0.20)",
+                            ...getButtonStyle(
+                                isMobile,
+                                isTablet
+                            ),
 
                             color:
                                 "#ffb0b0",
 
+                            background:
+                                "linear-gradient(to bottom, rgba(255,60,60,0.20), rgba(255,20,20,0.08))",
+
+                            border:
+                                "1px solid rgba(255,60,60,0.18)",
+
                             boxShadow:
                                 isMobile
-                                    ? "0 0 10px rgba(255,60,60,0.10)"
-                                    : "0 0 25px rgba(255,60,60,0.16)"
+                                    ? "0 0 12px rgba(255,60,60,0.10)"
+                                    : "0 0 24px rgba(255,60,60,0.14)"
                         }}
                     >
                         VOICE OFF
@@ -236,46 +295,49 @@ export default function Navbar() {
 
             </div>
 
-        </>,
-
-        document.getElementById(
-            "navbar-root"
-        )
+            <div
+                style={{
+                    paddingTop:
+                        isMobile
+                            ? "78px"
+                            : "110px"
+                }}
+            />
+        </>
     );
 }
 
 function NavButton({
     to,
     text,
-    active
+    active,
+    isMobile,
+    isTablet
 }) {
-
-    const isMobile =
-        window.innerWidth <= 768;
 
     return (
         <Link
             to={to}
 
             style={{
-                ...buttonStyle,
+                ...getButtonStyle(
+                    isMobile,
+                    isTablet
+                ),
+
+                textDecoration:
+                    "none",
+
+                display: "flex",
+
+                alignItems: "center",
+
+                justifyContent: "center",
 
                 color:
                     active
                         ? "#ffcf7a"
                         : "#d8d8d8",
-
-                textDecoration:
-                    "none",
-
-                display:
-                    "flex",
-
-                alignItems:
-                    "center",
-
-                justifyContent:
-                    "center",
 
                 background:
                     active
@@ -291,8 +353,8 @@ function NavButton({
                     active
                         ? (
                             isMobile
-                                ? "0 0 10px rgba(255,140,0,0.08)"
-                                : "0 0 25px rgba(255,140,0,0.12)"
+                                ? "0 0 12px rgba(255,140,0,0.08)"
+                                : "0 0 24px rgba(255,140,0,0.12)"
                         )
                         : "none"
             }}
@@ -302,20 +364,21 @@ function NavButton({
     );
 }
 
-function Divider() {
+function Divider({
+    isMobile
+}) {
 
-    const isMobile =
-        window.innerWidth <= 768;
+    if (isMobile) {
+
+        return null;
+    }
 
     return (
         <div
             style={{
                 width: "1px",
 
-                height:
-                    isMobile
-                        ? "16px"
-                        : "22px",
+                height: "22px",
 
                 background:
                     "rgba(255,255,255,0.08)",
@@ -326,64 +389,85 @@ function Divider() {
     );
 }
 
-const buttonStyle = {
+function getButtonStyle(
+    isMobile,
+    isTablet
+) {
 
-    height:
-        window.innerWidth <= 768
-            ? "26px"
-            : "42px",
+    return {
 
-    paddingLeft:
-        window.innerWidth <= 768
-            ? "8px"
-            : "18px",
+        minWidth:
+            isMobile
+                ? "74px"
+                : isTablet
+                    ? "90px"
+                    : "110px",
 
-    paddingRight:
-        window.innerWidth <= 768
-            ? "8px"
-            : "18px",
+        height:
+            isMobile
+                ? "34px"
+                : isTablet
+                    ? "40px"
+                    : "44px",
 
-    borderRadius:
-        window.innerWidth <= 768
-            ? "10px"
-            : "14px",
+        paddingLeft:
+            isMobile
+                ? "10px"
+                : "18px",
 
-    border:
-        "1px solid rgba(255,255,255,0.04)",
+        paddingRight:
+            isMobile
+                ? "10px"
+                : "18px",
 
-    background:
-        "rgba(255,255,255,0.02)",
+        borderRadius:
+            isMobile
+                ? "12px"
+                : "14px",
 
-    fontSize:
-        window.innerWidth <= 768
-            ? "7px"
-            : "12px",
+        border:
+            "1px solid rgba(255,255,255,0.04)",
 
-    fontWeight: "700",
+        background:
+            "rgba(255,255,255,0.02)",
 
-    letterSpacing:
-        window.innerWidth <= 768
-            ? "0.06em"
-            : "0.18em",
+        fontSize:
+            isMobile
+                ? "10px"
+                : isTablet
+                    ? "11px"
+                    : "12px",
 
-    cursor: "pointer",
+        fontWeight: "700",
 
-    outline: "none",
+        letterSpacing:
+            isMobile
+                ? "0.08em"
+                : "0.16em",
 
-    transition: "0.3s",
+        whiteSpace: "nowrap",
 
-    fontFamily:
-        "'Cinzel', serif",
+        cursor: "pointer",
 
-    backdropFilter:
-        window.innerWidth <= 768
-            ? "blur(6px)"
-            : "blur(10px)",
+        outline: "none",
 
-    WebkitBackdropFilter:
-        window.innerWidth <= 768
-            ? "blur(6px)"
-            : "blur(10px)",
+        transition:
+            "all 0.25s ease",
 
-    flexShrink: 0
-};
+        fontFamily:
+            "'Cinzel', serif",
+
+        backdropFilter:
+            "blur(10px)",
+
+        WebkitBackdropFilter:
+            "blur(10px)",
+
+        flexShrink: 0,
+
+        userSelect: "none",
+
+        WebkitTapHighlightColor:
+            "transparent"
+    };
+}
