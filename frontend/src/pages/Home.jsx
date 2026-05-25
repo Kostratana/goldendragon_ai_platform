@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import FounderSection from "../components/FounderSection";
 import Footer from "../components/Footer";
 
-import murzikImage from "../assets/murzik/murzik-main.png";
+import murzikImage from "../assets/murzik/murzik-main.webp";
 
 export default function Home() {
 
@@ -13,6 +13,29 @@ export default function Home() {
     const isTablet =
         window.innerWidth > 768 &&
         window.innerWidth < 1200;
+
+    const particles = [
+        {
+            left: "8%",
+            duration: 14,
+            delay: 0,
+        },
+        {
+            left: "26%",
+            duration: 16,
+            delay: 1,
+        },
+        {
+            left: "44%",
+            duration: 18,
+            delay: 2,
+        },
+        {
+            left: "62%",
+            duration: 15,
+            delay: 1.5,
+        },
+    ];
 
     return (
         <main
@@ -37,13 +60,13 @@ export default function Home() {
             }}
         >
 
+            {/* optimized ambient glow */}
             <motion.div
                 animate={{
-                    scale: [1, 1.04, 1],
-                    opacity: [0.10, 0.20, 0.10]
+                    opacity: [0.10, 0.16, 0.10]
                 }}
                 transition={{
-                    duration: 10,
+                    duration: 12,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
@@ -52,23 +75,23 @@ export default function Home() {
 
                     right:
                         isMobile
-                            ? "-120px"
-                            : "-260px",
+                            ? "-100px"
+                            : "-180px",
 
                     top:
                         isMobile
-                            ? "-120px"
-                            : "-220px",
+                            ? "-100px"
+                            : "-180px",
 
                     width:
                         isMobile
-                            ? "260px"
-                            : "900px",
+                            ? "240px"
+                            : "680px",
 
                     height:
                         isMobile
-                            ? "260px"
-                            : "900px",
+                            ? "240px"
+                            : "680px",
 
                     background:
                         "rgba(255,140,0,0.08)",
@@ -77,8 +100,8 @@ export default function Home() {
 
                     filter:
                         isMobile
-                            ? "blur(70px)"
-                            : "blur(200px)",
+                            ? "blur(40px)"
+                            : "blur(90px)",
 
                     pointerEvents: "none"
                 }}
@@ -124,6 +147,7 @@ export default function Home() {
                 }}
             >
 
+                {/* optimized particles */}
                 <div
                     style={{
                         position: "absolute",
@@ -136,49 +160,41 @@ export default function Home() {
                     }}
                 >
 
-                    {[...Array(
-                        isMobile
-                            ? 6
-                            : 16
-                    )].map((_, i) => (
+                    {particles.map((particle, i) => (
 
                         <motion.div
                             key={i}
                             animate={{
-                                y: [0, -1000],
-                                opacity: [0, 0.4, 0],
-                                x: [0, Math.random() * 60 - 30],
-                                scale: [0.4, 1, 0.3]
+                                y: [0, -900],
+                                opacity: [0, 0.35, 0],
                             }}
                             transition={{
-                                duration: 12 + i,
+                                duration: particle.duration,
                                 repeat: Infinity,
                                 ease: "linear",
-                                delay: i * 0.45
+                                delay: particle.delay
                             }}
                             style={{
                                 position: "absolute",
 
                                 bottom: "-100px",
 
-                                left: `${4 + i * 8}%`,
+                                left: particle.left,
 
                                 width:
                                     isMobile
                                         ? "2px"
-                                        : "4px",
+                                        : "3px",
 
                                 height:
                                     isMobile
                                         ? "2px"
-                                        : "4px",
+                                        : "3px",
 
                                 borderRadius: "9999px",
 
                                 background:
-                                    "rgba(255,180,120,0.35)",
-
-                                filter: "blur(1px)"
+                                    "rgba(255,180,120,0.28)"
                             }}
                         />
 
@@ -186,17 +202,18 @@ export default function Home() {
 
                 </div>
 
+                {/* title */}
                 <motion.div
                     initial={{
                         opacity: 0,
-                        y: 40
+                        y: 30
                     }}
                     animate={{
                         opacity: 1,
                         y: 0
                     }}
                     transition={{
-                        duration: 1.2
+                        duration: 1
                     }}
                     style={{
                         position: "relative",
@@ -219,10 +236,10 @@ export default function Home() {
 
                     <motion.div
                         animate={{
-                            opacity: [0.7, 1, 0.7]
+                            opacity: [0.82, 1, 0.82]
                         }}
                         transition={{
-                            duration: 5,
+                            duration: 6,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
@@ -251,7 +268,7 @@ export default function Home() {
                             textTransform: "uppercase",
 
                             textShadow:
-                                "0 0 16px rgba(255,180,120,0.14)",
+                                "0 0 10px rgba(255,180,120,0.10)",
 
                             marginBottom:
                                 isMobile
@@ -291,7 +308,7 @@ export default function Home() {
                                     : "0.03em",
 
                             textShadow:
-                                "0 0 12px rgba(255,180,120,0.08)",
+                                "0 0 8px rgba(255,180,120,0.05)",
 
                             maxWidth:
                                 isMobile
@@ -306,6 +323,7 @@ export default function Home() {
 
                 </motion.div>
 
+                {/* hero */}
                 <div
                     style={{
                         position: "relative",
@@ -325,13 +343,13 @@ export default function Home() {
                     }}
                 >
 
+                    {/* optimized glow */}
                     <motion.div
                         animate={{
-                            scale: [1, 1.05, 1],
-                            opacity: [0.08, 0.14, 0.08]
+                            opacity: [0.08, 0.12, 0.08]
                         }}
                         transition={{
-                            duration: 8,
+                            duration: 10,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
@@ -340,23 +358,23 @@ export default function Home() {
 
                             width:
                                 isMobile
-                                    ? "340px"
-                                    : "1200px",
+                                    ? "320px"
+                                    : "820px",
 
                             height:
                                 isMobile
-                                    ? "340px"
-                                    : "1200px",
+                                    ? "320px"
+                                    : "820px",
 
                             background:
-                                "rgba(255,140,0,0.10)",
+                                "rgba(255,140,0,0.08)",
 
                             borderRadius: "9999px",
 
                             filter:
                                 isMobile
-                                    ? "blur(70px)"
-                                    : "blur(190px)",
+                                    ? "blur(50px)"
+                                    : "blur(120px)",
 
                             pointerEvents: "none"
                         }}
@@ -378,10 +396,10 @@ export default function Home() {
 
                         <motion.div
                             animate={{
-                                scale: [1, 1.004, 1]
+                                y: [0, -6, 0]
                             }}
                             transition={{
-                                duration: 5,
+                                duration: 7,
                                 repeat: Infinity,
                                 ease: "easeInOut"
                             }}
@@ -394,11 +412,9 @@ export default function Home() {
                                     width:
                                         isMobile
                                             ? "100%"
-                                            : "1350px",
+                                            : "1150px",
 
                                     maxWidth: "100%",
-
-                                    marginLeft: "0",
 
                                     overflow: "visible"
                                 }}
@@ -408,6 +424,7 @@ export default function Home() {
                                     src={murzikImage}
                                     alt="Murzik AI"
                                     draggable={false}
+                                    loading="eager"
                                     style={{
                                         position: "relative",
 
@@ -425,8 +442,8 @@ export default function Home() {
 
                                         filter:
                                             isMobile
-                                                ? "drop-shadow(0 0 40px rgba(255,140,0,0.12))"
-                                                : "drop-shadow(0 0 170px rgba(255,140,0,0.20))"
+                                                ? "drop-shadow(0 0 28px rgba(255,140,0,0.10))"
+                                                : "drop-shadow(0 0 90px rgba(255,140,0,0.16))"
                                     }}
                                 />
 
@@ -435,29 +452,29 @@ export default function Home() {
                                     muted
                                     loop
                                     playsInline
-                                    preload="auto"
+                                    preload="metadata"
                                     style={{
                                         position: "absolute",
 
                                         top:
                                             isMobile
-                                                ? "-6%"
-                                                : "-14%",
+                                                ? "-4%"
+                                                : "-10%",
 
                                         left:
                                             isMobile
                                                 ? "0"
-                                                : "-12%",
+                                                : "-8%",
 
                                         width:
                                             isMobile
                                                 ? "100%"
-                                                : "124%",
+                                                : "116%",
 
                                         height:
                                             isMobile
-                                                ? "112%"
-                                                : "124%",
+                                                ? "108%"
+                                                : "116%",
 
                                         objectFit: "cover",
 
@@ -467,19 +484,13 @@ export default function Home() {
 
                                         mixBlendMode: "screen",
 
-                                        filter:
-                                            "brightness(1.2) contrast(1.05) blur(2px)",
-
                                         opacity:
                                             isMobile
-                                                ? 0.34
-                                                : 0.78,
+                                                ? 0.22
+                                                : 0.52,
 
-                                        WebkitMaskImage:
-                                            "radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 74%, rgba(0,0,0,0) 100%)",
-
-                                        maskImage:
-                                            "radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.72) 74%, rgba(0,0,0,0) 100%)"
+                                        filter:
+                                            "brightness(1.08)"
                                     }}
                                 >
                                     <source

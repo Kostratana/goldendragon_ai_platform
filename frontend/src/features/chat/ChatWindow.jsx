@@ -331,34 +331,38 @@ export default function ChatWindow({
 
                     display: "flex",
 
-                    justifyContent: "space-between",
+                    flexDirection: "column",
 
-                    alignItems: "center",
-
-                    gap: "10px",
+                    gap: "8px",
 
                     marginBottom:
                         isMobile
                             ? "10px"
-                            : "14px",
+                            : "12px",
 
                     position: "relative",
 
                     zIndex: 5,
 
-                    overflowX: "auto",
-
-                    cursor: "grab",
-
-                    paddingBottom: "4px"
+                    cursor: "grab"
                 }}
             >
 
                 <div
                     style={{
+
                         display: "flex",
-                        gap: "8px",
-                        flexWrap: "wrap"
+
+                        gap: "6px",
+
+                        flexWrap: "wrap",
+
+                        alignItems: "center",
+
+                        justifyContent:
+                            isMobile
+                                ? "center"
+                                : "flex-start"
                     }}
                 >
 
@@ -438,9 +442,19 @@ export default function ChatWindow({
 
                 <div
                     style={{
+
                         display: "flex",
-                        gap: "8px",
-                        flexWrap: "wrap"
+
+                        gap: "6px",
+
+                        flexWrap: "wrap",
+
+                        alignItems: "center",
+
+                        justifyContent:
+                            isMobile
+                                ? "center"
+                                : "flex-start"
                     }}
                 >
 
@@ -459,71 +473,47 @@ export default function ChatWindow({
                         onClick={downloadMessages}
                     />
 
-                </div>
-
-            </div>
-
-            {/* VOICE BAR */}
-
-            <div
-                style={{
-
-                    display: "flex",
-
-                    gap: "8px",
-
-                    marginBottom:
-                        isMobile
-                            ? "10px"
-                            : "14px",
-
-                    flexWrap: "wrap",
-
-                    position: "relative",
-
-                    zIndex: 5
-                }}
-            >
-
-                <ToolbarButton
-                    text={
-                        voiceEnabled
-                            ? "VOICE ACTIVE"
-                            : "VOICE OFF"
-                    }
-                    active={voiceEnabled}
-                    onClick={() =>
-                        setVoiceEnabled(
-                            prev => !prev
-                        )
-                    }
-                />
-
-                <ToolbarButton
-                    text="STOP VOICE"
-                    onClick={stopMurzikVoice}
-                />
-
-                <label
-                    style={{
-                        display:
-                            "inline-flex"
-                    }}
-                >
-
-                    <input
-                        type="file"
-                        style={{
-                            display:
-                                "none"
-                        }}
+                    <ToolbarButton
+                        text={
+                            voiceEnabled
+                                ? "VOICE ACTIVE"
+                                : "VOICE OFF"
+                        }
+                        active={voiceEnabled}
+                        onClick={() =>
+                            setVoiceEnabled(
+                                prev => !prev
+                            )
+                        }
                     />
 
                     <ToolbarButton
-                        text="UPLOAD"
+                        text="STOP VOICE"
+                        onClick={stopMurzikVoice}
                     />
 
-                </label>
+                    <label
+                        style={{
+                            display:
+                                "inline-flex"
+                        }}
+                    >
+
+                        <input
+                            type="file"
+                            style={{
+                                display:
+                                    "none"
+                            }}
+                        />
+
+                        <ToolbarButton
+                            text="UPLOAD"
+                        />
+
+                    </label>
+
+                </div>
 
             </div>
 
@@ -632,6 +622,7 @@ export default function ChatWindow({
                                 muted
                                 loop
                                 playsInline
+                                preload="metadata"
                                 style={{
 
                                     width:
@@ -730,6 +721,8 @@ export default function ChatWindow({
 
                     display: "flex",
 
+                    alignItems: "center",
+
                     gap:
                         isMobile
                             ? "8px"
@@ -757,12 +750,12 @@ export default function ChatWindow({
 
                         flex: 1,
 
-                        height: "42px",
+                        height: "34px",
 
-                        borderRadius: "14px",
+                        borderRadius: "10px",
 
-                        paddingLeft: "16px",
-                        paddingRight: "16px",
+                        paddingLeft: "14px",
+                        paddingRight: "14px",
 
                         border:
                             "1px solid rgba(255,220,170,0.08)",
@@ -778,7 +771,13 @@ export default function ChatWindow({
                             )
                             `,
 
-                        color: "#fff4e4"
+                        color: "#fff4e4",
+
+                        fontSize: "12px",
+
+                        letterSpacing: "0.03em",
+
+                        boxSizing: "border-box"
                     }}
                 />
 
@@ -786,9 +785,11 @@ export default function ChatWindow({
                     onClick={sendMessage}
                     style={{
 
-                        width: "110px",
+                        width: "92px",
 
-                        borderRadius: "14px",
+                        height: "34px",
+
+                        borderRadius: "10px",
 
                         border:
                             "1px solid rgba(255,220,170,0.08)",
@@ -797,8 +798,8 @@ export default function ChatWindow({
                             `
                             linear-gradient(
                                 to bottom,
-                                rgba(92,50,24,0.92),
-                                rgba(42,20,10,0.96)
+                                rgba(92,50,24,0.82),
+                                rgba(42,20,10,0.92)
                             )
                             `,
 
@@ -808,9 +809,30 @@ export default function ChatWindow({
 
                         fontWeight: "500",
 
-                        fontSize: "10px",
+                        fontSize: "9px",
 
-                        letterSpacing: "0.12em"
+                        letterSpacing: "0.16em",
+
+                        transition:
+                            "all 0.20s ease",
+
+                        backdropFilter:
+                            "blur(10px)",
+
+                        WebkitBackdropFilter:
+                            "blur(10px)",
+
+                        flexShrink: 0,
+
+                        display: "flex",
+
+                        alignItems: "center",
+
+                        justifyContent: "center",
+
+                        lineHeight: 1,
+
+                        userSelect: "none"
                     }}
                 >
                     SEND
@@ -1030,52 +1052,52 @@ function ToolbarButton({
             onClick={onClick}
             style={{
 
-                height: "34px",
+                height: "30px",
 
-                minWidth: "110px",
+                minWidth: "92px",
 
-                paddingLeft: "14px",
-                paddingRight: "14px",
+                paddingLeft: "12px",
+                paddingRight: "12px",
 
-                borderRadius: "12px",
+                borderRadius: "10px",
 
                 border:
                     active
-                        ? "1px solid rgba(255,190,90,0.18)"
-                        : "1px solid rgba(255,220,170,0.06)",
+                        ? "1px solid rgba(255,190,90,0.22)"
+                        : "1px solid rgba(255,220,170,0.05)",
 
                 background:
                     active
                         ? `
                         linear-gradient(
                             to bottom,
-                            rgba(255,170,70,0.18),
-                            rgba(255,120,20,0.10)
+                            rgba(255,170,70,0.14),
+                            rgba(255,120,20,0.08)
                         )
                         `
                         : `
                         linear-gradient(
                             to bottom,
-                            rgba(255,255,255,0.025),
-                            rgba(255,255,255,0.012)
+                            rgba(255,255,255,0.018),
+                            rgba(255,255,255,0.008)
                         )
                         `,
 
                 color:
                     active
                         ? "#ffe2b2"
-                        : "#f4dcc0",
+                        : "#f2dcc2",
 
                 cursor: "pointer",
 
-                fontSize: "10px",
+                fontSize: "9px",
 
                 fontWeight: "500",
 
-                letterSpacing: "0.12em",
+                letterSpacing: "0.16em",
 
                 transition:
-                    "all 0.22s ease",
+                    "all 0.20s ease",
 
                 backdropFilter:
                     "blur(10px)",
@@ -1086,15 +1108,25 @@ function ToolbarButton({
                 boxShadow:
                     active
                         ? `
-                        0 0 18px rgba(255,140,0,0.12)
+                        0 0 16px rgba(255,140,0,0.10)
                         `
                         : `
-                        0 0 10px rgba(255,255,255,0.02)
+                        0 0 8px rgba(255,255,255,0.015)
                         `,
 
                 whiteSpace: "nowrap",
 
-                flexShrink: 0
+                flexShrink: 0,
+
+                display: "flex",
+
+                alignItems: "center",
+
+                justifyContent: "center",
+
+                lineHeight: 1,
+
+                userSelect: "none"
             }}
         >
             {text}
@@ -1115,44 +1147,44 @@ function ModeButton({
             onClick={onClick}
             style={{
 
-                height: "34px",
+                height: "30px",
 
                 minWidth:
                     isMobile
-                        ? "82px"
-                        : "94px",
+                        ? "74px"
+                        : "86px",
 
-                paddingLeft: "14px",
-                paddingRight: "14px",
+                paddingLeft: "12px",
+                paddingRight: "12px",
 
-                borderRadius: "12px",
+                borderRadius: "10px",
 
                 border:
                     active
-                        ? "1px solid rgba(255,220,170,0.16)"
-                        : "1px solid rgba(255,255,255,0.05)",
+                        ? "1px solid rgba(255,220,170,0.18)"
+                        : "1px solid rgba(255,255,255,0.04)",
 
                 background:
                     active
                         ? `
                         linear-gradient(
                             to bottom,
-                            rgba(255,220,170,0.92),
-                            rgba(220,180,120,0.82)
+                            rgba(255,220,170,0.88),
+                            rgba(220,180,120,0.78)
                         )
                         `
                         : `
                         linear-gradient(
                             to bottom,
-                            rgba(255,255,255,0.03),
-                            rgba(255,255,255,0.015)
+                            rgba(255,255,255,0.02),
+                            rgba(255,255,255,0.008)
                         )
                         `,
 
                 color:
                     active
-                        ? "#24140a"
-                        : "#f6e3ca",
+                        ? "#1c120a"
+                        : "#f5dfc5",
 
                 cursor: "pointer",
 
@@ -1160,15 +1192,15 @@ function ModeButton({
 
                 fontSize:
                     isMobile
-                        ? "9px"
-                        : "10px",
+                        ? "8px"
+                        : "9px",
 
                 fontWeight: "500",
 
-                letterSpacing: "0.12em",
+                letterSpacing: "0.16em",
 
                 transition:
-                    "all 0.22s ease",
+                    "all 0.20s ease",
 
                 backdropFilter:
                     "blur(10px)",
@@ -1179,11 +1211,21 @@ function ModeButton({
                 boxShadow:
                     active
                         ? `
-                        0 0 22px rgba(255,180,70,0.14)
+                        0 0 18px rgba(255,180,70,0.12)
                         `
                         : `
-                        0 0 10px rgba(255,255,255,0.02)
-                        `
+                        0 0 8px rgba(255,255,255,0.015)
+                        `,
+
+                display: "flex",
+
+                alignItems: "center",
+
+                justifyContent: "center",
+
+                lineHeight: 1,
+
+                userSelect: "none"
             }}
         >
             {text}

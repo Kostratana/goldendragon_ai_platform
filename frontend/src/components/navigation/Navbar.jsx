@@ -1,5 +1,6 @@
 import {
     useEffect,
+    useRef,
     useState
 } from "react";
 
@@ -12,6 +13,9 @@ export default function Navbar() {
 
     const location =
         useLocation();
+
+    const audioRef =
+        useRef(null);
 
     const [screenWidth, setScreenWidth] =
         useState(window.innerWidth);
@@ -46,11 +50,7 @@ export default function Navbar() {
                 handleResize
             );
 
-            /*
-            CLEANUP SPEECH
-            */
-
-            window.speechSynthesis?.cancel();
+            stopVoice();
         };
 
     }, []);
@@ -62,213 +62,74 @@ export default function Navbar() {
         screenWidth > 768 &&
         screenWidth <= 1200;
 
-    /*
-    FREE MULTIPLATFORM VOICE
-    */
+    function stopVoice() {
+
+        if (audioRef.current) {
+
+            audioRef.current.pause();
+
+            audioRef.current.currentTime =
+                0;
+        }
+
+        setIsVoiceLoading(false);
+    }
 
     async function enableVoice() {
 
         try {
 
-            stopVoice();
+            if (!audioRef.current) {
 
-            if (
-                !window.speechSynthesis
-            ) {
+                audioRef.current =
+                    new Audio(
+                        "/audio/audio_webside.wav"
+                    );
 
-                console.error(
-                    "Speech synthesis not supported"
-                );
+                audioRef.current.preload =
+                    "metadata";
+
+                audioRef.current.volume =
+                    1;
+
+                audioRef.current.onended =
+                    () => {
+
+                        setIsVoiceLoading(false);
+                    };
+
+                audioRef.current.onerror =
+                    (error) => {
+
+                        console.error(
+                            "Murzik audio error:",
+                            error
+                        );
+
+                        setIsVoiceLoading(false);
+                    };
+            }
+
+            if (isVoiceLoading) {
+
+                stopVoice();
 
                 return;
             }
 
+            stopVoice();
+
             setIsVoiceLoading(true);
 
-            const synth =
-                window.speechSynthesis;
+            audioRef.current.currentTime =
+                0;
 
-            const text = `
-            Hello.
-
-            I am Murzik.
-
-            Personal AI business assistant
-            of Svetlana Rumyantseva.
-
-            I will guide you
-            through the world
-            of artificial intelligence.
-
-            Please open the chat page
-            to explore our AI systems,
-            projects and multimodal platforms.
-            `;
-
-            const speech =
-                new SpeechSynthesisUtterance(
-                    text
-                );
-
-            speech.lang =
-                "en-US";
-
-            /*
-            DEEP MALE SETTINGS
-            */
-
-            speech.rate =
-                0.88;
-
-            speech.pitch =
-                0.72;
-
-            speech.volume =
-                1;
-
-            let voices =
-                synth.getVoices();
-
-            /*
-            WAIT FOR VOICES
-            */
-
-            if (
-                voices.length === 0
-            ) {
-
-                await new Promise(
-                    (resolve) => {
-
-                        synth.onvoiceschanged =
-                            () => {
-
-                                voices =
-                                    synth.getVoices();
-
-                                resolve();
-                            };
-
-                        setTimeout(
-                            resolve,
-                            1200
-                        );
-                    }
-                );
-
-                voices =
-                    synth.getVoices();
-            }
-
-            console.log(
-                "Murzik available voices:",
-                voices.map(v => v.name)
-            );
-
-            /*
-            MICROSOFT MALE PRIORITY
-            */
-
-            const preferredVoice =
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Microsoft David"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Microsoft Guy"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Microsoft Ryan"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Google UK English Male"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Alex"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Daniel"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Male"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.lang ===
-                    "en-US"
-                ) ||
-
-                voices[0];
-
-            if (
-                preferredVoice
-            ) {
-
-                speech.voice =
-                    preferredVoice;
-
-                console.log(
-                    "Murzik selected voice:",
-                    preferredVoice.name
-                );
-            }
-
-            speech.onstart = () => {
-
-                console.log(
-                    "Murzik voice started"
-                );
-            };
-
-            speech.onend = () => {
-
-                setIsVoiceLoading(false);
-
-                console.log(
-                    "Murzik voice ended"
-                );
-            };
-
-            speech.onerror = (
-                error
-            ) => {
-
-                console.error(
-                    "Murzik voice error:",
-                    error
-                );
-
-                setIsVoiceLoading(false);
-            };
-
-            synth.speak(
-                speech
-            );
+            await audioRef.current.play();
 
         } catch (error) {
 
             console.error(
-                "Murzik runtime error:",
+                "Murzik audio runtime error:",
                 error
             );
 
@@ -276,27 +137,17 @@ export default function Navbar() {
         }
     }
 
-    function stopVoice() {
-
-        window.speechSynthesis?.cancel();
-
-        setIsVoiceLoading(false);
-    }
-
     const pathname =
         location.pathname
             .toLowerCase()
             .replace(/\/+$/, "") || "/";
 
-    /*
-    FIX ACTIVE LOGIC
-    */
-
     const isHomeActive =
         pathname === "/";
 
     const isChatActive =
-        pathname.includes("/chat");
+        pathname === "/chat" ||
+        pathname.startsWith("/chat/");
 
     return (
 
@@ -444,8 +295,6 @@ export default function Navbar() {
 
                     <button
                         onClick={enableVoice}
-
-                        disabled={isVoiceLoading}
 
                         style={{
 

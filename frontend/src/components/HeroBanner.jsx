@@ -1,443 +1,324 @@
-import { useState } from "react";
+import {
+    useRef,
+    useState
+} from "react";
 
-import murzikMain from "../assets/murzik/murzik-main.png";
+import murzikMain from "../assets/murzik/murzik-main.webp";
 import svetlanaAvatar from "../assets/murzik/svetlana-avatar.png";
 import murzikChat from "../assets/murzik/murzik-chat.png";
 
 export default function HeroBanner() {
 
-  const [language, setLanguage] = useState("en");
+    const [language, setLanguage] =
+        useState("en");
 
-  const voiceTexts = {
+    const [isPlaying, setIsPlaying] =
+        useState(false);
 
-    en: `
-      Greetings.
-      I am Murzik.
+    const audioRef =
+        useRef(null);
 
-      I am here to guide you through the world of artificial intelligence
-      and introduce you to implemented systems,
-      AI architectures,
-      multimodal technologies
-      and investment projects created by Svetlana.
+    const voiceTexts = {
 
-      Please proceed to the AI chat and project pages.
+        en:
+            "Murzik English runtime enabled.",
 
-      Access to private project presentations,
-      investment systems
-      and protected AI platforms
-      requires authorization from Svetlana.
+        ru:
+            "Русский режим Мурзика активирован.",
 
-      Please send an email to Svetlana
-      to request investor access.
+        fr:
+            "Le mode français de Murzik est activé.",
 
-      Svetlana will provide you with
-      an activation token
-      or unlock access to the protected systems.
+        es:
+            "El modo español de Murzik está activado.",
 
-      Welcome to Golden Dragon AI Systems.
-    `,
-
-    ru: `
-      Приветствую вас.
-      Я Мурзик.
-
-      Я здесь чтобы провести вам экскурсию
-      в мир искусственного интеллекта
-      и познакомить с уже реализованными проектами,
-      AI архитектурами,
-      мультимодальными технологиями
-      и инвестиционными системами Светланы.
-
-      Прошу пройти на страницу чата и проектов.
-
-      Доступ к закрытым презентациям проектов,
-      инвестиционным системам
-      и защищённым AI платформам
-      требует авторизации у Светланы.
-
-      Пожалуйста напишите Светлане на электронную почту
-      чтобы получить доступ к инвестиционным проектам.
-
-      Светлана предоставит вам
-      токен активации
-      или откроет доступ к защищённым системам.
-
-      Добро пожаловать в Golden Dragon AI Systems.
-    `,
-
-    fr: `
-      Salutations.
-      Je suis Murzik.
-
-      Je suis ici pour vous guider dans le monde
-      de l’intelligence artificielle
-      et vous présenter des projets réalisés,
-      des architectures IA,
-      des technologies multimodales
-      et des systèmes d’investissement créés par Svetlana.
-
-      Veuillez accéder à la page du chat IA et des projets.
-
-      L’accès aux présentations privées,
-      aux systèmes d’investissement
-      et aux plateformes IA protégées
-      nécessite une autorisation de Svetlana.
-
-      Veuillez envoyer un email à Svetlana
-      pour demander un accès investisseur.
-
-      Svetlana vous fournira
-      un jeton d’activation
-      ou débloquera l’accès aux systèmes protégés.
-
-      Bienvenue dans Golden Dragon AI Systems.
-    `,
-
-    es: `
-      Saludos.
-      Soy Murzik.
-
-      Estoy aquí para guiarte por el mundo
-      de la inteligencia artificial
-      y presentarte proyectos implementados,
-      arquitecturas IA,
-      tecnologías multimodales
-      y sistemas de inversión creados por Svetlana.
-
-      Por favor entra en la página del chat y proyectos.
-
-      El acceso a presentaciones privadas,
-      sistemas de inversión
-      y plataformas IA protegidas
-      requiere autorización de Svetlana.
-
-      Por favor envía un correo electrónico a Svetlana
-      para solicitar acceso a los proyectos de inversión.
-
-      Svetlana te proporcionará
-      un token de activación
-      o desbloqueará el acceso a los sistemas protegidos.
-
-      Bienvenido a Golden Dragon AI Systems.
-    `,
-
-    de: `
-      Grüße.
-      Ich bin Murzik.
-
-      Ich bin hier, um Sie durch die Welt
-      der künstlichen Intelligenz zu führen
-      und Ihnen entwickelte Projekte,
-      KI-Architekturen,
-      multimodale Technologien
-      und Investitionssysteme von Svetlana vorzustellen.
-
-      Bitte betreten Sie die Chat- und Projektseite.
-
-      Der Zugang zu privaten Projektpräsentationen,
-      Investitionssystemen
-      und geschützten KI-Plattformen
-      erfordert eine Autorisierung von Svetlana.
-
-      Bitte senden Sie Svetlana eine E-Mail,
-      um Zugang zu den Investitionsprojekten zu erhalten.
-
-      Svetlana wird Ihnen
-      ein Aktivierungstoken bereitstellen
-      oder den Zugang zu den geschützten Systemen freischalten.
-
-      Willkommen bei Golden Dragon AI Systems.
-    `,
-  };
-
-  const speakMurzik = () => {
-
-    if (!window.speechSynthesis) {
-
-      console.error(
-        "Speech synthesis not supported"
-      );
-
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const speech =
-      new SpeechSynthesisUtterance(
-        voiceTexts[language]
-      );
-
-    const languageMap = {
-      en: "en-US",
-      ru: "ru-RU",
-      fr: "fr-FR",
-      es: "es-ES",
-      de: "de-DE",
+        de:
+            "Der deutsche Murzik-Modus wurde aktiviert.",
     };
 
-    speech.lang = languageMap[language];
+    function stopMurzikVoice() {
 
-    speech.rate = 1;
+        try {
 
-    speech.pitch = 1;
+            if (audioRef.current) {
 
-    speech.volume = 1;
+                audioRef.current.pause();
 
-    const voices =
-      window.speechSynthesis.getVoices();
+                audioRef.current.currentTime =
+                    0;
+            }
 
-    console.log(
-      "Available voices:",
-      voices
-    );
+            setIsPlaying(false);
 
-    let selectedVoice =
-      voices.find(
-        (voice) =>
-          voice.lang ===
-          languageMap[language]
-      );
+        } catch (error) {
 
-    if (!selectedVoice) {
-
-      selectedVoice =
-        voices.find(
-          (voice) =>
-            voice.lang.startsWith(
-              language
-            )
-        );
+            console.error(
+                "Murzik audio stop error:",
+                error
+            );
+        }
     }
 
-    if (
-      !selectedVoice &&
-      voices.length > 0
-    ) {
+    async function speakMurzik() {
 
-      selectedVoice = voices[0];
+        try {
+
+            if (!audioRef.current) {
+
+                audioRef.current =
+                    new Audio(
+                        "/audio/audio_webside.wav"
+                    );
+
+                audioRef.current.preload =
+                    "metadata";
+
+                audioRef.current.volume =
+                    1;
+
+                audioRef.current.onended =
+                    () => {
+
+                        setIsPlaying(false);
+                    };
+
+                audioRef.current.onerror =
+                    (event) => {
+
+                        console.error(
+                            "Murzik audio error:",
+                            event
+                        );
+
+                        setIsPlaying(false);
+                    };
+            }
+
+            if (isPlaying) {
+
+                stopMurzikVoice();
+
+                return;
+            }
+
+            stopMurzikVoice();
+
+            setIsPlaying(true);
+
+            audioRef.current.currentTime =
+                0;
+
+            await audioRef.current.play();
+
+            console.log(
+                voiceTexts[language]
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Murzik audio runtime error:",
+                error
+            );
+
+            setIsPlaying(false);
+        }
     }
 
-    if (selectedVoice) {
+    return (
 
-      speech.voice = selectedVoice;
+        <section className="hero-section">
 
-      console.log(
-        "Selected voice:",
-        selectedVoice.name
-      );
-    }
+            <div className="hero-overlay"></div>
 
-    speech.onstart = () => {
+            <div className="hero-navbar">
 
-      console.log(
-        "Murzik voice started"
-      );
-    };
+                <div className="hero-logo">
+                    GOLDEN DRAGON AI
+                </div>
 
-    speech.onend = () => {
+                <div className="hero-nav-center">
 
-      console.log(
-        "Murzik voice ended"
-      );
-    };
+                    <button className="hero-nav-btn">
+                        Chat
+                    </button>
 
-    speech.onerror = (event) => {
+                    <button className="hero-nav-btn">
+                        Projects
+                    </button>
 
-      console.error(
-        "Speech synthesis error:",
-        event
-      );
-    };
+                    <button className="hero-nav-btn">
+                        Presentations
+                    </button>
 
-    window.speechSynthesis.resume();
+                    <button className="hero-nav-btn">
+                        Investor Access
+                    </button>
 
-    setTimeout(() => {
+                </div>
 
-      window.speechSynthesis.speak(
-        speech
-      );
+                <div className="hero-nav-right">
 
-    }, 120);
-  };
+                    <button
+                        className="voice-toggle-btn"
+                        onClick={speakMurzik}
+                    >
+                        {
+                            isPlaying
+                                ? "Playing..."
+                                : "Voice"
+                        }
+                    </button>
 
-  return (
-    <section className="hero-section">
+                    <button
+                        className="voice-toggle-btn"
+                        onClick={stopMurzikVoice}
+                    >
+                        Stop
+                    </button>
 
-      <div className="hero-overlay"></div>
+                    <div className="hero-language-switcher">
 
-      <div className="hero-navbar">
+                        <button
+                            onClick={() =>
+                                setLanguage("en")
+                            }
+                        >
+                            EN
+                        </button>
 
-        <div className="hero-logo">
-          GOLDEN DRAGON AI
-        </div>
+                        <button
+                            onClick={() =>
+                                setLanguage("ru")
+                            }
+                        >
+                            RU
+                        </button>
 
-        <div className="hero-nav-center">
+                        <button
+                            onClick={() =>
+                                setLanguage("fr")
+                            }
+                        >
+                            FR
+                        </button>
 
-          <button className="hero-nav-btn">
-            Chat
-          </button>
+                        <button
+                            onClick={() =>
+                                setLanguage("es")
+                            }
+                        >
+                            ES
+                        </button>
 
-          <button className="hero-nav-btn">
-            Projects
-          </button>
+                        <button
+                            onClick={() =>
+                                setLanguage("de")
+                            }
+                        >
+                            DE
+                        </button>
 
-          <button className="hero-nav-btn">
-            Presentations
-          </button>
+                    </div>
 
-          <button className="hero-nav-btn">
-            Investor Access
-          </button>
-
-        </div>
-
-        <div className="hero-nav-right">
-
-          <button
-            className="voice-toggle-btn"
-            onClick={speakMurzik}
-          >
-            Voice
-          </button>
-
-          <div className="hero-language-switcher">
-
-            <button
-              onClick={() =>
-                setLanguage("en")
-              }
-            >
-              EN
-            </button>
-
-            <button
-              onClick={() =>
-                setLanguage("ru")
-              }
-            >
-              RU
-            </button>
-
-            <button
-              onClick={() =>
-                setLanguage("fr")
-              }
-            >
-              FR
-            </button>
-
-            <button
-              onClick={() =>
-                setLanguage("es")
-              }
-            >
-              ES
-            </button>
-
-            <button
-              onClick={() =>
-                setLanguage("de")
-              }
-            >
-              DE
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div className="hero-container">
-
-        <div className="hero-left">
-
-          <div className="hero-top-avatar">
-
-            <img
-              src={murzikChat}
-              alt="Murzik Avatar"
-              className="hero-chat-avatar"
-            />
-
-            <div>
-
-              <h1 className="hero-title">
-                Ask Murzik
-              </h1>
-
-              <h2 className="hero-subtitle">
-                AI Business Assistant • AI Entity • Platform Guide
-              </h2>
+                </div>
 
             </div>
 
-          </div>
+            <div className="hero-container">
 
-          <p className="hero-description">
-            Welcome to Golden Dragon AI Systems.
-            Murzik will guide you through advanced AI systems,
-            orchestration architectures,
-            multimodal technologies
-            and intelligent platforms.
-          </p>
+                <div className="hero-left">
 
-          <div className="hero-buttons">
+                    <div className="hero-top-avatar">
 
-            <button
-              className="primary-btn"
-              onClick={speakMurzik}
-            >
-              Talk With Murzik
-            </button>
+                        <img
+                            src={murzikChat}
+                            alt="Murzik Avatar"
+                            className="hero-chat-avatar"
+                        />
 
-            <button className="secondary-btn">
-              Enter AI Chat
-            </button>
+                        <div>
 
-          </div>
+                            <h1 className="hero-title">
+                                Ask Murzik
+                            </h1>
 
-          <div className="hero-founder-mini">
+                            <h2 className="hero-subtitle">
+                                AI Business Assistant • AI Entity • Platform Guide
+                            </h2>
 
-            <img
-              src={svetlanaAvatar}
-              alt="Svetlana"
-              className="hero-founder-avatar"
-            />
+                        </div>
 
-            <p className="hero-founder-text">
-              AI systems architect and creator of Golden Dragon AI.
-            </p>
+                    </div>
 
-          </div>
+                    <p className="hero-description">
+                        Welcome to Golden Dragon AI Systems.
+                        Murzik will guide you through advanced AI systems,
+                        orchestration architectures,
+                        multimodal technologies
+                        and intelligent platforms.
+                    </p>
 
-        </div>
+                    <div className="hero-buttons">
 
-        <div className="hero-right">
+                        <button
+                            className="primary-btn"
+                            onClick={speakMurzik}
+                        >
+                            {
+                                isPlaying
+                                    ? "Murzik Speaking..."
+                                    : "Talk With Murzik"
+                            }
+                        </button>
 
-          <div className="murzik-glow"></div>
+                        <button className="secondary-btn">
+                            Enter AI Chat
+                        </button>
 
-          <div className="smoke-layer"></div>
+                    </div>
 
-          <div className="fire-particles"></div>
+                    <div className="hero-founder-mini">
 
-          <div className="cinematic-shadow"></div>
+                        <img
+                            src={svetlanaAvatar}
+                            alt="Svetlana"
+                            className="hero-founder-avatar"
+                        />
 
-          <div className="murzik-image-wrapper">
+                        <p className="hero-founder-text">
+                            AI systems architect and creator of Golden Dragon AI.
+                        </p>
 
-            <img
-              src={murzikMain}
-              alt="Murzik AI"
-              className="murzik-main"
-            />
+                    </div>
 
-          </div>
+                </div>
 
-        </div>
+                <div className="hero-right">
 
-      </div>
+                    <div className="murzik-glow"></div>
 
-    </section>
-  );
+                    <div className="smoke-layer"></div>
+
+                    <div className="fire-particles"></div>
+
+                    <div className="cinematic-shadow"></div>
+
+                    <div className="murzik-image-wrapper">
+
+                        <img
+                            src={murzikMain}
+                            alt="Murzik AI"
+                            className="murzik-main"
+                            draggable="false"
+                        />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    );
 }

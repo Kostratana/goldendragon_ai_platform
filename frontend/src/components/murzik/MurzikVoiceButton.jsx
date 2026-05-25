@@ -1,214 +1,75 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function MurzikVoiceButton() {
 
-    const [isLoading, setIsLoading] =
+    const audioRef =
+        useRef(null);
+
+    const [isPlaying, setIsPlaying] =
         useState(false);
 
     function stopMurzikVoice() {
 
-        window.speechSynthesis?.cancel();
+        if (!audioRef.current) {
+            return;
+        }
 
-        setIsLoading(false);
+        audioRef.current.pause();
+
+        audioRef.current.currentTime =
+            0;
+
+        setIsPlaying(false);
     }
 
     async function speakMurzik() {
 
         try {
 
-            stopMurzikVoice();
+            if (!audioRef.current) {
 
-            if (
-                !window.speechSynthesis
-            ) {
+                audioRef.current =
+                    new Audio(
+                        "/audio/audio_webside.wav"
+                    );
 
-                console.error(
-                    "Speech synthesis not supported"
-                );
+                audioRef.current.preload =
+                    "metadata";
+
+                audioRef.current.volume =
+                    1;
+
+                audioRef.current.onended =
+                    () => {
+
+                        setIsPlaying(false);
+                    };
+
+                audioRef.current.onerror =
+                    (error) => {
+
+                        console.error(
+                            "Murzik audio error:",
+                            error
+                        );
+
+                        setIsPlaying(false);
+                    };
+            }
+
+            if (isPlaying) {
+
+                stopMurzikVoice();
 
                 return;
             }
 
-            setIsLoading(true);
+            setIsPlaying(true);
 
-            const synth =
-                window.speechSynthesis;
+            audioRef.current.currentTime =
+                0;
 
-            /*
-            SHORT CLEAN INTRO
-            */
-
-            const text =
-                `
-                Hello.
-
-                I am Murzik.
-
-                AI assistant
-                of Svetlana Rumyantseva.
-
-                Welcome to our
-                artificial intelligence platform.
-
-                Open the chat
-                to explore our systems.
-                `;
-
-            const speech =
-                new SpeechSynthesisUtterance(
-                    text
-                );
-
-            speech.lang =
-                "en-US";
-
-            /*
-            GOOGLE MALE SETTINGS
-            */
-
-            speech.rate =
-                0.92;
-
-            speech.pitch =
-                0.82;
-
-            speech.volume =
-                1;
-
-            let voices =
-                synth.getVoices();
-
-            /*
-            WAIT VOICES
-            */
-
-            if (
-                voices.length === 0
-            ) {
-
-                await new Promise(
-                    (resolve) => {
-
-                        synth.onvoiceschanged =
-                            () => {
-
-                                voices =
-                                    synth.getVoices();
-
-                                resolve();
-                            };
-
-                        setTimeout(
-                            resolve,
-                            1200
-                        );
-                    }
-                );
-
-                voices =
-                    synth.getVoices();
-            }
-
-            console.log(
-                "Murzik voices:",
-                voices.map(v => v.name)
-            );
-
-            /*
-            GOOGLE MALE PRIORITY
-            */
-
-            const preferredVoice =
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Google UK English Male"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Google US English"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Alex"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Daniel"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.name.includes(
-                        "Male"
-                    )
-                ) ||
-
-                voices.find((voice) =>
-                    voice.lang ===
-                    "en-US"
-                ) ||
-
-                voices[0];
-
-            if (
-                preferredVoice
-            ) {
-
-                speech.voice =
-                    preferredVoice;
-
-                console.log(
-                    "Murzik selected voice:",
-                    preferredVoice.name
-                );
-            }
-
-            speech.onstart = () => {
-
-                console.log(
-                    "Murzik voice started"
-                );
-            };
-
-            speech.onend = () => {
-
-                console.log(
-                    "Murzik voice ended"
-                );
-
-                setIsLoading(false);
-            };
-
-            speech.onerror = (
-                error
-            ) => {
-
-                console.error(
-                    "Murzik voice error:",
-                    error
-                );
-
-                setIsLoading(false);
-            };
-
-            /*
-            PREVENT OVERLAP GLITCH
-            */
-
-            await new Promise(resolve =>
-                setTimeout(resolve, 180)
-            );
-
-            synth.speak(
-                speech
-            );
+            await audioRef.current.play();
 
         } catch (error) {
 
@@ -217,7 +78,7 @@ export default function MurzikVoiceButton() {
                 error
             );
 
-            setIsLoading(false);
+            setIsPlaying(false);
         }
     }
 
@@ -233,8 +94,6 @@ export default function MurzikVoiceButton() {
 
             <button
                 onClick={speakMurzik}
-
-                disabled={isLoading}
 
                 className="
                     rounded-2xl
@@ -255,13 +114,11 @@ export default function MurzikVoiceButton() {
                     hover:text-white
                     active:scale-95
                     shadow-[0_0_30px_rgba(255,140,0,0.08)]
-                    disabled:opacity-60
-                    disabled:cursor-not-allowed
                 "
             >
 
                 {
-                    isLoading
+                    isPlaying
                         ? "Murzik Speaking..."
                         : "Ask Murzik"
                 }

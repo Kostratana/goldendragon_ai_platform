@@ -10,7 +10,7 @@ import useDragResize from "../hooks/useDragResize";
 
 import ChatWindow from "../features/chat/ChatWindow";
 
-import chatMainImage from "../assets/murzik/chat-main-image.png";
+import chatMainImage from "../assets/murzik/chat-main-image.webp";
 
 const PROJECT_MODES = {
     CHAT: "chat",
@@ -35,10 +35,21 @@ export default function Chat() {
     const [isThinking, setIsThinking] =
         useState(false);
 
+    /*
+    FUTURE BACKEND VOICE RUNTIME
+    */
+
     const [voiceEnabled, setVoiceEnabled] =
         useState(false);
 
     const messagesRef =
+        useRef(null);
+
+    /*
+    FUTURE XTTS AUDIO STREAM
+    */
+
+    const audioRuntimeRef =
         useRef(null);
 
     const {
@@ -69,124 +80,67 @@ export default function Chat() {
             }
         ]);
 
+    /*
+    FUTURE BACKEND XTTS STOP
+    */
+
     function stopMurzikVoice() {
 
-        window.speechSynthesis?.cancel();
+        try {
+
+            if (
+                audioRuntimeRef.current
+            ) {
+
+                audioRuntimeRef.current.pause();
+
+                audioRuntimeRef.current.currentTime =
+                    0;
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Murzik stop runtime error:",
+                error
+            );
+        }
     }
 
-    function speakMurzikText(text) {
+    /*
+    FUTURE BACKEND XTTS AUDIO STREAM
+    */
 
-        if (
-            !voiceEnabled
-        ) {
-            return;
-        }
+    async function playMurzikAudio(
+        audioUrl
+    ) {
 
-        if (
-            !window.speechSynthesis
-        ) {
-            return;
-        }
+        try {
 
-        const synth =
-            window.speechSynthesis;
+            if (!voiceEnabled) {
+                return;
+            }
 
-        synth.cancel();
+            stopMurzikVoice();
 
-        const speech =
-            new SpeechSynthesisUtterance(
-                text
-            );
+            audioRuntimeRef.current =
+                new Audio(audioUrl);
 
-        speech.lang =
-            "en-US";
+            audioRuntimeRef.current.preload =
+                "metadata";
 
-        /*
-        DEEP MALE SETTINGS
-        */
+            audioRuntimeRef.current.volume =
+                1;
 
-        speech.rate =
-            0.88;
+            await audioRuntimeRef.current.play();
 
-        speech.pitch =
-            0.72;
+        } catch (error) {
 
-        speech.volume =
-            1;
-
-        const voices =
-            synth.getVoices();
-
-        /*
-        MICROSOFT MALE PRIORITY
-        */
-
-        const preferredVoice =
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Microsoft David"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Microsoft Guy"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Microsoft Ryan"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Google UK English Male"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Alex"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Daniel"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.name.includes(
-                    "Male"
-                )
-            ) ||
-
-            voices.find((voice) =>
-                voice.lang === "en-US"
-            ) ||
-
-            voices[0];
-
-        if (
-            preferredVoice
-        ) {
-
-            speech.voice =
-                preferredVoice;
-
-            console.log(
-                "Murzik selected voice:",
-                preferredVoice.name
+            console.error(
+                "Murzik audio runtime error:",
+                error
             );
         }
-
-        synth.speak(
-            speech
-        );
     }
 
     async function copyMessages() {
@@ -290,7 +244,7 @@ export default function Chat() {
             if (activeProject === PROJECT_MODES.VOICE) {
 
                 responseText =
-                    "Voice mode is active. Murzik voice runtime will be connected through the frontend voice layer and backend streaming.";
+                    "Voice mode is active. XTTS backend streaming runtime will be connected through the Murzik orchestration layer.";
             }
 
             if (activeProject === PROJECT_MODES.VIDEO) {
@@ -299,9 +253,15 @@ export default function Chat() {
                     "Video mode is active. Murzik video presentation runtime is ready for MVP demo connection.";
             }
 
-            speakMurzikText(
-                responseText
+            /*
+            FUTURE XTTS BACKEND CALL
+
+            Example:
+
+            playMurzikAudio(
+                backendAudioUrl
             );
+            */
 
             setMessages(prev => [
                 ...prev,
@@ -388,6 +348,8 @@ export default function Chat() {
                 <img
                     src={chatMainImage}
                     alt="Murzik"
+                    loading="eager"
+                    decoding="async"
                     style={{
 
                         position: "absolute",
@@ -406,7 +368,7 @@ export default function Chat() {
                                 : "center top",
 
                         filter:
-                            "brightness(1.08) contrast(1.03)",
+                            "brightness(1.06) contrast(1.02)",
 
                         pointerEvents: "none",
 
@@ -467,14 +429,14 @@ export default function Chat() {
                                 `
                                 radial-gradient(
                                     circle at center,
-                                    rgba(255,220,120,0.22),
-                                    rgba(255,160,40,0.08),
+                                    rgba(255,220,120,0.18),
+                                    rgba(255,160,40,0.06),
                                     transparent 72%
                                 )
                                 `,
 
                             filter:
-                                "blur(22px)",
+                                "blur(14px)",
 
                             animation:
                                 "portalPulse 4s ease-in-out infinite"
@@ -484,8 +446,8 @@ export default function Chat() {
                     {Array.from({
                         length:
                             isMobile
-                                ? 14
-                                : 28
+                                ? 8
+                                : 14
                     }).map((_, index) => (
 
                         <div
@@ -498,10 +460,10 @@ export default function Chat() {
                                     `${2 + (index % 2)}px`,
 
                                 height:
-                                    `${10 + (index % 6)}px`,
+                                    `${10 + (index % 5)}px`,
 
                                 left:
-                                    `${(index * 3.5) % 100}%`,
+                                    `${(index * 6.5) % 100}%`,
 
                                 top:
                                     `${(index * 8) % 80}%`,
@@ -513,15 +475,15 @@ export default function Chat() {
                                     `
                                     linear-gradient(
                                         to bottom,
-                                        rgba(255,255,255,0.95),
-                                        rgba(255,190,80,0.95),
+                                        rgba(255,255,255,0.92),
+                                        rgba(255,190,80,0.88),
                                         rgba(255,140,40,0)
                                     )
                                     `,
 
                                 boxShadow:
                                     `
-                                    0 0 10px rgba(255,200,120,0.35)
+                                    0 0 6px rgba(255,200,120,0.25)
                                     `,
 
                                 animation:
@@ -628,8 +590,6 @@ export default function Chat() {
                 </div>
 
             </section>
-
-            {/* MURZIK DESCRIPTION */}
 
             <section
                 style={{
@@ -769,8 +729,8 @@ export default function Chat() {
                     }
 
                     50% {
-                        opacity: 1;
-                        transform: scale(1.04);
+                        opacity: 0.92;
+                        transform: scale(1.02);
                     }
 
                     100% {
@@ -792,8 +752,8 @@ export default function Chat() {
 
                     100% {
                         transform:
-                            translateY(-120px)
-                            translateX(20px);
+                            translateY(-90px)
+                            translateX(14px);
 
                         opacity: 0;
                     }
@@ -812,8 +772,8 @@ export default function Chat() {
 
                     100% {
                         transform:
-                            translateY(-160px)
-                            translateX(-18px);
+                            translateY(-110px)
+                            translateX(-14px);
 
                         opacity: 0;
                     }
@@ -832,8 +792,8 @@ export default function Chat() {
 
                     100% {
                         transform:
-                            translateY(-140px)
-                            translateX(12px);
+                            translateY(-100px)
+                            translateX(10px);
 
                         opacity: 0;
                     }
@@ -852,8 +812,8 @@ export default function Chat() {
 
                     100% {
                         transform:
-                            translateY(-180px)
-                            translateX(-10px);
+                            translateY(-120px)
+                            translateX(-8px);
 
                         opacity: 0;
                     }

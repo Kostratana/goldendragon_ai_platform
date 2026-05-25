@@ -1,12 +1,47 @@
 import { motion } from "framer-motion";
 
-import murzikImage from "../../assets/murzik/murzik-main.png";
+import murzikImage from "../../assets/murzik/murzik-main.webp";
+import murzikSmokeVideo from "../../assets/murzik/murzik-smoke-v2.mp4";
 
 import MurzikVoiceButton from "./MurzikVoiceButton";
 
 export default function MurzikHero() {
 
+    const particles = [
+        {
+            left: "10%",
+            delay: 0,
+            duration: 15,
+        },
+        {
+            left: "24%",
+            delay: 1.2,
+            duration: 17,
+        },
+        {
+            left: "39%",
+            delay: 2.4,
+            duration: 16,
+        },
+        {
+            left: "55%",
+            delay: 0.8,
+            duration: 18,
+        },
+        {
+            left: "71%",
+            delay: 1.8,
+            duration: 16,
+        },
+        {
+            left: "88%",
+            delay: 3,
+            duration: 19,
+        },
+    ];
+
     return (
+
         <section
             className="
                 relative
@@ -19,8 +54,7 @@ export default function MurzikHero() {
             {/* animated ambient background */}
             <motion.div
                 animate={{
-                    scale: [1, 1.08, 1],
-                    opacity: [0.45, 0.7, 0.45],
+                    opacity: [0.38, 0.58, 0.38],
                 }}
                 transition={{
                     duration: 12,
@@ -30,7 +64,7 @@ export default function MurzikHero() {
                 className="
                     absolute
                     inset-0
-                    bg-[radial-gradient(circle_at_70%_35%,rgba(255,140,0,0.22),transparent_42%)]
+                    bg-[radial-gradient(circle_at_70%_35%,rgba(255,140,0,0.20),transparent_44%)]
                 "
             />
 
@@ -46,36 +80,40 @@ export default function MurzikHero() {
                 "
             />
 
-            {/* floating particles */}
-            <div className="absolute inset-0 overflow-hidden">
+            {/* optimized floating particles */}
+            <div
+                className="
+                    absolute
+                    inset-0
+                    overflow-hidden
+                    pointer-events-none
+                "
+            >
 
-                {[...Array(18)].map((_, i) => (
+                {particles.map((particle, i) => (
 
                     <motion.div
                         key={i}
                         animate={{
-                            y: [0, -900],
-                            opacity: [0, 0.9, 0],
-                            x: [0, Math.random() * 120 - 60],
-                            scale: [0.6, 1.4, 0.4],
+                            y: [0, -760],
+                            opacity: [0, 0.75, 0],
                         }}
                         transition={{
-                            duration: 12 + i,
+                            duration: particle.duration,
                             repeat: Infinity,
                             ease: "linear",
-                            delay: i * 0.4,
+                            delay: particle.delay,
                         }}
                         className="
                             absolute
-                            bottom-[-100px]
-                            h-[4px]
-                            w-[4px]
+                            bottom-[-90px]
+                            h-[3px]
+                            w-[3px]
                             rounded-full
-                            bg-orange-300/60
-                            blur-[1px]
+                            bg-orange-300/55
                         "
                         style={{
-                            left: `${8 + i * 5}%`,
+                            left: particle.left,
                         }}
                     />
 
@@ -110,14 +148,14 @@ export default function MurzikHero() {
                     <motion.h1
                         initial={{
                             opacity: 0,
-                            y: 40,
+                            y: 36,
                         }}
                         animate={{
                             opacity: 1,
                             y: 0,
                         }}
                         transition={{
-                            duration: 1.2,
+                            duration: 1.1,
                         }}
                         className="
                             text-[110px]
@@ -132,7 +170,6 @@ export default function MurzikHero() {
 
                     <motion.div
                         animate={{
-                            width: [160, 240, 160],
                             opacity: [0.7, 1, 0.7],
                         }}
                         transition={{
@@ -143,6 +180,7 @@ export default function MurzikHero() {
                         className="
                             mt-7
                             h-[2px]
+                            w-[210px]
                             bg-gradient-to-r
                             from-orange-400
                             via-orange-300
@@ -159,7 +197,7 @@ export default function MurzikHero() {
                         }}
                         transition={{
                             delay: 0.5,
-                            duration: 1.2,
+                            duration: 1.1,
                         }}
                         className="
                             mt-12
@@ -194,10 +232,10 @@ export default function MurzikHero() {
 
                         <motion.button
                             whileHover={{
-                                scale: 1.04,
+                                scale: 1.025,
                             }}
                             whileTap={{
-                                scale: 0.97,
+                                scale: 0.98,
                             }}
                             className="
                                 rounded-2xl
@@ -209,7 +247,7 @@ export default function MurzikHero() {
                                 text-[16px]
                                 font-medium
                                 text-orange-300
-                                backdrop-blur-xl
+                                backdrop-blur-sm
                                 transition-all
                                 duration-300
                                 hover:border-orange-300
@@ -238,18 +276,12 @@ export default function MurzikHero() {
                     {/* floating murzik */}
                     <motion.div
                         animate={{
-                            y: [0, -24, 0],
-                            rotate: [0, -1.2, 0],
-                            scale: [1, 1.015, 1],
+                            y: [0, -14, 0],
                         }}
                         transition={{
-                            duration: 7,
+                            duration: 8,
                             repeat: Infinity,
                             ease: "easeInOut",
-                        }}
-                        whileHover={{
-                            scale: 1.03,
-                            rotate: -1,
                         }}
                         style={{
                             position: "relative",
@@ -257,11 +289,10 @@ export default function MurzikHero() {
                         }}
                     >
 
-                        {/* massive cinematic glow */}
+                        {/* cinematic glow */}
                         <motion.div
                             animate={{
-                                scale: [1, 1.12, 1],
-                                opacity: [0.25, 0.42, 0.25],
+                                opacity: [0.22, 0.36, 0.22],
                             }}
                             transition={{
                                 duration: 8,
@@ -272,22 +303,22 @@ export default function MurzikHero() {
                                 absolute
                                 right-[6%]
                                 top-[14%]
-                                h-[620px]
-                                w-[620px]
+                                h-[560px]
+                                w-[560px]
                                 rounded-full
-                                bg-orange-500/25
-                                blur-[150px]
+                                bg-orange-500/22
+                                blur-[120px]
                             "
                         />
 
-                        {/* SMOKE VIDEO */}
+                        {/* smoke video */}
                         <video
                             autoPlay
                             muted
                             loop
                             playsInline
-                            preload="auto"
-                            src="/videos/murzik-smoke-v2.mp4"
+                            preload="metadata"
+                            src={murzikSmokeVideo}
                             style={{
                                 position: "absolute",
                                 top: "10px",
@@ -295,21 +326,19 @@ export default function MurzikHero() {
                                 width: "900px",
                                 height: "900px",
                                 objectFit: "cover",
-                                opacity: 1,
+                                opacity: 0.92,
                                 pointerEvents: "none",
-                                zIndex: 9999,
-                                border: "4px solid red",
+                                zIndex: 18,
                             }}
                         />
 
                         {/* eye glow */}
                         <motion.div
                             animate={{
-                                opacity: [0.2, 1, 0.2],
-                                scale: [0.95, 1.1, 0.95],
+                                opacity: [0.25, 0.9, 0.25],
                             }}
                             transition={{
-                                duration: 3,
+                                duration: 3.4,
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
@@ -318,22 +347,21 @@ export default function MurzikHero() {
                                 right-[32%]
                                 top-[30%]
                                 z-40
-                                h-[24px]
-                                w-[90px]
+                                h-[22px]
+                                w-[86px]
                                 rounded-full
                                 bg-orange-300
-                                blur-[18px]
+                                blur-[15px]
                             "
                         />
 
                         {/* breathing shadow */}
                         <motion.div
                             animate={{
-                                opacity: [0.18, 0.35, 0.18],
-                                scale: [1, 1.06, 1],
+                                opacity: [0.16, 0.3, 0.16],
                             }}
                             transition={{
-                                duration: 6,
+                                duration: 6.5,
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
@@ -341,39 +369,41 @@ export default function MurzikHero() {
                                 absolute
                                 bottom-[6%]
                                 right-[12%]
-                                h-[180px]
-                                w-[420px]
+                                h-[170px]
+                                w-[400px]
                                 rounded-full
-                                bg-orange-500/20
-                                blur-[70px]
+                                bg-orange-500/18
+                                blur-[60px]
                             "
                         />
 
                         <motion.img
                             initial={{
                                 opacity: 0,
-                                scale: 0.92,
+                                scale: 0.93,
                             }}
                             animate={{
                                 opacity: 1,
                                 scale: 1,
                             }}
                             transition={{
-                                duration: 1.4,
+                                duration: 1.3,
                             }}
                             src={murzikImage}
                             alt="Murzik"
+                            loading="eager"
                             style={{
                                 width: "1050px",
                                 maxWidth: "none",
                                 objectFit: "contain",
                                 transform: "translateY(60px)",
                                 filter:
-                                    "drop-shadow(0 0 120px rgba(255,140,0,0.42))",
+                                    "drop-shadow(0 0 90px rgba(255,140,0,0.34))",
                                 userSelect: "none",
                                 position: "relative",
                                 zIndex: 20,
                             }}
+                            draggable="false"
                         />
 
                     </motion.div>

@@ -1,4 +1,4 @@
-import founderImage from "../assets/murzik/doc_photo.png";
+import founderImage from "../assets/murzik/doc_photo.webp";
 
 export default function FounderSection() {
 
