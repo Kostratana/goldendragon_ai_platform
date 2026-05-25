@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+import {
+    useState,
+    useEffect
+} from "react";
 
 export default function useDragResize() {
 
@@ -15,34 +18,46 @@ export default function useDragResize() {
         viewport.width >= 768 &&
         viewport.width < 1200;
 
+    const initialWidth =
+
+        viewport.width < 768
+            ? viewport.width * 0.94
+            : viewport.width < 1200
+                ? 760
+                : 860;
+
+    const initialHeight =
+
+        viewport.width < 768
+            ? viewport.height * 0.54
+            : viewport.width < 1200
+                ? 560
+                : 620;
+
     const [chatBox, setChatBox] =
         useState({
 
             width:
-                viewport.width < 768
-                    ? viewport.width * 0.96
-                    : viewport.width < 1200
-                        ? 620
-                        : 540,
+                initialWidth,
 
             height:
-                viewport.width < 768
-                    ? viewport.height * 0.72
-                    : viewport.width < 1200
-                        ? 460
-                        : 420,
+                initialHeight,
+
+            /*
+            KEEP WINDOW CENTERED
+            UNDER MURZIK MONITOR
+            */
 
             x:
-                viewport.width < 768
-                    ? viewport.width * 0.02
-                    : (viewport.width / 2) - 270,
+                (viewport.width / 2) -
+                (initialWidth / 2),
 
             y:
                 viewport.width < 768
-                    ? 420
+                    ? 620
                     : viewport.width < 1200
-                        ? 560
-                        : 760
+                        ? 780
+                        : 820
         });
 
     useEffect(() => {
@@ -50,40 +65,65 @@ export default function useDragResize() {
         function handleResize() {
 
             const nextViewport = {
-                width: window.innerWidth,
-                height: window.innerHeight
+
+                width:
+                    window.innerWidth,
+
+                height:
+                    window.innerHeight
             };
 
             setViewport(nextViewport);
 
-            setChatBox(prev => ({
+            setChatBox(prev => {
 
-                ...prev,
+                const maxWidth =
+                    nextViewport.width * 0.96;
 
-                width:
+                const maxHeight =
+                    nextViewport.height * 0.82;
+
+                const nextWidth =
                     Math.min(
                         prev.width,
-                        nextViewport.width * 0.98
-                    ),
+                        maxWidth
+                    );
 
-                height:
+                const nextHeight =
                     Math.min(
                         prev.height,
-                        nextViewport.height * 0.88
-                    ),
+                        maxHeight
+                    );
 
-                x:
-                    Math.min(
-                        prev.x,
-                        nextViewport.width - prev.width
-                    ),
+                return {
 
-                y:
-                    Math.min(
-                        prev.y,
-                        nextViewport.height - 120
-                    )
-            }));
+                    ...prev,
+
+                    width:
+                        nextWidth,
+
+                    height:
+                        nextHeight,
+
+                    x:
+                        Math.max(
+                            0,
+                            Math.min(
+                                prev.x,
+                                nextViewport.width - nextWidth
+                            )
+                        ),
+
+                    y:
+                        Math.max(
+                            80,
+                            Math.min(
+                                prev.y,
+                                nextViewport.height - nextHeight
+                            )
+                        )
+                };
+            });
         }
 
         window.addEventListener(
@@ -103,126 +143,259 @@ export default function useDragResize() {
 
     function getClientPosition(event) {
 
-        if (event.touches && event.touches[0]) {
+        if (
+            event.touches &&
+            event.touches[0]
+        ) {
 
             return {
-                x: event.touches[0].clientX,
-                y: event.touches[0].clientY
+
+                x:
+                    event.touches[0].clientX,
+
+                y:
+                    event.touches[0].clientY
             };
         }
 
         return {
-            x: event.clientX,
-            y: event.clientY
+
+            x:
+                event.clientX,
+
+            y:
+                event.clientY
         };
     }
 
-    function startTopLeftResize(event) {
+    function clampBox(next) {
 
-        event.preventDefault();
+        const minWidth =
+            isMobile
+                ? 320
+                : 560;
 
-        const start =
-            getClientPosition(event);
+        const minHeight =
+            isMobile
+                ? 320
+                : 420;
 
-        const startWidth =
-            chatBox.width;
+        const maxWidth =
+            viewport.width * 0.96;
 
-        const startHeight =
-            chatBox.height;
+        const maxHeight =
+            viewport.height * 0.84;
 
-        function resizeMove(moveEvent) {
+        const width =
+            Math.max(
+                minWidth,
+                Math.min(
+                    next.width,
+                    maxWidth
+                )
+            );
 
-            const current =
-                getClientPosition(moveEvent);
+        const height =
+            Math.max(
+                minHeight,
+                Math.min(
+                    next.height,
+                    maxHeight
+                )
+            );
 
-            const deltaX =
-                current.x - start.x;
+        return {
 
-            const deltaY =
-                current.y - start.y;
+            ...next,
 
-            const nextWidth =
+            width,
+
+            height,
+
+            x:
                 Math.max(
-                    isMobile ? 300 : 340,
+                    0,
                     Math.min(
-                        startWidth - deltaX,
-                        viewport.width * 0.98
+                        next.x,
+                        viewport.width - width
                     )
+                ),
+
+            y:
+                Math.max(
+                    80,
+                    Math.min(
+                        next.y,
+                        viewport.height - height
+                    )
+                )
+        };
+    }
+
+    function createResizeHandler(direction) {
+
+        return function startResize(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            const start =
+                getClientPosition(event);
+
+            const startBox =
+                { ...chatBox };
+
+            function resizeMove(moveEvent) {
+
+                if (
+                    moveEvent.cancelable
+                ) {
+
+                    moveEvent.preventDefault();
+                }
+
+                const current =
+                    getClientPosition(moveEvent);
+
+                const deltaX =
+                    current.x - start.x;
+
+                const deltaY =
+                    current.y - start.y;
+
+                let nextBox =
+                    { ...startBox };
+
+                /*
+                RIGHT
+                */
+
+                if (
+                    direction.includes("right")
+                ) {
+
+                    nextBox.width =
+                        startBox.width + deltaX;
+                }
+
+                /*
+                LEFT
+                */
+
+                if (
+                    direction.includes("left")
+                ) {
+
+                    nextBox.width =
+                        startBox.width - deltaX;
+
+                    nextBox.x =
+                        startBox.x + deltaX;
+                }
+
+                /*
+                BOTTOM
+                */
+
+                if (
+                    direction.includes("bottom")
+                ) {
+
+                    nextBox.height =
+                        startBox.height + deltaY;
+                }
+
+                /*
+                TOP
+                */
+
+                if (
+                    direction.includes("top")
+                ) {
+
+                    nextBox.height =
+                        startBox.height - deltaY;
+
+                    nextBox.y =
+                        startBox.y + deltaY;
+                }
+
+                nextBox =
+                    clampBox(nextBox);
+
+                requestAnimationFrame(() => {
+
+                    setChatBox(nextBox);
+                });
+            }
+
+            function stopResize() {
+
+                window.removeEventListener(
+                    "mousemove",
+                    resizeMove
                 );
 
-            const nextHeight =
-                Math.max(
-                    isMobile ? 420 : 320,
-                    Math.min(
-                        startHeight - deltaY,
-                        viewport.height * 0.88
-                    )
+                window.removeEventListener(
+                    "mouseup",
+                    stopResize
                 );
 
-            setChatBox(prev => ({
-                ...prev,
-                width: nextWidth,
-                height: nextHeight
-            }));
-        }
+                window.removeEventListener(
+                    "touchmove",
+                    resizeMove
+                );
 
-        function stopResize() {
+                window.removeEventListener(
+                    "touchend",
+                    stopResize
+                );
+            }
 
-            window.removeEventListener(
+            window.addEventListener(
                 "mousemove",
                 resizeMove
             );
 
-            window.removeEventListener(
+            window.addEventListener(
                 "mouseup",
                 stopResize
             );
 
-            window.removeEventListener(
+            window.addEventListener(
                 "touchmove",
-                resizeMove
+                resizeMove,
+                { passive: false }
             );
 
-            window.removeEventListener(
+            window.addEventListener(
                 "touchend",
                 stopResize
             );
-        }
-
-        window.addEventListener(
-            "mousemove",
-            resizeMove
-        );
-
-        window.addEventListener(
-            "mouseup",
-            stopResize
-        );
-
-        window.addEventListener(
-            "touchmove",
-            resizeMove,
-            { passive: false }
-        );
-
-        window.addEventListener(
-            "touchend",
-            stopResize
-        );
+        };
     }
 
     function startDrag(event) {
 
+        event.preventDefault();
+
+        event.stopPropagation();
+
         const start =
             getClientPosition(event);
 
-        const startLeft =
-            chatBox.x;
-
-        const startTop =
-            chatBox.y;
+        const startBox =
+            { ...chatBox };
 
         function dragMove(moveEvent) {
+
+            if (
+                moveEvent.cancelable
+            ) {
+
+                moveEvent.preventDefault();
+            }
 
             const current =
                 getClientPosition(moveEvent);
@@ -233,28 +406,22 @@ export default function useDragResize() {
             const deltaY =
                 current.y - start.y;
 
-            setChatBox(prev => ({
+            const nextBox =
+                clampBox({
 
-                ...prev,
+                    ...startBox,
 
-                x:
-                    Math.max(
-                        0,
-                        Math.min(
-                            startLeft + deltaX,
-                            viewport.width - prev.width
-                        )
-                    ),
+                    x:
+                        startBox.x + deltaX,
 
-                y:
-                    Math.max(
-                        60,
-                        Math.min(
-                            startTop + deltaY,
-                            viewport.height - 100
-                        )
-                    )
-            }));
+                    y:
+                        startBox.y + deltaY
+                });
+
+            requestAnimationFrame(() => {
+
+                setChatBox(nextBox);
+            });
         }
 
         function stopDrag() {
@@ -314,8 +481,40 @@ export default function useDragResize() {
 
         setChatBox,
 
-        startTopLeftResize,
+        startDrag,
 
-        startDrag
+        /*
+        TRUE RESIZE HANDLES
+        */
+
+        startTopLeftResize:
+            createResizeHandler(
+                "top-left"
+            ),
+
+        startTopRightResize:
+            createResizeHandler(
+                "top-right"
+            ),
+
+        startBottomLeftResize:
+            createResizeHandler(
+                "bottom-left"
+            ),
+
+        startBottomRightResize:
+            createResizeHandler(
+                "bottom-right"
+            ),
+
+        startRightResize:
+            createResizeHandler(
+                "right"
+            ),
+
+        startBottomResize:
+            createResizeHandler(
+                "bottom"
+            )
     };
 }

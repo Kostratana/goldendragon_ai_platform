@@ -39,11 +39,23 @@ export default function Chat() {
         useRef(null);
 
     const {
+
         isMobile,
         isTablet,
+
         chatBox,
+
+        startDrag,
+
         startTopLeftResize,
-        startDrag
+        startTopRightResize,
+
+        startBottomLeftResize,
+        startBottomRightResize,
+
+        startRightResize,
+        startBottomResize
+
     } = useDragResize();
 
     const [messages, setMessages] =
@@ -69,6 +81,43 @@ export default function Chat() {
 
             console.log(error);
         }
+    }
+
+    function downloadMessages() {
+
+        const text =
+            messages
+                .map(item =>
+                    `[${item.role.toUpperCase()}]\n${item.text}`
+                )
+                .join("\n\n");
+
+        const blob =
+            new Blob(
+                [text],
+                {
+                    type: "text/plain"
+                }
+            );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        link.download =
+            "murzik-chat.txt";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
     }
 
     function sendMessage() {
@@ -159,34 +208,39 @@ export default function Chat() {
 
         <div
             style={{
+
                 width: "100%",
+
                 minHeight: "100vh",
+
                 background: "#040404",
+
                 overflowX: "hidden",
+
+                overflowY: "visible",
+
                 paddingTop:
                     isMobile
-                        ? "70px"
-                        : "80px"
+                        ? "72px"
+                        : "90px",
+
+                position: "relative"
             }}
         >
 
             <section
                 style={{
+
                     position: "relative",
 
                     width: "100%",
 
-                    height:
+                    minHeight:
                         isMobile
-                            ? "1120px"
+                            ? "1180px"
                             : isTablet
-                                ? "1220px"
-                                : "1360px",
-
-                    paddingTop:
-                        isMobile
-                            ? "8px"
-                            : "20px",
+                                ? "1380px"
+                                : "1460px",
 
                     overflow: "hidden",
 
@@ -200,44 +254,50 @@ export default function Chat() {
                 }}
             >
 
+                {/* BACKGROUND */}
+
                 <img
                     src={chatMainImage}
                     alt="Murzik"
                     style={{
+
                         position: "absolute",
 
-                        top: 0,
-                        left: 0,
+                        inset: 0,
 
                         width: "100%",
+
                         height: "100%",
 
-                        objectFit:
-                            isMobile
-                                ? "cover"
-                                : "contain",
+                        objectFit: "cover",
 
-                        objectPosition: "center top",
+                        objectPosition:
+                            isMobile
+                                ? "center center"
+                                : "center top",
 
                         filter:
-                            isMobile
-                                ? "brightness(1.05) contrast(1.02)"
-                                : "brightness(1.12) contrast(1.04)",
+                            "brightness(1.08) contrast(1.03)",
 
                         pointerEvents: "none",
 
-                        userSelect: "none"
+                        userSelect: "none",
+
+                        zIndex: 1
                     }}
                 />
 
+                {/* PORTAL */}
+
                 <div
                     style={{
+
                         position: "absolute",
 
                         top:
                             isMobile
-                                ? "180px"
-                                : "438px",
+                                ? "470px"
+                                : "590px",
 
                         left: "50%",
 
@@ -246,34 +306,30 @@ export default function Chat() {
 
                         width:
                             isMobile
-                                ? "180px"
-                                : "420px",
+                                ? "300px"
+                                : "520px",
 
                         height:
                             isMobile
-                                ? "80px"
-                                : "190px",
-
-                        pointerEvents: "none",
-
-                        zIndex: 5,
+                                ? "120px"
+                                : "220px",
 
                         overflow: "hidden",
 
                         borderRadius:
                             isMobile
-                                ? "12px"
-                                : "18px",
+                                ? "20px"
+                                : "28px",
 
-                        opacity:
-                            isMobile
-                                ? 0.55
-                                : 1
+                        zIndex: 3,
+
+                        pointerEvents: "none"
                     }}
                 >
 
                     <div
                         style={{
+
                             position: "absolute",
 
                             inset: 0,
@@ -282,69 +338,67 @@ export default function Chat() {
                                 `
                                 radial-gradient(
                                     circle at center,
-                                    rgba(255,220,120,0.30),
-                                    rgba(255,180,60,0.12),
+                                    rgba(255,220,120,0.22),
+                                    rgba(255,160,40,0.08),
                                     transparent 72%
                                 )
                                 `,
 
                             filter:
-                                isMobile
-                                    ? "blur(8px)"
-                                    : "blur(18px)",
+                                "blur(22px)",
 
                             animation:
-                                "portalPulse 3.5s ease-in-out infinite"
+                                "portalPulse 4s ease-in-out infinite"
                         }}
                     />
 
                     {Array.from({
                         length:
                             isMobile
-                                ? 8
-                                : 18
+                                ? 14
+                                : 28
                     }).map((_, index) => (
 
                         <div
                             key={index}
                             style={{
+
                                 position: "absolute",
 
                                 width:
-                                    `${2 + (index % 3)}px`,
+                                    `${2 + (index % 2)}px`,
 
                                 height:
-                                    `${12 + (index % 6)}px`,
+                                    `${10 + (index % 6)}px`,
 
                                 left:
-                                    `${5 + (index * 5)}%`,
+                                    `${(index * 3.5) % 100}%`,
 
                                 top:
-                                    `${10 + ((index * 7) % 70)}%`,
+                                    `${(index * 8) % 80}%`,
 
-                                borderRadius: "999px",
+                                borderRadius:
+                                    "999px",
 
                                 background:
                                     `
                                     linear-gradient(
                                         to bottom,
                                         rgba(255,255,255,0.95),
-                                        rgba(255,200,90,0.95),
+                                        rgba(255,190,80,0.95),
                                         rgba(255,140,40,0)
                                     )
                                     `,
 
-                                opacity:
-                                    isMobile
-                                        ? 0.55
-                                        : 0.9,
-
-                                filter: "blur(0.4px)",
+                                boxShadow:
+                                    `
+                                    0 0 10px rgba(255,200,120,0.35)
+                                    `,
 
                                 animation:
                                     `
                                     sparkFloat${index % 4}
-                                    ${3 + (index * 0.2)}s
+                                    ${3 + index * 0.15}s
                                     linear
                                     infinite
                                     `
@@ -355,8 +409,11 @@ export default function Chat() {
 
                 </div>
 
+                {/* OVERLAY */}
+
                 <div
                     style={{
+
                         position: "absolute",
 
                         inset: 0,
@@ -366,101 +423,163 @@ export default function Chat() {
                             linear-gradient(
                                 to bottom,
                                 rgba(0,0,0,0.02),
-                                rgba(0,0,0,0.18)
+                                rgba(0,0,0,0.08)
                             )
-                            `
+                            `,
+
+                        zIndex: 2
                     }}
                 />
 
-                <ChatWindow
+                {/* CHAT WINDOW */}
 
-                    mode={mode}
-                    setMode={setMode}
+                <div
+                    style={{
 
-                    activeProject={activeProject}
-                    setActiveProject={setActiveProject}
+                        position: "absolute",
 
-                    message={message}
-                    setMessage={setMessage}
+                        top:
+                            isMobile
+                                ? "610px"
+                                : isTablet
+                                    ? "760px"
+                                    : "790px",
 
-                    messages={messages}
-                    messagesRef={messagesRef}
+                        left: "50%",
 
-                    sendMessage={sendMessage}
-                    clearMessages={clearMessages}
-                    copyMessages={copyMessages}
+                        transform:
+                            "translateX(-50%)",
 
-                    isThinking={isThinking}
+                        zIndex: 10
+                    }}
+                >
 
-                    isMobile={isMobile}
-                    isTablet={isTablet}
+                    <ChatWindow
 
-                    chatBox={chatBox}
+                        mode={mode}
+                        setMode={setMode}
 
-                    startTopLeftResize={startTopLeftResize}
-                    startDrag={startDrag}
-                />
+                        activeProject={activeProject}
+                        setActiveProject={setActiveProject}
+
+                        message={message}
+                        setMessage={setMessage}
+
+                        messages={messages}
+                        messagesRef={messagesRef}
+
+                        sendMessage={sendMessage}
+                        clearMessages={clearMessages}
+                        copyMessages={copyMessages}
+                        downloadMessages={downloadMessages}
+
+                        isThinking={isThinking}
+
+                        isMobile={isMobile}
+                        isTablet={isTablet}
+
+                        chatBox={chatBox}
+
+                        startDrag={startDrag}
+
+                        startTopLeftResize={startTopLeftResize}
+                        startTopRightResize={startTopRightResize}
+
+                        startBottomLeftResize={startBottomLeftResize}
+                        startBottomRightResize={startBottomRightResize}
+
+                        startRightResize={startRightResize}
+                        startBottomResize={startBottomResize}
+                    />
+
+                </div>
 
             </section>
 
+            {/* MURZIK DESCRIPTION */}
+
             <section
                 style={{
+
                     width: "100%",
 
                     background: "#050505",
 
-                    paddingTop:
+                    padding:
                         isMobile
-                            ? "40px"
-                            : "70px",
-
-                    paddingBottom:
-                        isMobile
-                            ? "40px"
-                            : "70px",
-
-                    paddingLeft:
-                        isMobile
-                            ? "20px"
-                            : "40px",
-
-                    paddingRight:
-                        isMobile
-                            ? "20px"
-                            : "40px",
-
-                    boxSizing: "border-box",
+                            ? "60px 24px"
+                            : "90px 40px",
 
                     borderTop:
-                        "1px solid rgba(255,220,170,0.06)"
+                        "1px solid rgba(255,220,170,0.05)"
                 }}
             >
 
                 <div
                     style={{
+
                         maxWidth: "1200px",
 
                         margin: "0 auto",
 
-                        textAlign: "center",
-
-                        color: "#d7c1a4",
-
-                        fontSize:
-                            isMobile
-                                ? "11px"
-                                : "13px",
-
-                        lineHeight:
-                            isMobile
-                                ? "1.7"
-                                : "2",
-
-                        fontFamily:
-                            "'Inter', sans-serif"
+                        textAlign: "center"
                     }}
                 >
-                    Murzik is a next-generation multimodal intelligence system powered by adaptive quantum orchestration layers and cognitive runtime architecture.
+
+                    <h2
+                        style={{
+
+                            color: "#f0c88f",
+
+                            fontSize:
+                                isMobile
+                                    ? "22px"
+                                    : "34px",
+
+                            letterSpacing: "0.18em",
+
+                            marginBottom: "34px",
+
+                            fontWeight: 700
+                        }}
+                    >
+                        MURZIK AI ORCHESTRATION SYSTEM
+                    </h2>
+
+                    <p
+                        style={{
+
+                            color: "#d7c1a4",
+
+                            fontSize:
+                                isMobile
+                                    ? "13px"
+                                    : "16px",
+
+                            lineHeight: 2,
+
+                            marginBottom: "28px"
+                        }}
+                    >
+                        Murzik is an advanced multimodal AI orchestration system designed as an adaptive cognitive architecture for next-generation AGI research, intelligent automation, reasoning, investor interaction and modular AI runtime coordination.
+                    </p>
+
+                    <p
+                        style={{
+
+                            color: "#c9b18d",
+
+                            fontSize:
+                                isMobile
+                                    ? "12px"
+                                    : "15px",
+
+                            lineHeight: 2
+                        }}
+                    >
+                        The platform combines multiple specialized AI systems, orchestration layers, reasoning engines and multimodal interfaces into a unified extensible intelligence ecosystem capable of communication, analysis, execution planning and autonomous cognitive collaboration.
+                    </p>
+
                 </div>
 
             </section>
@@ -490,9 +609,7 @@ export default function Chat() {
                 @keyframes sparkFloat0 {
 
                     0% {
-                        transform:
-                            translateY(0px)
-                            scale(0.8);
+                        transform: translateY(0px);
                         opacity: 0;
                     }
 
@@ -503,8 +620,8 @@ export default function Chat() {
                     100% {
                         transform:
                             translateY(-120px)
-                            translateX(30px)
-                            scale(1.2);
+                            translateX(20px);
+
                         opacity: 0;
                     }
                 }
@@ -512,9 +629,7 @@ export default function Chat() {
                 @keyframes sparkFloat1 {
 
                     0% {
-                        transform:
-                            translateY(0px)
-                            scale(0.7);
+                        transform: translateY(0px);
                         opacity: 0;
                     }
 
@@ -525,8 +640,8 @@ export default function Chat() {
                     100% {
                         transform:
                             translateY(-160px)
-                            translateX(-20px)
-                            scale(1.3);
+                            translateX(-18px);
+
                         opacity: 0;
                     }
                 }
@@ -534,9 +649,7 @@ export default function Chat() {
                 @keyframes sparkFloat2 {
 
                     0% {
-                        transform:
-                            translateY(0px)
-                            scale(0.9);
+                        transform: translateY(0px);
                         opacity: 0;
                     }
 
@@ -547,8 +660,8 @@ export default function Chat() {
                     100% {
                         transform:
                             translateY(-140px)
-                            translateX(12px)
-                            scale(1.1);
+                            translateX(12px);
+
                         opacity: 0;
                     }
                 }
@@ -556,9 +669,7 @@ export default function Chat() {
                 @keyframes sparkFloat3 {
 
                     0% {
-                        transform:
-                            translateY(0px)
-                            scale(0.6);
+                        transform: translateY(0px);
                         opacity: 0;
                     }
 
@@ -568,9 +679,9 @@ export default function Chat() {
 
                     100% {
                         transform:
-                            translateY(-170px)
-                            translateX(-12px)
-                            scale(1.4);
+                            translateY(-180px)
+                            translateX(-10px);
+
                         opacity: 0;
                     }
                 }

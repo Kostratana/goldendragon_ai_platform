@@ -8,18 +8,16 @@ import {
     useLocation
 } from "react-router-dom";
 
-import MurzikIntro from "../murzik/MurzikIntro";
-
 export default function Navbar() {
 
     const location =
         useLocation();
 
-    const [voiceEnabled, setVoiceEnabled] =
-        useState(false);
-
     const [screenWidth, setScreenWidth] =
         useState(window.innerWidth);
+
+    const [isVoiceLoading, setIsVoiceLoading] =
+        useState(false);
 
     useEffect(() => {
 
@@ -41,12 +39,6 @@ export default function Navbar() {
         document.body.style.overflowX =
             "hidden";
 
-        document.body.style.margin =
-            "0";
-
-        document.body.style.padding =
-            "0";
-
         return () => {
 
             window.removeEventListener(
@@ -64,53 +56,178 @@ export default function Navbar() {
         screenWidth > 768 &&
         screenWidth <= 1200;
 
-    function enableVoice() {
+    async function enableVoice() {
 
-        if (
-            !window.speechSynthesis
-        ) {
-            return;
+        try {
+
+            setIsVoiceLoading(true);
+
+            /*
+            STOP OLD AUDIO
+            */
+
+            const existingAudio =
+                document.getElementById(
+                    "murzik-navbar-audio"
+                );
+
+            if (existingAudio) {
+
+                existingAudio.pause();
+
+                existingAudio.remove();
+            }
+
+            const text = `
+            Hello.
+
+            I am Murzik.
+
+            Personal AI business assistant
+            of Svetlana Rumyantseva.
+
+            I will guide you
+            through the world
+            of artificial intelligence.
+
+            Please open the chat page
+            to explore our AI systems,
+            projects and multimodal platforms.
+            `;
+
+            /*
+            OPENAI TTS
+            */
+
+            const response =
+                await fetch(
+                    "https://api.openai.com/v1/audio/speech",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            Authorization:
+                                `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+                        },
+
+                        body: JSON.stringify({
+
+                            model:
+                                "gpt-4o-mini-tts",
+
+                            /*
+                            DEEP MALE VOICE
+                            */
+
+                            voice:
+                                "onyx",
+
+                            input:
+                                text,
+
+                            format:
+                                "mp3",
+
+                            speed:
+                                0.92
+                        })
+                    }
+                );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "OpenAI voice request failed"
+                );
+            }
+
+            const audioBlob =
+                await response.blob();
+
+            const audioUrl =
+                URL.createObjectURL(
+                    audioBlob
+                );
+
+            const audio =
+                new Audio(audioUrl);
+
+            audio.id =
+                "murzik-navbar-audio";
+
+            audio.volume =
+                1;
+
+            audio.onended = () => {
+
+                URL.revokeObjectURL(
+                    audioUrl
+                );
+
+                setIsVoiceLoading(false);
+            };
+
+            audio.onerror = () => {
+
+                setIsVoiceLoading(false);
+            };
+
+            await audio.play();
+
+        } catch (error) {
+
+            console.error(
+                "Murzik OpenAI voice error:",
+                error
+            );
+
+            setIsVoiceLoading(false);
         }
-
-        window.speechSynthesis.cancel();
-
-        setVoiceEnabled(false);
-
-        setTimeout(() => {
-
-            setVoiceEnabled(true);
-
-        }, 100);
     }
 
     function disableVoice() {
 
-        if (
-            window.speechSynthesis
-        ) {
+        const existingAudio =
+            document.getElementById(
+                "murzik-navbar-audio"
+            );
 
-            window.speechSynthesis.cancel();
+        if (existingAudio) {
+
+            existingAudio.pause();
+
+            existingAudio.remove();
         }
 
-        setVoiceEnabled(false);
+        setIsVoiceLoading(false);
     }
 
+    const pathname =
+        location.pathname
+            .toLowerCase()
+            .replace(/\/+$/, "") || "/";
+
+    /*
+    FIX ACTIVE LOGIC
+    */
+
     const isHomeActive =
-        location.pathname === "/";
+        pathname === "/";
 
     const isChatActive =
-        location.pathname.startsWith(
-            "/chat"
-        );
+        pathname.includes("/chat");
 
     return (
-        <>
-            <MurzikIntro
-                enabled={voiceEnabled}
-            />
 
+        <>
             <div
                 style={{
+
                     position: "fixed",
 
                     top: 0,
@@ -128,29 +245,36 @@ export default function Navbar() {
                     paddingTop:
                         isMobile
                             ? "max(10px, env(safe-area-inset-top))"
-                            : "18px",
+                            : "16px",
 
                     paddingLeft:
                         isMobile
                             ? "10px"
-                            : "20px",
+                            : "18px",
 
                     paddingRight:
                         isMobile
                             ? "10px"
-                            : "20px",
+                            : "18px",
+
+                    zIndex: 999999,
+
+                    pointerEvents: "none",
 
                     boxSizing:
                         "border-box",
 
-                    zIndex: 999999,
+                    transform:
+                        "translateZ(0)",
 
-                    pointerEvents: "none"
+                    willChange:
+                        "transform"
                 }}
             >
 
                 <nav
                     style={{
+
                         pointerEvents: "auto",
 
                         width:
@@ -159,9 +283,7 @@ export default function Navbar() {
                                 : "fit-content",
 
                         maxWidth:
-                            isMobile
-                                ? "100%"
-                                : "96vw",
+                            "96vw",
 
                         display: "flex",
 
@@ -178,39 +300,44 @@ export default function Navbar() {
                             isMobile
                                 ? "6px"
                                 : isTablet
-                                    ? "10px"
-                                    : "14px",
-
-                        overflow: "hidden",
+                                    ? "8px"
+                                    : "10px",
 
                         padding:
                             isMobile
-                                ? "10px"
-                                : isTablet
-                                    ? "12px 16px"
-                                    : "14px 22px",
+                                ? "8px"
+                                : "10px 16px",
 
                         borderRadius:
                             isMobile
-                                ? "18px"
-                                : "24px",
+                                ? "16px"
+                                : "20px",
 
                         background:
-                            "rgba(8,8,8,0.78)",
-
-                        backdropFilter:
-                            "blur(18px)",
-
-                        WebkitBackdropFilter:
-                            "blur(18px)",
+                            `
+                            linear-gradient(
+                                to bottom,
+                                rgba(10,10,10,0.78),
+                                rgba(6,6,6,0.66)
+                            )
+                            `,
 
                         border:
-                            "1px solid rgba(255,140,0,0.12)",
+                            "1px solid rgba(255,140,0,0.08)",
+
+                        backdropFilter:
+                            "blur(16px)",
+
+                        WebkitBackdropFilter:
+                            "blur(16px)",
 
                         boxShadow:
-                            isMobile
-                                ? "0 0 20px rgba(255,140,0,0.08)"
-                                : "0 0 50px rgba(255,140,0,0.12)",
+                            `
+                            0 0 40px rgba(255,140,0,0.08),
+                            inset 0 0 18px rgba(255,140,0,0.03)
+                            `,
+
+                        overflow: "hidden",
 
                         boxSizing:
                             "border-box"
@@ -233,59 +360,72 @@ export default function Navbar() {
                         isTablet={isTablet}
                     />
 
-                    <Divider
-                        isMobile={isMobile}
-                    />
+                    {
+                        !isMobile && (
+                            <Divider />
+                        )
+                    }
 
                     <button
                         onClick={enableVoice}
 
+                        disabled={isVoiceLoading}
+
                         style={{
+
                             ...getButtonStyle(
                                 isMobile,
                                 isTablet
                             ),
 
                             color:
-                                "#ffcf7a",
+                                "#ffe2b2",
 
                             background:
-                                "linear-gradient(to bottom, rgba(255,140,0,0.18), rgba(255,140,0,0.08))",
+                                `
+                                linear-gradient(
+                                    to bottom,
+                                    rgba(255,170,70,0.20),
+                                    rgba(255,120,20,0.12)
+                                )
+                                `,
 
                             border:
-                                "1px solid rgba(255,140,0,0.18)",
+                                "1px solid rgba(255,190,90,0.16)",
 
                             boxShadow:
-                                isMobile
-                                    ? "0 0 12px rgba(255,140,0,0.10)"
-                                    : "0 0 24px rgba(255,140,0,0.14)"
+                                `
+                                0 0 24px rgba(255,140,0,0.16)
+                                `
                         }}
                     >
-                        VOICE ON
+
+                        {
+                            isVoiceLoading
+                                ? "MURZIK..."
+                                : "VOICE ON"
+                        }
+
                     </button>
 
                     <button
                         onClick={disableVoice}
 
                         style={{
+
                             ...getButtonStyle(
                                 isMobile,
                                 isTablet
                             ),
 
                             color:
-                                "#ffb0b0",
+                                "#ff9a9a",
 
                             background:
-                                "linear-gradient(to bottom, rgba(255,60,60,0.20), rgba(255,20,20,0.08))",
+                                "rgba(255,40,40,0.05)",
 
                             border:
-                                "1px solid rgba(255,60,60,0.18)",
-
-                            boxShadow:
-                                isMobile
-                                    ? "0 0 12px rgba(255,60,60,0.10)"
-                                    : "0 0 24px rgba(255,60,60,0.14)"
+                                "1px solid rgba(255,80,80,0.10)"
                         }}
                     >
                         VOICE OFF
@@ -297,10 +437,12 @@ export default function Navbar() {
 
             <div
                 style={{
-                    paddingTop:
+                    height:
                         isMobile
-                            ? "78px"
-                            : "110px"
+                            ? "82px"
+                            : "96px",
+
+                    width: "100%"
                 }}
             />
         </>
@@ -316,10 +458,12 @@ function NavButton({
 }) {
 
     return (
+
         <Link
             to={to}
 
             style={{
+
                 ...getButtonStyle(
                     isMobile,
                     isTablet
@@ -334,28 +478,37 @@ function NavButton({
 
                 justifyContent: "center",
 
+                /*
+                FIX ACTIVE VISUAL
+                */
+
                 color:
                     active
-                        ? "#ffcf7a"
-                        : "#d8d8d8",
+                        ? "#ffe2b2"
+                        : "#8c8c8c",
 
                 background:
                     active
-                        ? "linear-gradient(to bottom, rgba(255,140,0,0.18), rgba(255,140,0,0.08))"
-                        : "rgba(255,255,255,0.02)",
+                        ? `
+                        linear-gradient(
+                            to bottom,
+                            rgba(255,170,70,0.22),
+                            rgba(255,120,20,0.14)
+                        )
+                        `
+                        : "rgba(255,255,255,0.015)",
 
                 border:
                     active
-                        ? "1px solid rgba(255,140,0,0.16)"
-                        : "1px solid rgba(255,255,255,0.04)",
+                        ? "1px solid rgba(255,170,70,0.18)"
+                        : "1px solid rgba(255,255,255,0.03)",
 
                 boxShadow:
                     active
-                        ? (
-                            isMobile
-                                ? "0 0 12px rgba(255,140,0,0.08)"
-                                : "0 0 24px rgba(255,140,0,0.12)"
-                        )
+                        ? `
+                        0 0 34px rgba(255,140,0,0.22),
+                        inset 0 0 16px rgba(255,190,80,0.08)
+                        `
                         : "none"
             }}
         >
@@ -364,26 +517,18 @@ function NavButton({
     );
 }
 
-function Divider({
-    isMobile
-}) {
-
-    if (isMobile) {
-
-        return null;
-    }
+function Divider() {
 
     return (
         <div
             style={{
+
                 width: "1px",
 
-                height: "22px",
+                height: "20px",
 
                 background:
-                    "rgba(255,255,255,0.08)",
-
-                flexShrink: 0
+                    "rgba(255,255,255,0.05)"
             }}
         />
     );
@@ -400,50 +545,38 @@ function getButtonStyle(
             isMobile
                 ? "74px"
                 : isTablet
-                    ? "90px"
-                    : "110px",
+                    ? "88px"
+                    : "104px",
 
         height:
             isMobile
                 ? "34px"
-                : isTablet
-                    ? "40px"
-                    : "44px",
+                : "40px",
 
         paddingLeft:
             isMobile
                 ? "10px"
-                : "18px",
+                : "16px",
 
         paddingRight:
             isMobile
                 ? "10px"
-                : "18px",
+                : "16px",
 
         borderRadius:
             isMobile
-                ? "12px"
-                : "14px",
-
-        border:
-            "1px solid rgba(255,255,255,0.04)",
-
-        background:
-            "rgba(255,255,255,0.02)",
+                ? "11px"
+                : "13px",
 
         fontSize:
             isMobile
-                ? "10px"
-                : isTablet
-                    ? "11px"
-                    : "12px",
+                ? "9px"
+                : "11px",
 
         fontWeight: "700",
 
         letterSpacing:
-            isMobile
-                ? "0.08em"
-                : "0.16em",
+            "0.14em",
 
         whiteSpace: "nowrap",
 
@@ -452,16 +585,16 @@ function getButtonStyle(
         outline: "none",
 
         transition:
-            "all 0.25s ease",
+            "all 0.20s ease",
 
         fontFamily:
             "'Cinzel', serif",
 
         backdropFilter:
-            "blur(10px)",
+            "blur(8px)",
 
         WebkitBackdropFilter:
-            "blur(10px)",
+            "blur(8px)",
 
         flexShrink: 0,
 

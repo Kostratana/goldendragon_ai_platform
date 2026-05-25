@@ -10,60 +10,96 @@ export default function FounderSection() {
         window.innerWidth < 1200;
 
     const cards = [
+
         {
             title: "AI Architecture",
 
             text:
-                "Design and development of scalable AI architectures, distributed orchestration systems, intelligent routing pipelines, backend infrastructure and hybrid cognitive frameworks for production-grade artificial intelligence environments."
+                "Development of advanced AI architectures and scalable intelligent ecosystems including orchestration layers, adaptive reasoning systems, multimodal processing pipelines, distributed runtime coordination and production-grade cognitive infrastructures for next-generation AI platforms."
+        },
+
+        {
+            title: "AI Orchestration Systems",
+
+            text:
+                "Design of orchestration-driven intelligence systems capable of dynamic model routing, task distribution, memory coordination, execution planning, realtime synchronization and hybrid cognitive workflow management across complex AI environments."
+        },
+
+        {
+            title: "End-to-End AI Development",
+
+            text:
+                "Full-cycle creation of intelligent software solutions from concept research and system architecture to model training, backend engineering, deployment infrastructure, optimization and scalable production implementation tailored to specific client goals."
+        },
+
+        {
+            title: "Custom AI Solutions",
+
+            text:
+                "Development of custom AI systems designed around real client ideas, workflows and business objectives including analytical platforms, intelligent assistants, automation systems, recommendation engines and adaptive AI applications across multiple industries."
         },
 
         {
             title: "Computer Vision",
 
             text:
-                "Development of advanced computer vision systems including OCR pipelines, multimodal visual intelligence, object detection, medical imaging analysis, video understanding, automated inspection systems and AI-driven visual analytics."
+                "Creation of advanced computer vision systems including OCR pipelines, medical imaging analysis, infrared diagnostics, intelligent object detection, visual overlays, automated inspection platforms, video understanding and multimodal perception infrastructures."
         },
 
         {
-            title: "LLM Fine-Tuning",
+            title: "Multimodal AI Systems",
 
             text:
-                "Fine-tuning and adaptation of large language models using LoRA training, memory systems, reasoning pipelines, alignment strategies, prompt engineering and conversational AI optimization for specialized production tasks."
+                "Engineering of unified multimodal intelligence platforms combining text, image, audio and video processing with collaborative reasoning layers, orchestration logic, adaptive memory systems and scalable cognitive runtime architectures."
         },
 
         {
-            title: "AI Pipelines",
+            title: "Voice & Conversational AI",
 
             text:
-                "Full-cycle AI workflow development including preprocessing, multimodal orchestration, training systems, inference pipelines, deployment infrastructure, runtime optimization and scalable AI production integration."
+                "Development of intelligent conversational agents, realtime voice interfaces, multimodal communication environments, speech-driven assistants and interactive AI systems designed for natural human interaction and advanced user experiences."
         },
 
         {
-            title: "Multimodal Systems",
+            title: "Security & Detection Systems",
 
             text:
-                "Integrated multimodal AI systems combining text, image, audio and video intelligence with unified orchestration logic, intelligent routing systems and scalable cognitive processing architectures."
+                "Design of intelligent monitoring and detection infrastructures including anomaly analysis, behavioral pattern recognition, fraud detection, inspection systems, adaptive alert pipelines and AI-powered analytical security environments."
         },
 
         {
-            title: "Voice & AI Agents",
+            title: "Trading Intelligence Systems",
 
             text:
-                "Development of intelligent conversational agents, voice interfaces, speech-driven AI systems, autonomous assistants and interactive multimodal communication environments for real-world AI applications."
+                "Development of AI-powered analytical trading systems focused on liquidity analysis, whale activity monitoring, market structure evaluation, signal orchestration, capital flow analytics and adaptive predictive intelligence infrastructures."
         },
 
         {
-            title: "Quantum Hybrid AI",
+            title: "Quantum Hybrid AI Research",
 
             text:
-                "Research and development of quantum-inspired hybrid intelligence systems combining classical machine learning architectures with advanced orchestration models, cognitive reasoning systems and adaptive AI workflows."
+                "Research and prototyping of quantum-inspired hybrid intelligence systems combining classical machine learning, orchestration research, graph optimization, adaptive scheduling, cognitive routing and advanced coordination architectures for future AI infrastructures."
         },
 
         {
-            title: "Trading AI",
+            title: "AGI Research Systems",
 
             text:
-                "AI trading intelligence systems focused on liquidity analysis, whale tracking, signal processing, market structure analysis, capital flow detection and hybrid AI-assisted analytical trading infrastructures."
+                "Exploration of next-generation AGI-oriented architectures integrating multimodal cognition, autonomous reasoning, adaptive memory systems, orchestration intelligence and collaborative AI runtime ecosystems for advanced intelligent platforms."
+        },
+
+        {
+            title: "Scientific & Research AI",
+
+            text:
+                "Development of AI systems for scientific and analytical domains including genetics, biological data analysis, healthcare intelligence, research automation, multimodal analytics and advanced cognitive processing for complex research environments."
+        },
+
+        {
+            title: "Human-Centered AI",
+
+            text:
+                "I truly love my work and believe that artificial intelligence should serve people, improve everyday life and make advanced technology accessible and useful for everyone. That is why I focus on creating practical, human-centered AI systems and intelligent applications designed around real human needs, ideas and goals. I would be happy to help transform your ideas into real intelligent systems and AI solutions designed specifically for you."
         }
     ];
 
@@ -440,11 +476,7 @@ export default function FounderSection() {
                                         : "left"
                             }}
                         >
-                            Designing advanced intelligent AI systems
-                            from research and architecture
-                            to orchestration, multimodal cognition,
-                            deployment infrastructure and scalable
-                            production-grade artificial intelligence environments.
+                            Development of next-generation multimodal AI ecosystems combining orchestration intelligence, adaptive cognitive architectures, computer vision, conversational agents, hybrid reasoning systems and scalable AGI-oriented runtime infrastructures for advanced intelligent platforms.
                         </div>
 
                         {/* CARDS */}
