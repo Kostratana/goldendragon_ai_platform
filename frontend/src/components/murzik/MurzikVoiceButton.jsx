@@ -5,29 +5,42 @@ export default function MurzikVoiceButton() {
     const [isLoading, setIsLoading] =
         useState(false);
 
-    async function speakMurzik() {
+    function stopMurzikVoice() {
 
         /*
-        STOP PREVIOUS AUDIO
+        STOP ALL ACTIVE SPEECH
         */
 
         window.speechSynthesis?.cancel();
 
-        const existingAudio =
-            document.getElementById(
-                "murzik-openai-audio"
-            );
+        setIsLoading(false);
+    }
 
-        if (existingAudio) {
-
-            existingAudio.pause();
-
-            existingAudio.remove();
-        }
+    async function speakMurzik() {
 
         try {
 
+            /*
+            RESET PREVIOUS
+            */
+
+            stopMurzikVoice();
+
+            if (
+                !window.speechSynthesis
+            ) {
+
+                console.error(
+                    "Speech synthesis not supported"
+                );
+
+                return;
+            }
+
             setIsLoading(true);
+
+            const synth =
+                window.speechSynthesis;
 
             const text =
                 `
@@ -50,88 +63,163 @@ export default function MurzikVoiceButton() {
                 to explore our projects.
                 `;
 
+            const speech =
+                new SpeechSynthesisUtterance(
+                    text
+                );
+
+            speech.lang =
+                "en-US";
+
             /*
-            OPENAI TTS
+            CLEAN PREMIUM SETTINGS
             */
 
-            const response =
-                await fetch(
-                    "https://api.openai.com/v1/audio/speech",
-                    {
+            speech.rate =
+                0.96;
 
-                        method: "POST",
+            speech.pitch =
+                1;
 
-                        headers: {
+            speech.volume =
+                1;
 
-                            "Content-Type":
-                                "application/json",
+            /*
+            LOAD AVAILABLE VOICES
+            */
 
-                            Authorization:
-                                `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
-                        },
+            let voices =
+                synth.getVoices();
 
-                        body: JSON.stringify({
+            /*
+            WAIT FOR VOICES
+            */
 
-                            model: "gpt-4o-mini-tts",
+            if (
+                voices.length === 0
+            ) {
 
-                            /*
-                            LOW DEEP MALE VOICE
-                            */
+                await new Promise(
+                    (resolve) => {
 
-                            voice: "onyx",
+                        synth.onvoiceschanged =
+                            () => {
 
-                            input: text,
+                                voices =
+                                    synth.getVoices();
 
-                            format: "mp3",
+                                resolve();
+                            };
 
-                            speed: 0.92
-                        })
+                        setTimeout(
+                            resolve,
+                            1200
+                        );
                     }
                 );
 
-            if (!response.ok) {
+                voices =
+                    synth.getVoices();
+            }
 
-                throw new Error(
-                    "OpenAI voice request failed"
+            console.log(
+                "Murzik available voices:",
+                voices.map(v => v.name)
+            );
+
+            /*
+            PRIORITY:
+            EDGE NEURAL
+            ↓
+            MAC ALEX
+            ↓
+            DANIEL
+            ↓
+            WINDOWS DAVID
+            */
+
+            const preferredVoice =
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Neural"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Alex"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Daniel"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Microsoft David"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.lang ===
+                    "en-US"
+                ) ||
+
+                voices[0];
+
+            if (
+                preferredVoice
+            ) {
+
+                speech.voice =
+                    preferredVoice;
+
+                console.log(
+                    "Murzik selected voice:",
+                    preferredVoice.name
                 );
             }
 
-            const audioBlob =
-                await response.blob();
+            speech.onstart = () => {
 
-            const audioUrl =
-                URL.createObjectURL(
-                    audioBlob
+                console.log(
+                    "Murzik voice started"
                 );
+            };
 
-            const audio =
-                new Audio(audioUrl);
+            speech.onend = () => {
 
-            audio.id =
-                "murzik-openai-audio";
-
-            audio.volume = 1;
-
-            audio.onended = () => {
-
-                URL.revokeObjectURL(
-                    audioUrl
+                console.log(
+                    "Murzik voice ended"
                 );
 
                 setIsLoading(false);
             };
 
-            audio.onerror = () => {
+            speech.onerror = (
+                error
+            ) => {
+
+                console.error(
+                    "Murzik voice error:",
+                    error
+                );
 
                 setIsLoading(false);
             };
 
-            await audio.play();
+            synth.speak(
+                speech
+            );
 
         } catch (error) {
 
             console.error(
-                "Murzik OpenAI voice error:",
+                "Murzik runtime error:",
                 error
             );
 
@@ -141,39 +229,78 @@ export default function MurzikVoiceButton() {
 
     return (
 
-        <button
-            onClick={speakMurzik}
-
-            disabled={isLoading}
-
+        <div
             className="
-                rounded-2xl
-                border
-                border-orange-400/20
-                bg-black/35
-                px-8
-                py-4
-                text-lg
-                font-medium
-                text-orange-300
-                backdrop-blur-xl
-                transition-all
-                duration-300
-                hover:scale-[1.03]
-                hover:border-orange-300/60
-                hover:bg-orange-500/10
-                hover:text-white
-                active:scale-95
-                shadow-[0_0_30px_rgba(255,140,0,0.08)]
-                disabled:opacity-60
-                disabled:cursor-not-allowed
+                flex
+                items-center
+                gap-3
             "
         >
 
-            {isLoading
-                ? "Murzik Speaking..."
-                : "Ask Murzik"}
+            <button
+                onClick={speakMurzik}
 
-        </button>
+                disabled={isLoading}
+
+                className="
+                    rounded-2xl
+                    border
+                    border-orange-400/20
+                    bg-black/35
+                    px-8
+                    py-4
+                    text-lg
+                    font-medium
+                    text-orange-300
+                    backdrop-blur-xl
+                    transition-all
+                    duration-300
+                    hover:scale-[1.03]
+                    hover:border-orange-300/60
+                    hover:bg-orange-500/10
+                    hover:text-white
+                    active:scale-95
+                    shadow-[0_0_30px_rgba(255,140,0,0.08)]
+                    disabled:opacity-60
+                    disabled:cursor-not-allowed
+                "
+            >
+
+                {
+                    isLoading
+                        ? "Murzik Speaking..."
+                        : "Ask Murzik"
+                }
+
+            </button>
+
+            <button
+                onClick={stopMurzikVoice}
+
+                className="
+                    rounded-2xl
+                    border
+                    border-red-400/20
+                    bg-red-500/5
+                    px-6
+                    py-4
+                    text-lg
+                    font-medium
+                    text-red-300
+                    backdrop-blur-xl
+                    transition-all
+                    duration-300
+                    hover:scale-[1.03]
+                    hover:border-red-300/60
+                    hover:bg-red-500/10
+                    hover:text-white
+                    active:scale-95
+                    shadow-[0_0_30px_rgba(255,80,80,0.08)]
+                "
+            >
+                Stop
+            </button>
+
+        </div>
     );
 }

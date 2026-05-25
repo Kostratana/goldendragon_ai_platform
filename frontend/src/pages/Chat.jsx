@@ -35,6 +35,9 @@ export default function Chat() {
     const [isThinking, setIsThinking] =
         useState(false);
 
+    const [voiceEnabled, setVoiceEnabled] =
+        useState(false);
+
     const messagesRef =
         useRef(null);
 
@@ -65,6 +68,95 @@ export default function Chat() {
                 text: "Welcome."
             }
         ]);
+
+    function stopMurzikVoice() {
+
+        window.speechSynthesis?.cancel();
+    }
+
+    function speakMurzikText(text) {
+
+        if (
+            !voiceEnabled
+        ) {
+            return;
+        }
+
+        if (
+            !window.speechSynthesis
+        ) {
+            return;
+        }
+
+        const synth =
+            window.speechSynthesis;
+
+        synth.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+        speech.lang =
+            "en-US";
+
+        speech.rate =
+            0.96;
+
+        speech.pitch =
+            1;
+
+        speech.volume =
+            1;
+
+        const voices =
+            synth.getVoices();
+
+        const preferredVoice =
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Neural"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Alex"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Daniel"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Microsoft David"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.lang === "en-US"
+            ) ||
+
+            voices[0];
+
+        if (
+            preferredVoice
+        ) {
+
+            speech.voice =
+                preferredVoice;
+        }
+
+        synth.speak(
+            speech
+        );
+    }
 
     async function copyMessages() {
 
@@ -176,6 +268,10 @@ export default function Chat() {
                     "Video mode is active. Murzik video presentation runtime is ready for MVP demo connection.";
             }
 
+            speakMurzikText(
+                responseText
+            );
+
             setMessages(prev => [
                 ...prev,
                 {
@@ -192,6 +288,8 @@ export default function Chat() {
     function clearMessages() {
 
         setMessages([]);
+
+        stopMurzikVoice();
     }
 
     useEffect(() => {
@@ -431,6 +529,119 @@ export default function Chat() {
                     }}
                 />
 
+                {/* VOICE BUTTONS */}
+
+                <div
+                    style={{
+
+                        position: "absolute",
+
+                        top:
+                            isMobile
+                                ? "560px"
+                                : "720px",
+
+                        left: "50%",
+
+                        transform:
+                            "translateX(-50%)",
+
+                        zIndex: 30,
+
+                        display: "flex",
+
+                        gap: "12px"
+                    }}
+                >
+
+                    <button
+                        onClick={() =>
+                            setVoiceEnabled(
+                                !voiceEnabled
+                            )
+                        }
+
+                        style={{
+
+                            padding:
+                                "10px 18px",
+
+                            borderRadius:
+                                "14px",
+
+                            border:
+                                "1px solid rgba(255,180,80,0.14)",
+
+                            background:
+                                voiceEnabled
+                                    ? "rgba(255,160,40,0.14)"
+                                    : "rgba(255,255,255,0.04)",
+
+                            color:
+                                "#f0c88f",
+
+                            fontSize:
+                                isMobile
+                                    ? "10px"
+                                    : "12px",
+
+                            letterSpacing:
+                                "0.12em",
+
+                            fontFamily:
+                                "'Cinzel', serif",
+
+                            cursor:
+                                "pointer"
+                        }}
+                    >
+                        {
+                            voiceEnabled
+                                ? "VOICE ON"
+                                : "VOICE OFF"
+                        }
+                    </button>
+
+                    <button
+                        onClick={stopMurzikVoice}
+
+                        style={{
+
+                            padding:
+                                "10px 18px",
+
+                            borderRadius:
+                                "14px",
+
+                            border:
+                                "1px solid rgba(255,80,80,0.12)",
+
+                            background:
+                                "rgba(255,60,60,0.05)",
+
+                            color:
+                                "#ffb0b0",
+
+                            fontSize:
+                                isMobile
+                                    ? "10px"
+                                    : "12px",
+
+                            letterSpacing:
+                                "0.12em",
+
+                            fontFamily:
+                                "'Cinzel', serif",
+
+                            cursor:
+                                "pointer"
+                        }}
+                    >
+                        STOP
+                    </button>
+
+                </div>
+
                 {/* CHAT WINDOW */}
 
                 <div
@@ -507,18 +718,29 @@ export default function Chat() {
 
                     padding:
                         isMobile
-                            ? "60px 24px"
-                            : "90px 40px",
+                            ? "42px 18px"
+                            : "62px 24px",
 
                     borderTop:
-                        "1px solid rgba(255,220,170,0.05)"
+                        "1px solid rgba(255,220,170,0.05)",
+
+                    display: "flex",
+
+                    justifyContent: "center",
+
+                    overflow: "hidden"
                 }}
             >
 
                 <div
                     style={{
 
-                        maxWidth: "1200px",
+                        width: "100%",
+
+                        maxWidth:
+                            isMobile
+                                ? "94vw"
+                                : "980px",
 
                         margin: "0 auto",
 
@@ -533,14 +755,22 @@ export default function Chat() {
 
                             fontSize:
                                 isMobile
-                                    ? "22px"
-                                    : "34px",
+                                    ? "15px"
+                                    : "22px",
 
-                            letterSpacing: "0.18em",
+                            letterSpacing:
+                                isMobile
+                                    ? "0.10em"
+                                    : "0.18em",
 
-                            marginBottom: "34px",
+                            marginBottom:
+                                isMobile
+                                    ? "18px"
+                                    : "26px",
 
-                            fontWeight: 700
+                            fontWeight: 700,
+
+                            lineHeight: 1.4
                         }}
                     >
                         MURZIK AI ORCHESTRATION SYSTEM
@@ -553,12 +783,24 @@ export default function Chat() {
 
                             fontSize:
                                 isMobile
-                                    ? "13px"
-                                    : "16px",
+                                    ? "11px"
+                                    : "13px",
 
-                            lineHeight: 2,
+                            lineHeight:
+                                isMobile
+                                    ? 1.8
+                                    : 1.9,
 
-                            marginBottom: "28px"
+                            marginBottom:
+                                isMobile
+                                    ? "16px"
+                                    : "18px",
+
+                            maxWidth: "900px",
+
+                            marginLeft: "auto",
+
+                            marginRight: "auto"
                         }}
                     >
                         Murzik is an advanced multimodal AI orchestration system designed as an adaptive cognitive architecture for next-generation AGI research, intelligent automation, reasoning, investor interaction and modular AI runtime coordination.
@@ -571,10 +813,19 @@ export default function Chat() {
 
                             fontSize:
                                 isMobile
-                                    ? "12px"
-                                    : "15px",
+                                    ? "10px"
+                                    : "12px",
 
-                            lineHeight: 2
+                            lineHeight:
+                                isMobile
+                                    ? 1.8
+                                    : 1.9,
+
+                            maxWidth: "920px",
+
+                            marginLeft: "auto",
+
+                            marginRight: "auto"
                         }}
                     >
                         The platform combines multiple specialized AI systems, orchestration layers, reasoning engines and multimodal interfaces into a unified extensible intelligence ecosystem capable of communication, analysis, execution planning and autonomous cognitive collaboration.

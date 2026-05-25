@@ -45,6 +45,12 @@ export default function Navbar() {
                 "resize",
                 handleResize
             );
+
+            /*
+            CLEANUP SPEECH
+            */
+
+            window.speechSynthesis?.cancel();
         };
 
     }, []);
@@ -56,27 +62,31 @@ export default function Navbar() {
         screenWidth > 768 &&
         screenWidth <= 1200;
 
+    /*
+    FREE MULTIPLATFORM VOICE
+    */
+
     async function enableVoice() {
 
         try {
 
-            setIsVoiceLoading(true);
+            stopVoice();
 
-            /*
-            STOP OLD AUDIO
-            */
+            if (
+                !window.speechSynthesis
+            ) {
 
-            const existingAudio =
-                document.getElementById(
-                    "murzik-navbar-audio"
+                console.error(
+                    "Speech synthesis not supported"
                 );
 
-            if (existingAudio) {
-
-                existingAudio.pause();
-
-                existingAudio.remove();
+                return;
             }
+
+            setIsVoiceLoading(true);
+
+            const synth =
+                window.speechSynthesis;
 
             const text = `
             Hello.
@@ -95,94 +105,159 @@ export default function Navbar() {
             projects and multimodal platforms.
             `;
 
+            const speech =
+                new SpeechSynthesisUtterance(
+                    text
+                );
+
+            speech.lang =
+                "en-US";
+
             /*
-            OPENAI TTS
+            NATURAL SETTINGS
             */
 
-            const response =
-                await fetch(
-                    "https://api.openai.com/v1/audio/speech",
-                    {
+            speech.rate =
+                0.96;
 
-                        method: "POST",
+            speech.pitch =
+                1;
 
-                        headers: {
+            speech.volume =
+                1;
 
-                            "Content-Type":
-                                "application/json",
+            let voices =
+                synth.getVoices();
 
-                            Authorization:
-                                `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
-                        },
+            /*
+            WAIT FOR VOICES
+            */
 
-                        body: JSON.stringify({
+            if (
+                voices.length === 0
+            ) {
 
-                            model:
-                                "gpt-4o-mini-tts",
+                await new Promise(
+                    (resolve) => {
 
-                            /*
-                            DEEP MALE VOICE
-                            */
+                        synth.onvoiceschanged =
+                            () => {
 
-                            voice:
-                                "onyx",
+                                voices =
+                                    synth.getVoices();
 
-                            input:
-                                text,
+                                resolve();
+                            };
 
-                            format:
-                                "mp3",
-
-                            speed:
-                                0.92
-                        })
+                        setTimeout(
+                            resolve,
+                            1000
+                        );
                     }
                 );
 
-            if (!response.ok) {
+                voices =
+                    synth.getVoices();
+            }
 
-                throw new Error(
-                    "OpenAI voice request failed"
+            console.log(
+                "Murzik available voices:",
+                voices.map(v => v.name)
+            );
+
+            /*
+            PRIORITY:
+            EDGE NEURAL
+            ↓
+            MAC ALEX
+            ↓
+            DANIEL
+            ↓
+            MICROSOFT DAVID
+            */
+
+            const preferredVoice =
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Neural"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Alex"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Daniel"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Microsoft David"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.lang ===
+                    "en-US"
+                ) ||
+
+                voices[0];
+
+            if (
+                preferredVoice
+            ) {
+
+                speech.voice =
+                    preferredVoice;
+
+                console.log(
+                    "Murzik selected voice:",
+                    preferredVoice.name
                 );
             }
 
-            const audioBlob =
-                await response.blob();
+            speech.onstart = () => {
 
-            const audioUrl =
-                URL.createObjectURL(
-                    audioBlob
+                console.log(
+                    "Murzik voice started"
                 );
+            };
 
-            const audio =
-                new Audio(audioUrl);
+            speech.onend = () => {
 
-            audio.id =
-                "murzik-navbar-audio";
+                setIsVoiceLoading(false);
 
-            audio.volume =
-                1;
+                console.log(
+                    "Murzik voice ended"
+                );
+            };
 
-            audio.onended = () => {
+            speech.onerror = (
+                error
+            ) => {
 
-                URL.revokeObjectURL(
-                    audioUrl
+                console.error(
+                    "Murzik voice error:",
+                    error
                 );
 
                 setIsVoiceLoading(false);
             };
 
-            audio.onerror = () => {
-
-                setIsVoiceLoading(false);
-            };
-
-            await audio.play();
+            synth.speak(
+                speech
+            );
 
         } catch (error) {
 
             console.error(
-                "Murzik OpenAI voice error:",
+                "Murzik runtime error:",
                 error
             );
 
@@ -190,19 +265,9 @@ export default function Navbar() {
         }
     }
 
-    function disableVoice() {
+    function stopVoice() {
 
-        const existingAudio =
-            document.getElementById(
-                "murzik-navbar-audio"
-            );
-
-        if (existingAudio) {
-
-            existingAudio.pause();
-
-            existingAudio.remove();
-        }
+        window.speechSynthesis?.cancel();
 
         setIsVoiceLoading(false);
     }
@@ -409,7 +474,7 @@ export default function Navbar() {
                     </button>
 
                     <button
-                        onClick={disableVoice}
+                        onClick={stopVoice}
 
                         style={{
 
@@ -477,10 +542,6 @@ function NavButton({
                 alignItems: "center",
 
                 justifyContent: "center",
-
-                /*
-                FIX ACTIVE VISUAL
-                */
 
                 color:
                     active
