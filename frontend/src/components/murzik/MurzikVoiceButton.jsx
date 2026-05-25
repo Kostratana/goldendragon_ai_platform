@@ -7,10 +7,6 @@ export default function MurzikVoiceButton() {
 
     function stopMurzikVoice() {
 
-        /*
-        STOP ALL ACTIVE SPEECH
-        */
-
         window.speechSynthesis?.cancel();
 
         setIsLoading(false);
@@ -19,10 +15,6 @@ export default function MurzikVoiceButton() {
     async function speakMurzik() {
 
         try {
-
-            /*
-            RESET PREVIOUS
-            */
 
             stopMurzikVoice();
 
@@ -42,25 +34,24 @@ export default function MurzikVoiceButton() {
             const synth =
                 window.speechSynthesis;
 
+            /*
+            SHORT CLEAN INTRO
+            */
+
             const text =
                 `
                 Hello.
 
                 I am Murzik.
 
-                Personal AI business assistant
+                AI assistant
                 of Svetlana Rumyantseva.
 
-                I want to guide you
-                through the world
-                of artificial intelligence
-                and present our AI systems,
-                multimodal technologies
-                and orchestration platforms.
+                Welcome to our
+                artificial intelligence platform.
 
-                Please open
-                the chat page
-                to explore our projects.
+                Open the chat
+                to explore our systems.
                 `;
 
             const speech =
@@ -72,27 +63,23 @@ export default function MurzikVoiceButton() {
                 "en-US";
 
             /*
-            CLEAN PREMIUM SETTINGS
+            GOOGLE MALE SETTINGS
             */
 
             speech.rate =
-                0.96;
+                0.92;
 
             speech.pitch =
-                1;
+                0.82;
 
             speech.volume =
                 1;
-
-            /*
-            LOAD AVAILABLE VOICES
-            */
 
             let voices =
                 synth.getVoices();
 
             /*
-            WAIT FOR VOICES
+            WAIT VOICES
             */
 
             if (
@@ -123,26 +110,25 @@ export default function MurzikVoiceButton() {
             }
 
             console.log(
-                "Murzik available voices:",
+                "Murzik voices:",
                 voices.map(v => v.name)
             );
 
             /*
-            PRIORITY:
-            EDGE NEURAL
-            ↓
-            MAC ALEX
-            ↓
-            DANIEL
-            ↓
-            WINDOWS DAVID
+            GOOGLE MALE PRIORITY
             */
 
             const preferredVoice =
 
                 voices.find((voice) =>
                     voice.name.includes(
-                        "Neural"
+                        "Google UK English Male"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Google US English"
                     )
                 ) ||
 
@@ -160,7 +146,7 @@ export default function MurzikVoiceButton() {
 
                 voices.find((voice) =>
                     voice.name.includes(
-                        "Microsoft David"
+                        "Male"
                     )
                 ) ||
 
@@ -211,6 +197,14 @@ export default function MurzikVoiceButton() {
 
                 setIsLoading(false);
             };
+
+            /*
+            PREVENT OVERLAP GLITCH
+            */
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 180)
+            );
 
             synth.speak(
                 speech

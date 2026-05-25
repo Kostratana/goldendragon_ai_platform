@@ -114,14 +114,14 @@ export default function Navbar() {
                 "en-US";
 
             /*
-            NATURAL SETTINGS
+            DEEP MALE SETTINGS
             */
 
             speech.rate =
-                0.96;
+                0.88;
 
             speech.pitch =
-                1;
+                0.72;
 
             speech.volume =
                 1;
@@ -151,7 +151,7 @@ export default function Navbar() {
 
                         setTimeout(
                             resolve,
-                            1000
+                            1200
                         );
                     }
                 );
@@ -166,21 +166,32 @@ export default function Navbar() {
             );
 
             /*
-            PRIORITY:
-            EDGE NEURAL
-            ↓
-            MAC ALEX
-            ↓
-            DANIEL
-            ↓
-            MICROSOFT DAVID
+            MICROSOFT MALE PRIORITY
             */
 
             const preferredVoice =
 
                 voices.find((voice) =>
                     voice.name.includes(
-                        "Neural"
+                        "Microsoft David"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Microsoft Guy"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Microsoft Ryan"
+                    )
+                ) ||
+
+                voices.find((voice) =>
+                    voice.name.includes(
+                        "Google UK English Male"
                     )
                 ) ||
 
@@ -198,7 +209,7 @@ export default function Navbar() {
 
                 voices.find((voice) =>
                     voice.name.includes(
-                        "Microsoft David"
+                        "Male"
                     )
                 ) ||
 

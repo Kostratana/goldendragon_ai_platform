@@ -101,11 +101,15 @@ export default function Chat() {
         speech.lang =
             "en-US";
 
+        /*
+        DEEP MALE SETTINGS
+        */
+
         speech.rate =
-            0.96;
+            0.88;
 
         speech.pitch =
-            1;
+            0.72;
 
         speech.volume =
             1;
@@ -113,11 +117,33 @@ export default function Chat() {
         const voices =
             synth.getVoices();
 
+        /*
+        MICROSOFT MALE PRIORITY
+        */
+
         const preferredVoice =
 
             voices.find((voice) =>
                 voice.name.includes(
-                    "Neural"
+                    "Microsoft David"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Microsoft Guy"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Microsoft Ryan"
+                )
+            ) ||
+
+            voices.find((voice) =>
+                voice.name.includes(
+                    "Google UK English Male"
                 )
             ) ||
 
@@ -135,7 +161,7 @@ export default function Chat() {
 
             voices.find((voice) =>
                 voice.name.includes(
-                    "Microsoft David"
+                    "Male"
                 )
             ) ||
 
@@ -151,6 +177,11 @@ export default function Chat() {
 
             speech.voice =
                 preferredVoice;
+
+            console.log(
+                "Murzik selected voice:",
+                preferredVoice.name
+            );
         }
 
         synth.speak(
@@ -529,119 +560,6 @@ export default function Chat() {
                     }}
                 />
 
-                {/* VOICE BUTTONS */}
-
-                <div
-                    style={{
-
-                        position: "absolute",
-
-                        top:
-                            isMobile
-                                ? "560px"
-                                : "720px",
-
-                        left: "50%",
-
-                        transform:
-                            "translateX(-50%)",
-
-                        zIndex: 30,
-
-                        display: "flex",
-
-                        gap: "12px"
-                    }}
-                >
-
-                    <button
-                        onClick={() =>
-                            setVoiceEnabled(
-                                !voiceEnabled
-                            )
-                        }
-
-                        style={{
-
-                            padding:
-                                "10px 18px",
-
-                            borderRadius:
-                                "14px",
-
-                            border:
-                                "1px solid rgba(255,180,80,0.14)",
-
-                            background:
-                                voiceEnabled
-                                    ? "rgba(255,160,40,0.14)"
-                                    : "rgba(255,255,255,0.04)",
-
-                            color:
-                                "#f0c88f",
-
-                            fontSize:
-                                isMobile
-                                    ? "10px"
-                                    : "12px",
-
-                            letterSpacing:
-                                "0.12em",
-
-                            fontFamily:
-                                "'Cinzel', serif",
-
-                            cursor:
-                                "pointer"
-                        }}
-                    >
-                        {
-                            voiceEnabled
-                                ? "VOICE ON"
-                                : "VOICE OFF"
-                        }
-                    </button>
-
-                    <button
-                        onClick={stopMurzikVoice}
-
-                        style={{
-
-                            padding:
-                                "10px 18px",
-
-                            borderRadius:
-                                "14px",
-
-                            border:
-                                "1px solid rgba(255,80,80,0.12)",
-
-                            background:
-                                "rgba(255,60,60,0.05)",
-
-                            color:
-                                "#ffb0b0",
-
-                            fontSize:
-                                isMobile
-                                    ? "10px"
-                                    : "12px",
-
-                            letterSpacing:
-                                "0.12em",
-
-                            fontFamily:
-                                "'Cinzel', serif",
-
-                            cursor:
-                                "pointer"
-                        }}
-                    >
-                        STOP
-                    </button>
-
-                </div>
-
                 {/* CHAT WINDOW */}
 
                 <div
@@ -701,6 +619,10 @@ export default function Chat() {
 
                         startRightResize={startRightResize}
                         startBottomResize={startBottomResize}
+
+                        voiceEnabled={voiceEnabled}
+                        setVoiceEnabled={setVoiceEnabled}
+                        stopMurzikVoice={stopMurzikVoice}
                     />
 
                 </div>

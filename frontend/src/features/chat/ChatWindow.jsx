@@ -50,21 +50,14 @@ export default function ChatWindow({
     startBottomRightResize,
 
     startRightResize,
-    startBottomResize
+    startBottomResize,
+
+    voiceEnabled,
+    setVoiceEnabled,
+
+    stopMurzikVoice
 
 }) {
-
-    const [voiceEnabled, setVoiceEnabled] =
-        useState(false);
-
-    const [voiceLoading, setVoiceLoading] =
-        useState(false);
-
-    const audioRef =
-        useRef(null);
-
-    const lastSpokenMessageRef =
-        useRef("");
 
     function selectMode(nextMode, nextProject) {
 
@@ -82,202 +75,6 @@ export default function ChatWindow({
             sendMessage();
         }
     }
-
-    async function speakText(text) {
-
-        if (!text) {
-            return;
-        }
-
-        try {
-
-            setVoiceLoading(true);
-
-            /*
-            STOP OLD AUDIO
-            */
-
-            if (
-                audioRef.current
-            ) {
-
-                audioRef.current.pause();
-
-                audioRef.current = null;
-            }
-
-            const response =
-                await fetch(
-                    "https://api.openai.com/v1/audio/speech",
-                    {
-
-                        method: "POST",
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/json",
-
-                            Authorization:
-                                `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
-                        },
-
-                        body: JSON.stringify({
-
-                            model:
-                                "gpt-4o-mini-tts",
-
-                            /*
-                            DEEP MALE VOICE
-                            */
-
-                            voice:
-                                "onyx",
-
-                            input:
-                                text,
-
-                            format:
-                                "mp3",
-
-                            speed:
-                                0.92
-                        })
-                    }
-                );
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "OpenAI voice failed"
-                );
-            }
-
-            const audioBlob =
-                await response.blob();
-
-            const audioUrl =
-                URL.createObjectURL(
-                    audioBlob
-                );
-
-            const audio =
-                new Audio(audioUrl);
-
-            audioRef.current =
-                audio;
-
-            audio.volume = 1;
-
-            audio.onended = () => {
-
-                URL.revokeObjectURL(
-                    audioUrl
-                );
-
-                setVoiceLoading(false);
-            };
-
-            audio.onerror = () => {
-
-                setVoiceLoading(false);
-            };
-
-            await audio.play();
-
-        } catch (error) {
-
-            console.error(
-                "Murzik voice runtime error:",
-                error
-            );
-
-            setVoiceLoading(false);
-        }
-    }
-
-    function stopVoice() {
-
-        if (
-            audioRef.current
-        ) {
-
-            audioRef.current.pause();
-
-            audioRef.current = null;
-        }
-
-        setVoiceLoading(false);
-    }
-
-    async function readLastAssistantMessage() {
-
-        const assistantMessages =
-            messages.filter(
-                item =>
-                    item.role ===
-                    "assistant"
-            );
-
-        const lastMessage =
-            assistantMessages[
-                assistantMessages.length - 1
-            ];
-
-        if (!lastMessage) {
-            return;
-        }
-
-        await speakText(
-            lastMessage.text
-        );
-    }
-
-    /*
-    MANUAL VOICE MODE
-    */
-
-    useEffect(() => {
-
-        if (!voiceEnabled) {
-            return;
-        }
-
-        const assistantMessages =
-            messages.filter(
-                item =>
-                    item.role ===
-                    "assistant"
-            );
-
-        const lastMessage =
-            assistantMessages[
-                assistantMessages.length - 1
-            ];
-
-        if (!lastMessage) {
-            return;
-        }
-
-        /*
-        PREVENT DOUBLE PLAYBACK
-        */
-
-        if (
-            lastSpokenMessageRef.current ===
-            lastMessage.text
-        ) {
-            return;
-        }
-
-        lastSpokenMessageRef.current =
-            lastMessage.text;
-
-        speakText(
-            lastMessage.text
-        );
-
-    }, [messages, voiceEnabled]);
 
     return (
 
@@ -453,8 +250,8 @@ export default function ChatWindow({
                             `
                             radial-gradient(
                                 circle at center,
-                                rgba(255,180,80,0.12),
-                                rgba(255,120,30,0.04),
+                                rgba(255,180,80,0.10),
+                                rgba(255,120,30,0.03),
                                 transparent 72%
                             )
                             `
@@ -464,8 +261,8 @@ export default function ChatWindow({
                 {Array.from({
                     length:
                         isMobile
-                            ? 14
-                            : 28
+                            ? 18
+                            : 34
                 }).map((_, index) => (
 
                     <div
@@ -475,16 +272,16 @@ export default function ChatWindow({
                             position: "absolute",
 
                             width:
-                                `${1 + (index % 2)}px`,
+                                `${1.5 + (index % 2)}px`,
 
                             height:
-                                `${10 + (index % 5)}px`,
+                                `${14 + (index % 7)}px`,
 
                             left:
-                                `${(index * 7) % 100}%`,
+                                `${(index * 5.4) % 100}%`,
 
                             top:
-                                `${(index * 11) % 90}%`,
+                                `${(index * 9) % 92}%`,
 
                             borderRadius:
                                 "999px",
@@ -493,21 +290,28 @@ export default function ChatWindow({
                                 `
                                 linear-gradient(
                                     to bottom,
-                                    rgba(255,255,255,0.95),
-                                    rgba(255,220,140,0.85),
+                                    rgba(255,255,255,0.98),
+                                    rgba(255,220,120,0.95),
+                                    rgba(255,160,40,0.35),
                                     rgba(255,120,40,0)
                                 )
                                 `,
 
                             boxShadow:
                                 `
-                                0 0 12px rgba(255,190,80,0.35)
+                                0 0 12px rgba(255,210,120,0.35),
+                                0 0 22px rgba(255,140,40,0.18)
                                 `,
+
+                            filter:
+                                "blur(0.2px)",
+
+                            opacity: 0.92,
 
                             animation:
                                 `
                                 murzikSpark${index % 4}
-                                ${3 + index * 0.12}s
+                                ${3.4 + index * 0.14}s
                                 linear
                                 infinite
                                 `
@@ -553,7 +357,8 @@ export default function ChatWindow({
                 <div
                     style={{
                         display: "flex",
-                        gap: "8px"
+                        gap: "8px",
+                        flexWrap: "wrap"
                     }}
                 >
 
@@ -634,7 +439,8 @@ export default function ChatWindow({
                 <div
                     style={{
                         display: "flex",
-                        gap: "8px"
+                        gap: "8px",
+                        flexWrap: "wrap"
                     }}
                 >
 
@@ -664,7 +470,7 @@ export default function ChatWindow({
 
                     display: "flex",
 
-                    gap: "10px",
+                    gap: "8px",
 
                     marginBottom:
                         isMobile
@@ -683,7 +489,7 @@ export default function ChatWindow({
                     text={
                         voiceEnabled
                             ? "VOICE ACTIVE"
-                            : "START VOICE"
+                            : "VOICE OFF"
                     }
                     active={voiceEnabled}
                     onClick={() =>
@@ -694,19 +500,8 @@ export default function ChatWindow({
                 />
 
                 <ToolbarButton
-                    text={
-                        voiceLoading
-                            ? "READING..."
-                            : "READ LAST"
-                    }
-                    onClick={
-                        readLastAssistantMessage
-                    }
-                />
-
-                <ToolbarButton
                     text="STOP VOICE"
-                    onClick={stopVoice}
+                    onClick={stopMurzikVoice}
                 />
 
                 <label
@@ -962,18 +757,12 @@ export default function ChatWindow({
 
                         flex: 1,
 
-                        height:
-                            isMobile
-                                ? "44px"
-                                : "52px",
+                        height: "42px",
 
-                        borderRadius:
-                            isMobile
-                                ? "16px"
-                                : "20px",
+                        borderRadius: "14px",
 
-                        paddingLeft: "18px",
-                        paddingRight: "18px",
+                        paddingLeft: "16px",
+                        paddingRight: "16px",
 
                         border:
                             "1px solid rgba(255,220,170,0.08)",
@@ -997,15 +786,9 @@ export default function ChatWindow({
                     onClick={sendMessage}
                     style={{
 
-                        width:
-                            isMobile
-                                ? "84px"
-                                : "110px",
+                        width: "110px",
 
-                        borderRadius:
-                            isMobile
-                                ? "16px"
-                                : "20px",
+                        borderRadius: "14px",
 
                         border:
                             "1px solid rgba(255,220,170,0.08)",
@@ -1023,15 +806,121 @@ export default function ChatWindow({
 
                         cursor: "pointer",
 
-                        fontWeight: "600",
+                        fontWeight: "500",
 
-                        letterSpacing: "0.05em"
+                        fontSize: "10px",
+
+                        letterSpacing: "0.12em"
                     }}
                 >
                     SEND
                 </button>
 
             </div>
+
+            <style>
+                {`
+                @keyframes murzikSpark0 {
+
+                    0% {
+                        transform:
+                            translateY(0px)
+                            translateX(0px)
+                            scale(0.7);
+
+                        opacity: 0;
+                    }
+
+                    20% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        transform:
+                            translateY(-180px)
+                            translateX(22px)
+                            scale(1.1);
+
+                        opacity: 0;
+                    }
+                }
+
+                @keyframes murzikSpark1 {
+
+                    0% {
+                        transform:
+                            translateY(0px)
+                            translateX(0px)
+                            scale(0.7);
+
+                        opacity: 0;
+                    }
+
+                    20% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        transform:
+                            translateY(-220px)
+                            translateX(-18px)
+                            scale(1);
+
+                        opacity: 0;
+                    }
+                }
+
+                @keyframes murzikSpark2 {
+
+                    0% {
+                        transform:
+                            translateY(0px)
+                            translateX(0px)
+                            scale(0.6);
+
+                        opacity: 0;
+                    }
+
+                    20% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        transform:
+                            translateY(-160px)
+                            translateX(16px)
+                            scale(1.2);
+
+                        opacity: 0;
+                    }
+                }
+
+                @keyframes murzikSpark3 {
+
+                    0% {
+                        transform:
+                            translateY(0px)
+                            translateX(0px)
+                            scale(0.7);
+
+                        opacity: 0;
+                    }
+
+                    20% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        transform:
+                            translateY(-240px)
+                            translateX(-12px)
+                            scale(1.15);
+
+                        opacity: 0;
+                    }
+                }
+                `}
+            </style>
 
         </div>
     );
@@ -1141,48 +1030,71 @@ function ToolbarButton({
             onClick={onClick}
             style={{
 
-                height: "38px",
+                height: "34px",
 
-                paddingLeft: "16px",
-                paddingRight: "16px",
+                minWidth: "110px",
 
-                borderRadius: "999px",
+                paddingLeft: "14px",
+                paddingRight: "14px",
+
+                borderRadius: "12px",
 
                 border:
                     active
-                        ? "1px solid rgba(255,190,90,0.16)"
-                        : "1px solid rgba(255,220,170,0.08)",
+                        ? "1px solid rgba(255,190,90,0.18)"
+                        : "1px solid rgba(255,220,170,0.06)",
 
                 background:
                     active
                         ? `
                         linear-gradient(
                             to bottom,
-                            rgba(255,170,70,0.20),
-                            rgba(255,120,20,0.12)
+                            rgba(255,170,70,0.18),
+                            rgba(255,120,20,0.10)
                         )
                         `
-                        : "rgba(255,255,255,0.03)",
+                        : `
+                        linear-gradient(
+                            to bottom,
+                            rgba(255,255,255,0.025),
+                            rgba(255,255,255,0.012)
+                        )
+                        `,
 
                 color:
                     active
                         ? "#ffe2b2"
-                        : "#fff0d6",
+                        : "#f4dcc0",
 
                 cursor: "pointer",
 
-                fontSize: "11px",
+                fontSize: "10px",
 
-                fontWeight: "600",
+                fontWeight: "500",
 
-                letterSpacing: "0.08em",
+                letterSpacing: "0.12em",
+
+                transition:
+                    "all 0.22s ease",
+
+                backdropFilter:
+                    "blur(10px)",
+
+                WebkitBackdropFilter:
+                    "blur(10px)",
 
                 boxShadow:
                     active
                         ? `
-                        0 0 24px rgba(255,140,0,0.16)
+                        0 0 18px rgba(255,140,0,0.12)
                         `
-                        : "none"
+                        : `
+                        0 0 10px rgba(255,255,255,0.02)
+                        `,
+
+                whiteSpace: "nowrap",
+
+                flexShrink: 0
             }}
         >
             {text}
@@ -1203,44 +1115,44 @@ function ModeButton({
             onClick={onClick}
             style={{
 
-                height:
-                    isMobile
-                        ? "30px"
-                        : "34px",
+                height: "34px",
 
-                paddingLeft:
+                minWidth:
                     isMobile
-                        ? "12px"
-                        : "16px",
+                        ? "82px"
+                        : "94px",
 
-                paddingRight:
-                    isMobile
-                        ? "12px"
-                        : "16px",
+                paddingLeft: "14px",
+                paddingRight: "14px",
 
-                borderRadius:
-                    "999px",
+                borderRadius: "12px",
 
                 border:
                     active
                         ? "1px solid rgba(255,220,170,0.16)"
-                        : "1px solid rgba(255,255,255,0.04)",
+                        : "1px solid rgba(255,255,255,0.05)",
 
                 background:
                     active
                         ? `
                         linear-gradient(
                             to bottom,
-                            rgba(246,226,190,0.92),
-                            rgba(218,184,130,0.88)
+                            rgba(255,220,170,0.92),
+                            rgba(220,180,120,0.82)
                         )
                         `
-                        : "rgba(255,255,255,0.022)",
+                        : `
+                        linear-gradient(
+                            to bottom,
+                            rgba(255,255,255,0.03),
+                            rgba(255,255,255,0.015)
+                        )
+                        `,
 
                 color:
                     active
                         ? "#24140a"
-                        : "#fff0d6",
+                        : "#f6e3ca",
 
                 cursor: "pointer",
 
@@ -1251,9 +1163,27 @@ function ModeButton({
                         ? "9px"
                         : "10px",
 
-                fontWeight: "600",
+                fontWeight: "500",
 
-                letterSpacing: "0.08em"
+                letterSpacing: "0.12em",
+
+                transition:
+                    "all 0.22s ease",
+
+                backdropFilter:
+                    "blur(10px)",
+
+                WebkitBackdropFilter:
+                    "blur(10px)",
+
+                boxShadow:
+                    active
+                        ? `
+                        0 0 22px rgba(255,180,70,0.14)
+                        `
+                        : `
+                        0 0 10px rgba(255,255,255,0.02)
+                        `
             }}
         >
             {text}
