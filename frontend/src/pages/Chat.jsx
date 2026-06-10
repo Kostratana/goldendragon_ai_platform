@@ -160,121 +160,133 @@ export default function Chat() {
         }
     }
 
-    function downloadMessages() {
+function downloadMessages() {
 
-        const text =
-            messages
-                .map(item =>
-                    `[${item.role.toUpperCase()}]\n${item.text}`
-                )
-                .join("\n\n");
+    const text =
+        messages
+            .map(item =>
+                `[${item.role.toUpperCase()}]\n${item.text}`
+            )
+            .join("\n\n");
 
-        const blob =
-            new Blob(
-                [text],
+    const blob =
+        new Blob(
+            [text],
+            {
+                type: "text/plain"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "murzik-chat.txt";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+}
+
+
+async function sendMessage() {
+
+    if (!message.trim()) {
+        return;
+    }
+
+    const userMessage =
+        message;
+
+    setMessages(prev => [
+        ...prev,
+        {
+            role: "user",
+            text: userMessage
+        }
+    ]);
+
+    setMessage("");
+
+    setIsThinking(true);
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:8000/chat",
                 {
-                    type: "text/plain"
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: userMessage
+                    })
                 }
             );
 
-        const url =
-            URL.createObjectURL(blob);
+        if (!response.ok) {
 
-        const link =
-            document.createElement("a");
-
-        link.href = url;
-
-        link.download =
-            "murzik-chat.txt";
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        document.body.removeChild(link);
-
-        URL.revokeObjectURL(url);
-    }
-
-    function sendMessage() {
-
-        if (!message.trim()) {
-            return;
+            throw new Error(
+                `Backend error: ${response.status}`
+            );
         }
 
-        const userMessage =
-            message;
+        const data =
+            await response.json();
+
+        let responseText =
+            data.response ||
+            "Murzik returned an empty response.";
 
         setMessages(prev => [
             ...prev,
             {
-                role: "user",
-                text: userMessage
+                role: "assistant",
+                text: responseText
             }
         ]);
 
-        setMessage("");
+        /*
+        FUTURE XTTS BACKEND CALL
 
-        setIsThinking(true);
+        Example:
 
-        setTimeout(() => {
+        playMurzikAudio(
+            backendAudioUrl
+        );
+        */
 
-            let responseText =
-                "Murzik processed request.";
+    } catch (error) {
 
-            if (activeProject === PROJECT_MODES.MVP_1) {
+        console.error(
+            "Murzik backend error:",
+            error
+        );
 
-                responseText =
-                    "MVP 1 Health mode is active. Murzik is ready for product composition analysis, harmful substances detection, OCR labels and health explanation.";
+        setMessages(prev => [
+            ...prev,
+            {
+                role: "assistant",
+                text:
+                    "Murzik backend connection error."
             }
-
-            if (activeProject === PROJECT_MODES.MVP_2) {
-
-                responseText =
-                    "MVP 2 Horse AI mode is prepared. Video runtime, movement anomaly detection, pain detection and infrared analysis will be connected in the next module.";
-            }
-
-            if (activeProject === PROJECT_MODES.LOGGER) {
-
-                responseText =
-                    "Runtime logger mode is active. Murzik will display orchestration state, active brain, routing, memory and model runtime logs.";
-            }
-
-            if (activeProject === PROJECT_MODES.VOICE) {
-
-                responseText =
-                    "Voice mode is active. XTTS backend streaming runtime will be connected through the Murzik orchestration layer.";
-            }
-
-            if (activeProject === PROJECT_MODES.VIDEO) {
-
-                responseText =
-                    "Video mode is active. Murzik video presentation runtime is ready for MVP demo connection.";
-            }
-
-            /*
-            FUTURE XTTS BACKEND CALL
-
-            Example:
-
-            playMurzikAudio(
-                backendAudioUrl
-            );
-            */
-
-            setMessages(prev => [
-                ...prev,
-                {
-                    role: "assistant",
-                    text: responseText
-                }
-            ]);
-
-            setIsThinking(false);
-
-        }, 1800);
+        ]);
     }
+
+    setIsThinking(false);
+}
+
 
     function clearMessages() {
 
