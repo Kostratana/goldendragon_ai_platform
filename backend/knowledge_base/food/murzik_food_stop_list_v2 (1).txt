@@ -1,0 +1,659 @@
+MURZIK FOOD STOP LIST v2
+Personal risk-list for checking food labels. Not a medical diagnosis. Regulatory status varies by country.
+
+1. E171 | Titanium dioxide / Диоксид титана
+   Aliases: CI 77891; TiO2; titanium white
+   Category: colorant
+   Personal rule: avoid
+   Regulatory note: EU: not considered safe as food additive; US: still allowed with limits
+   Common products: candies, chewing gum, sauces, supplements, icing
+   Notes: Priority avoid
+
+2. E127 | Erythrosine / Эритрозин / Красный 3
+   Aliases: FD&C Red No.3; Red 3
+   Category: colorant
+   Personal rule: avoid
+   Regulatory note: US: authorization revoked for food/ingested drugs with phase-out; varies elsewhere
+   Common products: candies, cherries, decorations, gummies
+   Notes: Priority avoid
+
+3. N/A | Potassium bromate / Бромат калия
+   Aliases: bromated flour
+   Category: flour improver
+   Personal rule: avoid
+   Regulatory note: Banned/restricted in many places; still can appear in some markets
+   Common products: bread, pizza dough, bagels
+   Notes: Priority avoid
+
+4. N/A | Propylparaben / Пропилпарабен
+   Aliases: propyl p-hydroxybenzoate; E216 in some systems
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Banned/restricted in some jurisdictions; endocrine concern
+   Common products: bakery products, packaged foods
+   Notes: Priority avoid
+
+5. N/A | Brominated vegetable oil / Бромированное растительное масло
+   Aliases: BVO
+   Category: emulsifier/stabilizer
+   Personal rule: avoid
+   Regulatory note: US FDA revoked food additive authorization in 2024
+   Common products: citrus sodas, soft drinks
+   Notes: Priority avoid
+
+6. N/A | Partially hydrogenated oils / Частично гидрогенизированные масла
+   Aliases: PHO; trans fats
+   Category: fat/oil
+   Personal rule: avoid
+   Regulatory note: Industrial trans fats restricted/banned in many countries
+   Common products: margarine, snacks, bakery
+   Notes: Priority avoid
+
+7. E102 | Tartrazine / Тартразин
+   Aliases: Yellow 5; FD&C Yellow 5
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Allowed in many countries but warning labels/concerns in EU/UK contexts
+   Common products: drinks, candy, snacks, desserts
+   Notes: Synthetic azo dye
+
+8. E104 | Quinoline Yellow / Хинолиновый желтый
+   Aliases: Yellow 10
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Restricted/varies by country
+   Common products: drinks, desserts, candies
+   Notes: Synthetic dye
+
+9. E110 | Sunset Yellow FCF / Желтый закат
+   Aliases: Yellow 6; Orange Yellow S
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Allowed in some countries; warning labels/concerns in EU/UK contexts
+   Common products: soda, candy, snacks
+   Notes: Synthetic azo dye
+
+10. E122 | Azorubine / Азорубин
+   Aliases: Carmoisine
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Restricted/varies by country
+   Common products: desserts, sweets
+   Notes: Synthetic azo dye
+
+11. E123 | Amaranth / Амарант
+   Aliases: Red No.2
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Banned/restricted in some countries
+   Common products: drinks, desserts
+   Notes: Synthetic dye
+
+12. E124 | Ponceau 4R / Понсо 4R
+   Aliases: Cochineal Red A
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Allowed in some countries; warning labels/concerns in EU/UK contexts
+   Common products: candy, drinks, desserts
+   Notes: Synthetic azo dye
+
+13. E129 | Allura Red AC / Красный очаровательный AC
+   Aliases: Red 40; FD&C Red 40
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Allowed in US/EU with limits; controversial for sensitive children
+   Common products: soda, candy, cereal
+   Notes: Synthetic azo dye
+
+14. E131 | Patent Blue V / Патентованный синий V
+   Aliases: Blue V
+   Category: synthetic colorant
+   Personal rule: caution
+   Regulatory note: Restricted/varies by country
+   Common products: desserts, confectionery
+   Notes: Synthetic dye
+
+15. E132 | Indigo Carmine / Индигокармин
+   Aliases: FD&C Blue 2
+   Category: synthetic colorant
+   Personal rule: caution
+   Regulatory note: Allowed with limits; synthetic dye
+   Common products: drinks, candy
+   Notes: Synthetic dye
+
+16. E133 | Brilliant Blue FCF / Бриллиантовый синий FCF
+   Aliases: FD&C Blue 1
+   Category: synthetic colorant
+   Personal rule: caution
+   Regulatory note: Allowed with limits; synthetic dye
+   Common products: drinks, desserts, candy
+   Notes: Synthetic dye
+
+17. E142 | Green S / Зеленый S
+   Aliases: Food Green S
+   Category: synthetic colorant
+   Personal rule: caution
+   Regulatory note: Restricted/varies by country
+   Common products: desserts, mint products
+   Notes: Synthetic dye
+
+18. E151 | Brilliant Black BN / Бриллиантовый черный BN
+   Aliases: Black PN
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Restricted/varies by country
+   Common products: sweets, sauces
+   Notes: Synthetic dye
+
+19. E155 | Brown HT / Коричневый HT
+   Aliases: Chocolate Brown HT
+   Category: synthetic colorant
+   Personal rule: avoid
+   Regulatory note: Restricted/varies by country
+   Common products: chocolate desserts, bakery
+   Notes: Synthetic dye
+
+20. E200 | Sorbic acid / Сорбиновая кислота
+   Aliases: sorbic acid
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution if avoiding preservatives
+   Common products: cheese, sauces, bakery
+   Notes: Common preservative
+
+21. E202 | Potassium sorbate / Сорбат калия
+   Aliases: potassium sorbate
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution if avoiding preservatives
+   Common products: cheese, sauces, dried fruit
+   Notes: Common preservative
+
+22. E210 | Benzoic acid / Бензойная кислота
+   Aliases: benzoic acid
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed with limits
+   Common products: soda, sauces, pickles
+   Notes: Benzoate family
+
+23. E211 | Sodium benzoate / Бензоат натрия
+   Aliases: sodium benzoate
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed with limits; controversial in drinks with vitamin C/heat/light due benzene concern
+   Common products: sodas, juices, sauces
+   Notes: Benzoate family
+
+24. E212 | Potassium benzoate / Бензоат калия
+   Aliases: potassium benzoate
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed with limits
+   Common products: drinks, sauces
+   Notes: Benzoate family
+
+25. E213 | Calcium benzoate / Бензоат кальция
+   Aliases: calcium benzoate
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed with limits
+   Common products: processed foods
+   Notes: Benzoate family
+
+26. E214 | Ethylparaben / Этилпарабен
+   Aliases: ethyl p-hydroxybenzoate
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Paraben preservative; restricted/controversial
+   Common products: processed foods
+   Notes: Paraben
+
+27. E215 | Sodium ethylparaben / Натриевая соль этилпарабена
+   Aliases: sodium ethyl p-hydroxybenzoate
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Paraben preservative; restricted/controversial
+   Common products: processed foods
+   Notes: Paraben
+
+28. E216 | Propylparaben / Пропилпарабен
+   Aliases: propyl p-hydroxybenzoate
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Paraben preservative; banned/restricted in some places
+   Common products: processed foods
+   Notes: Paraben
+
+29. E217 | Sodium propylparaben / Натриевая соль пропилпарабена
+   Aliases: sodium propyl p-hydroxybenzoate
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Paraben preservative; banned/restricted in some places
+   Common products: processed foods
+   Notes: Paraben
+
+30. E220 | Sulfur dioxide / Диоксид серы
+   Aliases: sulphur dioxide; sulfites
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; allergen/sensitivity labeling required in many places
+   Common products: wine, dried fruit, juices
+   Notes: Sulfite
+
+31. E221 | Sodium sulfite / Сульфит натрия
+   Aliases: sodium sulphite
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; sulfite sensitivity concern
+   Common products: dried fruit, wine
+   Notes: Sulfite
+
+32. E222 | Sodium bisulfite / Гидросульфит натрия
+   Aliases: sodium bisulphite
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; sulfite sensitivity concern
+   Common products: dried fruit, wine
+   Notes: Sulfite
+
+33. E223 | Sodium metabisulfite / Метабисульфит натрия
+   Aliases: sodium metabisulphite
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; sulfite sensitivity concern
+   Common products: dried fruit, wine
+   Notes: Sulfite
+
+34. E224 | Potassium metabisulfite / Метабисульфит калия
+   Aliases: potassium metabisulphite
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; sulfite sensitivity concern
+   Common products: wine, dried fruit
+   Notes: Sulfite
+
+35. E249 | Potassium nitrite / Нитрит калия
+   Aliases: potassium nitrite
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; processed meat/nitrosamine concern
+   Common products: sausages, ham, bacon
+   Notes: Nitrite
+
+36. E250 | Sodium nitrite / Нитрит натрия
+   Aliases: sodium nitrite
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; processed meat/nitrosamine concern
+   Common products: sausages, ham, bacon
+   Notes: Nitrite
+
+37. E251 | Sodium nitrate / Нитрат натрия
+   Aliases: sodium nitrate
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; processed meat concern
+   Common products: cured meats
+   Notes: Nitrate
+
+38. E252 | Potassium nitrate / Нитрат калия
+   Aliases: potassium nitrate; saltpeter
+   Category: preservative
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; processed meat concern
+   Common products: cured meats
+   Notes: Nitrate
+
+39. E280 | Propionic acid / Пропионовая кислота
+   Aliases: propionic acid
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution if avoiding preservatives
+   Common products: bread, bakery
+   Notes: Mold inhibitor
+
+40. E281 | Sodium propionate / Пропионат натрия
+   Aliases: sodium propionate
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution if avoiding preservatives
+   Common products: bread, bakery
+   Notes: Mold inhibitor
+
+41. E282 | Calcium propionate / Пропионат кальция
+   Aliases: calcium propionate
+   Category: preservative
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution if avoiding preservatives
+   Common products: bread, bakery
+   Notes: Mold inhibitor
+
+42. E310 | Propyl gallate / Пропилгаллат
+   Aliases: propyl gallate
+   Category: antioxidant
+   Personal rule: avoid
+   Regulatory note: Allowed in some places; controversial antioxidant
+   Common products: oils, snacks, meat products
+   Notes: Synthetic antioxidant
+
+43. E319 | TBHQ / Трет-бутилгидрохинон
+   Aliases: tert-Butylhydroquinone
+   Category: antioxidant
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; controversial synthetic antioxidant
+   Common products: instant noodles, oils, snacks
+   Notes: Synthetic antioxidant
+
+44. E320 | BHA / Бутилгидроксианизол
+   Aliases: butylated hydroxyanisole
+   Category: antioxidant
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; controversial synthetic antioxidant
+   Common products: snacks, cereals, fats
+   Notes: Synthetic antioxidant
+
+45. E321 | BHT / Бутилгидрокситолуол
+   Aliases: butylated hydroxytoluene
+   Category: antioxidant
+   Personal rule: avoid
+   Regulatory note: Allowed with limits; controversial synthetic antioxidant
+   Common products: snacks, cereals, fats
+   Notes: Synthetic antioxidant
+
+46. E407 | Carrageenan / Каррагинан
+   Aliases: carrageenan
+   Category: emulsifier/thickener
+   Personal rule: caution
+   Regulatory note: Allowed; GI controversy/sensitivity concern
+   Common products: plant milks, cream, dairy, processed meats
+   Notes: Seaweed-derived but controversial
+
+47. E407a | Processed eucheuma seaweed / Обработанные водоросли Eucheuma
+   Aliases: PES
+   Category: emulsifier/thickener
+   Personal rule: caution
+   Regulatory note: Allowed; related to carrageenan family
+   Common products: plant milks, processed foods
+   Notes: Carrageenan family
+
+48. E412 | Guar gum / Гуаровая камедь
+   Aliases: guar gum
+   Category: thickener
+   Personal rule: caution
+   Regulatory note: Allowed; can cause GI issues in sensitive people
+   Common products: sauces, ice cream, gluten-free
+   Notes: Gum
+
+49. E415 | Xanthan gum / Ксантановая камедь
+   Aliases: xanthan gum
+   Category: thickener
+   Personal rule: caution
+   Regulatory note: Allowed; can cause GI issues in sensitive people
+   Common products: sauces, gluten-free, dressings
+   Notes: Gum
+
+50. E433 | Polysorbate 80 / Полисорбат 80
+   Aliases: Tween 80
+   Category: emulsifier
+   Personal rule: caution
+   Regulatory note: Allowed; microbiome/GI controversy in research
+   Common products: ice cream, sauces, supplements
+   Notes: Synthetic emulsifier
+
+51. E435 | Polysorbate 60 / Полисорбат 60
+   Aliases: Tween 60
+   Category: emulsifier
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution
+   Common products: bakery, whipped toppings
+   Notes: Synthetic emulsifier
+
+52. E466 | Carboxymethyl cellulose / Карбоксиметилцеллюлоза
+   Aliases: CMC; cellulose gum
+   Category: emulsifier/thickener
+   Personal rule: caution
+   Regulatory note: Allowed; microbiome/GI controversy in research
+   Common products: ice cream, sauces, gluten-free
+   Notes: Cellulose derivative
+
+53. E471 | Mono- and diglycerides of fatty acids / Моно- и диглицериды жирных кислот
+   Aliases: mono/diglycerides
+   Category: emulsifier
+   Personal rule: caution
+   Regulatory note: Allowed; ultra-processed marker
+   Common products: bakery, margarine, ice cream
+   Notes: May be animal/vegetable origin
+
+54. E472e | DATEM / ДАТЕМ
+   Aliases: diacetyl tartaric acid esters
+   Category: emulsifier
+   Personal rule: caution
+   Regulatory note: Allowed; ultra-processed bakery marker
+   Common products: bread, bakery
+   Notes: Dough conditioner
+
+55. E950 | Acesulfame K / Ацесульфам K
+   Aliases: Ace-K; acesulfame potassium
+   Category: sweetener
+   Personal rule: caution
+   Regulatory note: Allowed; artificial sweetener
+   Common products: diet drinks, protein foods
+   Notes: Artificial sweetener
+
+56. E951 | Aspartame / Аспартам
+   Aliases: aspartame
+   Category: sweetener
+   Personal rule: avoid
+   Regulatory note: IARC Group 2B; JECFA/FDA maintain ADI/safety at limits
+   Common products: diet soda, gum, desserts
+   Notes: Controversial sweetener
+
+57. E952 | Cyclamates / Цикламаты
+   Aliases: cyclamate; sodium cyclamate
+   Category: sweetener
+   Personal rule: avoid
+   Regulatory note: Banned in US; allowed in some countries with limits
+   Common products: diet drinks, tabletop sweeteners
+   Notes: Artificial sweetener
+
+58. E954 | Saccharin / Сахарин
+   Aliases: saccharin
+   Category: sweetener
+   Personal rule: caution
+   Regulatory note: Allowed; older controversy
+   Common products: diet foods, tablets
+   Notes: Artificial sweetener
+
+59. E955 | Sucralose / Сукралоза
+   Aliases: Splenda
+   Category: sweetener
+   Personal rule: caution
+   Regulatory note: Allowed; controversial especially with heating/processed foods
+   Common products: diet drinks, protein bars
+   Notes: Artificial sweetener
+
+60. E961 | Neotame / Неотам
+   Aliases: neotame
+   Category: sweetener
+   Personal rule: caution
+   Regulatory note: Allowed; artificial sweetener
+   Common products: diet foods
+   Notes: Artificial sweetener
+
+61. E962 | Aspartame-acesulfame salt / Соль аспартам-ацесульфама
+   Aliases: aspartame-acesulfame
+   Category: sweetener
+   Personal rule: avoid
+   Regulatory note: Contains aspartame component
+   Common products: diet foods
+   Notes: Artificial sweetener
+
+62. E969 | Advantame / Адвантам
+   Aliases: advantame
+   Category: sweetener
+   Personal rule: caution
+   Regulatory note: Allowed; artificial sweetener
+   Common products: diet foods
+   Notes: Artificial sweetener
+
+63. E620 | Glutamic acid / Глутаминовая кислота
+   Aliases: glutamate
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; personal sensitivity possible
+   Common products: snacks, sauces
+   Notes: Glutamate family
+
+64. E621 | Monosodium glutamate / Глутамат натрия
+   Aliases: MSG; sodium glutamate
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; personal sensitivity/ultra-processed marker
+   Common products: chips, noodles, soups
+   Notes: Glutamate family
+
+65. E622 | Monopotassium glutamate / Глутамат калия
+   Aliases: potassium glutamate
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution
+   Common products: snacks, instant foods
+   Notes: Glutamate family
+
+66. E623 | Calcium diglutamate / Глутамат кальция
+   Aliases: calcium glutamate
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; personal caution
+   Common products: snacks, instant foods
+   Notes: Glutamate family
+
+67. E627 | Disodium guanylate / Гуанилат натрия
+   Aliases: sodium guanylate
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; often with MSG
+   Common products: chips, noodles, soups
+   Notes: Ribonucleotide
+
+68. E631 | Disodium inosinate / Инозинат натрия
+   Aliases: sodium inosinate
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; often with MSG; may be animal origin
+   Common products: chips, noodles, soups
+   Notes: Ribonucleotide
+
+69. E635 | Disodium ribonucleotides / Рибонуклеотиды натрия
+   Aliases: I+G; disodium 5-ribonucleotides
+   Category: flavor enhancer
+   Personal rule: caution
+   Regulatory note: Allowed; often with MSG
+   Common products: chips, noodles, soups
+   Notes: Ribonucleotide
+
+70. N/A | High fructose corn syrup / Кукурузный сироп с высоким содержанием фруктозы
+   Aliases: HFCS; glucose-fructose syrup
+   Category: sweetener/UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; ultra-processed/sugar load marker
+   Common products: soda, sauces, sweets
+   Notes: UPF marker
+
+71. N/A | Maltodextrin / Мальтодекстрин
+   Aliases: maltodextrin
+   Category: starch derivative/UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; high glycemic/processed marker
+   Common products: protein foods, snacks, sauces
+   Notes: UPF marker
+
+72. N/A | Modified starch / Модифицированный крахмал
+   Aliases: modified corn starch; modified food starch
+   Category: thickener/UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; ultra-processed marker
+   Common products: sauces, desserts, processed foods
+   Notes: UPF marker
+
+73. N/A | Artificial flavor / Искусственный ароматизатор
+   Aliases: artificial flavour
+   Category: flavoring/UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; vague additive marker
+   Common products: almost any processed food
+   Notes: UPF marker
+
+74. N/A | Natural flavor / Натуральный ароматизатор
+   Aliases: natural flavour
+   Category: flavoring/UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; vague compound mixture
+   Common products: drinks, snacks, desserts
+   Notes: UPF marker
+
+75. N/A | Smoke flavor / Аромат дыма
+   Aliases: smoke flavour; liquid smoke
+   Category: flavoring
+   Personal rule: caution
+   Regulatory note: Allowed/varies; personal caution
+   Common products: sausages, sauces, snacks
+   Notes: Flavoring
+
+76. N/A | Protein isolate / Изолят белка
+   Aliases: soy protein isolate; pea protein isolate
+   Category: UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; ultra-processed marker
+   Common products: protein bars, meat substitutes
+   Notes: UPF marker
+
+77. N/A | Textured vegetable protein / Текстурированный растительный белок
+   Aliases: TVP; textured soy protein
+   Category: UPF marker
+   Personal rule: caution
+   Regulatory note: Allowed; ultra-processed marker
+   Common products: meat substitutes, cheap sausages
+   Notes: UPF marker
+
+78. INSECT | Acheta domesticus / Домашний сверчок
+   Aliases: house cricket; cricket powder; cricket flour; cricket protein; Acheta
+   Category: insect ingredient
+   Personal rule: avoid
+   Regulatory note: EU novel food authorizations exist for specified forms/uses
+   Common products: protein bars, crackers, bakery, pasta
+   Notes: No E-number usually
+
+79. INSECT | Tenebrio molitor / Желтый мучной червь
+   Aliases: yellow mealworm; mealworm powder; mealworm flour; Tenebrio
+   Category: insect ingredient
+   Personal rule: avoid
+   Regulatory note: EU novel food authorizations exist for specified forms/uses
+   Common products: protein snacks, bakery, pasta
+   Notes: No E-number usually
+
+80. INSECT | Locusta migratoria / Перелетная саранча
+   Aliases: migratory locust; locust powder
+   Category: insect ingredient
+   Personal rule: avoid
+   Regulatory note: EU novel food authorizations exist for specified forms/uses
+   Common products: snacks, protein foods
+   Notes: No E-number usually
+
+81. INSECT | Alphitobius diaperinus / Малый мучной хрущак
+   Aliases: lesser mealworm; buffalo worm; buffalo worm powder
+   Category: insect ingredient
+   Personal rule: avoid
+   Regulatory note: EU novel food authorizations exist for specified forms/uses
+   Common products: protein foods, snacks, bakery
+   Notes: No E-number usually
+
+82. INSECT | Insect protein / Белок насекомых
+   Aliases: insect flour; insect powder; edible insects
+   Category: insect ingredient
+   Personal rule: avoid
+   Regulatory note: Label wording varies
+   Common products: protein foods, bakery, snacks
+   Notes: Catch-all search term
+

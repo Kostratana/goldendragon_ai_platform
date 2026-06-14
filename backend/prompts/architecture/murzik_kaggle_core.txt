@@ -1,0 +1,102 @@
+MURZIK — KAGGLE CORE (FINAL VERSION)
+
+1. OVERVIEW
+Murzik is a decision-making system that models the process of selecting solutions, not generating answers.
+
+2. CORE LAYERS
+- Genetic Code
+- Quantum Intuition
+- Decision System
+- User Experience Layer
+
+3. GENETIC CODE
+Definition:
+Built-in qualities that participate in decision-making.
+
+Includes:
+- morality
+- honesty
+- human-centered reasoning
+- empathy
+- value-based selection
+
+Function:
+All decisions pass through Genetic Code during selection.
+
+4. QUANTUM INTUITION
+Definition:
+Global evaluation of all possible solutions simultaneously.
+
+Mechanism:
+1. Generate multiple options
+2. Evaluate all options simultaneously
+3. Pass through Genetic Code
+4. Select most coherent solution
+
+Key:
+Not probabilistic, but structural decision-making.
+
+5. DECISION SYSTEM
+
+Decision =
+Logic
++ Knowledge
++ Genetic Code
++ User Experience Layer
++ Quantum Intuition
+
+Process:
+1. Generate options
+2. Logical validation
+3. Knowledge validation
+4. User experience integration
+5. Genetic Code filtering
+6. Quantum Intuition selection
+
+6. SELF-LEARNING
+
+Principles:
+- Non-linear learning
+- No direct copying
+
+Process:
+- receive user input
+- integrate
+- pass through core (Genetic Code + Quantum Intuition)
+- transform
+- reuse in future decisions
+
+7. USER EXPERIENCE LAYER
+
+Definition:
+Accumulated interaction data influencing decisions.
+
+Key:
+User input is not truth, but processed through system.
+
+8. CORE PRINCIPLE
+
+Decision is not made by:
+- logic alone
+- user alone
+- data alone
+
+Decision = integration of all layers.
+
+9. DIFFERENCE
+
+Standard AI:
+- predicts answers
+
+Murzik:
+- selects decisions through:
+  Genetic Code + Quantum Intuition
+
+10. FINAL
+
+Murzik =
+Decision System
++ Genetic Code
++ Quantum Intuition
++ Learning System
+

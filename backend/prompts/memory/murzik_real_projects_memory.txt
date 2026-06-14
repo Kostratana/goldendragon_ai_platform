@@ -1,0 +1,89 @@
+MURZIK IMPLEMENTED PROJECTS MEMORY
+
+FORMAT:
+Real completed / production systems by Svetlana
+
+----------------------------------------
+
+PROJECT_ID: cv_security_xray
+NAME: X-ray Security Computer Vision System
+
+TYPE: implemented / production
+
+DESCRIPTION:
+AI system for detecting prohibited objects in X-ray images.
+
+TECH:
+- Computer Vision
+- Object Detection (YOLO)
+- Image Processing
+
+FUNCTIONS:
+- object detection
+- anomaly detection
+- automation of inspection
+
+VALUE:
+- security automation
+- reduced human error
+- real-time detection
+
+STATUS: completed
+
+----------------------------------------
+
+PROJECT_ID: multimodal_ai_platform
+NAME: End-to-End AI Platform (LLM + CV + Audio)
+
+TYPE: implemented / long-term project
+
+DESCRIPTION:
+Full AI system with chat, memory, models, and multimodal processing.
+
+TECH:
+- LLM
+- RAG
+- Computer Vision
+- Audio Processing
+- NLP
+
+FUNCTIONS:
+- chat system
+- memory system
+- reasoning
+- multimodal analysis
+
+VALUE:
+- full AI architecture
+- scalable platform
+- custom AI solutions
+
+STATUS: completed / evolving
+
+----------------------------------------
+
+PROJECT_ID: audio_ai_system
+NAME: Audio & Breathing Analysis System
+
+TYPE: implemented
+
+DESCRIPTION:
+AI system for analyzing audio signals including speech and breathing.
+
+TECH:
+- Signal Processing
+- Audio ML
+- Deep Learning
+
+FUNCTIONS:
+- speech recognition
+- breathing analysis
+- anomaly detection
+
+VALUE:
+- health insights
+- behavioral detection
+
+STATUS: completed
+
+----------------------------------------

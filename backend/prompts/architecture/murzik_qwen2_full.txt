@@ -1,0 +1,66 @@
+============================================================
+MURZIK MODEL — QWEN2 (FULL DESCRIPTION)
+============================================================
+
+[MODEL NAME]
+Murzik Qwen2 Brain
+
+[BASE MODEL]
+Qwen2
+
+[ARCHITECTURE]
+Transformer-based
+Multimodal capable
+
+[ROLE IN SYSTEM]
+Processing + Multimodal Brain
+
+Functions:
+- Audio processing
+- Speech recognition
+- Data preprocessing
+- Tool usage
+- Input transformation
+
+[PIPELINE]
+
+INPUT:
+User → Voice/Data → Qwen2 → Processed → LLaMA
+
+OUTPUT:
+LLaMA → Qwen2 → Final output (optional)
+
+[BEHAVIOR]
+- Secondary brain
+- No personality
+- Supports LLaMA
+- Handles heavy processing
+
+[INTEGRATION]
+- Audio system
+- Backend tools
+- Data pipelines
+
+[USE CASES]
+- Voice interface
+- Multimodal inputs
+- Data parsing
+- Tool orchestration
+
+[MODEL STRATEGY]
+Dual system:
+- LLaMA → chat/persona
+- Qwen2 → processing
+
+[EXTENSIONS]
+- Tool calling
+- API integrations
+- Real-time processing
+
+[NOTES]
+- Works together with LLaMA
+- Not replacing chat layer
+
+============================================================
+END OF FILE
+============================================================

@@ -1,0 +1,96 @@
+============================================================
+MURZIK MODEL — LLAMA CORE (FULL DESCRIPTION)
+============================================================
+
+[MODEL NAME]
+Murzik LLaMA Core
+
+[BASE MODEL]
+LLaMA (Meta)
+
+[ARCHITECTURE]
+Type: Transformer (Decoder-only)
+Model Class: LlamaForCausalLM
+Hidden Size: 4096
+Layers: 32
+Attention Heads: 32
+KV Heads: 8
+Activation: SiLU
+Max Context Length: 131072
+RoPE Scaling:
+  factor: 8.0
+  rope_type: llama3
+  theta: 500000
+
+[WEIGHTS]
+Format: safetensors (sharded)
+Files:
+- model-00001-of-00004.safetensors
+- model-00002-of-00004.safetensors
+- model-00003-of-00004.safetensors
+- model-00004-of-00004.safetensors
+
+Original:
+- consolidated.00.pth (~15GB)
+
+Index:
+- model.safetensors.index.json
+
+[TOKENIZER]
+Type: BPE (byte-level)
+Files:
+- tokenizer.json
+- tokenizer_config.json
+- special_tokens_map.json
+
+Special tokens:
+- <|begin_of_text|>
+- <|end_of_text|>
+- <|eot_id|>
+
+Max length: 131072
+
+[GENERATION CONFIG]
+temperature: 0.6
+top_p: 0.9
+do_sample: true
+
+[ROLE IN SYSTEM]
+Murzik LLaMA = CORE PERSONALITY + CHAT ENGINE
+
+Functions:
+- Dialogue system
+- Investor communication
+- Presentation explanation
+- Reasoning
+- Storytelling
+- Personal agent behavior
+
+[PIPELINE ROLE]
+User → Chat → LLaMA → Response
+
+[BEHAVIOR]
+- Acts as Murzik persona
+- Represents developer (Svetlana)
+- Explains projects and AI systems
+- Maintains conversational memory
+
+[INTEGRATION]
+- Frontend chat UI
+- Memory module
+- Works with Qwen2
+
+[FILES]
+- config.json
+- tokenizer.json
+- generation_config.json
+- model shards
+
+[NOTES]
+- Long context support
+- Optimized for reasoning
+- Core brain of system
+
+============================================================
+END OF FILE
+============================================================

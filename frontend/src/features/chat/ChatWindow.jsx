@@ -6,13 +6,15 @@ import {
 
 import murzikEyes from "../../assets/murzik/murzik-eyes.mp4";
 
+import ChatInput from "./ChatInput";
+
+import LoggerPanel from "../../logger/LoggerPanel";
+
 const PROJECT_MODES = {
     CHAT: "chat",
-    MVP_1: "murzik_health",
-    MVP_2: "horse_ai",
-    LOGGER: "logger",
-    VOICE: "voice",
-    VIDEO: "video"
+    MVP_1: "mvp_1",
+    MVP_2: "mvp_2",
+    LOGGER: "logger"
 };
 
 export default function ChatWindow({
@@ -25,6 +27,9 @@ export default function ChatWindow({
 
     message,
     setMessage,
+
+    uploadedFile,
+    setUploadedFile,
 
     messages,
     messagesRef,
@@ -59,6 +64,8 @@ export default function ChatWindow({
 
 }) {
 
+    const fileInputRef = useRef(null);
+
     function selectMode(nextMode, nextProject) {
 
         setMode(nextMode);
@@ -73,6 +80,83 @@ export default function ChatWindow({
         if (event.key === "Enter") {
 
             sendMessage();
+        }
+    }
+
+    async function handleFileUpload(event) {
+
+        const files =
+            Array.from(
+                event.target.files || []
+            );
+
+        if (!files.length) {
+            return;
+        }
+
+        for (const file of files) {
+
+            const formData =
+                new FormData();
+
+            formData.append(
+                "file",
+                file
+            );
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:8000/upload",
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `Upload failed: ${response.status}`
+                    );
+                }
+
+                const result =
+                    await response.json();
+
+                setUploadedFile(
+                    result.path
+                );
+
+                console.log(
+                    "Murzik upload result:",
+                    result
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Murzik upload error:",
+                    error
+                );
+
+                alert(
+                    `Upload error: ${error.message}`
+                );
+            }
+        }
+
+        alert(
+            `Uploaded files: ${files.length}`
+        );
+    }
+
+    function handleUploadClick() {
+
+        if (fileInputRef.current) {
+
+            fileInputRef.current.click();
         }
     }
 
@@ -322,201 +406,152 @@ export default function ChatWindow({
 
             </div>
 
-            {/* HEADER */}
+{/* HEADER */}
 
-            <div
-                onMouseDown={startDrag}
-                onTouchStart={startDrag}
-                style={{
+<div
+    onMouseDown={startDrag}
+    onTouchStart={startDrag}
+    style={{
 
-                    display: "flex",
+        display: "flex",
 
-                    flexDirection: "column",
+        flexDirection: "column",
 
-                    gap: "8px",
+        gap: "8px",
 
-                    marginBottom:
-                        isMobile
-                            ? "10px"
-                            : "12px",
+        marginBottom:
+            isMobile
+                ? "10px"
+                : "12px",
 
-                    position: "relative",
+        position: "relative",
 
-                    zIndex: 5,
+        zIndex: 5,
 
-                    cursor: "grab"
-                }}
-            >
+        cursor: "grab"
+    }}
+>
 
-                <div
-                    style={{
+    <div
+        style={{
 
-                        display: "flex",
+            display: "flex",
 
-                        gap: "6px",
+            gap: "6px",
 
-                        flexWrap: "wrap",
+            flexWrap: "wrap",
 
-                        alignItems: "center",
+            alignItems: "center",
 
-                        justifyContent:
-                            isMobile
-                                ? "center"
-                                : "flex-start"
-                    }}
-                >
+            justifyContent:
+                isMobile
+                    ? "center"
+                    : "flex-start"
+        }}
+    >
 
-                    <ModeButton
-                        text="CHAT"
-                        active={mode === "CHAT"}
-                        isMobile={isMobile}
-                        onClick={() =>
-                            selectMode(
-                                "CHAT",
-                                PROJECT_MODES.CHAT
-                            )
-                        }
-                    />
+        <ModeButton
+            text="CHAT"
+            active={mode === PROJECT_MODES.CHAT}
+            isMobile={isMobile}
+            onClick={() =>
+                selectMode(
+                    PROJECT_MODES.CHAT,
+                    PROJECT_MODES.CHAT
+                )
+            }
+        />
 
-                    <ModeButton
-                        text="MVP 1"
-                        active={mode === "MVP_1"}
-                        isMobile={isMobile}
-                        onClick={() =>
-                            selectMode(
-                                "MVP_1",
-                                PROJECT_MODES.MVP_1
-                            )
-                        }
-                    />
+        <ModeButton
+            text="LOGGER"
+            active={mode === PROJECT_MODES.LOGGER}
+            isMobile={isMobile}
+            onClick={() =>
+                selectMode(
+                    PROJECT_MODES.LOGGER,
+                    PROJECT_MODES.LOGGER
+                )
+            }
+        />
 
-                    <ModeButton
-                        text="MVP 2"
-                        active={mode === "MVP_2"}
-                        isMobile={isMobile}
-                        onClick={() =>
-                            selectMode(
-                                "MVP_2",
-                                PROJECT_MODES.MVP_2
-                            )
-                        }
-                    />
+        <ModeButton
+            text="MVP 1"
+            active={mode === PROJECT_MODES.MVP_1}
+            isMobile={isMobile}
+            onClick={() =>
+                selectMode(
+                    PROJECT_MODES.MVP_1,
+                    PROJECT_MODES.MVP_1
+                )
+            }
+        />
 
-                    <ModeButton
-                        text="LOGGER"
-                        active={mode === "LOGGER"}
-                        isMobile={isMobile}
-                        onClick={() =>
-                            selectMode(
-                                "LOGGER",
-                                PROJECT_MODES.LOGGER
-                            )
-                        }
-                    />
+        <ModeButton
+            text="MVP 2"
+            active={mode === PROJECT_MODES.MVP_2}
+            isMobile={isMobile}
+            onClick={() =>
+                selectMode(
+                    PROJECT_MODES.MVP_2,
+                    PROJECT_MODES.MVP_2
+                )
+            }
+        />
 
-                    <ModeButton
-                        text="VOICE"
-                        active={mode === "VOICE"}
-                        isMobile={isMobile}
-                        onClick={() =>
-                            selectMode(
-                                "VOICE",
-                                PROJECT_MODES.VOICE
-                            )
-                        }
-                    />
+    </div>
 
-                    <ModeButton
-                        text="VIDEO"
-                        active={mode === "VIDEO"}
-                        isMobile={isMobile}
-                        onClick={() =>
-                            selectMode(
-                                "VIDEO",
-                                PROJECT_MODES.VIDEO
-                            )
-                        }
-                    />
+    <div
+        style={{
 
-                </div>
+            display: "flex",
 
-                <div
-                    style={{
+            gap: "6px",
 
-                        display: "flex",
+            flexWrap: "wrap",
 
-                        gap: "6px",
+            alignItems: "center",
 
-                        flexWrap: "wrap",
+            justifyContent:
+                isMobile
+                    ? "center"
+                    : "flex-start"
+        }}
+    >
 
-                        alignItems: "center",
+        <ToolbarButton
+            text="CLEAR"
+            onClick={clearMessages}
+        />
 
-                        justifyContent:
-                            isMobile
-                                ? "center"
-                                : "flex-start"
-                    }}
-                >
 
-                    <ToolbarButton
-                        text="CLEAR"
-                        onClick={clearMessages}
-                    />
+        <input
+            ref={fileInputRef}
+            type="file"
+            accept="
+                image/*,
+                video/*,
+                audio/*,
+                .pdf,
+                .txt,
+                .csv,
+                .json,
+                .doc,
+                .docx,
+                .xls,
+                .xlsx,
+                .ppt,
+                .pptx
+            "
+            multiple
+            style={{
+                display: "none"
+            }}
+            onChange={handleFileUpload}
+        />
 
-                    <ToolbarButton
-                        text="COPY"
-                        onClick={copyMessages}
-                    />
+    </div>
 
-                    <ToolbarButton
-                        text="DOWNLOAD"
-                        onClick={downloadMessages}
-                    />
-
-                    <ToolbarButton
-                        text={
-                            voiceEnabled
-                                ? "VOICE ACTIVE"
-                                : "VOICE OFF"
-                        }
-                        active={voiceEnabled}
-                        onClick={() =>
-                            setVoiceEnabled(
-                                prev => !prev
-                            )
-                        }
-                    />
-
-                    <ToolbarButton
-                        text="STOP VOICE"
-                        onClick={stopMurzikVoice}
-                    />
-
-                    <label
-                        style={{
-                            display:
-                                "inline-flex"
-                        }}
-                    >
-
-                        <input
-                            type="file"
-                            style={{
-                                display:
-                                    "none"
-                            }}
-                        />
-
-                        <ToolbarButton
-                            text="UPLOAD"
-                        />
-
-                    </label>
-
-                </div>
-
-            </div>
-
+</div>
             {/* MESSAGES */}
 
             <div
@@ -714,131 +749,42 @@ export default function ChatWindow({
 
             </div>
 
-            {/* INPUT */}
+            {
+                uploadedFile && (
 
-            <div
-                style={{
+                    <div
+                        style={{
+                            color: "#ffd59a",
+                            padding: "8px",
+                            fontSize: "12px"
+                        }}
+                    >
+                        📎 {uploadedFile}
+                    </div>
 
-                    display: "flex",
+                )
+            }
+<ChatInput
 
-                    alignItems: "center",
+    message={message}
+    setMessage={setMessage}
 
-                    gap:
-                        isMobile
-                            ? "8px"
-                            : "10px",
+    sendMessage={sendMessage}
 
-                    marginTop:
-                        isMobile
-                            ? "10px"
-                            : "14px",
+    handleUploadClick={handleUploadClick}
 
-                    position: "relative",
+    voiceEnabled={voiceEnabled}
+    setVoiceEnabled={setVoiceEnabled}
 
-                    zIndex: 5
-                }}
-            >
+    stopMurzikVoice={stopMurzikVoice}
 
-                <input
-                    value={message}
-                    onChange={(e) =>
-                        setMessage(e.target.value)
-                    }
-                    onKeyDown={handleKeyDown}
-                    placeholder="Ask Murzik..."
-                    style={{
+    uploadedFile={uploadedFile}
 
-                        flex: 1,
+    uploadStatus={"Ready"}
 
-                        height: "34px",
+    uploadProgress={100}
 
-                        borderRadius: "10px",
-
-                        paddingLeft: "14px",
-                        paddingRight: "14px",
-
-                        border:
-                            "1px solid rgba(255,220,170,0.08)",
-
-                        outline: "none",
-
-                        background:
-                            `
-                            linear-gradient(
-                                to bottom,
-                                rgba(20,10,6,0.96),
-                                rgba(10,4,2,0.98)
-                            )
-                            `,
-
-                        color: "#fff4e4",
-
-                        fontSize: "12px",
-
-                        letterSpacing: "0.03em",
-
-                        boxSizing: "border-box"
-                    }}
-                />
-
-                <button
-                    onClick={sendMessage}
-                    style={{
-
-                        width: "92px",
-
-                        height: "34px",
-
-                        borderRadius: "10px",
-
-                        border:
-                            "1px solid rgba(255,220,170,0.08)",
-
-                        background:
-                            `
-                            linear-gradient(
-                                to bottom,
-                                rgba(92,50,24,0.82),
-                                rgba(42,20,10,0.92)
-                            )
-                            `,
-
-                        color: "#fff2de",
-
-                        cursor: "pointer",
-
-                        fontWeight: "500",
-
-                        fontSize: "9px",
-
-                        letterSpacing: "0.16em",
-
-                        transition:
-                            "all 0.20s ease",
-
-                        backdropFilter:
-                            "blur(10px)",
-
-                        WebkitBackdropFilter:
-                            "blur(10px)",
-
-                        flexShrink: 0,
-
-                        display: "flex",
-
-                        alignItems: "center",
-
-                        justifyContent: "center",
-
-                        lineHeight: 1,
-
-                        userSelect: "none"
-                    }}
-                >
-                    SEND
-                </button>
-
-            </div>
+/>
 
             <style>
                 {`

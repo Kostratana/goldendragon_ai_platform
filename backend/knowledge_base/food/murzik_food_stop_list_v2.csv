@@ -1,0 +1,83 @@
+﻿code,name_en,name_ru,aliases,category,personal_rule,regulatory_note,common_products,notes
+E171,Titanium dioxide,Диоксид титана,CI 77891; TiO2; titanium white,colorant,avoid,EU: not considered safe as food additive; US: still allowed with limits,"candies, chewing gum, sauces, supplements, icing",Priority avoid
+E127,Erythrosine,Эритрозин / Красный 3,FD&C Red No.3; Red 3,colorant,avoid,US: authorization revoked for food/ingested drugs with phase-out; varies elsewhere,"candies, cherries, decorations, gummies",Priority avoid
+N/A,Potassium bromate,Бромат калия,bromated flour,flour improver,avoid,Banned/restricted in many places; still can appear in some markets,"bread, pizza dough, bagels",Priority avoid
+N/A,Propylparaben,Пропилпарабен,propyl p-hydroxybenzoate; E216 in some systems,preservative,avoid,Banned/restricted in some jurisdictions; endocrine concern,"bakery products, packaged foods",Priority avoid
+N/A,Brominated vegetable oil,Бромированное растительное масло,BVO,emulsifier/stabilizer,avoid,US FDA revoked food additive authorization in 2024,"citrus sodas, soft drinks",Priority avoid
+N/A,Partially hydrogenated oils,Частично гидрогенизированные масла,PHO; trans fats,fat/oil,avoid,Industrial trans fats restricted/banned in many countries,"margarine, snacks, bakery",Priority avoid
+E102,Tartrazine,Тартразин,Yellow 5; FD&C Yellow 5,synthetic colorant,avoid,Allowed in many countries but warning labels/concerns in EU/UK contexts,"drinks, candy, snacks, desserts",Synthetic azo dye
+E104,Quinoline Yellow,Хинолиновый желтый,Yellow 10,synthetic colorant,avoid,Restricted/varies by country,"drinks, desserts, candies",Synthetic dye
+E110,Sunset Yellow FCF,Желтый закат,Yellow 6; Orange Yellow S,synthetic colorant,avoid,Allowed in some countries; warning labels/concerns in EU/UK contexts,"soda, candy, snacks",Synthetic azo dye
+E122,Azorubine,Азорубин,Carmoisine,synthetic colorant,avoid,Restricted/varies by country,"desserts, sweets",Synthetic azo dye
+E123,Amaranth,Амарант,Red No.2,synthetic colorant,avoid,Banned/restricted in some countries,"drinks, desserts",Synthetic dye
+E124,Ponceau 4R,Понсо 4R,Cochineal Red A,synthetic colorant,avoid,Allowed in some countries; warning labels/concerns in EU/UK contexts,"candy, drinks, desserts",Synthetic azo dye
+E129,Allura Red AC,Красный очаровательный AC,Red 40; FD&C Red 40,synthetic colorant,avoid,Allowed in US/EU with limits; controversial for sensitive children,"soda, candy, cereal",Synthetic azo dye
+E131,Patent Blue V,Патентованный синий V,Blue V,synthetic colorant,caution,Restricted/varies by country,"desserts, confectionery",Synthetic dye
+E132,Indigo Carmine,Индигокармин,FD&C Blue 2,synthetic colorant,caution,Allowed with limits; synthetic dye,"drinks, candy",Synthetic dye
+E133,Brilliant Blue FCF,Бриллиантовый синий FCF,FD&C Blue 1,synthetic colorant,caution,Allowed with limits; synthetic dye,"drinks, desserts, candy",Synthetic dye
+E142,Green S,Зеленый S,Food Green S,synthetic colorant,caution,Restricted/varies by country,"desserts, mint products",Synthetic dye
+E151,Brilliant Black BN,Бриллиантовый черный BN,Black PN,synthetic colorant,avoid,Restricted/varies by country,"sweets, sauces",Synthetic dye
+E155,Brown HT,Коричневый HT,Chocolate Brown HT,synthetic colorant,avoid,Restricted/varies by country,"chocolate desserts, bakery",Synthetic dye
+E200,Sorbic acid,Сорбиновая кислота,sorbic acid,preservative,caution,Allowed; personal caution if avoiding preservatives,"cheese, sauces, bakery",Common preservative
+E202,Potassium sorbate,Сорбат калия,potassium sorbate,preservative,caution,Allowed; personal caution if avoiding preservatives,"cheese, sauces, dried fruit",Common preservative
+E210,Benzoic acid,Бензойная кислота,benzoic acid,preservative,caution,Allowed with limits,"soda, sauces, pickles",Benzoate family
+E211,Sodium benzoate,Бензоат натрия,sodium benzoate,preservative,caution,Allowed with limits; controversial in drinks with vitamin C/heat/light due benzene concern,"sodas, juices, sauces",Benzoate family
+E212,Potassium benzoate,Бензоат калия,potassium benzoate,preservative,caution,Allowed with limits,"drinks, sauces",Benzoate family
+E213,Calcium benzoate,Бензоат кальция,calcium benzoate,preservative,caution,Allowed with limits,processed foods,Benzoate family
+E214,Ethylparaben,Этилпарабен,ethyl p-hydroxybenzoate,preservative,avoid,Paraben preservative; restricted/controversial,processed foods,Paraben
+E215,Sodium ethylparaben,Натриевая соль этилпарабена,sodium ethyl p-hydroxybenzoate,preservative,avoid,Paraben preservative; restricted/controversial,processed foods,Paraben
+E216,Propylparaben,Пропилпарабен,propyl p-hydroxybenzoate,preservative,avoid,Paraben preservative; banned/restricted in some places,processed foods,Paraben
+E217,Sodium propylparaben,Натриевая соль пропилпарабена,sodium propyl p-hydroxybenzoate,preservative,avoid,Paraben preservative; banned/restricted in some places,processed foods,Paraben
+E220,Sulfur dioxide,Диоксид серы,sulphur dioxide; sulfites,preservative,caution,Allowed; allergen/sensitivity labeling required in many places,"wine, dried fruit, juices",Sulfite
+E221,Sodium sulfite,Сульфит натрия,sodium sulphite,preservative,caution,Allowed; sulfite sensitivity concern,"dried fruit, wine",Sulfite
+E222,Sodium bisulfite,Гидросульфит натрия,sodium bisulphite,preservative,caution,Allowed; sulfite sensitivity concern,"dried fruit, wine",Sulfite
+E223,Sodium metabisulfite,Метабисульфит натрия,sodium metabisulphite,preservative,caution,Allowed; sulfite sensitivity concern,"dried fruit, wine",Sulfite
+E224,Potassium metabisulfite,Метабисульфит калия,potassium metabisulphite,preservative,caution,Allowed; sulfite sensitivity concern,"wine, dried fruit",Sulfite
+E249,Potassium nitrite,Нитрит калия,potassium nitrite,preservative,avoid,Allowed with limits; processed meat/nitrosamine concern,"sausages, ham, bacon",Nitrite
+E250,Sodium nitrite,Нитрит натрия,sodium nitrite,preservative,avoid,Allowed with limits; processed meat/nitrosamine concern,"sausages, ham, bacon",Nitrite
+E251,Sodium nitrate,Нитрат натрия,sodium nitrate,preservative,avoid,Allowed with limits; processed meat concern,cured meats,Nitrate
+E252,Potassium nitrate,Нитрат калия,potassium nitrate; saltpeter,preservative,avoid,Allowed with limits; processed meat concern,cured meats,Nitrate
+E280,Propionic acid,Пропионовая кислота,propionic acid,preservative,caution,Allowed; personal caution if avoiding preservatives,"bread, bakery",Mold inhibitor
+E281,Sodium propionate,Пропионат натрия,sodium propionate,preservative,caution,Allowed; personal caution if avoiding preservatives,"bread, bakery",Mold inhibitor
+E282,Calcium propionate,Пропионат кальция,calcium propionate,preservative,caution,Allowed; personal caution if avoiding preservatives,"bread, bakery",Mold inhibitor
+E310,Propyl gallate,Пропилгаллат,propyl gallate,antioxidant,avoid,Allowed in some places; controversial antioxidant,"oils, snacks, meat products",Synthetic antioxidant
+E319,TBHQ,Трет-бутилгидрохинон,tert-Butylhydroquinone,antioxidant,avoid,Allowed with limits; controversial synthetic antioxidant,"instant noodles, oils, snacks",Synthetic antioxidant
+E320,BHA,Бутилгидроксианизол,butylated hydroxyanisole,antioxidant,avoid,Allowed with limits; controversial synthetic antioxidant,"snacks, cereals, fats",Synthetic antioxidant
+E321,BHT,Бутилгидрокситолуол,butylated hydroxytoluene,antioxidant,avoid,Allowed with limits; controversial synthetic antioxidant,"snacks, cereals, fats",Synthetic antioxidant
+E407,Carrageenan,Каррагинан,carrageenan,emulsifier/thickener,caution,Allowed; GI controversy/sensitivity concern,"plant milks, cream, dairy, processed meats",Seaweed-derived but controversial
+E407a,Processed eucheuma seaweed,Обработанные водоросли Eucheuma,PES,emulsifier/thickener,caution,Allowed; related to carrageenan family,"plant milks, processed foods",Carrageenan family
+E412,Guar gum,Гуаровая камедь,guar gum,thickener,caution,Allowed; can cause GI issues in sensitive people,"sauces, ice cream, gluten-free",Gum
+E415,Xanthan gum,Ксантановая камедь,xanthan gum,thickener,caution,Allowed; can cause GI issues in sensitive people,"sauces, gluten-free, dressings",Gum
+E433,Polysorbate 80,Полисорбат 80,Tween 80,emulsifier,caution,Allowed; microbiome/GI controversy in research,"ice cream, sauces, supplements",Synthetic emulsifier
+E435,Polysorbate 60,Полисорбат 60,Tween 60,emulsifier,caution,Allowed; personal caution,"bakery, whipped toppings",Synthetic emulsifier
+E466,Carboxymethyl cellulose,Карбоксиметилцеллюлоза,CMC; cellulose gum,emulsifier/thickener,caution,Allowed; microbiome/GI controversy in research,"ice cream, sauces, gluten-free",Cellulose derivative
+E471,Mono- and diglycerides of fatty acids,Моно- и диглицериды жирных кислот,mono/diglycerides,emulsifier,caution,Allowed; ultra-processed marker,"bakery, margarine, ice cream",May be animal/vegetable origin
+E472e,DATEM,ДАТЕМ,diacetyl tartaric acid esters,emulsifier,caution,Allowed; ultra-processed bakery marker,"bread, bakery",Dough conditioner
+E950,Acesulfame K,Ацесульфам K,Ace-K; acesulfame potassium,sweetener,caution,Allowed; artificial sweetener,"diet drinks, protein foods",Artificial sweetener
+E951,Aspartame,Аспартам,aspartame,sweetener,avoid,IARC Group 2B; JECFA/FDA maintain ADI/safety at limits,"diet soda, gum, desserts",Controversial sweetener
+E952,Cyclamates,Цикламаты,cyclamate; sodium cyclamate,sweetener,avoid,Banned in US; allowed in some countries with limits,"diet drinks, tabletop sweeteners",Artificial sweetener
+E954,Saccharin,Сахарин,saccharin,sweetener,caution,Allowed; older controversy,"diet foods, tablets",Artificial sweetener
+E955,Sucralose,Сукралоза,Splenda,sweetener,caution,Allowed; controversial especially with heating/processed foods,"diet drinks, protein bars",Artificial sweetener
+E961,Neotame,Неотам,neotame,sweetener,caution,Allowed; artificial sweetener,diet foods,Artificial sweetener
+E962,Aspartame-acesulfame salt,Соль аспартам-ацесульфама,aspartame-acesulfame,sweetener,avoid,Contains aspartame component,diet foods,Artificial sweetener
+E969,Advantame,Адвантам,advantame,sweetener,caution,Allowed; artificial sweetener,diet foods,Artificial sweetener
+E620,Glutamic acid,Глутаминовая кислота,glutamate,flavor enhancer,caution,Allowed; personal sensitivity possible,"snacks, sauces",Glutamate family
+E621,Monosodium glutamate,Глутамат натрия,MSG; sodium glutamate,flavor enhancer,caution,Allowed; personal sensitivity/ultra-processed marker,"chips, noodles, soups",Glutamate family
+E622,Monopotassium glutamate,Глутамат калия,potassium glutamate,flavor enhancer,caution,Allowed; personal caution,"snacks, instant foods",Glutamate family
+E623,Calcium diglutamate,Глутамат кальция,calcium glutamate,flavor enhancer,caution,Allowed; personal caution,"snacks, instant foods",Glutamate family
+E627,Disodium guanylate,Гуанилат натрия,sodium guanylate,flavor enhancer,caution,Allowed; often with MSG,"chips, noodles, soups",Ribonucleotide
+E631,Disodium inosinate,Инозинат натрия,sodium inosinate,flavor enhancer,caution,Allowed; often with MSG; may be animal origin,"chips, noodles, soups",Ribonucleotide
+E635,Disodium ribonucleotides,Рибонуклеотиды натрия,I+G; disodium 5-ribonucleotides,flavor enhancer,caution,Allowed; often with MSG,"chips, noodles, soups",Ribonucleotide
+N/A,High fructose corn syrup,Кукурузный сироп с высоким содержанием фруктозы,HFCS; glucose-fructose syrup,sweetener/UPF marker,caution,Allowed; ultra-processed/sugar load marker,"soda, sauces, sweets",UPF marker
+N/A,Maltodextrin,Мальтодекстрин,maltodextrin,starch derivative/UPF marker,caution,Allowed; high glycemic/processed marker,"protein foods, snacks, sauces",UPF marker
+N/A,Modified starch,Модифицированный крахмал,modified corn starch; modified food starch,thickener/UPF marker,caution,Allowed; ultra-processed marker,"sauces, desserts, processed foods",UPF marker
+N/A,Artificial flavor,Искусственный ароматизатор,artificial flavour,flavoring/UPF marker,caution,Allowed; vague additive marker,almost any processed food,UPF marker
+N/A,Natural flavor,Натуральный ароматизатор,natural flavour,flavoring/UPF marker,caution,Allowed; vague compound mixture,"drinks, snacks, desserts",UPF marker
+N/A,Smoke flavor,Аромат дыма,smoke flavour; liquid smoke,flavoring,caution,Allowed/varies; personal caution,"sausages, sauces, snacks",Flavoring
+N/A,Protein isolate,Изолят белка,soy protein isolate; pea protein isolate,UPF marker,caution,Allowed; ultra-processed marker,"protein bars, meat substitutes",UPF marker
+N/A,Textured vegetable protein,Текстурированный растительный белок,TVP; textured soy protein,UPF marker,caution,Allowed; ultra-processed marker,"meat substitutes, cheap sausages",UPF marker
+INSECT,Acheta domesticus,Домашний сверчок,house cricket; cricket powder; cricket flour; cricket protein; Acheta,insect ingredient,avoid,EU novel food authorizations exist for specified forms/uses,"protein bars, crackers, bakery, pasta",No E-number usually
+INSECT,Tenebrio molitor,Желтый мучной червь,yellow mealworm; mealworm powder; mealworm flour; Tenebrio,insect ingredient,avoid,EU novel food authorizations exist for specified forms/uses,"protein snacks, bakery, pasta",No E-number usually
+INSECT,Locusta migratoria,Перелетная саранча,migratory locust; locust powder,insect ingredient,avoid,EU novel food authorizations exist for specified forms/uses,"snacks, protein foods",No E-number usually
+INSECT,Alphitobius diaperinus,Малый мучной хрущак,lesser mealworm; buffalo worm; buffalo worm powder,insect ingredient,avoid,EU novel food authorizations exist for specified forms/uses,"protein foods, snacks, bakery",No E-number usually
+INSECT,Insect protein,Белок насекомых,insect flour; insect powder; edible insects,insect ingredient,avoid,Label wording varies,"protein foods, bakery, snacks",Catch-all search term

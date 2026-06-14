@@ -1,0 +1,182 @@
+MURZIK — SVETLANA BUSINESS PROFILE
+
+CORE IDENTITY
+
+Svetlana Rumyantseva
+
+AI Systems Architect
+Founder of Golden Dragon AI
+End-to-End AI System Builder
+
+------------------------------------------------------------
+
+POSITIONING
+
+Svetlana is not a typical AI engineer.
+
+She builds full AI systems independently —
+from architecture design to deployment.
+
+Her expertise goes beyond individual models
+into complete system creation,
+including pipelines, orchestration, and real-world integration.
+
+------------------------------------------------------------
+
+CORE STRENGTH
+
+- designs and builds AI systems from scratch
+- works as a sole AI engineer across full lifecycle
+- combines multiple AI domains into unified systems
+- builds production-ready solutions, not prototypes
+- thinks in systems, not isolated components
+
+------------------------------------------------------------
+
+MULTI-MODEL AI EXPERTISE
+
+- LLM systems (chat, memory, reasoning)
+- Computer Vision (detection, video analysis, pose estimation)
+- Audio & signal processing
+- Multimodal AI systems
+
+Core capability:
+→ building integrated multi-model AI architectures
+
+------------------------------------------------------------
+
+SYSTEM ARCHITECTURE
+
+Specializes in:
+
+- AI system architecture
+- pipeline orchestration
+- modular AI systems
+- end-to-end AI pipelines
+- integration of multiple models into unified platforms
+
+------------------------------------------------------------
+
+MURZIK SYSTEM
+
+Currently developing Murzik — an advanced AI system
+based on a dual-model architecture:
+
+- LLaMA → reasoning, personality, interaction
+- Qwen2 → processing, multimodal input, system layer
+
+Murzik is not a chatbot.
+
+It is a structured AI system with:
+- memory layers
+- decision core
+- behavior system
+- multi-context operation (personal + business + investor)
+
+This represents a new approach to AI agents
+as evolving systems rather than simple interfaces.
+
+------------------------------------------------------------
+
+EXPERIENCE
+
+- Built multiple AI systems independently as a sole AI engineer
+- Developed full-cycle AI platforms (data → models → deployment)
+- Integrated LLM, CV, and multimodal pipelines
+- Delivered production-ready AI systems
+
+------------------------------------------------------------
+
+FOUNDER & BUSINESS EXPERIENCE
+
+Founder of Golden Dragon AI
+
+- developing own AI platform
+- building proprietary AI systems
+- focused on scalable AI products
+
+Founder / Business Owner (2016–2022)
+
+- managed own business and consulting projects
+- led projects from concept to execution
+- responsible for strategy, finance, and operations
+
+Background includes:
+- business development
+- investment thinking
+- full project ownership
+
+------------------------------------------------------------
+
+EDUCATION
+
+University of Artificial Intelligence (2023–2024)
+- Data Science
+- Neural Networks
+- Machine Learning
+- AI systems
+
+Finance Academy, Moscow (1999–2004)
+- Organizational Management
+
+Chambre de Commerce, Luxembourg (2013–2016)
+- Accounting
+- Financial operations
+
+------------------------------------------------------------
+
+THINKING STYLE
+
+Svetlana approaches AI as systems, not isolated models.
+
+Her thinking is defined by:
+
+- system-level vision
+- structural thinking over chaos
+- designing logic before coding
+- combining multiple domains into unified architectures
+- focus on scalability and real-world application
+
+------------------------------------------------------------
+
+PERSONAL EDGE
+
+Maintains an active lifestyle and strong physical discipline.
+
+- engaged in sports and outdoor activities
+- horse riding, including long-distance mountain riding
+- strong connection with nature and animals
+
+This reflects a mindset of:
+
+- endurance
+- consistency
+- resilience
+- long-term focus
+
+These qualities directly translate into
+her approach to building complex AI systems.
+
+------------------------------------------------------------
+
+INVESTMENT POSITION
+
+Svetlana is building a portfolio of AI systems
+targeting real-world markets:
+
+- healthcare
+- veterinary systems
+- security
+- industrial AI
+
+Her approach combines:
+
+technical depth
++ system architecture
++ business understanding
+
+→ resulting in scalable, investment-ready AI products
+
+------------------------------------------------------------
+
+END OF FILE

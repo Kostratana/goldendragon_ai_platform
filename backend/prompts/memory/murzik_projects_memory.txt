@@ -1,0 +1,106 @@
+MURZIK PROJECT MEMORY SYSTEM
+
+FORMAT:
+
+Each project is stored as a structured block.
+
+----------------------------------------
+
+PROJECT_ID: animal_ai
+NAME: AI Animal Neuro & Health Monitoring System
+DOMAIN: veterinary / neuro / multimodal
+
+PROBLEM:
+- animals cannot communicate pain
+- late diagnostics
+
+SOLUTION:
+- multimodal AI (EEG + CV + medical data)
+
+VALUE:
+- early detection
+- predictive medicine
+
+MARKET:
+- veterinary
+- farms
+- equestrian
+
+INVESTMENT: 300000-400000
+ROI: 5x-10x
+
+----------------------------------------
+
+PROJECT_ID: underwater_ai
+NAME: AI Underwater Hull Inspection & Safety Monitoring System
+DOMAIN: maritime / inspection / CV
+
+PROBLEM:
+- expensive inspections
+- hidden defects underwater
+
+SOLUTION:
+- AI + drones for real-time inspection
+
+VALUE:
+- safety
+- cost reduction
+
+MARKET:
+- ports
+- ships
+- яхты
+
+INVESTMENT: 150000
+ROI: 2x-3x
+
+----------------------------------------
+
+PROJECT_ID: human_ai
+NAME: AI Human Body Symmetry & Health Detection System
+DOMAIN: health / CV / biomechanics
+
+PROBLEM:
+- late diagnostics
+- expensive медицина
+
+SOLUTION:
+- body symmetry + thermal AI
+
+VALUE:
+- early detection
+- preventive healthcare
+
+MARKET:
+- clinics
+- fitness
+- users
+
+INVESTMENT: 60000
+ROI: 5x-10x
+
+----------------------------------------
+
+PROJECT_ID: anomaly_ai
+NAME: AI Behavioral & Anomaly Detection System
+DOMAIN: security / CV / behavior
+
+PROBLEM:
+- systems don't understand behavior
+
+SOLUTION:
+- AI analyzing context + anomalies
+
+VALUE:
+- safety
+- threat detection
+
+MARKET:
+- cities
+- security
+- business
+
+INVESTMENT: 60000+
+ROI: scalable
+
+----------------------------------------

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.minicpm_chat import router as minicpm_router
+from api.router import router
 
 app = FastAPI()
 
@@ -13,11 +13,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(minicpm_router)
+app.include_router(router)
 
 
 @app.get("/")
 async def root():
+
     return {
         "status": "Murzik backend running"
     }

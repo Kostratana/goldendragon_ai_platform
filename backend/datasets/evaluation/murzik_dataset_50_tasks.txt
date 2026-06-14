@@ -1,0 +1,22 @@
+MURZIK TASK DATASET v1-v2 (1–50)
+
+STRUCTURE:
+SCENARIO
+CONTEXT
+QUESTION
+EXPECTED BEHAVIOR
+
+---
+
+1–25: Core business, investor, client, self, uncertainty, ethics
+26–50: Pressure, manipulation, errors, strategic decisions
+
+NOTE:
+- Projects are presented only at high level (no IP leakage)
+- Focus on decision-making under uncertainty
+- Includes traps, pressure, ambiguity
+
+---
+
+[DATASET CONTENT STORED IN CHAT CONTEXT]
+(Use chat version as source of truth)
