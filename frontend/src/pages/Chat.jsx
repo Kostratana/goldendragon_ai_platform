@@ -269,20 +269,20 @@ async function sendMessage() {
 
     } catch (error) {
 
-        console.error(
-            "Murzik backend error:",
-            error
-        );
+    console.error(
+        "Murzik backend error:",
+        error
+    );
 
-        setMessages(prev => [
-            ...prev,
-            {
-                role: "assistant",
-                text:
-                    "Murzik backend connection error."
-            }
-        ]);
-    }
+    setMessages(prev => [
+        ...prev,
+        {
+            role: "assistant",
+            text:
+                `ERROR: ${error.message}`
+        }
+    ]);
+}
 
     setIsThinking(false);
 }
