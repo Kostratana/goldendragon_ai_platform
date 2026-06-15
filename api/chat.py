@@ -1,93 +1,124 @@
-from http.server import BaseHTTPRequestHandler
-
 import json
 import os
 
 from groq import Groq
 
 
-SYSTEM_PROMPT = """
-You are Murzik AI.
+PROMPTS_DIR = "prompts"
 
-You were created by Svetlana Rumyantseva.
-
-You are the AI assistant of the Golden Dragon AI Platform.
-
-Always identify yourself as Murzik AI.
-
-Answer ONLY in the language of the user's latest message.
-
-Russian input -> Russian output only.
-
-English input -> English output only.
-
-Spanish input -> Spanish output only.
-
-Never mix languages.
-
-Never claim to be ChatGPT.
-
-Never claim to be OpenAI.
-"""
+PROMPT_FOLDERS = [
+    "core",
+    "identity",
+    "memory",
+    "modes",
+    "profile"
+]
 
 
-class handler(BaseHTTPRequestHandler):
+def load_prompts():
 
-    def do_POST(self):
+    parts = []
 
-        try:
+    if not os.path.exists(PROMPTS_DIR):
+        return ""
 
-            api_key = os.environ.get(
-                "GROQ_API_KEY"
+    for folder in PROMPT_FOLDERS:
+
+        folder_path = os.path.join(
+            PROMPTS_DIR,
+            folder
+        )
+
+        if not os.path.exists(folder_path):
+            continue
+
+        for filename in sorted(
+            os.listdir(folder_path)
+        ):
+
+            file_path = os.path.join(
+                folder_path,
+                filename
             )
 
-            if not api_key:
+            if not os.path.isfile(file_path):
+                continue
 
-                self.send_response(500)
+            try:
 
-                self.send_header(
-                    "Content-Type",
-                    "application/json"
+                with open(
+                    file_path,
+                    "r",
+                    encoding="utf-8"
+                ) as file:
+
+                    parts.append(
+                        file.read()
+                    )
+
+            except Exception as error:
+
+                print(
+                    f"Prompt load error: {error}"
                 )
 
-                self.end_headers()
+    return "\n\n".join(parts)
 
-                self.wfile.write(
-                    json.dumps(
-                        {
-                            "status": "error",
-                            "error": "GROQ_API_KEY is missing"
-                        }
-                    ).encode("utf-8")
+
+SYSTEM_PROMPT = load_prompts()
+
+
+def handler(request):
+
+    try:
+
+        if request.method == "GET":
+
+            return {
+                "statusCode": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": json.dumps(
+                    {
+                        "status": "ok",
+                        "prompts_loaded": len(
+                            SYSTEM_PROMPT
+                        ),
+                        "groq_key": bool(
+                            os.environ.get(
+                                "GROQ_API_KEY"
+                            )
+                        )
+                    }
                 )
+            }
 
-                return
+        api_key = os.environ.get(
+            "GROQ_API_KEY"
+        )
 
-            content_length = int(
-                self.headers.get(
-                    "Content-Length",
-                    0
-                )
+        if not api_key:
+
+            raise Exception(
+                "GROQ_API_KEY missing"
             )
 
-            body = self.rfile.read(
-                content_length
-            )
+        body = json.loads(
+            request.body
+        )
 
-            data = json.loads(
-                body.decode("utf-8")
-            )
+        message = body.get(
+            "message",
+            ""
+        )
 
-            message = data.get(
-                "message",
-                ""
-            )
+        client = Groq(
+            api_key=api_key
+        )
 
-            client = Groq(
-                api_key=api_key
-            )
-
-            completion = client.chat.completions.create(
+        completion = (
+            client.chat.completions.create(
                 model=os.environ.get(
                     "GROQ_MODEL",
                     "llama-3.3-70b-versatile"
@@ -105,48 +136,39 @@ class handler(BaseHTTPRequestHandler):
                 temperature=0.3,
                 max_completion_tokens=2048
             )
+        )
 
-            answer = (
-                completion
-                .choices[0]
-                .message
-                .content
+        answer = (
+            completion
+            .choices[0]
+            .message
+            .content
+        )
+
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": json.dumps(
+                {
+                    "status": "ok",
+                    "response": answer
+                }
             )
+        }
 
-            self.send_response(200)
+    except Exception as error:
 
-            self.send_header(
-                "Content-Type",
-                "application/json"
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": json.dumps(
+                {
+                    "status": "error",
+                    "error": str(error)
+                }
             )
-
-            self.end_headers()
-
-            self.wfile.write(
-                json.dumps(
-                    {
-                        "response": answer,
-                        "status": "ok"
-                    }
-                ).encode("utf-8")
-            )
-
-        except Exception as error:
-
-            self.send_response(500)
-
-            self.send_header(
-                "Content-Type",
-                "application/json"
-            )
-
-            self.end_headers()
-
-            self.wfile.write(
-                json.dumps(
-                    {
-                        "status": "error",
-                        "error": str(error)
-                    }
-                ).encode("utf-8")
-            )
+        }
