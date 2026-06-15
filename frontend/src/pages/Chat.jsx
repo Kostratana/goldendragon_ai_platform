@@ -223,7 +223,7 @@ async function sendMessage() {
 
         const response =
     await fetch(
-        "/chat",
+        "/api/chat",
         {
             method: "POST",
             headers: {

@@ -85,23 +85,30 @@ def load_prompts():
 SYSTEM_PROMPT = load_prompts()
 
 GROQ_API_KEY = os.getenv(
-    "GROQ_API_KEY"
+    "GROQ_API_KEY",
+    ""
 )
-
-if not GROQ_API_KEY:
-
-    raise ValueError(
-        "GROQ_API_KEY not found in .env"
-    )
 
 GROQ_MODEL = os.getenv(
     "GROQ_MODEL",
     "llama-3.3-70b-versatile"
 )
 
-client = Groq(
-    api_key=GROQ_API_KEY
-)
+client = None
+
+if GROQ_API_KEY:
+
+    try:
+
+        client = Groq(
+            api_key=GROQ_API_KEY
+        )
+
+    except Exception as error:
+
+        print(
+            f"Groq init error: {error}"
+        )
 
 UPLOAD_DIR = "uploads"
 
@@ -145,12 +152,32 @@ async def upload_file(
     }
 
 
+@router.get("/health")
+async def health():
+
+    return {
+        "status": "ok",
+        "groq": bool(
+            GROQ_API_KEY
+        ),
+        "model": GROQ_MODEL
+    }
+
+
 @router.post("/chat")
 async def chat(
     request: ChatRequest
 ):
 
     try:
+
+        if client is None:
+
+            return {
+                "response": "",
+                "status": "error",
+                "error": "GROQ_API_KEY is missing"
+            }
 
         completion = (
             client.chat.completions.create(
