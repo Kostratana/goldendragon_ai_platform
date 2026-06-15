@@ -68,17 +68,31 @@ def load_prompts():
 SYSTEM_PROMPT = load_prompts()
 
 
+CORS_HEADERS = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+}
+
+
 def handler(request):
 
     try:
+
+        if request.method == "OPTIONS":
+
+            return {
+                "statusCode": 200,
+                "headers": CORS_HEADERS,
+                "body": ""
+            }
 
         if request.method == "GET":
 
             return {
                 "statusCode": 200,
-                "headers": {
-                    "Content-Type": "application/json"
-                },
+                "headers": CORS_HEADERS,
                 "body": json.dumps(
                     {
                         "status": "ok",
@@ -89,7 +103,24 @@ def handler(request):
                             os.environ.get(
                                 "GROQ_API_KEY"
                             )
+                        ),
+                        "model": os.environ.get(
+                            "GROQ_MODEL",
+                            "llama-3.3-70b-versatile"
                         )
+                    }
+                )
+            }
+
+        if request.method != "POST":
+
+            return {
+                "statusCode": 405,
+                "headers": CORS_HEADERS,
+                "body": json.dumps(
+                    {
+                        "status": "error",
+                        "error": "Method not allowed"
                     }
                 )
             }
@@ -147,9 +178,7 @@ def handler(request):
 
         return {
             "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json"
-            },
+            "headers": CORS_HEADERS,
             "body": json.dumps(
                 {
                     "status": "ok",
@@ -162,9 +191,7 @@ def handler(request):
 
         return {
             "statusCode": 500,
-            "headers": {
-                "Content-Type": "application/json"
-            },
+            "headers": CORS_HEADERS,
             "body": json.dumps(
                 {
                     "status": "error",
