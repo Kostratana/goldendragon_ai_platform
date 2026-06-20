@@ -1,14 +1,5 @@
 {
-  "functions": {
-    "api/chat.py": {
-      "maxDuration": 60
-    }
-  },
   "rewrites": [
-    {
-      "source": "/api/chat",
-      "destination": "/api/chat.py"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
