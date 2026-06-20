@@ -80,109 +80,50 @@ def handler(request):
 
     try:
 
-        if request.method == "OPTIONS":
+        method = getattr(
+            request,
+            "method",
+            "UNKNOWN"
+        )
 
-            return {
-                "statusCode": 200,
-                "headers": CORS_HEADERS,
-                "body": ""
-            }
+        body_preview = None
 
-        if request.method == "GET":
+        try:
 
-            return {
-                "statusCode": 200,
-                "headers": CORS_HEADERS,
-                "body": json.dumps(
-                    {
-                        "status": "ok",
-                        "prompts_loaded": len(
-                            SYSTEM_PROMPT
-                        ),
-                        "groq_key": bool(
-                            os.environ.get(
-                                "GROQ_API_KEY"
-                            )
-                        ),
-                        "model": os.environ.get(
-                            "GROQ_MODEL",
-                            "llama-3.3-70b-versatile"
-                        )
-                    }
+            body_preview = str(
+                getattr(
+                    request,
+                    "body",
+                    None
                 )
-            }
+            )[:500]
 
-        if request.method != "POST":
-
-            return {
-                "statusCode": 405,
-                "headers": CORS_HEADERS,
-                "body": json.dumps(
-                    {
-                        "status": "error",
-                        "error": "Method not allowed"
-                    }
-                )
-            }
-
-        api_key = os.environ.get(
-            "GROQ_API_KEY"
-        )
-
-        if not api_key:
-
-            raise Exception(
-                "GROQ_API_KEY missing"
-            )
-
-        body = json.loads(
-            request.body
-        )
-
-        message = body.get(
-            "message",
-            ""
-        )
-
-        client = Groq(
-            api_key=api_key
-        )
-
-        completion = (
-            client.chat.completions.create(
-                model=os.environ.get(
-                    "GROQ_MODEL",
-                    "llama-3.3-70b-versatile"
-                ),
-                messages=[
-                    {
-                        "role": "system",
-                        "content": SYSTEM_PROMPT
-                    },
-                    {
-                        "role": "user",
-                        "content": message
-                    }
-                ],
-                temperature=0.3,
-                max_completion_tokens=2048
-            )
-        )
-
-        answer = (
-            completion
-            .choices[0]
-            .message
-            .content
-        )
+        except Exception:
+            body_preview = "unavailable"
 
         return {
             "statusCode": 200,
             "headers": CORS_HEADERS,
             "body": json.dumps(
                 {
-                    "status": "ok",
-                    "response": answer
+                    "status": "debug",
+                    "method": method,
+                    "request_type": str(
+                        type(request)
+                    ),
+                    "body_preview": body_preview,
+                    "groq_key": bool(
+                        os.environ.get(
+                            "GROQ_API_KEY"
+                        )
+                    ),
+                    "model": os.environ.get(
+                        "GROQ_MODEL",
+                        "llama-3.3-70b-versatile"
+                    ),
+                    "prompts_loaded": len(
+                        SYSTEM_PROMPT
+                    )
                 }
             )
         }
