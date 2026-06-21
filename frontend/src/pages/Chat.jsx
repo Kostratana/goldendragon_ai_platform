@@ -223,7 +223,7 @@ async function sendMessage() {
 
         const response =
     await fetch(
-        "/api/chat",
+        "https://murzik-chat-backend.vercel.app/api/chat",
         {
             method: "POST",
             headers: {
