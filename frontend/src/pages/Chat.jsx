@@ -13,12 +13,25 @@ import ChatWindow from "../features/chat/ChatWindow";
 import chatMainImage from "../assets/murzik/chat-main-image.webp";
 
 const PROJECT_MODES = {
+
     CHAT: "chat",
-    MVP_1: "murzik_health",
-    MVP_2: "horse_ai",
+
+    MVP_1: "mvp1",
+
+    MVP_2: "mvp2",
+
     LOGGER: "logger",
+
     VOICE: "voice",
+
     VIDEO: "video"
+};
+
+const PROJECT_SLOTS = {
+
+    mvp1: "mvp1_food_safety_ai",
+
+    mvp2: "mvp2_horse_health_ai"
 };
 
 export default function Chat() {
@@ -222,18 +235,24 @@ async function sendMessage() {
     try {
 
         const response =
-    await fetch(
-        "https://murzik-chat-backend.vercel.app/api/chat",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: userMessage
-            })
-        }
-    );
+            await fetch(
+                "https://murzik-chat-backend.vercel.app/api/chat",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        message: userMessage,
+
+                        mode: activeProject
+
+                    })
+                }
+            );
 
         if (!response.ok) {
 
