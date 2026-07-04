@@ -37,6 +37,12 @@ export default function Home() {
         },
     ];
 
+    const heroBreathTransition = {
+        duration: 18,
+        repeat: Infinity,
+        ease: "easeInOut"
+    };
+
     return (
         <main
             style={{
@@ -236,13 +242,14 @@ export default function Home() {
 
                     <motion.div
                         animate={{
-                            opacity: [0.82, 1, 0.82]
+                            opacity: [0.58, 0.94, 0.58],
+                            textShadow: [
+                                "0 0 10px rgba(255,180,120,0.07)",
+                                "0 0 22px rgba(255,170,90,0.20)",
+                                "0 0 10px rgba(255,180,120,0.07)"
+                            ]
                         }}
-                        transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
+                        transition={heroBreathTransition}
                         style={{
                             color: "#d8b07a",
 
@@ -258,17 +265,16 @@ export default function Home() {
                                     ? "1.7"
                                     : "2",
 
-                            fontWeight: "700",
+                            fontWeight: "800",
 
                             letterSpacing:
                                 isMobile
-                                    ? "0.14em"
-                                    : "0.22em",
+                                    ? "0.20em"
+                                    : isTablet
+                                        ? "0.26em"
+                                        : "0.32em",
 
                             textTransform: "uppercase",
-
-                            textShadow:
-                                "0 0 10px rgba(255,180,120,0.10)",
 
                             marginBottom:
                                 isMobile
@@ -279,36 +285,40 @@ export default function Home() {
                                 "'Cinzel', serif"
                         }}
                     >
-                        Murzik AI
-                        <br />
-                        Hybrid Intelligence Systems
+                        Golden Dragon AI Studio
                     </motion.div>
 
-                    <div
+                    <motion.div
+                        animate={{
+                            opacity: [0.55, 0.88, 0.55],
+                            textShadow: [
+                                "0 0 6px rgba(255,180,120,0.04)",
+                                "0 0 14px rgba(255,170,90,0.13)",
+                                "0 0 6px rgba(255,180,120,0.04)"
+                            ]
+                        }}
+                        transition={heroBreathTransition}
                         style={{
                             color: "#c9aa82",
 
                             fontSize:
                                 isMobile
-                                    ? "16px"
+                                    ? "13px"
                                     : isTablet
-                                        ? "18px"
-                                        : "24px",
+                                        ? "15px"
+                                        : "19px",
 
                             lineHeight:
                                 isMobile
                                     ? "1.8"
                                     : "1.9",
 
-                            fontWeight: "500",
+                            fontWeight: "400",
 
                             letterSpacing:
                                 isMobile
                                     ? "0.01em"
                                     : "0.03em",
-
-                            textShadow:
-                                "0 0 8px rgba(255,180,120,0.05)",
 
                             maxWidth:
                                 isMobile
@@ -318,8 +328,10 @@ export default function Home() {
                             margin: "0 auto"
                         }}
                     >
-                        Multimodal intelligence systems powered by adaptive quantum-inspired layers, cognitive runtime architecture, visual analysis, voice interaction and scalable AI orchestration.
-                    </div>
+                        Inspired by Ancient Wisdom,
+                        <br />
+                        Transforming Knowledge into Technology for a Better Life.
+                    </motion.div>
 
                 </motion.div>
 
@@ -422,7 +434,7 @@ export default function Home() {
 
                                 <img
                                     src={murzikImage}
-                                    alt="Murzik AI"
+                                    alt="Golden Dragon AI Studio"
                                     draggable={false}
                                     loading="eager"
                                     style={{

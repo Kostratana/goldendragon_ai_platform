@@ -9,100 +9,6 @@ export default function FounderSection() {
         window.innerWidth > 768 &&
         window.innerWidth < 1200;
 
-    const cards = [
-
-        {
-            title: "AI Architecture",
-
-            text:
-                "Development of advanced AI architectures and scalable intelligent ecosystems including orchestration layers, adaptive reasoning systems, multimodal processing pipelines, distributed runtime coordination and production-grade cognitive infrastructures for next-generation AI platforms."
-        },
-
-        {
-            title: "AI Orchestration Systems",
-
-            text:
-                "Design of orchestration-driven intelligence systems capable of dynamic model routing, task distribution, memory coordination, execution planning, realtime synchronization and hybrid cognitive workflow management across complex AI environments."
-        },
-
-        {
-            title: "End-to-End AI Development",
-
-            text:
-                "Full-cycle creation of intelligent software solutions from concept research and system architecture to model training, backend engineering, deployment infrastructure, optimization and scalable production implementation tailored to specific client goals."
-        },
-
-        {
-            title: "Custom AI Solutions",
-
-            text:
-                "Development of custom AI systems designed around real client ideas, workflows and business objectives including analytical platforms, intelligent assistants, automation systems, recommendation engines and adaptive AI applications across multiple industries."
-        },
-
-        {
-            title: "Computer Vision",
-
-            text:
-                "Creation of advanced computer vision systems including OCR pipelines, medical imaging analysis, infrared diagnostics, intelligent object detection, visual overlays, automated inspection platforms, video understanding and multimodal perception infrastructures."
-        },
-
-        {
-            title: "Multimodal AI Systems",
-
-            text:
-                "Engineering of unified multimodal intelligence platforms combining text, image, audio and video processing with collaborative reasoning layers, orchestration logic, adaptive memory systems and scalable cognitive runtime architectures."
-        },
-
-        {
-            title: "Voice & Conversational AI",
-
-            text:
-                "Development of intelligent conversational agents, realtime voice interfaces, multimodal communication environments, speech-driven assistants and interactive AI systems designed for natural human interaction and advanced user experiences."
-        },
-
-        {
-            title: "Security & Detection Systems",
-
-            text:
-                "Design of intelligent monitoring and detection infrastructures including anomaly analysis, behavioral pattern recognition, fraud detection, inspection systems, adaptive alert pipelines and AI-powered analytical security environments."
-        },
-
-        {
-            title: "Trading Intelligence Systems",
-
-            text:
-                "Development of AI-powered analytical trading systems focused on liquidity analysis, whale activity monitoring, market structure evaluation, signal orchestration, capital flow analytics and adaptive predictive intelligence infrastructures."
-        },
-
-        {
-            title: "Quantum Hybrid AI Research",
-
-            text:
-                "Research and prototyping of quantum-inspired hybrid intelligence systems combining classical machine learning, orchestration research, graph optimization, adaptive scheduling, cognitive routing and advanced coordination architectures for future AI infrastructures."
-        },
-
-        {
-            title: "AGI Research Systems",
-
-            text:
-                "Exploration of next-generation AGI-oriented architectures integrating multimodal cognition, autonomous reasoning, adaptive memory systems, orchestration intelligence and collaborative AI runtime ecosystems for advanced intelligent platforms."
-        },
-
-        {
-            title: "Scientific & Research AI",
-
-            text:
-                "Development of AI systems for scientific and analytical domains including genetics, biological data analysis, healthcare intelligence, research automation, multimodal analytics and advanced cognitive processing for complex research environments."
-        },
-
-        {
-            title: "Human-Centered AI",
-
-            text:
-                "I truly love my work and believe that artificial intelligence should serve people, improve everyday life and make advanced technology accessible and useful for everyone. That is why I focus on creating practical, human-centered AI systems and intelligent applications designed around real human needs, ideas and goals. I would be happy to help transform your ideas into real intelligent systems and AI solutions designed specifically for you."
-        }
-    ];
-
     return (
         <section
             style={{
@@ -190,43 +96,257 @@ export default function FounderSection() {
 
                 <div
                     style={{
-                        display: "grid",
+                        display: "flex",
 
-                        gridTemplateColumns:
-                            isMobile
-                                ? "1fr"
-                                : isTablet
-                                    ? "1fr"
-                                    : "360px 1fr",
+                        flexDirection: "column",
 
-                        gap:
-                            isMobile
-                                ? "40px"
-                                : isTablet
-                                    ? "50px"
-                                    : "90px",
-
-                        alignItems: "start"
+                        alignItems: "center"
                     }}
                 >
 
-                    {/* LEFT COLUMN */}
+                    {/* DECLARATION */}
 
                     <div
                         style={{
-                            display: "flex",
+                            width: "100%",
 
-                            flexDirection: "column",
+                            maxWidth: "960px",
 
-                            alignItems:
-                                isMobile
-                                    ? "center"
-                                    : "flex-start",
+                            margin: "0 auto",
 
                             textAlign:
                                 isMobile
                                     ? "center"
                                     : "left"
+                        }}
+                    >
+
+                        <div
+                            style={{
+                                color: "#d8b07a",
+
+                                fontSize:
+                                    isMobile
+                                        ? "19px"
+                                        : isTablet
+                                            ? "24px"
+                                            : "32px",
+
+                                fontWeight: "700",
+
+                                fontFamily:
+                                    "'Cinzel', serif",
+
+                                letterSpacing:
+                                    isMobile
+                                        ? "0.02em"
+                                        : "0.06em",
+
+                                lineHeight: 1.5,
+
+                                marginBottom:
+                                    isMobile
+                                        ? "12px"
+                                        : "18px"
+                            }}
+                        >
+                            The Golden Dragon Declaration
+                        </div>
+
+                        <div
+                            style={{
+                                color: "#c9aa82",
+
+                                fontSize:
+                                    isMobile
+                                        ? "14px"
+                                        : isTablet
+                                            ? "18px"
+                                            : "22px",
+
+                                fontWeight: "500",
+
+                                lineHeight:
+                                    isMobile
+                                        ? "1.7"
+                                        : "1.9",
+
+                                marginBottom:
+                                    isMobile
+                                        ? "50px"
+                                        : "60px"
+                            }}
+                        >
+                            Ancient Wisdom. Modern Technology. Better Future.
+                        </div>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Every great journey begins with a vision.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Golden Dragon AI was founded with a simple but ambitious purpose: to create intelligent technologies that improve life.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            We believe that throughout history humanity has repeatedly discovered, forgotten, and rediscovered knowledge. Every generation inherits ideas from the past and transforms them into the future.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            For us, the Golden Dragon is the symbol of this timeless wisdom.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Not a myth of the past, but a reminder that knowledge never truly disappears. It waits to be rediscovered and reimagined for a new generation.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            The Golden Dragon was born from this philosophy.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            More than an AI assistant, the Golden Dragon is the symbolic guardian of knowledge and the intelligence at the heart of Golden Dragon AI Studio.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Golden Dragon AI is our commitment to bringing timeless wisdom into the modern world through responsible artificial intelligence.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Our technologies are created for one purpose:
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            To serve life.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            We believe artificial intelligence should help people—not replace them.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            It should help us make better decisions, improve health, support businesses, protect animals, preserve nature, and build a better future for generations to come.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Every system we create is another chapter in this journey.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Every project reflects the same philosophy while solving real-world challenges.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Together, they form a single ecosystem united by one vision and one purpose.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            This declaration defines the path we have chosen.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            A path where knowledge is shared.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Technology empowers humanity.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Innovation carries responsibility.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            And every new chapter brings us one step closer to a better future.
+                        </p>
+
+                        <div
+                            style={{
+                                ...declarationHeadingStyle(isMobile, isTablet),
+
+                                marginTop:
+                                    isMobile
+                                        ? "28px"
+                                        : "42px"
+                            }}
+                        >
+                            Our Philosophy
+                        </div>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            Ancient Wisdom. Modern Technology. Better Future.
+                        </p>
+
+                        <div
+                            style={{
+                                ...declarationHeadingStyle(isMobile, isTablet),
+
+                                marginTop:
+                                    isMobile
+                                        ? "28px"
+                                        : "42px"
+                            }}
+                        >
+                            Our Mission
+                        </div>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            To build intelligent technologies that improve life, empower people, protect animals, support businesses, preserve nature, and inspire future generations.
+                        </p>
+
+                        <div
+                            style={{
+                                ...declarationHeadingStyle(isMobile, isTablet),
+
+                                marginTop:
+                                    isMobile
+                                        ? "28px"
+                                        : "42px"
+                            }}
+                        >
+                            Our Vision
+                        </div>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            To create a global ecosystem of AI systems inspired by timeless wisdom and dedicated to improving life through responsible innovation.
+                        </p>
+
+                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
+                            This is where our story begins.
+                        </p>
+
+                        <p
+                            style={{
+                                ...declarationParagraphStyle(isMobile, isTablet),
+
+                                fontWeight: "600",
+
+                                marginBottom: 0
+                            }}
+                        >
+                            Welcome to Golden Dragon AI Studio.
+                        </p>
+
+                    </div>
+
+                    {/* FOUNDER BLOCK */}
+
+                    <div
+                        style={{
+                            marginTop:
+                                isMobile
+                                    ? "50px"
+                                    : isTablet
+                                        ? "70px"
+                                        : "90px",
+
+                            display: "flex",
+
+                            flexDirection: "column",
+
+                            alignItems: "center",
+
+                            textAlign: "center"
                         }}
                     >
 
@@ -345,19 +465,11 @@ export default function FounderSection() {
                             </div>
 
                             <div>
-                                AI Engineer
+                                Founder • Lead AI Engineer
                             </div>
 
                             <div>
-                                Multimodal AI Architect
-                            </div>
-
-                            <div>
-                                AI Systems Researcher
-                            </div>
-
-                            <div>
-                                Data Scientist
+                                Owner of Golden Dragon AI Studio
                             </div>
 
                         </div>
@@ -375,10 +487,7 @@ export default function FounderSection() {
 
                                 flexWrap: "wrap",
 
-                                justifyContent:
-                                    isMobile
-                                        ? "center"
-                                        : "flex-start",
+                                justifyContent: "center",
 
                                 gap:
                                     isMobile
@@ -412,18 +521,6 @@ export default function FounderSection() {
                             </a>
 
                             <a
-                                href="https://www.kaggle.com/svetlanarumyantseva7"
-
-                                target="_blank"
-
-                                rel="noopener noreferrer"
-
-                                style={mobileButtonStyle(isMobile)}
-                            >
-                                Kaggle
-                            </a>
-
-                            <a
                                 href="https://mail.google.com/mail/?view=cm&fs=1&to=srumyantseva7@gmail.com&su=Golden%20Dragon%20AI"
 
                                 target="_blank"
@@ -439,171 +536,74 @@ export default function FounderSection() {
 
                     </div>
 
-                    {/* RIGHT COLUMN */}
-
-                    <div>
-
-                        {/* intro */}
-
-                        <div
-                            style={{
-                                color: "#c9aa82",
-
-                                fontSize:
-                                    isMobile
-                                        ? "14px"
-                                        : isTablet
-                                            ? "22px"
-                                            : "28px",
-
-                                lineHeight:
-                                    isMobile
-                                        ? "1.7"
-                                        : "1.9",
-
-                                marginBottom:
-                                    isMobile
-                                        ? "26px"
-                                        : "58px",
-
-                                maxWidth: "920px",
-
-                                fontWeight: "500",
-
-                                textAlign:
-                                    isMobile
-                                        ? "center"
-                                        : "left"
-                            }}
-                        >
-                            Development of next-generation multimodal AI ecosystems combining orchestration intelligence, adaptive cognitive architectures, computer vision, conversational agents, hybrid reasoning systems and scalable AGI-oriented runtime infrastructures for advanced intelligent platforms.
-                        </div>
-
-                        {/* CARDS */}
-
-                        <div
-                            style={{
-                                display: "grid",
-
-                                gridTemplateColumns:
-                                    isMobile
-                                        ? "1fr"
-                                        : isTablet
-                                            ? "1fr"
-                                            : "repeat(2, minmax(0, 1fr))",
-
-                                gap:
-                                    isMobile
-                                        ? "14px"
-                                        : "26px"
-                            }}
-                        >
-
-                            {cards.map((card) => (
-
-                                <div
-                                    key={card.title}
-
-                                    style={{
-                                        padding:
-                                            isMobile
-                                                ? "18px"
-                                                : "36px",
-
-                                        borderRadius:
-                                            isMobile
-                                                ? "18px"
-                                                : "30px",
-
-                                        border:
-                                            "1px solid rgba(216,176,122,0.16)",
-
-                                        background:
-                                            "rgba(10,10,10,0.72)",
-
-                                        backdropFilter:
-                                            isMobile
-                                                ? "blur(6px)"
-                                                : "blur(18px)",
-
-                                        boxShadow:
-                                            isMobile
-                                                ? "0 0 18px rgba(255,140,0,0.03)"
-                                                : "0 0 50px rgba(255,140,0,0.04)"
-                                    }}
-                                >
-
-                                    <div
-                                        style={{
-                                            color: "#d8b07a",
-
-                                            fontSize:
-                                                isMobile
-                                                    ? "15px"
-                                                    : isTablet
-                                                        ? "20px"
-                                                        : "24px",
-
-                                            fontWeight: "700",
-
-                                            marginBottom:
-                                                isMobile
-                                                    ? "10px"
-                                                    : "20px",
-
-                                            fontFamily:
-                                                "'Cinzel', serif",
-
-                                            letterSpacing:
-                                                isMobile
-                                                    ? "0.02em"
-                                                    : "0.06em",
-
-                                            lineHeight:
-                                                isMobile
-                                                    ? "1.4"
-                                                    : "1.5"
-                                        }}
-                                    >
-                                        {card.title}
-                                    </div>
-
-                                    <div
-                                        style={{
-                                            color: "#d8d8d8",
-
-                                            fontSize:
-                                                isMobile
-                                                    ? "12px"
-                                                    : isTablet
-                                                        ? "18px"
-                                                        : "22px",
-
-                                            lineHeight:
-                                                isMobile
-                                                    ? "1.65"
-                                                    : "1.9",
-
-                                            fontWeight: "400"
-                                        }}
-                                    >
-                                        {card.text}
-                                    </div>
-
-                                </div>
-
-                            ))}
-
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>
 
         </section>
     );
+}
+
+function declarationParagraphStyle(isMobile, isTablet) {
+
+    return {
+        color: "#d8d8d8",
+
+        fontSize:
+            isMobile
+                ? "14px"
+                : isTablet
+                    ? "18px"
+                    : "22px",
+
+        lineHeight:
+            isMobile
+                ? "1.7"
+                : "1.9",
+
+        fontWeight: "400",
+
+        marginTop: 0,
+
+        marginBottom:
+            isMobile
+                ? "16px"
+                : "24px"
+    };
+}
+
+function declarationHeadingStyle(isMobile, isTablet) {
+
+    return {
+        color: "#d8b07a",
+
+        fontSize:
+            isMobile
+                ? "15px"
+                : isTablet
+                    ? "20px"
+                    : "24px",
+
+        fontWeight: "700",
+
+        fontFamily:
+            "'Cinzel', serif",
+
+        letterSpacing:
+            isMobile
+                ? "0.02em"
+                : "0.06em",
+
+        lineHeight:
+            isMobile
+                ? "1.4"
+                : "1.5",
+
+        marginBottom:
+            isMobile
+                ? "14px"
+                : "20px"
+    };
 }
 
 function mobileButtonStyle(isMobile) {
