@@ -9,6 +9,40 @@ import {
     useLocation
 } from "react-router-dom";
 
+/*
+All future AI products
+must be added ONLY here.
+
+Do not hardcode solution items
+inside JSX.
+*/
+const SOLUTIONS_LINKS = [
+    {
+        label: "Golden Dragon Health AI",
+        to: "/solutions/health-ai"
+    },
+    {
+        label: "Animal Health Detection",
+        to: "/solutions/animal-health"
+    },
+    {
+        label: "Underwater AI",
+        to: "/solutions/underwater-ai"
+    },
+    {
+        label: "Whale Hunter AI",
+        to: "/solutions/whale-hunter"
+    },
+    {
+        label: "Sentinel AI",
+        to: "/solutions/sentinel-ai"
+    },
+    {
+        label: "Private Shopper AI",
+        to: "/solutions/private-shopper"
+    }
+];
+
 export default function Navbar() {
 
     const location =
@@ -21,6 +55,12 @@ export default function Navbar() {
         useState(window.innerWidth);
 
     const [isVoiceLoading, setIsVoiceLoading] =
+        useState(false);
+
+    const [solutionsOpen, setSolutionsOpen] =
+        useState(false);
+
+    const [voiceHovered, setVoiceHovered] =
         useState(false);
 
     useEffect(() => {
@@ -102,7 +142,7 @@ export default function Navbar() {
                     (error) => {
 
                         console.error(
-                            "Murzik audio error:",
+                            "Dragon audio error:",
                             error
                         );
 
@@ -129,7 +169,7 @@ export default function Navbar() {
         } catch (error) {
 
             console.error(
-                "Murzik audio runtime error:",
+                "Dragon audio runtime error:",
                 error
             );
 
@@ -148,6 +188,10 @@ export default function Navbar() {
     const isChatActive =
         pathname === "/chat" ||
         pathname.startsWith("/chat/");
+
+    const isSolutionsActive =
+        pathname === "/solutions" ||
+        pathname.startsWith("/solutions/");
 
     return (
 
@@ -264,8 +308,6 @@ export default function Navbar() {
                             inset 0 0 18px rgba(255,140,0,0.03)
                             `,
 
-                        overflow: "hidden",
-
                         boxSizing:
                             "border-box"
                     }}
@@ -279,9 +321,18 @@ export default function Navbar() {
                         isTablet={isTablet}
                     />
 
+                    <SolutionsDropdown
+                        active={isSolutionsActive}
+                        isMobile={isMobile}
+                        isTablet={isTablet}
+                        pathname={pathname}
+                        open={solutionsOpen}
+                        onOpenChange={setSolutionsOpen}
+                    />
+
                     <NavButton
                         to="/chat"
-                        text="CHAT"
+                        text="DRAGON CHAT"
                         active={isChatActive}
                         isMobile={isMobile}
                         isTablet={isTablet}
@@ -294,47 +345,26 @@ export default function Navbar() {
                     }
 
                     <button
-                        onClick={enableVoice}
-
-                        style={{
-
-                            ...getButtonStyle(
-                                isMobile,
-                                isTablet
-                            ),
-
-                            color:
-                                "#ffe2b2",
-
-                            background:
-                                `
-                                linear-gradient(
-                                    to bottom,
-                                    rgba(255,170,70,0.20),
-                                    rgba(255,120,20,0.12)
-                                )
-                                `,
-
-                            border:
-                                "1px solid rgba(255,190,90,0.16)",
-
-                            boxShadow:
-                                `
-                                0 0 24px rgba(255,140,0,0.16)
-                                `
-                        }}
-                    >
-
-                        {
+                        type="button"
+                        onClick={
                             isVoiceLoading
-                                ? "MURZIK..."
-                                : "VOICE ON"
+                                ? stopVoice
+                                : enableVoice
                         }
 
-                    </button>
+                        onMouseEnter={() =>
+                            setVoiceHovered(true)
+                        }
 
-                    <button
-                        onClick={stopVoice}
+                        onMouseLeave={() =>
+                            setVoiceHovered(false)
+                        }
+
+                        aria-label={
+                            isVoiceLoading
+                                ? "Stop presentation audio"
+                                : "Play presentation audio"
+                        }
 
                         style={{
 
@@ -343,17 +373,71 @@ export default function Navbar() {
                                 isTablet
                             ),
 
+                            minWidth:
+                                isMobile
+                                    ? "34px"
+                                    : "40px",
+
+                            paddingLeft: 0,
+
+                            paddingRight: 0,
+
+                            fontSize:
+                                isMobile
+                                    ? "16px"
+                                    : "18px",
+
+                            letterSpacing: 0,
+
+                            lineHeight: 1,
+
+                            transition:
+                                "transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease",
+
+                            transform:
+                                voiceHovered
+                                    ? "scale(1.08)"
+                                    : "scale(1)",
+
                             color:
-                                "#ff9a9a",
+                                isVoiceLoading ||
+                                voiceHovered
+                                    ? "#ffe2b2"
+                                    : "#8c8c8c",
 
                             background:
-                                "rgba(255,40,40,0.05)",
+                                isVoiceLoading ||
+                                voiceHovered
+                                    ? `
+                                    linear-gradient(
+                                        to bottom,
+                                        rgba(255,170,70,0.28),
+                                        rgba(255,120,20,0.16)
+                                    )
+                                    `
+                                    : "rgba(255,255,255,0.015)",
 
                             border:
-                                "1px solid rgba(255,80,80,0.10)"
+                                isVoiceLoading ||
+                                voiceHovered
+                                    ? "1px solid rgba(255,190,90,0.22)"
+                                    : "1px solid rgba(255,255,255,0.03)",
+
+                            boxShadow:
+                                isVoiceLoading ||
+                                voiceHovered
+                                    ? `
+                                    0 0 34px rgba(255,140,0,0.28),
+                                    inset 0 0 16px rgba(255,190,80,0.10)
+                                    `
+                                    : "none"
                         }}
                     >
-                        VOICE OFF
+                        {
+                            isVoiceLoading
+                                ? "⏹"
+                                : "🎙"
+                        }
                     </button>
 
                 </nav>
@@ -371,6 +455,415 @@ export default function Navbar() {
                 }}
             />
         </>
+    );
+}
+
+function SolutionsDropdown({
+    active,
+    isMobile,
+    isTablet,
+    pathname,
+    open,
+    onOpenChange
+}) {
+
+    const containerRef =
+        useRef(null);
+
+    useEffect(() => {
+
+        if (!open || !isMobile) {
+            return;
+        }
+
+        function handleClickOutside(
+            event
+        ) {
+
+            if (
+                containerRef.current &&
+                !containerRef.current.contains(
+                    event.target
+                )
+            ) {
+
+                onOpenChange(false);
+            }
+        }
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+        return () => {
+
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+        };
+
+    }, [open, isMobile, onOpenChange]);
+
+    function handleMouseEnter() {
+
+        if (!isMobile) {
+            onOpenChange(true);
+        }
+    }
+
+    function handleMouseLeave() {
+
+        if (!isMobile) {
+            onOpenChange(false);
+        }
+    }
+
+    function handleTriggerClick() {
+
+        if (isMobile) {
+            onOpenChange(!open);
+        }
+    }
+
+    return (
+
+        <div
+            ref={containerRef}
+
+            style={{
+                position: "relative",
+                flexShrink: 0
+            }}
+
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+
+            <style>
+                {`
+                    @keyframes navDropdownOpen {
+                        from {
+                            opacity: 0;
+                            transform: translateX(-50%) translateY(-6px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateX(-50%) translateY(0);
+                        }
+                    }
+                `}
+            </style>
+
+            <button
+                type="button"
+                onClick={handleTriggerClick}
+                aria-expanded={open}
+                aria-haspopup="menu"
+
+                style={{
+
+                    ...getButtonStyle(
+                        isMobile,
+                        isTablet
+                    ),
+
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    justifyContent: "center",
+
+                    color:
+                        active
+                            ? "#ffe2b2"
+                            : "#8c8c8c",
+
+                    background:
+                        active
+                            ? `
+                            linear-gradient(
+                                to bottom,
+                                rgba(255,170,70,0.22),
+                                rgba(255,120,20,0.14)
+                            )
+                            `
+                            : "rgba(255,255,255,0.015)",
+
+                    border:
+                        active
+                            ? "1px solid rgba(255,170,70,0.18)"
+                            : "1px solid rgba(255,255,255,0.03)",
+
+                    boxShadow:
+                        active
+                            ? `
+                            0 0 34px rgba(255,140,0,0.22),
+                            inset 0 0 16px rgba(255,190,80,0.08)
+                            `
+                            : "none"
+                }}
+            >
+                AI SOLUTIONS
+                <ChevronDown
+                    open={open}
+                    active={active}
+                />
+            </button>
+
+            {
+                open && (
+                    <div
+                        role="menu"
+
+                        style={{
+
+                            position: "absolute",
+
+                            top: "100%",
+
+                            left: "50%",
+
+                            transform:
+                                "translateX(-50%)",
+
+                            marginTop: "10px",
+
+                            minWidth:
+                                isMobile
+                                    ? "240px"
+                                    : "300px",
+
+                            padding: "8px",
+
+                            borderRadius: "12px",
+
+                            background:
+                                `
+                                linear-gradient(
+                                    to bottom,
+                                    rgba(10,10,10,0.92),
+                                    rgba(6,6,6,0.88)
+                                )
+                                `,
+
+                            border:
+                                "1px solid rgba(255,140,0,0.08)",
+
+                            backdropFilter:
+                                "blur(16px)",
+
+                            WebkitBackdropFilter:
+                                "blur(16px)",
+
+                            boxShadow:
+                                `
+                                0 0 60px rgba(255,140,0,0.08),
+                                inset 0 0 18px rgba(255,140,0,0.03)
+                                `,
+
+                            zIndex: 999999,
+
+                            animation:
+                                "navDropdownOpen 200ms ease-out forwards"
+                        }}
+                    >
+
+                        {
+                            SOLUTIONS_LINKS.map(
+                                ({
+                                    label,
+                                    to
+                                }) => {
+
+                                    const itemPath =
+                                        to
+                                            .toLowerCase()
+                                            .replace(
+                                                /\/+$/,
+                                                ""
+                                            );
+
+                                    const itemActive =
+                                        pathname === itemPath ||
+                                        pathname.startsWith(
+                                            itemPath + "/"
+                                        );
+
+                                    return (
+
+                                        <SolutionMenuItem
+                                            key={to}
+                                            label={label}
+                                            to={to}
+                                            active={itemActive}
+                                            isMobile={isMobile}
+                                            onNavigate={() =>
+                                                onOpenChange(false)
+                                            }
+                                        />
+                                    );
+                                }
+                            )
+                        }
+
+                    </div>
+                )
+            }
+
+        </div>
+    );
+}
+
+function ChevronDown({
+    open,
+    active
+}) {
+
+    return (
+
+        <svg
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            aria-hidden="true"
+
+            style={{
+
+                marginLeft: "6px",
+
+                flexShrink: 0,
+
+                display: "block",
+
+                transition:
+                    "transform 200ms ease",
+
+                transform:
+                    open
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)"
+            }}
+        >
+            <path
+                d="M2 3.5L5 6.5L8 3.5"
+                stroke={
+                    active
+                        ? "#ffe2b2"
+                        : "#c9a050"
+                }
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+}
+
+function SolutionMenuItem({
+    label,
+    to,
+    active,
+    isMobile,
+    onNavigate
+}) {
+
+    const [hovered, setHovered] =
+        useState(false);
+
+    return (
+
+        <Link
+            to={to}
+            role="menuitem"
+
+            onClick={onNavigate}
+
+            onMouseEnter={() =>
+                setHovered(true)
+            }
+
+            onMouseLeave={() =>
+                setHovered(false)
+            }
+
+            style={{
+
+                display: "block",
+
+                padding:
+                    isMobile
+                        ? "8px 10px"
+                        : "10px 14px",
+
+                borderRadius: "8px",
+
+                textDecoration:
+                    "none",
+
+                fontSize:
+                    isMobile
+                        ? "8px"
+                        : "10px",
+
+                fontWeight: "700",
+
+                letterSpacing:
+                    "0.08em",
+
+                fontFamily:
+                    "'Cinzel', serif",
+
+                whiteSpace:
+                    "nowrap",
+
+                color:
+                    active
+                        ? "#ffe2b2"
+                        : "#8c8c8c",
+
+                background:
+                    active
+                        ? `
+                        linear-gradient(
+                            to bottom,
+                            rgba(255,170,70,0.18),
+                            rgba(255,120,20,0.10)
+                        )
+                        `
+                        : hovered
+                            ? `
+                            linear-gradient(
+                                to bottom,
+                                rgba(255,170,70,0.12),
+                                rgba(255,120,20,0.06)
+                            )
+                            `
+                            : "transparent",
+
+                border:
+                    active
+                        ? "1px solid rgba(255,170,70,0.14)"
+                        : hovered
+                            ? "1px solid rgba(255,170,70,0.10)"
+                            : "1px solid transparent",
+
+                boxShadow:
+                    hovered
+                        ? `
+                        0 0 20px rgba(255,140,0,0.16),
+                        inset 0 0 10px rgba(255,190,80,0.05)
+                        `
+                        : "none",
+
+                transition:
+                    "all 0.20s ease"
+            }}
+        >
+            {label}
+        </Link>
     );
 }
 

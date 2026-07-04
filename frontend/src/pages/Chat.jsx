@@ -16,7 +16,7 @@ const PROJECT_MODES = {
 
     CHAT: "chat",
 
-    MVP_1: "mvp1",
+    MVP_1: "mvp1_food_safety_ai",
 
     MVP_2: "mvp2",
 
