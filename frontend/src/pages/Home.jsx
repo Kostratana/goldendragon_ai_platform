@@ -38,9 +38,27 @@ export default function Home() {
     ];
 
     const heroBreathTransition = {
-        duration: 18,
+        duration: 20,
         repeat: Infinity,
         ease: "easeInOut"
+    };
+
+    const heroTitleBreath = {
+        opacity: [0.40, 0.88, 0.40],
+        textShadow: [
+            "0 0 6px rgba(255,170,90,0.04)",
+            "0 0 16px rgba(255,160,80,0.12)",
+            "0 0 6px rgba(255,170,90,0.04)"
+        ]
+    };
+
+    const heroSubtitleBreath = {
+        opacity: [0.38, 0.75, 0.38],
+        textShadow: [
+            "0 0 4px rgba(255,170,90,0.03)",
+            "0 0 10px rgba(255,160,80,0.08)",
+            "0 0 4px rgba(255,170,90,0.03)"
+        ]
     };
 
     return (
@@ -125,14 +143,14 @@ export default function Home() {
 
                     alignItems: "center",
 
-                    justifyContent: "flex-start",
+                    justifyContent: "center",
 
                     minHeight: "100vh",
 
                     paddingTop:
                         isMobile
-                            ? "95px"
-                            : "130px",
+                            ? "max(86px, calc(76px + env(safe-area-inset-top, 0px)))"
+                            : "108px",
 
                     paddingBottom:
                         isMobile
@@ -141,15 +159,19 @@ export default function Home() {
 
                     paddingLeft:
                         isMobile
-                            ? "16px"
+                            ? "max(16px, env(safe-area-inset-left, 0px))"
                             : "40px",
 
                     paddingRight:
                         isMobile
-                            ? "16px"
+                            ? "max(16px, env(safe-area-inset-right, 0px))"
                             : "40px",
 
-                    overflow: "hidden"
+                    boxSizing: "border-box",
+
+                    width: "100%",
+
+                    overflowX: "hidden"
                 }}
             >
 
@@ -208,15 +230,38 @@ export default function Home() {
 
                 </div>
 
+                {/* hero composition */}
+                <div
+                    style={{
+                        position: "relative",
+
+                        zIndex: 4,
+
+                        display: "flex",
+
+                        flexDirection: "column",
+
+                        alignItems: "center",
+
+                        justifyContent: "center",
+
+                        width: "100%",
+
+                        flex: 1,
+
+                        boxSizing: "border-box",
+
+                        maxWidth: "100%"
+                    }}
+                >
+
                 {/* title */}
                 <motion.div
                     initial={{
-                        opacity: 0,
-                        y: 30
+                        opacity: 0
                     }}
                     animate={{
-                        opacity: 1,
-                        y: 0
+                        opacity: 1
                     }}
                     transition={{
                         duration: 1
@@ -224,89 +269,97 @@ export default function Home() {
                     style={{
                         position: "relative",
 
-                        zIndex: 4,
-
                         textAlign: "center",
 
                         marginBottom:
                             isMobile
-                                ? "20px"
-                                : "10px",
+                                ? "10px"
+                                : "8px",
 
                         maxWidth:
                             isMobile
                                 ? "100%"
-                                : "1100px"
+                                : "1100px",
+
+                        width: "100%",
+
+                        boxSizing: "border-box"
                     }}
                 >
 
                     <motion.div
-                        animate={{
-                            opacity: [0.58, 0.94, 0.58],
-                            textShadow: [
-                                "0 0 10px rgba(255,180,120,0.07)",
-                                "0 0 22px rgba(255,170,90,0.20)",
-                                "0 0 10px rgba(255,180,120,0.07)"
-                            ]
-                        }}
+                        animate={heroTitleBreath}
                         transition={heroBreathTransition}
                         style={{
-                            color: "#d8b07a",
+                            background:
+                                "linear-gradient(to bottom, #dfc493 0%, #c9a866 42%, #9a7340 100%)",
+
+                            WebkitBackgroundClip:
+                                "text",
+
+                            WebkitTextFillColor:
+                                "transparent",
+
+                            backgroundClip:
+                                "text",
 
                             fontSize:
                                 isMobile
-                                    ? "15px"
+                                    ? "24px"
                                     : isTablet
-                                        ? "18px"
-                                        : "22px",
+                                        ? "32px"
+                                        : "40px",
 
                             lineHeight:
                                 isMobile
-                                    ? "1.7"
-                                    : "2",
+                                    ? "1.5"
+                                    : "1.45",
 
                             fontWeight: "800",
 
                             letterSpacing:
                                 isMobile
-                                    ? "0.20em"
+                                    ? "0.11em"
                                     : isTablet
-                                        ? "0.26em"
-                                        : "0.32em",
+                                        ? "0.18em"
+                                        : "0.22em",
 
                             textTransform: "uppercase",
 
                             marginBottom:
                                 isMobile
-                                    ? "18px"
-                                    : "22px",
+                                    ? "16px"
+                                    : "18px",
 
                             fontFamily:
-                                "'Cinzel', serif"
+                                "'Cinzel Decorative', 'Cinzel', serif"
                         }}
                     >
                         Golden Dragon AI Studio
                     </motion.div>
 
                     <motion.div
-                        animate={{
-                            opacity: [0.55, 0.88, 0.55],
-                            textShadow: [
-                                "0 0 6px rgba(255,180,120,0.04)",
-                                "0 0 14px rgba(255,170,90,0.13)",
-                                "0 0 6px rgba(255,180,120,0.04)"
-                            ]
-                        }}
+                        animate={heroSubtitleBreath}
                         transition={heroBreathTransition}
                         style={{
-                            color: "#c9aa82",
+                            background:
+                                "linear-gradient(to bottom, #d4bc96 0%, #c9aa82 52%, #b89868 100%)",
+
+                            WebkitBackgroundClip:
+                                "text",
+
+                            WebkitTextFillColor:
+                                "transparent",
+
+                            backgroundClip:
+                                "text",
 
                             fontSize:
                                 isMobile
-                                    ? "13px"
+                                    ? "16px"
                                     : isTablet
-                                        ? "15px"
-                                        : "19px",
+                                        ? "18px"
+                                        : "22px",
 
                             lineHeight:
                                 isMobile
@@ -317,15 +370,20 @@ export default function Home() {
 
                             letterSpacing:
                                 isMobile
-                                    ? "0.01em"
-                                    : "0.03em",
+                                    ? "0.02em"
+                                    : "0.04em",
 
                             maxWidth:
                                 isMobile
                                     ? "100%"
-                                    : "1000px",
+                                    : isTablet
+                                        ? "620px"
+                                        : "820px",
 
-                            margin: "0 auto"
+                            margin: "0 auto",
+
+                            fontFamily:
+                                "'Cinzel', serif"
                         }}
                     >
                         Inspired by Ancient Wisdom,
@@ -350,8 +408,8 @@ export default function Home() {
 
                         marginTop:
                             isMobile
-                                ? "10px"
-                                : "40px"
+                                ? "8px"
+                                : "22px"
                     }}
                 >
 
@@ -421,12 +479,11 @@ export default function Home() {
                                 style={{
                                     position: "relative",
 
-                                    width:
-                                        isMobile
-                                            ? "100%"
-                                            : "1150px",
+                                    width: "100%",
 
-                                    maxWidth: "100%",
+                                    maxWidth: "1150px",
+
+                                    boxSizing: "border-box",
 
                                     overflow: "visible"
                                 }}
@@ -441,6 +498,10 @@ export default function Home() {
                                         position: "relative",
 
                                         width: "100%",
+
+                                        height: "auto",
+
+                                        maxWidth: "100%",
 
                                         objectFit: "contain",
 
@@ -516,6 +577,8 @@ export default function Home() {
                         </motion.div>
 
                     </div>
+
+                </div>
 
                 </div>
 

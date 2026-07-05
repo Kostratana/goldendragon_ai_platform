@@ -1,5 +1,10 @@
 import founderImage from "../assets/murzik/doc_photo.webp";
 
+import { Link } from "react-router-dom";
+
+const EMAIL_LINK =
+    "https://mail.google.com/mail/?view=cm&fs=1&to=srumyantseva7@gmail.com&su=Golden%20Dragon%20AI";
+
 export default function FounderSection() {
 
     const isMobile =
@@ -14,24 +19,28 @@ export default function FounderSection() {
             style={{
                 position: "relative",
 
+                width: "100%",
+
+                boxSizing: "border-box",
+
                 paddingTop:
                     isMobile
-                        ? "60px"
+                        ? "56px"
                         : "120px",
 
                 paddingBottom:
                     isMobile
-                        ? "70px"
+                        ? "64px"
                         : "140px",
 
                 paddingLeft:
                     isMobile
-                        ? "16px"
+                        ? "20px"
                         : "70px",
 
                 paddingRight:
                     isMobile
-                        ? "16px"
+                        ? "20px"
                         : "70px",
 
                 background:
@@ -100,7 +109,11 @@ export default function FounderSection() {
 
                         flexDirection: "column",
 
-                        alignItems: "center"
+                        alignItems: "center",
+
+                        width: "100%",
+
+                        boxSizing: "border-box"
                     }}
                 >
 
@@ -110,14 +123,13 @@ export default function FounderSection() {
                         style={{
                             width: "100%",
 
-                            maxWidth: "960px",
+                            maxWidth: "820px",
 
                             margin: "0 auto",
 
-                            textAlign:
-                                isMobile
-                                    ? "center"
-                                    : "left"
+                            boxSizing: "border-box",
+
+                            textAlign: "center"
                         }}
                     >
 
@@ -127,10 +139,10 @@ export default function FounderSection() {
 
                                 fontSize:
                                     isMobile
-                                        ? "19px"
+                                        ? "20px"
                                         : isTablet
-                                            ? "24px"
-                                            : "32px",
+                                            ? "28px"
+                                            : "37px",
 
                                 fontWeight: "700",
 
@@ -139,45 +151,21 @@ export default function FounderSection() {
 
                                 letterSpacing:
                                     isMobile
-                                        ? "0.02em"
+                                        ? "0.01em"
                                         : "0.06em",
 
-                                lineHeight: 1.5,
+                                lineHeight:
+                                    isMobile
+                                        ? "1.45"
+                                        : 1.5,
 
                                 marginBottom:
                                     isMobile
-                                        ? "12px"
+                                        ? "14px"
                                         : "18px"
                             }}
                         >
                             The Golden Dragon Declaration
-                        </div>
-
-                        <div
-                            style={{
-                                color: "#c9aa82",
-
-                                fontSize:
-                                    isMobile
-                                        ? "14px"
-                                        : isTablet
-                                            ? "18px"
-                                            : "22px",
-
-                                fontWeight: "500",
-
-                                lineHeight:
-                                    isMobile
-                                        ? "1.7"
-                                        : "1.9",
-
-                                marginBottom:
-                                    isMobile
-                                        ? "50px"
-                                        : "60px"
-                            }}
-                        >
-                            Ancient Wisdom. Modern Technology. Better Future.
                         </div>
 
                         <p style={declarationParagraphStyle(isMobile, isTablet)}>
@@ -256,75 +244,112 @@ export default function FounderSection() {
                             Innovation carries responsibility.
                         </p>
 
-                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
-                            And every new chapter brings us one step closer to a better future.
-                        </p>
-
-                        <div
-                            style={{
-                                ...declarationHeadingStyle(isMobile, isTablet),
-
-                                marginTop:
-                                    isMobile
-                                        ? "28px"
-                                        : "42px"
-                            }}
-                        >
-                            Our Philosophy
-                        </div>
-
-                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
-                            Ancient Wisdom. Modern Technology. Better Future.
-                        </p>
-
-                        <div
-                            style={{
-                                ...declarationHeadingStyle(isMobile, isTablet),
-
-                                marginTop:
-                                    isMobile
-                                        ? "28px"
-                                        : "42px"
-                            }}
-                        >
-                            Our Mission
-                        </div>
-
-                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
-                            To build intelligent technologies that improve life, empower people, protect animals, support businesses, preserve nature, and inspire future generations.
-                        </p>
-
-                        <div
-                            style={{
-                                ...declarationHeadingStyle(isMobile, isTablet),
-
-                                marginTop:
-                                    isMobile
-                                        ? "28px"
-                                        : "42px"
-                            }}
-                        >
-                            Our Vision
-                        </div>
-
-                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
-                            To create a global ecosystem of AI systems inspired by timeless wisdom and dedicated to improving life through responsible innovation.
-                        </p>
-
-                        <p style={declarationParagraphStyle(isMobile, isTablet)}>
-                            This is where our story begins.
-                        </p>
-
                         <p
                             style={{
                                 ...declarationParagraphStyle(isMobile, isTablet),
 
-                                fontWeight: "600",
+                                marginBottom: 0
+                            }}
+                        >
+                            And every new chapter brings us one step closer to a better future.
+                        </p>
+
+                    </div>
+
+                    {/* BUSINESS CTA */}
+
+                    <div
+                        style={{
+                            width: "100%",
+
+                            maxWidth: "820px",
+
+                            margin:
+                                isMobile
+                                    ? "44px auto 0"
+                                    : isTablet
+                                        ? "70px auto 0"
+                                        : "90px auto 0",
+
+                            boxSizing: "border-box",
+
+                            textAlign: "center"
+                        }}
+                    >
+
+                        <div
+                            style={{
+                                ...declarationHeadingStyle(isMobile, isTablet),
+
+                                fontSize:
+                                    isMobile
+                                        ? "17px"
+                                        : isTablet
+                                            ? "24px"
+                                            : "30px",
+
+                                marginTop: 0,
+
+                                marginBottom:
+                                    isMobile
+                                        ? "18px"
+                                        : "28px"
+                            }}
+                        >
+                            Let's Build the Future Together
+                        </div>
+
+                        <p style={ctaParagraphStyle(isMobile, isTablet)}>
+                            Every great solution begins with a conversation.
+                        </p>
+
+                        <p style={ctaParagraphStyle(isMobile, isTablet)}>
+                            Whether you want to automate your business, develop an intelligent AI assistant, build a computer vision system, create a custom machine learning model, or transform an idea into a complete AI product, Golden Dragon AI Studio is ready to build your next intelligent system.
+                        </p>
+
+                        <p style={ctaParagraphStyle(isMobile, isTablet)}>
+                            Start by telling us about your project.
+                        </p>
+
+                        <p style={ctaParagraphStyle(isMobile, isTablet)}>
+                            You can contact us directly by{" "}
+                            <a
+                                href={EMAIL_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={ctaLinkStyle()}
+                            >
+                                email
+                            </a>
+                            {" "}or continue to the{" "}
+                            <Link
+                                to="/chat"
+                                style={ctaLinkStyle()}
+                            >
+                                Dragon Chat
+                            </Link>
+                            {" "}page, where our AI Business Assistant will help you define your goals, collect your requirements, and prepare the foundation for your future intelligent system.
+                        </p>
+
+                        <p
+                            style={{
+                                ...ctaParagraphStyle(isMobile, isTablet),
+
+                                fontSize:
+                                    isMobile
+                                        ? "17px"
+                                        : isTablet
+                                            ? "21px"
+                                            : "27px",
+
+                                color: "#d8b07a",
+
+                                fontWeight: "700",
 
                                 marginBottom: 0
                             }}
                         >
-                            Welcome to Golden Dragon AI Studio.
+                            Let's transform your ideas into intelligent technology.
                         </p>
 
                     </div>
@@ -335,10 +360,14 @@ export default function FounderSection() {
                         style={{
                             marginTop:
                                 isMobile
-                                    ? "50px"
+                                    ? "44px"
                                     : isTablet
                                         ? "70px"
                                         : "90px",
+
+                            width: "100%",
+
+                            boxSizing: "border-box",
 
                             display: "flex",
 
@@ -420,7 +449,7 @@ export default function FounderSection() {
                             style={{
                                 marginTop:
                                     isMobile
-                                        ? "22px"
+                                        ? "18px"
                                         : "34px",
 
                                 display: "flex",
@@ -460,7 +489,13 @@ export default function FounderSection() {
                             }}
                         >
 
-                            <div>
+                            <div
+                                style={
+                                    isMobile
+                                        ? { fontSize: "11px" }
+                                        : undefined
+                                }
+                            >
                                 Svetlana Rumyantseva
                             </div>
 
@@ -480,8 +515,10 @@ export default function FounderSection() {
                             style={{
                                 marginTop:
                                     isMobile
-                                        ? "22px"
+                                        ? "18px"
                                         : "38px",
+
+                                width: "100%",
 
                                 display: "flex",
 
@@ -544,21 +581,21 @@ export default function FounderSection() {
     );
 }
 
-function declarationParagraphStyle(isMobile, isTablet) {
+function ctaParagraphStyle(isMobile, isTablet) {
 
     return {
-        color: "#d8d8d8",
+        color: "#c9aa82",
 
         fontSize:
             isMobile
-                ? "14px"
+                ? "15px"
                 : isTablet
                     ? "18px"
                     : "22px",
 
         lineHeight:
             isMobile
-                ? "1.7"
+                ? "1.75"
                 : "1.9",
 
         fontWeight: "400",
@@ -567,8 +604,60 @@ function declarationParagraphStyle(isMobile, isTablet) {
 
         marginBottom:
             isMobile
-                ? "16px"
-                : "24px"
+                ? "14px"
+                : "24px",
+
+        width: "100%",
+
+        boxSizing: "border-box"
+    };
+}
+
+function ctaLinkStyle() {
+
+    return {
+        color: "#d8b07a",
+
+        textDecoration:
+            "underline",
+
+        textDecorationColor:
+            "rgba(216,176,122,0.35)",
+
+        textUnderlineOffset:
+            "3px"
+    };
+}
+
+function declarationParagraphStyle(isMobile, isTablet) {
+
+    return {
+        color: "#c9aa82",
+
+        fontSize:
+            isMobile
+                ? "15px"
+                : isTablet
+                    ? "18px"
+                    : "22px",
+
+        lineHeight:
+            isMobile
+                ? "1.75"
+                : "1.9",
+
+        fontWeight: "500",
+
+        marginTop: 0,
+
+        marginBottom:
+            isMobile
+                ? "14px"
+                : "24px",
+
+        width: "100%",
+
+        boxSizing: "border-box"
     };
 }
 
@@ -596,13 +685,17 @@ function declarationHeadingStyle(isMobile, isTablet) {
 
         lineHeight:
             isMobile
-                ? "1.4"
+                ? "1.45"
                 : "1.5",
 
         marginBottom:
             isMobile
-                ? "14px"
-                : "20px"
+                ? "12px"
+                : "20px",
+
+        width: "100%",
+
+        boxSizing: "border-box"
     };
 }
 
@@ -669,7 +762,7 @@ function mobileButtonStyle(isMobile) {
         fontSize:
             isMobile
                 ? "9px"
-                : "13px",
+                : "14px",
 
         letterSpacing:
             isMobile
