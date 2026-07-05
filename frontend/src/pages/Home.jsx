@@ -37,29 +37,11 @@ export default function Home() {
         },
     ];
 
-    const heroBreathTransition = {
-        duration: 20,
-        repeat: Infinity,
-        ease: "easeInOut"
-    };
+    const heroInscriptionAnimation =
+        "heroTitleInscription 20s ease-in-out infinite";
 
-    const heroTitleBreath = {
-        opacity: [0.40, 0.88, 0.40],
-        textShadow: [
-            "0 0 6px rgba(255,170,90,0.04)",
-            "0 0 16px rgba(255,160,80,0.12)",
-            "0 0 6px rgba(255,170,90,0.04)"
-        ]
-    };
-
-    const heroSubtitleBreath = {
-        opacity: [0.38, 0.75, 0.38],
-        textShadow: [
-            "0 0 4px rgba(255,170,90,0.03)",
-            "0 0 10px rgba(255,160,80,0.08)",
-            "0 0 4px rgba(255,170,90,0.03)"
-        ]
-    };
+    const heroSubtitleAnimation =
+        "heroSubtitleInscription 20s ease-in-out infinite";
 
     return (
         <main
@@ -255,6 +237,32 @@ export default function Home() {
                     }}
                 >
 
+                    <style>
+                        {`
+                            @keyframes heroTitleInscription {
+                                0%, 100% {
+                                    opacity: 0.40;
+                                    text-shadow: 0 0 6px rgba(255,170,90,0.04);
+                                }
+                                50% {
+                                    opacity: 0.88;
+                                    text-shadow: 0 0 16px rgba(255,160,80,0.12);
+                                }
+                            }
+
+                            @keyframes heroSubtitleInscription {
+                                0%, 100% {
+                                    opacity: 0.38;
+                                    text-shadow: 0 0 4px rgba(255,170,90,0.03);
+                                }
+                                50% {
+                                    opacity: 0.75;
+                                    text-shadow: 0 0 10px rgba(255,160,80,0.08);
+                                }
+                            }
+                        `}
+                    </style>
+
                 {/* title */}
                 <motion.div
                     initial={{
@@ -287,9 +295,7 @@ export default function Home() {
                     }}
                 >
 
-                    <motion.div
-                        animate={heroTitleBreath}
-                        transition={heroBreathTransition}
+                    <div
                         style={{
                             background:
                                 "linear-gradient(to bottom, #dfc493 0%, #c9a866 42%, #9a7340 100%)",
@@ -305,21 +311,21 @@ export default function Home() {
 
                             fontSize:
                                 isMobile
-                                    ? "24px"
+                                    ? "40px"
                                     : isTablet
-                                        ? "32px"
-                                        : "40px",
+                                        ? "56px"
+                                        : "72px",
 
                             lineHeight:
                                 isMobile
-                                    ? "1.5"
-                                    : "1.45",
+                                    ? "1.35"
+                                    : "1.3",
 
                             fontWeight: "800",
 
                             letterSpacing:
                                 isMobile
-                                    ? "0.11em"
+                                    ? "0.08em"
                                     : isTablet
                                         ? "0.18em"
                                         : "0.22em",
@@ -332,15 +338,16 @@ export default function Home() {
                                     : "18px",
 
                             fontFamily:
-                                "'Cinzel Decorative', 'Cinzel', serif"
+                                "'Cinzel Decorative', 'Cinzel', serif",
+
+                            animation:
+                                heroInscriptionAnimation
                         }}
                     >
                         Golden Dragon AI Studio
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        animate={heroSubtitleBreath}
-                        transition={heroBreathTransition}
+                    <div
                         style={{
                             background:
                                 "linear-gradient(to bottom, #d4bc96 0%, #c9aa82 52%, #b89868 100%)",
@@ -356,10 +363,10 @@ export default function Home() {
 
                             fontSize:
                                 isMobile
-                                    ? "16px"
+                                    ? "17px"
                                     : isTablet
-                                        ? "18px"
-                                        : "22px",
+                                        ? "22px"
+                                        : "30px",
 
                             lineHeight:
                                 isMobile
@@ -383,13 +390,16 @@ export default function Home() {
                             margin: "0 auto",
 
                             fontFamily:
-                                "'Cinzel', serif"
+                                "'Cinzel', serif",
+
+                            animation:
+                                heroSubtitleAnimation
                         }}
                     >
                         Inspired by Ancient Wisdom,
                         <br />
                         Transforming Knowledge into Technology for a Better Life.
-                    </motion.div>
+                    </div>
 
                 </motion.div>
 

@@ -139,7 +139,7 @@ export default function FounderSection() {
 
                                 fontSize:
                                     isMobile
-                                        ? "20px"
+                                        ? "22px"
                                         : isTablet
                                             ? "28px"
                                             : "37px",
@@ -151,13 +151,16 @@ export default function FounderSection() {
 
                                 letterSpacing:
                                     isMobile
-                                        ? "0.01em"
+                                        ? "0"
                                         : "0.06em",
 
                                 lineHeight:
                                     isMobile
                                         ? "1.45"
                                         : 1.5,
+
+                                textShadow:
+                                    "0 0 12px rgba(216,176,122,0.12)",
 
                                 marginBottom:
                                     isMobile
@@ -266,7 +269,7 @@ export default function FounderSection() {
 
                             margin:
                                 isMobile
-                                    ? "44px auto 0"
+                                    ? "54px auto 0"
                                     : isTablet
                                         ? "70px auto 0"
                                         : "90px auto 0",
@@ -283,7 +286,7 @@ export default function FounderSection() {
 
                                 fontSize:
                                     isMobile
-                                        ? "17px"
+                                        ? "19px"
                                         : isTablet
                                             ? "24px"
                                             : "30px",
@@ -337,7 +340,7 @@ export default function FounderSection() {
 
                                 fontSize:
                                     isMobile
-                                        ? "17px"
+                                        ? "19px"
                                         : isTablet
                                             ? "21px"
                                             : "27px",
@@ -360,7 +363,7 @@ export default function FounderSection() {
                         style={{
                             marginTop:
                                 isMobile
-                                    ? "44px"
+                                    ? "54px"
                                     : isTablet
                                         ? "70px"
                                         : "90px",
@@ -465,7 +468,7 @@ export default function FounderSection() {
 
                                 fontSize:
                                     isMobile
-                                        ? "10px"
+                                        ? "12px"
                                         : isTablet
                                             ? "15px"
                                             : "18px",
@@ -492,7 +495,7 @@ export default function FounderSection() {
                             <div
                                 style={
                                     isMobile
-                                        ? { fontSize: "11px" }
+                                        ? { fontSize: "13px" }
                                         : undefined
                                 }
                             >
@@ -705,7 +708,7 @@ function mobileButtonStyle(isMobile) {
 
         height:
             isMobile
-                ? "34px"
+                ? "38px"
                 : "48px",
 
         paddingLeft:
@@ -761,7 +764,7 @@ function mobileButtonStyle(isMobile) {
 
         fontSize:
             isMobile
-                ? "9px"
+                ? "11px"
                 : "14px",
 
         letterSpacing:
