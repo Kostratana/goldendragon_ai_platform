@@ -33,6 +33,10 @@ import {
     prepareTextForTranslation
 } from "./translationUtils.js";
 
+import {
+    getCuratedTranslation
+} from "./curatedTranslations.js";
+
 const LanguageContext =
     createContext(null);
 
@@ -70,6 +74,24 @@ export function resolveTranslation(
     ) {
         return finalizeTranslatedText(
             cached,
+            {},
+            {},
+            values
+        );
+    }
+
+    const curated =
+        getCuratedTranslation(
+            language,
+            template
+        );
+
+    if (
+        typeof curated ===
+        "string"
+    ) {
+        return finalizeTranslatedText(
+            curated,
             {},
             {},
             values
@@ -158,6 +180,30 @@ export function TranslationProvider({
                 ) {
                     return finalizeTranslatedText(
                         cached,
+                        {},
+                        {},
+                        values
+                    );
+                }
+
+                const curated =
+                    getCuratedTranslation(
+                        language,
+                        template
+                    );
+
+                if (
+                    typeof curated ===
+                    "string"
+                ) {
+                    setCachedTranslation(
+                        language,
+                        template,
+                        curated
+                    );
+
+                    return finalizeTranslatedText(
+                        curated,
                         {},
                         {},
                         values

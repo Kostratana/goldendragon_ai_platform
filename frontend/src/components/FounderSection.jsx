@@ -646,38 +646,46 @@ export default function FounderSection() {
                             }
                         >
 
-                            <h1
-                                id="founder-hero-title"
-                                className="gd-ancient-ink-text"
-                                style={
-                                    heroTitleStyle
-                                }
-                            >
-                                <T brand>
-                                    {
-                                        FOUNDER_BRANDS.GOLDEN_DRAGON_AI_STUDIO
-                                    }
-                                </T>
-                            </h1>
+                            <div className="gd-ancient-ink-wrap">
 
-                            <p
-                                className="gd-ancient-ink-text"
-                                style={
-                                    heroSubtitleStyle
-                                }
-                            >
-                                <T>
-                                    {
-                                        FOUNDER_TEXT.SUBTITLE_LINE_1
+                                <h1
+                                    id="founder-hero-title"
+                                    className="gd-ancient-ink-text"
+                                    style={
+                                        heroTitleStyle
                                     }
-                                </T>
-                                <br />
-                                <T>
-                                    {
-                                        FOUNDER_TEXT.SUBTITLE_LINE_2
+                                >
+                                    <T brand>
+                                        {
+                                            FOUNDER_BRANDS.GOLDEN_DRAGON_AI_STUDIO
+                                        }
+                                    </T>
+                                </h1>
+
+                            </div>
+
+                            <div className="gd-ancient-ink-wrap">
+
+                                <p
+                                    className="gd-ancient-ink-text"
+                                    style={
+                                        heroSubtitleStyle
                                     }
-                                </T>
-                            </p>
+                                >
+                                    <T>
+                                        {
+                                            FOUNDER_TEXT.SUBTITLE_LINE_1
+                                        }
+                                    </T>
+                                    <br />
+                                    <T>
+                                        {
+                                            FOUNDER_TEXT.SUBTITLE_LINE_2
+                                        }
+                                    </T>
+                                </p>
+
+                            </div>
 
                         </div>
 
