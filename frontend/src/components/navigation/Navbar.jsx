@@ -58,7 +58,7 @@ inside JSX.
 */
 const SOLUTIONS_LINKS = [
     {
-        label: "Golden Dragon Health AI",
+        label: "Health Support AI",
         to: "/solutions/health-ai"
     },
     {
@@ -72,10 +72,6 @@ const SOLUTIONS_LINKS = [
     {
         label: "Whale Hunter AI",
         to: "/solutions/whale-hunter"
-    },
-    {
-        label: "Sentinel AI",
-        to: "/solutions/sentinel-ai"
     },
     {
         label: "Private Shopper AI",
@@ -144,7 +140,8 @@ export default function Navbar() {
         setNavbarPortalTarget(
             document.getElementById(
                 "navbar-root"
-            )
+            ) ||
+            document.body
         );
     }, []);
 
@@ -286,7 +283,17 @@ export default function Navbar() {
                 className="gd-navbar-shell"
                 style={{
 
+                    position: "fixed",
+
+                    top: 0,
+
+                    left: 0,
+
+                    right: 0,
+
                     width: "100%",
+
+                    zIndex: 2147483647,
 
                     display: "flex",
 

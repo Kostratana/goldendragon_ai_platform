@@ -12,5 +12,7 @@ export const CTA_LINK_STYLE = {
     fontFamily: FONT_IM_FELL,
     textDecoration: "underline",
     textDecorationColor: GOLD_UNDERLINE,
-    textUnderlineOffset: "3px"
+    textUnderlineOffset: "3px",
+    marginLeft: "0.2em",
+    marginRight: "0.2em"
 };

@@ -12,7 +12,7 @@ registry before requesting translation.
 export const BRAND_TERMS =
     new Set([
         "Golden Dragon AI Studio",
-        "Golden Dragon Health AI",
+        "Health Support AI",
         "Golden Dragon AI",
         "GOLDEN DRAGON AI",
         "Golden Dragon",
@@ -22,7 +22,6 @@ export const BRAND_TERMS =
         "Animal Health Detection",
         "Underwater AI",
         "Whale Hunter AI",
-        "Sentinel AI",
         "Private Shopper AI",
         "Murzik",
         "MURZIK",

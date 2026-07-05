@@ -792,6 +792,7 @@ export default function FounderSection() {
                                     FOUNDER_TEXT.CTA_CONTACT_PREFIX
                                 }
                             </T>
+                            {" "}
                             <a
                                 href={
                                     CONTACT_LINKS.EMAIL
@@ -808,11 +809,13 @@ export default function FounderSection() {
                                     }
                                 </T>
                             </a>
+                            {" "}
                             <T>
                                 {
                                     FOUNDER_TEXT.CTA_CONTACT_AFTER_EMAIL
                                 }
                             </T>
+                            {" "}
                             <Link
                                 to="/chat"
                                 style={
@@ -825,6 +828,7 @@ export default function FounderSection() {
                                     }
                                 </T>
                             </Link>
+                            {" "}
                             <T>
                                 {
                                     FOUNDER_TEXT.CTA_CONTACT_AFTER_CHAT
