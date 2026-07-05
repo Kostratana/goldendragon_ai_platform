@@ -542,7 +542,9 @@ export default function Navbar() {
                     height:
                         isMobile
                             ? "82px"
-                            : "96px",
+                            : isTablet
+                                ? "90px"
+                                : "96px",
 
                     width: "100%"
                 }}

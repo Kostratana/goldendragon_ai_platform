@@ -3,12 +3,16 @@ import { motion } from "framer-motion";
 import FounderSection from "../components/FounderSection";
 import Footer from "../components/Footer";
 
+import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
+
 import murzikImage from "../assets/murzik/murzik-main.webp";
 
 export default function Home() {
 
-    const isMobile =
-        window.innerWidth <= 768;
+    const {
+        isMobile,
+        isTablet
+    } = useFounderBreakpoints();
 
     const particles = [
         {
@@ -72,22 +76,30 @@ export default function Home() {
                     right:
                         isMobile
                             ? "-100px"
-                            : "-180px",
+                            : isTablet
+                                ? "-140px"
+                                : "-180px",
 
                     top:
                         isMobile
                             ? "-100px"
-                            : "-180px",
+                            : isTablet
+                                ? "-140px"
+                                : "-180px",
 
                     width:
                         isMobile
                             ? "240px"
-                            : "680px",
+                            : isTablet
+                                ? "420px"
+                                : "680px",
 
                     height:
                         isMobile
                             ? "240px"
-                            : "680px",
+                            : isTablet
+                                ? "420px"
+                                : "680px",
 
                     background:
                         "rgba(255,140,0,0.08)",
@@ -97,7 +109,9 @@ export default function Home() {
                     filter:
                         isMobile
                             ? "blur(40px)"
-                            : "blur(90px)",
+                            : isTablet
+                                ? "blur(65px)"
+                                : "blur(90px)",
 
                     pointerEvents: "none"
                 }}
@@ -118,32 +132,44 @@ export default function Home() {
                     justifyContent:
                         isMobile
                             ? "flex-start"
-                            : "center",
+                            : isTablet
+                                ? "flex-start"
+                                : "center",
 
                     minHeight:
                         isMobile
                             ? "auto"
-                            : "100vh",
+                            : isTablet
+                                ? "auto"
+                                : "100vh",
 
                     paddingTop:
                         isMobile
                             ? "max(86px, calc(76px + env(safe-area-inset-top, 0px)))"
-                            : "108px",
+                            : isTablet
+                                ? "96px"
+                                : "108px",
 
                     paddingBottom:
                         isMobile
                             ? "24px"
-                            : "40px",
+                            : isTablet
+                                ? "32px"
+                                : "40px",
 
                     paddingLeft:
                         isMobile
                             ? "max(16px, env(safe-area-inset-left, 0px))"
-                            : "40px",
+                            : isTablet
+                                ? "28px"
+                                : "40px",
 
                     paddingRight:
                         isMobile
                             ? "max(16px, env(safe-area-inset-right, 0px))"
-                            : "40px",
+                            : isTablet
+                                ? "28px"
+                                : "40px",
 
                     boxSizing: "border-box",
 
@@ -190,12 +216,16 @@ export default function Home() {
                                 width:
                                     isMobile
                                         ? "2px"
-                                        : "3px",
+                                        : isTablet
+                                            ? "2px"
+                                            : "3px",
 
                                 height:
                                     isMobile
                                         ? "2px"
-                                        : "3px",
+                                        : isTablet
+                                            ? "2px"
+                                            : "3px",
 
                                 borderRadius: "9999px",
 
@@ -264,12 +294,16 @@ export default function Home() {
                             width:
                                 isMobile
                                     ? "360px"
-                                    : "820px",
+                                    : isTablet
+                                        ? "560px"
+                                        : "820px",
 
                             height:
                                 isMobile
                                     ? "360px"
-                                    : "820px",
+                                    : isTablet
+                                        ? "560px"
+                                        : "820px",
 
                             background:
                                 "rgba(255,140,0,0.08)",
@@ -279,7 +313,9 @@ export default function Home() {
                             filter:
                                 isMobile
                                     ? "blur(50px)"
-                                    : "blur(120px)",
+                                    : isTablet
+                                        ? "blur(85px)"
+                                        : "blur(120px)",
 
                             pointerEvents: "none"
                         }}
@@ -304,7 +340,9 @@ export default function Home() {
                                 y:
                                     isMobile
                                         ? [0, -4, 0]
-                                        : [0, -6, 0]
+                                        : isTablet
+                                            ? [0, -5, 0]
+                                            : [0, -6, 0]
                             }}
                             transition={{
                                 duration: 7,
@@ -356,7 +394,9 @@ export default function Home() {
                                         filter:
                                             isMobile
                                                 ? "drop-shadow(0 0 28px rgba(255,140,0,0.10))"
-                                                : "drop-shadow(0 0 90px rgba(255,140,0,0.16))"
+                                                : isTablet
+                                                    ? "drop-shadow(0 0 55px rgba(255,140,0,0.13))"
+                                                    : "drop-shadow(0 0 90px rgba(255,140,0,0.16))"
                                     }}
                                 />
 
@@ -372,22 +412,30 @@ export default function Home() {
                                         top:
                                             isMobile
                                                 ? "-4%"
-                                                : "-10%",
+                                                : isTablet
+                                                    ? "-7%"
+                                                    : "-10%",
 
                                         left:
                                             isMobile
                                                 ? "0"
-                                                : "-8%",
+                                                : isTablet
+                                                    ? "-4%"
+                                                    : "-8%",
 
                                         width:
                                             isMobile
                                                 ? "100%"
-                                                : "116%",
+                                                : isTablet
+                                                    ? "108%"
+                                                    : "116%",
 
                                         height:
                                             isMobile
                                                 ? "108%"
-                                                : "116%",
+                                                : isTablet
+                                                    ? "112%"
+                                                    : "116%",
 
                                         objectFit: "cover",
 
@@ -400,7 +448,9 @@ export default function Home() {
                                         opacity:
                                             isMobile
                                                 ? 0.28
-                                                : 0.52,
+                                                : isTablet
+                                                    ? 0.4
+                                                    : 0.52,
 
                                         filter:
                                             "brightness(1.08)"

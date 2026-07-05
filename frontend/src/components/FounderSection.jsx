@@ -300,10 +300,14 @@ export default function FounderSection() {
     const buttonStyle =
         useMemo(
             () =>
-                mobileButtonStyle(
-                    isMobile
+                contactButtonStyle(
+                    isMobile,
+                    isTablet
                 ),
-            [isMobile]
+            [
+                isMobile,
+                isTablet
+            ]
         );
 
     const sectionStyle =
@@ -314,25 +318,36 @@ export default function FounderSection() {
                 paddingTop:
                     isMobile
                         ? "56px"
-                        : "120px",
+                        : isTablet
+                            ? "88px"
+                            : "120px",
                 paddingBottom:
                     isMobile
                         ? "64px"
-                        : "140px",
+                        : isTablet
+                            ? "100px"
+                            : "140px",
                 paddingLeft:
                     isMobile
                         ? "20px"
-                        : "70px",
+                        : isTablet
+                            ? "40px"
+                            : "70px",
                 paddingRight:
                     isMobile
                         ? "20px"
-                        : "70px",
+                        : isTablet
+                            ? "40px"
+                            : "70px",
                 background:
                     "linear-gradient(to bottom, #080603 0%, #040404 100%)",
                 fontFamily: FONT_IM_FELL,
                 overflow: "hidden"
             }),
-            [isMobile]
+            [
+                isMobile,
+                isTablet
+            ]
         );
 
     const ambientGlowStyle =
@@ -342,28 +357,41 @@ export default function FounderSection() {
                 top:
                     isMobile
                         ? "-120px"
-                        : "120px",
+                        : isTablet
+                            ? "40px"
+                            : "120px",
                 left:
                     isMobile
                         ? "-200px"
-                        : "-180px",
+                        : isTablet
+                            ? "-190px"
+                            : "-180px",
                 width:
                     isMobile
                         ? "320px"
-                        : "520px",
+                        : isTablet
+                            ? "420px"
+                            : "520px",
                 height:
                     isMobile
                         ? "320px"
-                        : "520px",
+                        : isTablet
+                            ? "420px"
+                            : "520px",
                 background:
                     "rgba(255,140,0,0.08)",
                 borderRadius: "9999px",
                 filter:
                     isMobile
                         ? "blur(70px)"
-                        : "blur(160px)"
+                        : isTablet
+                            ? "blur(115px)"
+                            : "blur(160px)"
             }),
-            [isMobile]
+            [
+                isMobile,
+                isTablet
+            ]
         );
 
     const contentColumnStyle =
@@ -422,11 +450,14 @@ export default function FounderSection() {
                 marginBottom:
                     isMobile
                         ? "18px"
-                        : "28px"
+                        : isTablet
+                            ? "22px"
+                            : "28px"
             }),
             [
                 headingStyle,
-                isMobile
+                isMobile,
+                isTablet
             ]
         );
 
@@ -497,25 +528,36 @@ export default function FounderSection() {
                 width:
                     isMobile
                         ? "150px"
-                        : "220px",
+                        : isTablet
+                            ? "185px"
+                            : "220px",
                 height:
                     isMobile
                         ? "150px"
-                        : "220px",
+                        : isTablet
+                            ? "185px"
+                            : "220px",
                 borderRadius:
                     "9999px",
                 padding:
                     isMobile
                         ? "3px"
-                        : "4px",
+                        : isTablet
+                            ? "3px"
+                            : "4px",
                 background:
                     "linear-gradient(135deg, rgba(216,176,122,1), rgba(120,70,20,0.55))",
                 boxShadow:
                     isMobile
                         ? "0 0 30px rgba(255,140,0,0.12)"
-                        : "0 0 100px rgba(255,140,0,0.16)"
+                        : isTablet
+                            ? "0 0 60px rgba(255,140,0,0.14)"
+                            : "0 0 100px rgba(255,140,0,0.16)"
             }),
-            [isMobile]
+            [
+                isMobile,
+                isTablet
+            ]
         );
 
     const avatarInnerStyle =
@@ -617,7 +659,9 @@ export default function FounderSection() {
                 marginTop:
                     isMobile
                         ? "18px"
-                        : "38px",
+                        : isTablet
+                            ? "28px"
+                            : "38px",
                 ...FULL_WIDTH_BOX,
                 display: "flex",
                 flexWrap: "wrap",
@@ -626,9 +670,14 @@ export default function FounderSection() {
                 gap:
                     isMobile
                         ? "8px"
-                        : "14px"
+                        : isTablet
+                            ? "11px"
+                            : "14px"
             }),
-            [isMobile]
+            [
+                isMobile,
+                isTablet
+            ]
         );
 
     return (
@@ -1138,27 +1187,36 @@ function animatedHeroTitleStyle(
     };
 }
 
-function mobileButtonStyle(
-    isMobile
+function contactButtonStyle(
+    isMobile,
+    isTablet
 ) {
 
     return {
         height:
             isMobile
                 ? "38px"
-                : "48px",
+                : isTablet
+                    ? "42px"
+                    : "48px",
         paddingLeft:
             isMobile
                 ? "14px"
-                : "22px",
+                : isTablet
+                    ? "18px"
+                    : "22px",
         paddingRight:
             isMobile
                 ? "14px"
-                : "22px",
+                : isTablet
+                    ? "18px"
+                    : "22px",
         borderRadius:
             isMobile
                 ? "10px"
-                : "16px",
+                : isTablet
+                    ? "12px"
+                    : "16px",
         border:
             "1px solid rgba(216,176,122,0.16)",
         background:
@@ -1177,10 +1235,14 @@ function mobileButtonStyle(
         fontSize:
             isMobile
                 ? "11px"
-                : "14px",
+                : isTablet
+                    ? "12px"
+                    : "14px",
         letterSpacing:
             isMobile
                 ? "0.06em"
-                : "0.14em"
+                : isTablet
+                    ? "0.1em"
+                    : "0.14em"
     };
 }

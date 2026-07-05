@@ -1,15 +1,15 @@
+import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
+
 import {
     T
 } from "../services/translation";
 
 export default function Footer() {
 
-    const isMobile =
-        window.innerWidth < 768;
-
-    const isTablet =
-        window.innerWidth >= 768 &&
-        window.innerWidth < 1200;
+    const {
+        isMobile,
+        isTablet
+    } = useFounderBreakpoints();
 
     return (
         <footer
@@ -19,22 +19,30 @@ export default function Footer() {
                 paddingTop:
                     isMobile
                         ? "40px"
-                        : "70px",
+                        : isTablet
+                            ? "55px"
+                            : "70px",
 
                 paddingBottom:
                     isMobile
                         ? "40px"
-                        : "70px",
+                        : isTablet
+                            ? "55px"
+                            : "70px",
 
                 paddingLeft:
                     isMobile
                         ? "20px"
-                        : "40px",
+                        : isTablet
+                            ? "32px"
+                            : "40px",
 
                 paddingRight:
                     isMobile
                         ? "20px"
-                        : "40px",
+                        : isTablet
+                            ? "32px"
+                            : "40px",
 
                 background:
                     "linear-gradient(to bottom, #090603 0%, #050505 100%)",
@@ -57,7 +65,9 @@ export default function Footer() {
                     bottom:
                         isMobile
                             ? "-160px"
-                            : "-220px",
+                            : isTablet
+                                ? "-190px"
+                                : "-220px",
 
                     transform:
                         "translateX(-50%)",
@@ -65,12 +75,16 @@ export default function Footer() {
                     width:
                         isMobile
                             ? "320px"
-                            : "520px",
+                            : isTablet
+                                ? "420px"
+                                : "520px",
 
                     height:
                         isMobile
                             ? "320px"
-                            : "520px",
+                            : isTablet
+                                ? "420px"
+                                : "520px",
 
                     background:
                         "rgba(255,140,0,0.08)",
@@ -80,12 +94,16 @@ export default function Footer() {
                     filter:
                         isMobile
                             ? "blur(90px)"
-                            : "blur(160px)",
+                            : isTablet
+                                ? "blur(125px)"
+                                : "blur(160px)",
 
                     opacity:
                         isMobile
                             ? 0.7
-                            : 1,
+                            : isTablet
+                                ? 0.85
+                                : 1,
 
                     pointerEvents: "none"
                 }}
@@ -125,12 +143,16 @@ export default function Footer() {
                         letterSpacing:
                             isMobile
                                 ? "0.12em"
-                                : "0.22em",
+                                : isTablet
+                                    ? "0.18em"
+                                    : "0.22em",
 
                         lineHeight:
                             isMobile
                                 ? "1.9"
-                                : "2.1",
+                                : isTablet
+                                    ? "2"
+                                    : "2.1",
 
                         textTransform: "uppercase",
 
