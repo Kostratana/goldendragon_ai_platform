@@ -18,6 +18,8 @@ import {
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
+import AnimatedInkText from "./AnimatedInkText";
+
 import {
     T,
     useTranslatedText,
@@ -125,6 +127,16 @@ export default function FounderSection() {
     const founderPortraitAlt =
         useTranslatedText(
             FOUNDER_TEXT.ALT_PORTRAIT
+        );
+
+    const heroSubtitleLine1 =
+        useTranslatedText(
+            FOUNDER_TEXT.SUBTITLE_LINE_1
+        );
+
+    const heroSubtitleLine2 =
+        useTranslatedText(
+            FOUNDER_TEXT.SUBTITLE_LINE_2
         );
 
     useEffect(() => {
@@ -646,46 +658,27 @@ export default function FounderSection() {
                             }
                         >
 
-                            <div className="gd-ancient-ink-wrap">
+                            <AnimatedInkText
+                                as="h1"
+                                id="founder-hero-title"
+                                style={
+                                    heroTitleStyle
+                                }
+                                text={
+                                    FOUNDER_BRANDS.GOLDEN_DRAGON_AI_STUDIO
+                                }
+                            />
 
-                                <h1
-                                    id="founder-hero-title"
-                                    className="gd-ancient-ink-text"
-                                    style={
-                                        heroTitleStyle
-                                    }
-                                >
-                                    <T brand>
-                                        {
-                                            FOUNDER_BRANDS.GOLDEN_DRAGON_AI_STUDIO
-                                        }
-                                    </T>
-                                </h1>
-
-                            </div>
-
-                            <div className="gd-ancient-ink-wrap">
-
-                                <p
-                                    className="gd-ancient-ink-text"
-                                    style={
-                                        heroSubtitleStyle
-                                    }
-                                >
-                                    <T>
-                                        {
-                                            FOUNDER_TEXT.SUBTITLE_LINE_1
-                                        }
-                                    </T>
-                                    <br />
-                                    <T>
-                                        {
-                                            FOUNDER_TEXT.SUBTITLE_LINE_2
-                                        }
-                                    </T>
-                                </p>
-
-                            </div>
+                            <AnimatedInkText
+                                as="p"
+                                style={
+                                    heroSubtitleStyle
+                                }
+                                lines={[
+                                    heroSubtitleLine1,
+                                    heroSubtitleLine2
+                                ]}
+                            />
 
                         </div>
 

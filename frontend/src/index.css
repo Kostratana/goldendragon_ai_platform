@@ -1,180 +1,88 @@
-@keyframes gdAncientInk {
+@keyframes gdCharBurnCycle {
     0%,
-    30% {
-        clip-path: inset(0 0 0 0);
+    22% {
         opacity: 1;
-        filter: saturate(1.08) brightness(1.08);
-    }
-    38% {
-        clip-path: inset(0 45% 0 0);
-        opacity: 0.72;
-        filter: saturate(0.96) brightness(0.96);
-    }
-    46% {
-        clip-path: inset(0 100% 0 0);
-        opacity: 0.35;
-        filter: saturate(0.92) brightness(0.94);
-    }
-    54% {
-        clip-path: inset(0 58% 0 0);
-        opacity: 0.68;
-        filter: saturate(0.96) brightness(0.96);
-    }
-    62%,
-    100% {
         clip-path: inset(0 0 0 0);
-        opacity: 1;
-        filter: saturate(1.08) brightness(1.08);
-    }
-}
-
-@keyframes gdFireSparks {
-    0%,
-    100% {
-        text-shadow:
-            0 0 8px rgba(255, 230, 160, 1),
-            0 0 18px rgba(255, 170, 50, 0.9),
-            0 0 32px rgba(255, 110, 0, 0.65),
-            0 0 48px rgba(255, 70, 0, 0.35),
-            -2px -1px 4px rgba(255, 245, 200, 0.95),
-            2px 2px 6px rgba(255, 100, 20, 0.8),
-            0 -2px 12px rgba(255, 200, 80, 0.55);
-    }
-    15% {
-        text-shadow:
-            0 0 12px rgba(255, 245, 210, 1),
-            0 0 24px rgba(255, 190, 70, 0.95),
-            0 0 40px rgba(255, 130, 0, 0.75),
-            0 0 58px rgba(255, 80, 0, 0.42),
-            -3px -2px 6px rgba(255, 255, 230, 1),
-            3px 1px 8px rgba(255, 90, 0, 0.88),
-            4px -3px 14px rgba(255, 220, 100, 0.7);
-    }
-    35% {
-        text-shadow:
-            0 0 10px rgba(255, 210, 130, 0.95),
-            0 0 22px rgba(255, 150, 45, 0.85),
-            0 0 36px rgba(255, 95, 0, 0.58),
-            1px -3px 8px rgba(255, 235, 160, 0.9),
-            -2px 2px 5px rgba(255, 60, 0, 0.72);
-    }
-    55% {
-        text-shadow:
-            0 0 14px rgba(255, 250, 220, 1),
-            0 0 28px rgba(255, 180, 55, 0.96),
-            0 0 44px rgba(255, 115, 0, 0.72),
-            0 0 62px rgba(255, 75, 0, 0.4),
-            -4px 0 7px rgba(255, 255, 210, 0.95),
-            4px -2px 9px rgba(255, 105, 10, 0.85);
-    }
-    75% {
-        text-shadow:
-            0 0 9px rgba(255, 220, 150, 0.98),
-            0 0 20px rgba(255, 160, 48, 0.82),
-            0 0 34px rgba(255, 100, 0, 0.55),
-            -1px 2px 5px rgba(255, 240, 180, 0.88),
-            2px -2px 7px rgba(255, 85, 0, 0.75);
-    }
-}
-
-@keyframes gdEmberDrift {
-    0%,
-    100% {
-        opacity: 0.55;
         transform: translateY(0) scale(1);
-        filter: blur(0.5px);
+        text-shadow:
+            0 0 6px rgba(255, 200, 120, 0.55),
+            -1px 0 5px rgba(255, 120, 20, 0.45),
+            1px 0 5px rgba(255, 120, 20, 0.45);
     }
-    25% {
-        opacity: 0.9;
-        transform: translateY(-3px) scale(1.05);
-        filter: blur(0px);
+    28% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateY(-1px) scale(1.04);
+        text-shadow:
+            0 0 10px rgba(255, 220, 140, 0.95),
+            0 0 18px rgba(255, 150, 40, 0.85),
+            -2px -1px 6px rgba(255, 90, 0, 0.75),
+            2px 1px 6px rgba(255, 90, 0, 0.75);
+    }
+    36% {
+        opacity: 0.75;
+        clip-path: inset(0 35% 0 0);
+        transform: translateY(0) scale(1.02);
+        text-shadow:
+            0 0 14px rgba(255, 180, 60, 1),
+            0 0 22px rgba(255, 100, 0, 0.9);
+    }
+    44% {
+        opacity: 0.25;
+        clip-path: inset(0 100% 0 0);
+        transform: translateY(2px) scale(0.92);
+        text-shadow:
+            0 0 16px rgba(255, 120, 0, 0.95),
+            0 0 24px rgba(255, 60, 0, 0.7);
     }
     50% {
-        opacity: 0.65;
-        transform: translateY(2px) scale(0.98);
-        filter: blur(0.5px);
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateY(4px) scale(0.88);
+        text-shadow: none;
     }
-    75% {
-        opacity: 0.95;
-        transform: translateY(-2px) scale(1.03);
-        filter: blur(0px);
+    56% {
+        opacity: 0.35;
+        clip-path: inset(0 65% 0 0);
+        transform: translateY(1px) scale(0.96);
+        text-shadow:
+            0 0 8px rgba(255, 170, 50, 0.7);
     }
-}
-
-@keyframes gdSparkFlicker {
-    0%,
+    64%,
     100% {
-        opacity: 0.4;
-        transform: scale(1) rotate(0deg);
-    }
-    40% {
-        opacity: 0.85;
-        transform: scale(1.03) rotate(1deg);
-    }
-    70% {
-        opacity: 0.55;
-        transform: scale(0.99) rotate(-0.5deg);
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateY(0) scale(1);
+        text-shadow:
+            0 0 6px rgba(255, 200, 120, 0.5),
+            -1px 0 4px rgba(255, 120, 20, 0.35),
+            1px 0 4px rgba(255, 120, 20, 0.35);
     }
 }
 
-.gd-ancient-ink-wrap {
-    position: relative;
+.gd-ink-text-line {
     display: block;
     width: 100%;
     overflow: visible;
-    isolation: isolate;
 }
 
-.gd-ancient-ink-wrap::before,
-.gd-ancient-ink-wrap::after {
-    content: "";
-    position: absolute;
-    inset: -12% -6%;
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 12px;
-    animation: gdEmberDrift 3.2s ease-in-out infinite;
+.gd-ink-line {
+    display: inline;
 }
 
-.gd-ancient-ink-wrap::before {
-    background:
-        radial-gradient(circle at 18% 42%, rgba(255, 180, 60, 0.22) 0%, transparent 42%),
-        radial-gradient(circle at 72% 28%, rgba(255, 120, 20, 0.18) 0%, transparent 38%),
-        radial-gradient(circle at 48% 78%, rgba(255, 220, 140, 0.14) 0%, transparent 45%);
-    filter: blur(8px);
-}
-
-.gd-ancient-ink-wrap::after {
-    inset: -8% -4%;
-    background:
-        radial-gradient(circle at 12% 24%, rgba(255, 220, 120, 0.95) 0%, transparent 2%),
-        radial-gradient(circle at 78% 18%, rgba(255, 150, 40, 0.9) 0%, transparent 2.5%),
-        radial-gradient(circle at 44% 68%, rgba(255, 200, 80, 0.85) 0%, transparent 2%),
-        radial-gradient(circle at 86% 62%, rgba(255, 100, 20, 0.8) 0%, transparent 2%),
-        radial-gradient(circle at 24% 52%, rgba(255, 180, 60, 0.9) 0%, transparent 1.8%),
-        radial-gradient(circle at 62% 36%, rgba(255, 240, 180, 0.85) 0%, transparent 2.2%),
-        radial-gradient(circle at 52% 82%, rgba(255, 120, 30, 0.75) 0%, transparent 2%);
-    animation:
-        gdEmberDrift 2.6s ease-in-out infinite reverse,
-        gdSparkFlicker 1.8s ease-in-out infinite;
-    opacity: 0.7;
-}
-
-.gd-ancient-ink-text {
+.gd-ink-char {
+    display: inline-block;
     position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    overflow: visible;
-    animation:
-        gdAncientInk 14s ease-in-out infinite,
-        gdFireSparks 2.2s ease-in-out infinite;
-    -webkit-animation:
-        gdAncientInk 14s ease-in-out infinite,
-        gdFireSparks 2.2s ease-in-out infinite;
+    animation: gdCharBurnCycle 11s ease-in-out infinite;
+    animation-delay: calc(var(--char-i) * 0.07s);
+    will-change: opacity, clip-path, transform;
 }
 
-.gd-navbar-shell {
+.gd-ink-space {
+    min-width: 0.28em;
+}
+
+#navbar-root {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -182,8 +90,12 @@
     width: 100% !important;
     z-index: 2147483647 !important;
     pointer-events: none;
+    margin: 0;
+    padding: 0;
+}
+
+.gd-navbar-shell {
+    width: 100%;
+    pointer-events: none;
     box-sizing: border-box;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    will-change: transform;
 }
