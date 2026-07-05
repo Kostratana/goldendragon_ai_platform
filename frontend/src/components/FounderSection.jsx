@@ -181,19 +181,15 @@ export default function FounderSection() {
             ),
 
             translateFounderText(
-                FOUNDER_TEXT.CTA_CONTACT_PREFIX
+                FOUNDER_TEXT.CTA_CONTACT_BEFORE
             ),
 
             translateFounderText(
-                FOUNDER_TEXT.CTA_EMAIL_LINK
+                FOUNDER_TEXT.CTA_CONTACT_MIDDLE
             ),
 
             translateFounderText(
-                FOUNDER_TEXT.CTA_CONTACT_AFTER_EMAIL
-            ),
-
-            translateFounderText(
-                FOUNDER_TEXT.CTA_CONTACT_AFTER_CHAT
+                FOUNDER_TEXT.CTA_CONTACT_AFTER
             ),
 
             translateFounderText(
@@ -789,33 +785,28 @@ export default function FounderSection() {
                         >
                             <T>
                                 {
-                                    FOUNDER_TEXT.CTA_CONTACT_PREFIX
+                                    FOUNDER_TEXT.CTA_CONTACT_BEFORE
                                 }
                             </T>
-                            {" "}
                             <a
                                 href={
                                     CONTACT_LINKS.EMAIL
                                 }
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                data-no-translate
                                 style={
                                     CTA_LINK_STYLE
                                 }
                             >
-                                <T>
-                                    {
-                                        FOUNDER_TEXT.CTA_EMAIL_LINK
-                                    }
-                                </T>
+                                email
                             </a>
                             {" "}
                             <T>
                                 {
-                                    FOUNDER_TEXT.CTA_CONTACT_AFTER_EMAIL
+                                    FOUNDER_TEXT.CTA_CONTACT_MIDDLE
                                 }
                             </T>
-                            {" "}
                             <Link
                                 to="/chat"
                                 style={
@@ -831,7 +822,7 @@ export default function FounderSection() {
                             {" "}
                             <T>
                                 {
-                                    FOUNDER_TEXT.CTA_CONTACT_AFTER_CHAT
+                                    FOUNDER_TEXT.CTA_CONTACT_AFTER
                                 }
                             </T>
                         </p>

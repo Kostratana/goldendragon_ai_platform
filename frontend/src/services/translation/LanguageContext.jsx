@@ -38,28 +38,6 @@ const LanguageContext =
 
 function readStoredLanguage() {
 
-    try {
-
-        const stored =
-            localStorage.getItem(
-                LANGUAGE_STORAGE_KEY
-            );
-
-        if (
-            stored &&
-            LANGUAGE_LABELS[stored]
-        ) {
-            return stored;
-        }
-
-    } catch (error) {
-
-        console.warn(
-            "Unable to read stored language:",
-            error
-        );
-    }
-
     return DEFAULT_LANGUAGE;
 }
 
@@ -109,32 +87,27 @@ export function TranslationProvider({
 }) {
 
     const [language, setLanguageState] =
-        useState(readStoredLanguage);
+        useState(DEFAULT_LANGUAGE);
 
     const [isTranslating, setIsTranslating] =
         useState(false);
 
-    const persistLanguage =
-        useCallback(
-            (nextLanguage) => {
+    useEffect(() => {
 
-                try {
+        try {
 
-                    localStorage.setItem(
-                        LANGUAGE_STORAGE_KEY,
-                        nextLanguage
-                    );
+            localStorage.removeItem(
+                LANGUAGE_STORAGE_KEY
+            );
 
-                } catch (error) {
+        } catch (error) {
 
-                    console.warn(
-                        "Unable to store language:",
-                        error
-                    );
-                }
-            },
-            []
-        );
+            console.warn(
+                "Unable to clear stored language:",
+                error
+            );
+        }
+    }, []);
 
     const setLanguage =
         useCallback(
@@ -151,12 +124,8 @@ export function TranslationProvider({
                 setLanguageState(
                     nextLanguage
                 );
-
-                persistLanguage(
-                    nextLanguage
-                );
             },
-            [persistLanguage]
+            []
         );
 
     const translateText =

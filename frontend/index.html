@@ -128,33 +128,6 @@
         rel="stylesheet"
     />
 
-    <!-- GOOGLE TRANSLATE -->
-
-    <script type="text/javascript">
-
-        function googleTranslateElementInit() {
-
-            new google.translate.TranslateElement(
-                {
-                    pageLanguage: "en",
-
-                    includedLanguages:
-                        "en,ru,es,fr,de",
-
-                    autoDisplay: false
-                },
-
-                "google_translate_element"
-            );
-        }
-
-    </script>
-
-    <script
-        type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
-
     <style>
 
         html {
@@ -178,7 +151,7 @@
 
             font-family: "Inter", sans-serif;
 
-            position: relative;
+            position: static;
 
             min-height: 100vh;
 
@@ -213,58 +186,6 @@
             z-index: 999999;
 
             pointer-events: none;
-        }
-
-        /* REMOVE GOOGLE TOP BAR */
-
-        iframe.skiptranslate {
-
-            display: none !important;
-        }
-
-        .goog-te-banner-frame {
-
-            display: none !important;
-        }
-
-        body {
-
-            top: 0 !important;
-        }
-
-        /* HIDE GOOGLE LOGO */
-
-        .goog-logo-link,
-        .goog-te-gadget span {
-
-            display: none !important;
-        }
-
-        .goog-te-gadget {
-
-            color: transparent !important;
-
-            font-size: 0px !important;
-        }
-
-        /* HIDE DEFAULT DROPDOWN */
-
-        .goog-te-combo {
-
-            display: none !important;
-        }
-
-        /* TRANSLATE WRAPPER */
-
-        #google_translate_element {
-
-            position: fixed;
-
-            opacity: 0;
-
-            pointer-events: none;
-
-            z-index: -9999;
         }
 
         /* FIX FAVICON ROUND DISPLAY */
@@ -323,10 +244,6 @@
 </head>
 
 <body>
-
-    <!-- GOOGLE TRANSLATE -->
-
-    <div id="google_translate_element"></div>
 
     <!-- GLOBAL NAVBAR PORTAL -->
 

@@ -3,33 +3,75 @@
     30% {
         clip-path: inset(0 0 0 0);
         opacity: 1;
-        text-shadow: 0 0 18px rgba(216, 176, 122, 0.22), 0 0 32px rgba(216, 176, 122, 0.08);
-        filter: saturate(1) brightness(1);
+        filter: saturate(1.08) brightness(1.08);
     }
     38% {
         clip-path: inset(0 45% 0 0);
         opacity: 0.72;
-        text-shadow: 0 0 10px rgba(216, 176, 122, 0.12);
         filter: saturate(0.96) brightness(0.96);
     }
     46% {
         clip-path: inset(0 100% 0 0);
         opacity: 0.35;
-        text-shadow: 0 0 4px rgba(216, 176, 122, 0.05);
         filter: saturate(0.92) brightness(0.94);
     }
     54% {
         clip-path: inset(0 58% 0 0);
         opacity: 0.68;
-        text-shadow: 0 0 10px rgba(216, 176, 122, 0.12);
         filter: saturate(0.96) brightness(0.96);
     }
     62%,
     100% {
         clip-path: inset(0 0 0 0);
         opacity: 1;
-        text-shadow: 0 0 18px rgba(216, 176, 122, 0.22), 0 0 32px rgba(216, 176, 122, 0.08);
-        filter: saturate(1) brightness(1);
+        filter: saturate(1.08) brightness(1.08);
+    }
+}
+
+@keyframes gdFireSparks {
+    0%,
+    100% {
+        text-shadow:
+            0 0 6px rgba(255, 220, 140, 0.95),
+            0 0 14px rgba(255, 160, 50, 0.75),
+            0 0 28px rgba(255, 110, 0, 0.45),
+            0 0 42px rgba(255, 70, 0, 0.22),
+            -1px -1px 2px rgba(255, 240, 180, 0.8),
+            1px 1px 3px rgba(255, 120, 20, 0.65);
+    }
+    20% {
+        text-shadow:
+            0 0 10px rgba(255, 240, 180, 1),
+            0 0 20px rgba(255, 180, 60, 0.9),
+            0 0 34px rgba(255, 120, 0, 0.55),
+            0 0 50px rgba(255, 80, 0, 0.3),
+            -2px -2px 4px rgba(255, 255, 220, 0.95),
+            2px 1px 5px rgba(255, 90, 0, 0.75);
+    }
+    40% {
+        text-shadow:
+            0 0 8px rgba(255, 200, 120, 0.9),
+            0 0 18px rgba(255, 140, 40, 0.8),
+            0 0 30px rgba(255, 100, 0, 0.5),
+            1px -2px 6px rgba(255, 230, 150, 0.85),
+            -1px 2px 4px rgba(255, 60, 0, 0.6);
+    }
+    60% {
+        text-shadow:
+            0 0 12px rgba(255, 245, 200, 1),
+            0 0 24px rgba(255, 170, 50, 0.92),
+            0 0 38px rgba(255, 110, 0, 0.58),
+            0 0 54px rgba(255, 75, 0, 0.32),
+            -3px 0 5px rgba(255, 255, 200, 0.9),
+            3px -1px 6px rgba(255, 100, 10, 0.8);
+    }
+    80% {
+        text-shadow:
+            0 0 7px rgba(255, 210, 130, 0.92),
+            0 0 16px rgba(255, 150, 45, 0.78),
+            0 0 26px rgba(255, 95, 0, 0.48),
+            -1px 1px 3px rgba(255, 235, 160, 0.82),
+            2px -2px 4px rgba(255, 85, 0, 0.68);
     }
 }
 
@@ -37,18 +79,13 @@
     display: block;
     width: 100%;
     overflow: visible;
-    animation: gdAncientInk 14s ease-in-out infinite;
-    -webkit-animation: gdAncientInk 14s ease-in-out infinite;
-}
-
-#navbar-root {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    z-index: 2147483647 !important;
-    pointer-events: none;
+    position: relative;
+    animation:
+        gdAncientInk 14s ease-in-out infinite,
+        gdFireSparks 2.8s ease-in-out infinite;
+    -webkit-animation:
+        gdAncientInk 14s ease-in-out infinite,
+        gdFireSparks 2.8s ease-in-out infinite;
 }
 
 .gd-navbar-shell {
@@ -60,4 +97,7 @@
     z-index: 2147483647 !important;
     pointer-events: none;
     box-sizing: border-box;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
 }

@@ -99,16 +99,13 @@ export const FOUNDER_TEXT = {
     CTA_PROJECT:
         "Start by telling us about your project.",
 
-    CTA_CONTACT_PREFIX:
+    CTA_CONTACT_BEFORE:
         "You can contact us directly by ",
 
-    CTA_EMAIL_LINK:
-        "email",
-
-    CTA_CONTACT_AFTER_EMAIL:
+    CTA_CONTACT_MIDDLE:
         " or continue to the ",
 
-    CTA_CONTACT_AFTER_CHAT:
+    CTA_CONTACT_AFTER:
         " page, where our AI Business Assistant will help you define your goals, collect your requirements, and prepare the foundation for your future intelligent system.",
 
     CTA_TRANSFORM:

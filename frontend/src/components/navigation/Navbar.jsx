@@ -1,13 +1,8 @@
 import {
     useEffect,
-    useLayoutEffect,
     useRef,
     useState
 } from "react";
-
-import {
-    createPortal
-} from "react-dom";
 
 import {
     Link,
@@ -122,11 +117,6 @@ export default function Navbar() {
     const [languageOpen, setLanguageOpen] =
         useState(false);
 
-    const [
-        navbarPortalTarget,
-        setNavbarPortalTarget
-    ] = useState(null);
-
     const [voiceHovered, setVoiceHovered] =
         useState(false);
 
@@ -134,16 +124,6 @@ export default function Navbar() {
         language,
         setLanguage
     } = useLanguage();
-
-    useLayoutEffect(() => {
-
-        setNavbarPortalTarget(
-            document.getElementById(
-                "navbar-root"
-            ) ||
-            document.body
-        );
-    }, []);
 
     useEffect(() => {
 
@@ -541,14 +521,7 @@ export default function Navbar() {
     return (
 
         <>
-            {
-                navbarPortalTarget
-                    ? createPortal(
-                        fixedNavbarBar,
-                        navbarPortalTarget
-                    )
-                    : null
-            }
+            {fixedNavbarBar}
 
             <div
                 style={{
