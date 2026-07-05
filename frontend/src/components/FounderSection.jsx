@@ -446,6 +446,12 @@ export default function FounderSection() {
         useMemo(
             () => ({
                 ...headingStyle,
+                fontSize:
+                    isMobile
+                        ? "24px"
+                        : isTablet
+                            ? "30px"
+                            : "40px",
                 marginTop: 0,
                 marginBottom:
                     isMobile
@@ -1070,10 +1076,10 @@ function declarationHeadingStyle(
         color: GOLD,
         fontSize:
             isMobile
-                ? "24px"
+                ? "20px"
                 : isTablet
-                    ? "30px"
-                    : "40px",
+                    ? "26px"
+                    : "32px",
         fontWeight: "700",
         fontFamily: FONT_CINZEL,
         letterSpacing:
