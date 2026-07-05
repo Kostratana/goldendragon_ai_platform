@@ -2,61 +2,39 @@
     0%,
     22% {
         opacity: 1;
+        color: inherit;
         clip-path: inset(0 0 0 0);
-        transform: translateY(0) scale(1);
-        text-shadow:
-            0 0 6px rgba(255, 200, 120, 0.55),
-            -1px 0 5px rgba(255, 120, 20, 0.45),
-            1px 0 5px rgba(255, 120, 20, 0.45);
     }
     28% {
         opacity: 1;
+        color: #f0b040;
         clip-path: inset(0 0 0 0);
-        transform: translateY(-1px) scale(1.04);
-        text-shadow:
-            0 0 10px rgba(255, 220, 140, 0.95),
-            0 0 18px rgba(255, 150, 40, 0.85),
-            -2px -1px 6px rgba(255, 90, 0, 0.75),
-            2px 1px 6px rgba(255, 90, 0, 0.75);
     }
     36% {
-        opacity: 0.75;
+        opacity: 0.9;
+        color: #e07020;
         clip-path: inset(0 35% 0 0);
-        transform: translateY(0) scale(1.02);
-        text-shadow:
-            0 0 14px rgba(255, 180, 60, 1),
-            0 0 22px rgba(255, 100, 0, 0.9);
     }
     44% {
-        opacity: 0.25;
+        opacity: 0.35;
+        color: #c84810;
         clip-path: inset(0 100% 0 0);
-        transform: translateY(2px) scale(0.92);
-        text-shadow:
-            0 0 16px rgba(255, 120, 0, 0.95),
-            0 0 24px rgba(255, 60, 0, 0.7);
     }
     50% {
         opacity: 0;
+        color: #a83808;
         clip-path: inset(0 100% 0 0);
-        transform: translateY(4px) scale(0.88);
-        text-shadow: none;
     }
     56% {
-        opacity: 0.35;
+        opacity: 0.45;
+        color: #e88828;
         clip-path: inset(0 65% 0 0);
-        transform: translateY(1px) scale(0.96);
-        text-shadow:
-            0 0 8px rgba(255, 170, 50, 0.7);
     }
     64%,
     100% {
         opacity: 1;
+        color: inherit;
         clip-path: inset(0 0 0 0);
-        transform: translateY(0) scale(1);
-        text-shadow:
-            0 0 6px rgba(255, 200, 120, 0.5),
-            -1px 0 4px rgba(255, 120, 20, 0.35),
-            1px 0 4px rgba(255, 120, 20, 0.35);
     }
 }
 
@@ -75,7 +53,7 @@
     position: relative;
     animation: gdCharBurnCycle 11s ease-in-out infinite;
     animation-delay: calc(var(--char-i) * 0.07s);
-    will-change: opacity, clip-path, transform;
+    will-change: opacity, clip-path, color;
 }
 
 .gd-ink-space {
