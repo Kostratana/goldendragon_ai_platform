@@ -3,6 +3,8 @@ import {
 }
 from "./loggerStore";
 
+import { T } from "../services/translation";
+
 export default function LoggerPanel() {
 
     const logs =
@@ -58,7 +60,7 @@ export default function LoggerPanel() {
                     fontWeight: "600"
                 }}
             >
-                Runtime Logger
+                <T>Runtime Logger</T>
             </div>
 
             {
@@ -87,7 +89,7 @@ export default function LoggerPanel() {
                                 "1px solid rgba(255,220,170,0.08)"
                         }}
                     >
-                        Waiting for runtime events...
+                        <T>Waiting for runtime events...</T>
                     </div>
 
                 )
@@ -162,7 +164,7 @@ export default function LoggerPanel() {
                                 lineHeight: "1.5"
                             }}
                         >
-                            {log.message}
+                            <T>{log.message}</T>
                         </div>
 
                     </div>

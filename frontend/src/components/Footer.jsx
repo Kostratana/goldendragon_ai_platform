@@ -1,3 +1,7 @@
+import {
+    T
+} from "../services/translation";
+
 export default function Footer() {
 
     const isMobile =
@@ -139,9 +143,9 @@ export default function Footer() {
                                 : "900px"
                     }}
                 >
-                    © 2026 GOLDEN DRAGON AI
+                    <T>© 2026 GOLDEN DRAGON AI</T>
                     <br />
-                    ALL RIGHTS RESERVED
+                    <T>ALL RIGHTS RESERVED</T>
                 </div>
 
             </div>

@@ -1,3 +1,8 @@
+import {
+    T,
+    useTranslatedText
+} from "../../services/translation";
+
 export default function ChatInput({
 
     message,
@@ -17,6 +22,26 @@ export default function ChatInput({
     uploadProgress
 
 }) {
+
+    const placeholderText =
+        useTranslatedText(
+            "Ask Murzik..."
+        );
+
+    const uploadFileTitle =
+        useTranslatedText(
+            "Upload File"
+        );
+
+    const voiceTitle =
+        useTranslatedText(
+            "Voice"
+        );
+
+    const sendMessageTitle =
+        useTranslatedText(
+            "Send Message"
+        );
 
     const iconButtonStyle = {
 
@@ -108,13 +133,13 @@ export default function ChatInput({
                         </div>
 
                         <div>
-                            Status:
+                            <T>Status:</T>
                             {" "}
                             {uploadStatus}
                         </div>
 
                         <div>
-                            Progress:
+                            <T>Progress:</T>
                             {" "}
                             {uploadProgress}%
                         </div>
@@ -138,7 +163,7 @@ export default function ChatInput({
                 <button
                     style={iconButtonStyle}
                     onClick={handleUploadClick}
-                    title="Upload File"
+                    title={uploadFileTitle}
                 >
                     📎
                 </button>
@@ -162,7 +187,7 @@ export default function ChatInput({
                             !voiceEnabled
                         )
                     }
-                    title="Voice"
+                    title={voiceTitle}
                 >
                     🎤
                 </button>
@@ -187,7 +212,7 @@ export default function ChatInput({
                         }
                     }}
 
-                    placeholder="Ask Murzik..."
+                    placeholder={placeholderText}
 
                     style={{
 
@@ -223,7 +248,7 @@ export default function ChatInput({
 
                 <button
                     onClick={sendMessage}
-                    title="Send Message"
+                    title={sendMessageTitle}
                     style={{
 
                         width: "72px",
@@ -264,7 +289,7 @@ export default function ChatInput({
                             "blur(10px)"
                     }}
                 >
-                    SEND
+                    <T>SEND</T>
                 </button>
 
             </div>

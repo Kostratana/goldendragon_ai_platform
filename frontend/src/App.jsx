@@ -1,6 +1,14 @@
 import AppRouter from "./router/AppRouter";
 
+import {
+    TranslationProvider
+} from "./services/translation";
+
 export default function App() {
 
-    return <AppRouter />;
+    return (
+        <TranslationProvider>
+            <AppRouter />
+        </TranslationProvider>
+    );
 }

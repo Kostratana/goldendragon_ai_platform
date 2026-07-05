@@ -9,6 +9,41 @@ import {
     useLocation
 } from "react-router-dom";
 
+import {
+    useLanguage,
+    T as Translate,
+    BRAND_TERMS,
+    SUPPORTED_LANGUAGES
+} from "../../services/translation";
+
+/*
+Navigation translation policy:
+
+• Translate normal user-facing labels (HOME, future nav items).
+• Never translate brand or product names.
+• Protected names live in BRAND_TERMS (Brand Registry).
+• New AI products: add ONLY to SOLUTIONS_LINKS below.
+  Each label must already exist in BRAND_TERMS.
+*/
+
+function T({
+    children,
+    brand = false,
+    values = null,
+    translate = true
+}) {
+
+    return (
+        <Translate
+            noTranslate={brand}
+            translate={translate}
+            values={values}
+        >
+            {children}
+        </Translate>
+    );
+}
+
 /*
 All future AI products
 must be added ONLY here.
@@ -43,6 +78,29 @@ const SOLUTIONS_LINKS = [
     }
 ];
 
+if (
+    import.meta.env.DEV
+) {
+
+    SOLUTIONS_LINKS.forEach(
+        ({
+            label
+        }) => {
+
+            if (
+                !BRAND_TERMS.has(
+                    label
+                )
+            ) {
+
+                console.warn(
+                    `Navbar: "${label}" is missing from BRAND_TERMS registry.`
+                );
+            }
+        }
+    );
+}
+
 export default function Navbar() {
 
     const location =
@@ -60,8 +118,16 @@ export default function Navbar() {
     const [solutionsOpen, setSolutionsOpen] =
         useState(false);
 
+    const [languageOpen, setLanguageOpen] =
+        useState(false);
+
     const [voiceHovered, setVoiceHovered] =
         useState(false);
+
+    const {
+        language,
+        setLanguage
+    } = useLanguage();
 
     useEffect(() => {
 
@@ -193,6 +259,9 @@ export default function Navbar() {
         pathname === "/solutions" ||
         pathname.startsWith("/solutions/");
 
+    const isLanguageActive =
+        language !== "en";
+
     return (
 
         <>
@@ -233,13 +302,7 @@ export default function Navbar() {
                     pointerEvents: "none",
 
                     boxSizing:
-                        "border-box",
-
-                    transform:
-                        "translateZ(0)",
-
-                    willChange:
-                        "transform"
+                        "border-box"
                 }}
             >
 
@@ -330,9 +393,20 @@ export default function Navbar() {
                         onOpenChange={setSolutionsOpen}
                     />
 
+                    <LanguageDropdown
+                        active={isLanguageActive}
+                        isMobile={isMobile}
+                        isTablet={isTablet}
+                        open={languageOpen}
+                        currentLanguage={language}
+                        onOpenChange={setLanguageOpen}
+                        onLanguageChange={setLanguage}
+                    />
+
                     <NavButton
                         to="/chat"
                         text="DRAGON CHAT"
+                        brand
                         active={isChatActive}
                         isMobile={isMobile}
                         isTablet={isTablet}
@@ -365,6 +439,8 @@ export default function Navbar() {
                                 ? "Stop presentation audio"
                                 : "Play presentation audio"
                         }
+
+                        data-no-translate
 
                         style={{
 
@@ -605,7 +681,7 @@ function SolutionsDropdown({
                             : "none"
                 }}
             >
-                AI SOLUTIONS
+                <T brand>AI SOLUTIONS</T>
                 <ChevronDown
                     open={open}
                     active={active}
@@ -716,6 +792,487 @@ function SolutionsDropdown({
     );
 }
 
+function LanguageDropdown({
+    active,
+    isMobile,
+    isTablet,
+    open,
+    currentLanguage,
+    onOpenChange,
+    onLanguageChange
+}) {
+
+    const containerRef =
+        useRef(null);
+
+    useEffect(() => {
+
+        if (!open || !isMobile) {
+            return;
+        }
+
+        function handleClickOutside(
+            event
+        ) {
+
+            if (
+                containerRef.current &&
+                !containerRef.current.contains(
+                    event.target
+                )
+            ) {
+
+                onOpenChange(false);
+            }
+        }
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+        return () => {
+
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+        };
+
+    }, [open, isMobile, onOpenChange]);
+
+    function handleMouseEnter() {
+
+        if (!isMobile) {
+            onOpenChange(true);
+        }
+    }
+
+    function handleMouseLeave() {
+
+        if (!isMobile) {
+            onOpenChange(false);
+        }
+    }
+
+    function handleTriggerClick() {
+
+        if (isMobile) {
+            onOpenChange(!open);
+        }
+    }
+
+    function handleLanguageSelect(
+        code
+    ) {
+
+        onLanguageChange(code);
+
+        onOpenChange(false);
+    }
+
+    return (
+
+        <div
+            ref={containerRef}
+
+            style={{
+                position: "relative",
+                flexShrink: 0
+            }}
+
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+
+            <style>
+                {`
+                    @keyframes navDropdownOpen {
+                        from {
+                            opacity: 0;
+                            transform: translateX(-50%) translateY(-6px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateX(-50%) translateY(0);
+                        }
+                    }
+                `}
+            </style>
+
+            <button
+                type="button"
+                onClick={handleTriggerClick}
+                aria-expanded={open}
+                aria-haspopup="menu"
+
+                style={{
+
+                    ...getButtonStyle(
+                        isMobile,
+                        isTablet
+                    ),
+
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    justifyContent: "center",
+
+                    color:
+                        active
+                            ? "#ffe2b2"
+                            : "#8c8c8c",
+
+                    background:
+                        active
+                            ? `
+                            linear-gradient(
+                                to bottom,
+                                rgba(255,170,70,0.22),
+                                rgba(255,120,20,0.14)
+                            )
+                            `
+                            : "rgba(255,255,255,0.015)",
+
+                    border:
+                        active
+                            ? "1px solid rgba(255,170,70,0.18)"
+                            : "1px solid rgba(255,255,255,0.03)",
+
+                    boxShadow:
+                        active
+                            ? `
+                            0 0 34px rgba(255,140,0,0.22),
+                            inset 0 0 16px rgba(255,190,80,0.08)
+                            `
+                            : "none"
+                }}
+            >
+                <span data-no-translate>
+                    LANGUAGE
+                </span>
+                <ChevronDown
+                    open={open}
+                    active={active}
+                />
+            </button>
+
+            {
+                open && (
+                    <div
+                        role="menu"
+
+                        style={{
+
+                            position: "absolute",
+
+                            top: "100%",
+
+                            left: "50%",
+
+                            transform:
+                                "translateX(-50%)",
+
+                            marginTop: "10px",
+
+                            minWidth:
+                                isMobile
+                                    ? "240px"
+                                    : "300px",
+
+                            padding: "8px",
+
+                            borderRadius: "12px",
+
+                            background:
+                                `
+                                linear-gradient(
+                                    to bottom,
+                                    rgba(10,10,10,0.92),
+                                    rgba(6,6,6,0.88)
+                                )
+                                `,
+
+                            border:
+                                "1px solid rgba(255,140,0,0.08)",
+
+                            backdropFilter:
+                                "blur(16px)",
+
+                            WebkitBackdropFilter:
+                                "blur(16px)",
+
+                            boxShadow:
+                                `
+                                0 0 60px rgba(255,140,0,0.08),
+                                inset 0 0 18px rgba(255,140,0,0.03)
+                                `,
+
+                            zIndex: 999999,
+
+                            animation:
+                                "navDropdownOpen 200ms ease-out forwards"
+                        }}
+                    >
+
+                        {
+                            SUPPORTED_LANGUAGES.map(
+                                ({
+                                    code,
+                                    nativeName,
+                                    flag
+                                }) => {
+
+                                    const itemActive =
+                                        currentLanguage ===
+                                        code;
+
+                                    return (
+
+                                        <LanguageMenuItem
+                                            key={code}
+                                            label={nativeName}
+                                            flag={flag}
+                                            active={itemActive}
+                                            isMobile={isMobile}
+                                            onSelect={() =>
+                                                handleLanguageSelect(
+                                                    code
+                                                )
+                                            }
+                                        />
+                                    );
+                                }
+                            )
+                        }
+
+                    </div>
+                )
+            }
+
+        </div>
+    );
+}
+
+function getDropdownMenuFontSize(
+    isMobile
+) {
+
+    return isMobile
+        ? "10px"
+        : "11px";
+}
+
+function LanguageFlag({
+    flag
+}) {
+
+    const shared = {
+        width: "16",
+        height: "11",
+        viewBox: "0 0 16 11",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        "aria-hidden": "true",
+        style: {
+            flexShrink: 0,
+            display: "block",
+            borderRadius: "2px",
+            boxShadow:
+                "0 0 0 1px rgba(255,255,255,0.08)"
+        }
+    };
+
+    if (flag === "gb") {
+
+        return (
+            <svg {...shared}>
+                <rect width="16" height="11" fill="#012169" />
+                <path d="M0 0L16 11M16 0L0 11" stroke="#FFFFFF" strokeWidth="2.2" />
+                <path d="M0 0L16 11M16 0L0 11" stroke="#C8102E" strokeWidth="1.1" />
+                <path d="M8 0V11M0 5.5H16" stroke="#FFFFFF" strokeWidth="3.2" />
+                <path d="M8 0V11M0 5.5H16" stroke="#C8102E" strokeWidth="1.8" />
+            </svg>
+        );
+    }
+
+    if (flag === "ru") {
+
+        return (
+            <svg {...shared}>
+                <rect width="16" height="3.67" y="0" fill="#FFFFFF" />
+                <rect width="16" height="3.67" y="3.67" fill="#0039A6" />
+                <rect width="16" height="3.66" y="7.34" fill="#D52B1E" />
+            </svg>
+        );
+    }
+
+    if (flag === "es") {
+
+        return (
+            <svg {...shared}>
+                <rect width="16" height="11" fill="#AA151B" />
+                <rect width="16" height="5.5" y="2.75" fill="#F1BF00" />
+            </svg>
+        );
+    }
+
+    if (flag === "fr") {
+
+        return (
+            <svg {...shared}>
+                <rect width="5.33" height="11" fill="#0055A4" />
+                <rect width="5.34" height="11" x="5.33" fill="#FFFFFF" />
+                <rect width="5.33" height="11" x="10.67" fill="#EF4135" />
+            </svg>
+        );
+    }
+
+    if (flag === "de") {
+
+        return (
+            <svg {...shared}>
+                <rect width="16" height="3.67" y="0" fill="#000000" />
+                <rect width="16" height="3.67" y="3.67" fill="#DD0000" />
+                <rect width="16" height="3.66" y="7.34" fill="#FFCE00" />
+            </svg>
+        );
+    }
+
+    if (flag === "it") {
+
+        return (
+            <svg {...shared}>
+                <rect width="5.33" height="11" fill="#009246" />
+                <rect width="5.34" height="11" x="5.33" fill="#FFFFFF" />
+                <rect width="5.33" height="11" x="10.67" fill="#CE2B37" />
+            </svg>
+        );
+    }
+
+    return null;
+}
+
+function LanguageMenuItem({
+    label,
+    flag,
+    active,
+    isMobile,
+    onSelect
+}) {
+
+    const [hovered, setHovered] =
+        useState(false);
+
+    return (
+
+        <button
+            type="button"
+            role="menuitem"
+            data-no-translate
+
+            onClick={onSelect}
+
+            onMouseEnter={() =>
+                setHovered(true)
+            }
+
+            onMouseLeave={() =>
+                setHovered(false)
+            }
+
+            style={{
+
+                display: "flex",
+
+                alignItems: "center",
+
+                gap: "8px",
+
+                width: "100%",
+
+                padding:
+                    isMobile
+                        ? "8px 10px"
+                        : "10px 14px",
+
+                borderRadius: "8px",
+
+                textDecoration:
+                    "none",
+
+                fontSize:
+                    getDropdownMenuFontSize(
+                        isMobile
+                    ),
+
+                fontWeight: "700",
+
+                letterSpacing:
+                    "0.08em",
+
+                fontFamily:
+                    "'Cinzel', serif",
+
+                whiteSpace:
+                    "nowrap",
+
+                color:
+                    active
+                        ? "#ffe2b2"
+                        : "#8c8c8c",
+
+                background:
+                    active
+                        ? `
+                        linear-gradient(
+                            to bottom,
+                            rgba(255,170,70,0.18),
+                            rgba(255,120,20,0.10)
+                        )
+                        `
+                        : hovered
+                            ? `
+                            linear-gradient(
+                                to bottom,
+                                rgba(255,170,70,0.12),
+                                rgba(255,120,20,0.06)
+                            )
+                            `
+                            : "transparent",
+
+                border:
+                    active
+                        ? "1px solid rgba(255,170,70,0.14)"
+                        : hovered
+                            ? "1px solid rgba(255,170,70,0.10)"
+                            : "1px solid transparent",
+
+                boxShadow:
+                    hovered
+                        ? `
+                        0 0 20px rgba(255,140,0,0.16),
+                        inset 0 0 10px rgba(255,190,80,0.05)
+                        `
+                        : "none",
+
+                transition:
+                    "all 0.20s ease",
+
+                cursor: "pointer",
+
+                outline: "none",
+
+                textAlign: "left"
+            }}
+        >
+            <LanguageFlag flag={flag} />
+            {label}
+        </button>
+    );
+}
+
 function ChevronDown({
     open,
     active
@@ -804,9 +1361,9 @@ function SolutionMenuItem({
                     "none",
 
                 fontSize:
-                    isMobile
-                        ? "8px"
-                        : "10px",
+                    getDropdownMenuFontSize(
+                        isMobile
+                    ),
 
                 fontWeight: "700",
 
@@ -862,7 +1419,7 @@ function SolutionMenuItem({
                     "all 0.20s ease"
             }}
         >
-            {label}
+            <T brand>{label}</T>
         </Link>
     );
 }
@@ -872,7 +1429,8 @@ function NavButton({
     text,
     active,
     isMobile,
-    isTablet
+    isTablet,
+    brand = false
 }) {
 
     return (
@@ -926,7 +1484,7 @@ function NavButton({
                         : "none"
             }}
         >
-            {text}
+            <T brand={brand}>{text}</T>
         </Link>
     );
 }

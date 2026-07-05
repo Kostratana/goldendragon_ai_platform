@@ -10,6 +10,8 @@ import ChatInput from "./ChatInput";
 
 import LoggerPanel from "../../logger/LoggerPanel";
 
+import { T } from "../../services/translation";
+
 const PROJECT_MODES = {
     CHAT: "chat",
     MVP_1: "mvp1_food_safety_ai",
@@ -702,7 +704,7 @@ export default function ChatWindow({
                                         : "1.6"
                             }}
                         >
-                            {item.text}
+                            <T>{item.text}</T>
                         </div>
 
                     </div>
@@ -740,7 +742,7 @@ export default function ChatWindow({
                                 letterSpacing: "0.08em"
                             }}
                         >
-                            Murzik is thinking...
+                            <T>Murzik is thinking...</T>
                         </div>
 
                     </div>
@@ -1075,7 +1077,7 @@ function ToolbarButton({
                 userSelect: "none"
             }}
         >
-            {text}
+            <T>{text}</T>
         </button>
     );
 }
@@ -1174,7 +1176,7 @@ function ModeButton({
                 userSelect: "none"
             }}
         >
-            {text}
+            <T>{text}</T>
         </button>
     );
 }

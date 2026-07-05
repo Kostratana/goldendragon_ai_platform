@@ -10,10 +10,6 @@ export default function Home() {
     const isMobile =
         window.innerWidth <= 768;
 
-    const isTablet =
-        window.innerWidth > 768 &&
-        window.innerWidth < 1200;
-
     const particles = [
         {
             left: "8%",
@@ -36,12 +32,6 @@ export default function Home() {
             delay: 1.5,
         },
     ];
-
-    const heroInscriptionAnimation =
-        "heroTitleInscription 20s ease-in-out infinite";
-
-    const heroSubtitleAnimation =
-        "heroSubtitleInscription 20s ease-in-out infinite";
 
     return (
         <main
@@ -125,9 +115,15 @@ export default function Home() {
 
                     alignItems: "center",
 
-                    justifyContent: "center",
+                    justifyContent:
+                        isMobile
+                            ? "flex-start"
+                            : "center",
 
-                    minHeight: "100vh",
+                    minHeight:
+                        isMobile
+                            ? "auto"
+                            : "100vh",
 
                     paddingTop:
                         isMobile
@@ -136,7 +132,7 @@ export default function Home() {
 
                     paddingBottom:
                         isMobile
-                            ? "40px"
+                            ? "24px"
                             : "40px",
 
                     paddingLeft:
@@ -237,172 +233,6 @@ export default function Home() {
                     }}
                 >
 
-                    <style>
-                        {`
-                            @keyframes heroTitleInscription {
-                                0%, 100% {
-                                    opacity: 0.40;
-                                    text-shadow: 0 0 6px rgba(255,170,90,0.04);
-                                }
-                                50% {
-                                    opacity: 0.88;
-                                    text-shadow: 0 0 16px rgba(255,160,80,0.12);
-                                }
-                            }
-
-                            @keyframes heroSubtitleInscription {
-                                0%, 100% {
-                                    opacity: 0.38;
-                                    text-shadow: 0 0 4px rgba(255,170,90,0.03);
-                                }
-                                50% {
-                                    opacity: 0.75;
-                                    text-shadow: 0 0 10px rgba(255,160,80,0.08);
-                                }
-                            }
-                        `}
-                    </style>
-
-                {/* title */}
-                <motion.div
-                    initial={{
-                        opacity: 0
-                    }}
-                    animate={{
-                        opacity: 1
-                    }}
-                    transition={{
-                        duration: 1
-                    }}
-                    style={{
-                        position: "relative",
-
-                        textAlign: "center",
-
-                        marginBottom:
-                            isMobile
-                                ? "10px"
-                                : "8px",
-
-                        maxWidth:
-                            isMobile
-                                ? "100%"
-                                : "1100px",
-
-                        width: "100%",
-
-                        boxSizing: "border-box"
-                    }}
-                >
-
-                    <div
-                        style={{
-                            background:
-                                "linear-gradient(to bottom, #dfc493 0%, #c9a866 42%, #9a7340 100%)",
-
-                            WebkitBackgroundClip:
-                                "text",
-
-                            WebkitTextFillColor:
-                                "transparent",
-
-                            backgroundClip:
-                                "text",
-
-                            fontSize:
-                                isMobile
-                                    ? "40px"
-                                    : isTablet
-                                        ? "56px"
-                                        : "72px",
-
-                            lineHeight:
-                                isMobile
-                                    ? "1.35"
-                                    : "1.3",
-
-                            fontWeight: "800",
-
-                            letterSpacing:
-                                isMobile
-                                    ? "0.08em"
-                                    : isTablet
-                                        ? "0.18em"
-                                        : "0.22em",
-
-                            textTransform: "uppercase",
-
-                            marginBottom:
-                                isMobile
-                                    ? "16px"
-                                    : "18px",
-
-                            fontFamily:
-                                "'Cinzel Decorative', 'Cinzel', serif",
-
-                            animation:
-                                heroInscriptionAnimation
-                        }}
-                    >
-                        Golden Dragon AI Studio
-                    </div>
-
-                    <div
-                        style={{
-                            background:
-                                "linear-gradient(to bottom, #d4bc96 0%, #c9aa82 52%, #b89868 100%)",
-
-                            WebkitBackgroundClip:
-                                "text",
-
-                            WebkitTextFillColor:
-                                "transparent",
-
-                            backgroundClip:
-                                "text",
-
-                            fontSize:
-                                isMobile
-                                    ? "17px"
-                                    : isTablet
-                                        ? "22px"
-                                        : "30px",
-
-                            lineHeight:
-                                isMobile
-                                    ? "1.8"
-                                    : "1.9",
-
-                            fontWeight: "400",
-
-                            letterSpacing:
-                                isMobile
-                                    ? "0.02em"
-                                    : "0.04em",
-
-                            maxWidth:
-                                isMobile
-                                    ? "100%"
-                                    : isTablet
-                                        ? "620px"
-                                        : "820px",
-
-                            margin: "0 auto",
-
-                            fontFamily:
-                                "'Cinzel', serif",
-
-                            animation:
-                                heroSubtitleAnimation
-                        }}
-                    >
-                        Inspired by Ancient Wisdom,
-                        <br />
-                        Transforming Knowledge into Technology for a Better Life.
-                    </div>
-
-                </motion.div>
-
                 {/* hero */}
                 <div
                     style={{
@@ -414,12 +244,7 @@ export default function Home() {
 
                         justifyContent: "center",
 
-                        alignItems: "center",
-
-                        marginTop:
-                            isMobile
-                                ? "8px"
-                                : "22px"
+                        alignItems: "center"
                     }}
                 >
 
@@ -438,12 +263,12 @@ export default function Home() {
 
                             width:
                                 isMobile
-                                    ? "320px"
+                                    ? "360px"
                                     : "820px",
 
                             height:
                                 isMobile
-                                    ? "320px"
+                                    ? "360px"
                                     : "820px",
 
                             background:
@@ -476,7 +301,10 @@ export default function Home() {
 
                         <motion.div
                             animate={{
-                                y: [0, -6, 0]
+                                y:
+                                    isMobile
+                                        ? [0, -4, 0]
+                                        : [0, -6, 0]
                             }}
                             transition={{
                                 duration: 7,
@@ -492,6 +320,8 @@ export default function Home() {
                                     width: "100%",
 
                                     maxWidth: "1150px",
+
+                                    margin: "0 auto",
 
                                     boxSizing: "border-box",
 
@@ -569,7 +399,7 @@ export default function Home() {
 
                                         opacity:
                                             isMobile
-                                                ? 0.22
+                                                ? 0.28
                                                 : 0.52,
 
                                         filter:

@@ -10,6 +10,11 @@ import useDragResize from "../hooks/useDragResize";
 
 import ChatWindow from "../features/chat/ChatWindow";
 
+import {
+    T,
+    useLanguage
+} from "../services/translation";
+
 import chatMainImage from "../assets/murzik/chat-main-image.webp";
 
 const PROJECT_MODES = {
@@ -84,6 +89,10 @@ export default function Chat() {
         startBottomResize
 
     } = useDragResize();
+
+    const {
+        currentUserLanguage
+    } = useLanguage();
 
     const [messages, setMessages] =
         useState([
@@ -248,7 +257,10 @@ async function sendMessage() {
 
                         message: userMessage,
 
-                        mode: activeProject
+                        mode: activeProject,
+
+                        language:
+                            currentUserLanguage
 
                     })
                 }
@@ -686,7 +698,7 @@ async function sendMessage() {
                             lineHeight: 1.4
                         }}
                     >
-                        MURZIK AI ORCHESTRATION SYSTEM
+                        <T>MURZIK AI ORCHESTRATION SYSTEM</T>
                     </h2>
 
                     <p
@@ -716,7 +728,7 @@ async function sendMessage() {
                             marginRight: "auto"
                         }}
                     >
-                        Murzik is an advanced multimodal AI orchestration system designed as an adaptive cognitive architecture for next-generation AGI research, intelligent automation, reasoning, investor interaction and modular AI runtime coordination.
+                        <T>Murzik is an advanced multimodal AI orchestration system designed as an adaptive cognitive architecture for next-generation AGI research, intelligent automation, reasoning, investor interaction and modular AI runtime coordination.</T>
                     </p>
 
                     <p
@@ -741,7 +753,7 @@ async function sendMessage() {
                             marginRight: "auto"
                         }}
                     >
-                        The platform combines multiple specialized AI systems, orchestration layers, reasoning engines and multimodal interfaces into a unified extensible intelligence ecosystem capable of communication, analysis, execution planning and autonomous cognitive collaboration.
+                        <T>The platform combines multiple specialized AI systems, orchestration layers, reasoning engines and multimodal interfaces into a unified extensible intelligence ecosystem capable of communication, analysis, execution planning and autonomous cognitive collaboration.</T>
                     </p>
 
                 </div>
