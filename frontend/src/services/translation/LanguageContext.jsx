@@ -213,7 +213,10 @@ export function TranslationProvider({
                             [
                                 preparedText
                             ],
-                            language
+                            language,
+                            [
+                                template
+                            ]
                         );
 
                     setCachedTranslation(

@@ -1,4 +1,5 @@
 import {
+    useEffect,
     useMemo
 } from "react";
 
@@ -19,7 +20,10 @@ import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
 import {
     T,
-    useTranslatedText
+    useTranslatedText,
+    useLanguage,
+    useTranslate,
+    DEFAULT_LANGUAGE
 } from "../services/translation";
 
 import {
@@ -110,10 +114,126 @@ export default function FounderSection() {
         isTablet
     } = useFounderBreakpoints();
 
+    const {
+        language
+    } = useLanguage();
+
+    const {
+        t: translateFounderText
+    } = useTranslate();
+
     const founderPortraitAlt =
         useTranslatedText(
             FOUNDER_TEXT.ALT_PORTRAIT
         );
+
+    useEffect(() => {
+
+        if (
+            language ===
+                DEFAULT_LANGUAGE
+        ) {
+            return;
+        }
+
+        const warmupTasks = [
+
+            ...DECLARATION_PARAGRAPHS.map(
+                ({
+                    text,
+                    values
+                }) =>
+                    translateFounderText(
+                        text,
+                        values ||
+                            null
+                    )
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.SUBTITLE_LINE_1
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.SUBTITLE_LINE_2
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.DECLARATION_HEADING,
+                FOUNDER_TEXT_VALUES.DECLARATION_HEADING
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_HEADING
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_CONVERSATION
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_READY,
+                FOUNDER_TEXT_VALUES.CTA_READY
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_PROJECT
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_CONTACT_PREFIX
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_EMAIL_LINK
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_CONTACT_AFTER_EMAIL
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_CONTACT_AFTER_CHAT
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.CTA_TRANSFORM
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.FOUNDER_ROLE
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.FOUNDER_OWNER,
+                FOUNDER_TEXT_VALUES.FOUNDER_OWNER
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.BUTTON_EMAIL
+            ),
+
+            translateFounderText(
+                FOUNDER_TEXT.ALT_PORTRAIT
+            )
+        ];
+
+        Promise.all(
+            warmupTasks
+        ).catch(
+            (error) => {
+
+                console.error(
+                    "Founder translation warmup failed:",
+                    error
+                );
+            }
+        );
+
+    }, [
+        language,
+        translateFounderText
+    ]);
 
     const paragraphStyle =
         useMemo(

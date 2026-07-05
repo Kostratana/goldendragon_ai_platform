@@ -14,6 +14,40 @@ const ALLOWED_TARGET_LANGUAGES =
         "it"
     ]);
 
+async function translateWithMyMemory(
+    texts,
+    targetLanguage
+) {
+
+    const translations = [];
+
+    for (const text of texts) {
+
+        const params =
+            new URLSearchParams({
+                q: text,
+                langpair: `en|${targetLanguage}`
+            });
+
+        const response =
+            await fetch(
+                `https://api.mymemory.translated.net/get?${params.toString()}`
+            );
+
+        const payload =
+            await response.json();
+
+        translations.push(
+            payload
+                ?.responseData
+                ?.translatedText ||
+            text
+        );
+    }
+
+    return translations;
+}
+
 function translateDevApiPlugin(
     env
 ) {
@@ -164,12 +198,17 @@ function translateDevApiPlugin(
                                 if (
                                     !apiKey
                                 ) {
+                                    const translations =
+                                        await translateWithMyMemory(
+                                            texts,
+                                            targetLanguage
+                                        );
+
                                     sendJson(
                                         res,
-                                        503,
+                                        200,
                                         {
-                                            error:
-                                                "Translation service is not configured"
+                                            translations
                                         }
                                     );
 

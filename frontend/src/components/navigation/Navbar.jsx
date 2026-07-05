@@ -714,32 +714,31 @@ function SolutionsDropdown({
             {
                 open && (
                     <div
-                        role="menu"
-
                         style={{
-
                             position: "absolute",
-
                             top: "100%",
-
                             left: "50%",
-
                             transform:
                                 "translateX(-50%)",
-
-                            marginTop: "10px",
-
+                            paddingTop: "10px",
                             minWidth:
                                 isMobile
                                     ? "240px"
                                     : "300px",
+                            zIndex: 999999
+                        }}
+                    >
+                        <div
+                            role="menu"
 
-                            padding: "8px",
+                            style={{
 
-                            borderRadius: "12px",
+                                padding: "8px",
 
-                            background:
-                                `
+                                borderRadius: "12px",
+
+                                background:
+                                    `
                                 linear-gradient(
                                     to bottom,
                                     rgba(10,10,10,0.92),
@@ -747,27 +746,25 @@ function SolutionsDropdown({
                                 )
                                 `,
 
-                            border:
-                                "1px solid rgba(255,140,0,0.08)",
+                                border:
+                                    "1px solid rgba(255,140,0,0.08)",
 
-                            backdropFilter:
-                                "blur(16px)",
+                                backdropFilter:
+                                    "blur(16px)",
 
-                            WebkitBackdropFilter:
-                                "blur(16px)",
+                                WebkitBackdropFilter:
+                                    "blur(16px)",
 
-                            boxShadow:
-                                `
+                                boxShadow:
+                                    `
                                 0 0 60px rgba(255,140,0,0.08),
                                 inset 0 0 18px rgba(255,140,0,0.03)
                                 `,
 
-                            zIndex: 999999,
-
-                            animation:
-                                "navDropdownOpen 200ms ease-out forwards"
-                        }}
-                    >
+                                animation:
+                                    "navDropdownOpen 200ms ease-out forwards"
+                            }}
+                        >
 
                         {
                             SOLUTIONS_LINKS.map(
@@ -807,6 +804,7 @@ function SolutionsDropdown({
                             )
                         }
 
+                        </div>
                     </div>
                 )
             }

@@ -85,7 +85,8 @@ async function requestTranslations(
 
 export async function translateTexts(
     texts,
-    targetLanguage
+    targetLanguage,
+    cacheTexts = texts
 ) {
 
     if (
@@ -110,7 +111,7 @@ export async function translateTexts(
     const cached =
         getCachedTranslations(
             targetLanguage,
-            texts
+            cacheTexts
         );
 
     const missingTexts = [];
@@ -150,7 +151,10 @@ export async function translateTexts(
 
     primeTranslationCache(
         targetLanguage,
-        missingTexts,
+        missingIndexes.map(
+            (index) =>
+                cacheTexts[index]
+        ),
         translatedMissing
     );
 
