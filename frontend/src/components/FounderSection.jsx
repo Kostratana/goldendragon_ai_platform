@@ -327,6 +327,7 @@ export default function FounderSection() {
         useMemo(
             () => ({
                 ...FULL_WIDTH_BOX,
+                overflow: "visible",
                 marginBottom:
                     getHeroTitleMarginBottom(
                         isMobile,

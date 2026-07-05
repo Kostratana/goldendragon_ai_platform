@@ -441,6 +441,15 @@ export function useTranslatedText(
                     );
                 }
             }
+        ).catch(
+            (error) => {
+
+                console.error(
+                    "Translation failed:",
+                    sourceText,
+                    error
+                );
+            }
         );
 
         return () => {
@@ -584,6 +593,15 @@ export function Translate({
                         result
                     );
                 }
+            }
+        ).catch(
+            (error) => {
+
+                console.error(
+                    "Translation failed:",
+                    template,
+                    error
+                );
             }
         );
 

@@ -36,6 +36,31 @@ async function requestTranslations(
 
     if (!response.ok) {
 
+        let details = "";
+
+        try {
+
+            const errorPayload =
+                await response.json();
+
+            details =
+                errorPayload.error ||
+                JSON.stringify(
+                    errorPayload
+                );
+
+        } catch (error) {
+
+            details =
+                await response.text();
+        }
+
+        console.error(
+            "Translation API failed:",
+            response.status,
+            details
+        );
+
         throw new Error(
             `Translation API failed with status ${response.status}`
         );

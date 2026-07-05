@@ -1,45 +1,32 @@
 @keyframes gdAncientInk {
-    0% {
+    0%,
+    30% {
+        clip-path: inset(0 0 0 0);
         opacity: 1;
         text-shadow: 0 0 18px rgba(216, 176, 122, 0.22), 0 0 32px rgba(216, 176, 122, 0.08);
         filter: saturate(1) brightness(1);
     }
-    20% {
-        opacity: 0.96;
-        text-shadow: 0 0 15px rgba(216, 176, 122, 0.18);
-        filter: saturate(0.99) brightness(0.99);
+    38% {
+        clip-path: inset(0 45% 0 0);
+        opacity: 0.72;
+        text-shadow: 0 0 10px rgba(216, 176, 122, 0.12);
+        filter: saturate(0.96) brightness(0.96);
     }
-    35% {
-        opacity: 0.9;
-        text-shadow: 0 0 12px rgba(216, 176, 122, 0.14);
-        filter: saturate(0.97) brightness(0.98);
+    46% {
+        clip-path: inset(0 100% 0 0);
+        opacity: 0.35;
+        text-shadow: 0 0 4px rgba(216, 176, 122, 0.05);
+        filter: saturate(0.92) brightness(0.94);
     }
-    45% {
-        opacity: 0.84;
-        text-shadow: 0 0 9px rgba(216, 176, 122, 0.10);
-        filter: saturate(0.95) brightness(0.96);
+    54% {
+        clip-path: inset(0 58% 0 0);
+        opacity: 0.68;
+        text-shadow: 0 0 10px rgba(216, 176, 122, 0.12);
+        filter: saturate(0.96) brightness(0.96);
     }
-    50% {
-        opacity: 0.78;
-        text-shadow: 0 0 7px rgba(216, 176, 122, 0.07);
-        filter: saturate(0.95) brightness(0.96);
-    }
-    55% {
-        opacity: 0.84;
-        text-shadow: 0 0 9px rgba(216, 176, 122, 0.10);
-        filter: saturate(0.95) brightness(0.96);
-    }
-    65% {
-        opacity: 0.9;
-        text-shadow: 0 0 12px rgba(216, 176, 122, 0.14);
-        filter: saturate(0.97) brightness(0.98);
-    }
-    80% {
-        opacity: 0.96;
-        text-shadow: 0 0 15px rgba(216, 176, 122, 0.18);
-        filter: saturate(0.99) brightness(0.99);
-    }
+    62%,
     100% {
+        clip-path: inset(0 0 0 0);
         opacity: 1;
         text-shadow: 0 0 18px rgba(216, 176, 122, 0.22), 0 0 32px rgba(216, 176, 122, 0.08);
         filter: saturate(1) brightness(1);
@@ -47,5 +34,9 @@
 }
 
 .gd-ancient-ink-text {
-    animation: gdAncientInk 30s ease-in-out infinite;
+    display: block;
+    width: 100%;
+    overflow: visible;
+    animation: gdAncientInk 14s ease-in-out infinite;
+    -webkit-animation: gdAncientInk 14s ease-in-out infinite;
 }

@@ -1,8 +1,13 @@
 import {
     useEffect,
+    useLayoutEffect,
     useRef,
     useState
 } from "react";
+
+import {
+    createPortal
+} from "react-dom";
 
 import {
     Link,
@@ -121,6 +126,11 @@ export default function Navbar() {
     const [languageOpen, setLanguageOpen] =
         useState(false);
 
+    const [
+        navbarPortalTarget,
+        setNavbarPortalTarget
+    ] = useState(null);
+
     const [voiceHovered, setVoiceHovered] =
         useState(false);
 
@@ -128,6 +138,15 @@ export default function Navbar() {
         language,
         setLanguage
     } = useLanguage();
+
+    useLayoutEffect(() => {
+
+        setNavbarPortalTarget(
+            document.getElementById(
+                "navbar-root"
+            )
+        );
+    }, []);
 
     useEffect(() => {
 
@@ -260,19 +279,12 @@ export default function Navbar() {
         pathname.startsWith("/solutions/");
 
     const isLanguageActive =
-        language !== "en";
+        languageOpen;
 
-    return (
-
-        <>
+    const fixedNavbarBar = (
             <div
+                className="gd-navbar-shell"
                 style={{
-
-                    position: "fixed",
-
-                    top: 0,
-
-                    left: 0,
 
                     width: "100%",
 
@@ -296,8 +308,6 @@ export default function Navbar() {
                         isMobile
                             ? "10px"
                             : "18px",
-
-                    zIndex: 999999,
 
                     pointerEvents: "none",
 
@@ -519,6 +529,19 @@ export default function Navbar() {
                 </nav>
 
             </div>
+    );
+
+    return (
+
+        <>
+            {
+                navbarPortalTarget
+                    ? createPortal(
+                        fixedNavbarBar,
+                        navbarPortalTarget
+                    )
+                    : null
+            }
 
             <div
                 style={{
@@ -961,32 +984,31 @@ function LanguageDropdown({
             {
                 open && (
                     <div
-                        role="menu"
-
                         style={{
-
                             position: "absolute",
-
                             top: "100%",
-
                             left: "50%",
-
                             transform:
                                 "translateX(-50%)",
-
-                            marginTop: "10px",
-
+                            paddingTop: "10px",
                             minWidth:
                                 isMobile
                                     ? "240px"
                                     : "300px",
+                            zIndex: 999999
+                        }}
+                    >
+                        <div
+                            role="menu"
 
-                            padding: "8px",
+                            style={{
 
-                            borderRadius: "12px",
+                                padding: "8px",
 
-                            background:
-                                `
+                                borderRadius: "12px",
+
+                                background:
+                                    `
                                 linear-gradient(
                                     to bottom,
                                     rgba(10,10,10,0.92),
@@ -994,27 +1016,25 @@ function LanguageDropdown({
                                 )
                                 `,
 
-                            border:
-                                "1px solid rgba(255,140,0,0.08)",
+                                border:
+                                    "1px solid rgba(255,140,0,0.08)",
 
-                            backdropFilter:
-                                "blur(16px)",
+                                backdropFilter:
+                                    "blur(16px)",
 
-                            WebkitBackdropFilter:
-                                "blur(16px)",
+                                WebkitBackdropFilter:
+                                    "blur(16px)",
 
-                            boxShadow:
-                                `
+                                boxShadow:
+                                    `
                                 0 0 60px rgba(255,140,0,0.08),
                                 inset 0 0 18px rgba(255,140,0,0.03)
                                 `,
 
-                            zIndex: 999999,
-
-                            animation:
-                                "navDropdownOpen 200ms ease-out forwards"
-                        }}
-                    >
+                                animation:
+                                    "navDropdownOpen 200ms ease-out forwards"
+                            }}
+                        >
 
                         {
                             SUPPORTED_LANGUAGES.map(
@@ -1047,6 +1067,7 @@ function LanguageDropdown({
                             )
                         }
 
+                        </div>
                     </div>
                 )
             }
