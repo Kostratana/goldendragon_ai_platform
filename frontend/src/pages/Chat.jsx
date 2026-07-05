@@ -15,6 +15,11 @@ import {
     useLanguage
 } from "../services/translation";
 
+import {
+    CHAT_TEXT,
+    CHAT_TEXT_VALUES
+} from "../content/chatTexts";
+
 import chatMainImage from "../assets/murzik/chat-main-image.webp";
 
 const PROJECT_MODES = {
@@ -673,34 +678,6 @@ async function sendMessage() {
                     }}
                 >
 
-                    <h2
-                        style={{
-
-                            color: "#f0c88f",
-
-                            fontSize:
-                                isMobile
-                                    ? "15px"
-                                    : "22px",
-
-                            letterSpacing:
-                                isMobile
-                                    ? "0.10em"
-                                    : "0.18em",
-
-                            marginBottom:
-                                isMobile
-                                    ? "18px"
-                                    : "26px",
-
-                            fontWeight: 700,
-
-                            lineHeight: 1.4
-                        }}
-                    >
-                        <T>MURZIK AI ORCHESTRATION SYSTEM</T>
-                    </h2>
-
                     <p
                         style={{
 
@@ -716,44 +693,24 @@ async function sendMessage() {
                                     ? 1.8
                                     : 1.9,
 
-                            marginBottom:
-                                isMobile
-                                    ? "16px"
-                                    : "18px",
-
                             maxWidth: "900px",
 
                             marginLeft: "auto",
 
-                            marginRight: "auto"
+                            marginRight: "auto",
+
+                            marginBottom: 0
                         }}
                     >
-                        <T>Murzik is an advanced multimodal AI orchestration system designed as an adaptive cognitive architecture for next-generation AGI research, intelligent automation, reasoning, investor interaction and modular AI runtime coordination.</T>
-                    </p>
-
-                    <p
-                        style={{
-
-                            color: "#c9b18d",
-
-                            fontSize:
-                                isMobile
-                                    ? "10px"
-                                    : "12px",
-
-                            lineHeight:
-                                isMobile
-                                    ? 1.8
-                                    : 1.9,
-
-                            maxWidth: "920px",
-
-                            marginLeft: "auto",
-
-                            marginRight: "auto"
-                        }}
-                    >
-                        <T>The platform combines multiple specialized AI systems, orchestration layers, reasoning engines and multimodal interfaces into a unified extensible intelligence ecosystem capable of communication, analysis, execution planning and autonomous cognitive collaboration.</T>
+                        <T
+                            values={
+                                CHAT_TEXT_VALUES.FOOTER_DESCRIPTION
+                            }
+                        >
+                            {
+                                CHAT_TEXT.FOOTER_DESCRIPTION
+                            }
+                        </T>
                     </p>
 
                 </div>

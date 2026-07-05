@@ -18,12 +18,57 @@ import {
     FOUNDER_TRANSLATIONS_RU
 } from "../../content/founderTranslations.ru.js";
 
+import {
+    CHAT_TRANSLATIONS_DE
+} from "../../content/chatTranslations.de.js";
+
+import {
+    CHAT_TRANSLATIONS_ES
+} from "../../content/chatTranslations.es.js";
+
+import {
+    CHAT_TRANSLATIONS_FR
+} from "../../content/chatTranslations.fr.js";
+
+import {
+    CHAT_TRANSLATIONS_IT
+} from "../../content/chatTranslations.it.js";
+
+import {
+    CHAT_TRANSLATIONS_RU
+} from "../../content/chatTranslations.ru.js";
+
+function mergeCuratedDictionaries(
+    ...dictionaries
+) {
+
+    return Object.assign(
+        {},
+        ...dictionaries
+    );
+}
+
 const CURATED_BY_LANGUAGE = {
-    ru: FOUNDER_TRANSLATIONS_RU,
-    es: FOUNDER_TRANSLATIONS_ES,
-    fr: FOUNDER_TRANSLATIONS_FR,
-    de: FOUNDER_TRANSLATIONS_DE,
-    it: FOUNDER_TRANSLATIONS_IT
+    ru: mergeCuratedDictionaries(
+        FOUNDER_TRANSLATIONS_RU,
+        CHAT_TRANSLATIONS_RU
+    ),
+    es: mergeCuratedDictionaries(
+        FOUNDER_TRANSLATIONS_ES,
+        CHAT_TRANSLATIONS_ES
+    ),
+    fr: mergeCuratedDictionaries(
+        FOUNDER_TRANSLATIONS_FR,
+        CHAT_TRANSLATIONS_FR
+    ),
+    de: mergeCuratedDictionaries(
+        FOUNDER_TRANSLATIONS_DE,
+        CHAT_TRANSLATIONS_DE
+    ),
+    it: mergeCuratedDictionaries(
+        FOUNDER_TRANSLATIONS_IT,
+        CHAT_TRANSLATIONS_IT
+    )
 };
 
 export function getCuratedTranslation(
