@@ -9,6 +9,9 @@ export default function ChatInput({
     setMessage,
 
     sendMessage,
+    clearMessages,
+    copyMessages,
+    downloadMessages,
 
     handleUploadClick,
 
@@ -25,7 +28,7 @@ export default function ChatInput({
 
     const placeholderText =
         useTranslatedText(
-            "Ask Murzik..."
+            "Ask Dragon..."
         );
 
     const uploadFileTitle =
@@ -43,16 +46,49 @@ export default function ChatInput({
             "Send Message"
         );
 
+    const clearChatTitle =
+        useTranslatedText(
+            "Clear Chat"
+        );
+
+    const copyConversationTitle =
+        useTranslatedText(
+            "Copy Conversation"
+        );
+
+    const downloadConversationTitle =
+        useTranslatedText(
+            "Download Conversation"
+        );
+
+    const messageLineCount =
+        Math.min(
+            4,
+            Math.max(
+                1,
+                message.split("\n").length
+            )
+        );
+
+    const textareaHeight =
+        `${Math.min(
+            96,
+            Math.max(
+                44,
+                24 + messageLineCount * 20
+            )
+        )}px`;
+
     const iconButtonStyle = {
 
-        width: "42px",
+        width: "44px",
 
-        height: "42px",
+        height: "44px",
 
         borderRadius: "12px",
 
         border:
-            "1px solid rgba(255,220,170,0.10)",
+            "1px solid rgba(216,176,122,0.42)",
 
         background:
             `
@@ -74,6 +110,12 @@ export default function ChatInput({
         alignItems: "center",
 
         justifyContent: "center",
+
+        boxShadow:
+            "0 0 0 rgba(216,176,122,0)",
+
+        transition:
+            "border-color 180ms ease, box-shadow 180ms ease, color 180ms ease",
 
         backdropFilter: "blur(10px)",
 
@@ -150,13 +192,16 @@ export default function ChatInput({
             }
 
             <div
+                className="dragon-chat-input-row"
                 style={{
 
                     display: "flex",
 
-                    alignItems: "center",
+                    alignItems: "flex-end",
 
-                    gap: "8px"
+                    gap: "8px",
+
+                    flexWrap: "wrap"
                 }}
             >
 
@@ -192,7 +237,8 @@ export default function ChatInput({
                     🎤
                 </button>
 
-                <input
+                <textarea
+                    rows={messageLineCount}
 
                     value={message}
 
@@ -205,8 +251,11 @@ export default function ChatInput({
                     onKeyDown={event => {
 
                         if (
-                            event.key === "Enter"
+                            event.key === "Enter" &&
+                            !event.shiftKey
                         ) {
+
+                            event.preventDefault();
 
                             sendMessage();
                         }
@@ -218,13 +267,20 @@ export default function ChatInput({
 
                         flex: 1,
 
-                        height: "44px",
+                        flexBasis: "180px",
+
+                        minWidth: 0,
+
+                        height: textareaHeight,
+
+                        minHeight: "44px",
+
+                        maxHeight: "96px",
 
                         borderRadius: "12px",
 
-                        paddingLeft: "14px",
-
-                        paddingRight: "14px",
+                        padding:
+                            "12px 14px",
 
                         border:
                             "1px solid rgba(255,220,170,0.08)",
@@ -242,45 +298,104 @@ export default function ChatInput({
 
                         outline: "none",
 
-                        fontSize: "14px"
+                        fontSize: "14px",
+
+                        lineHeight: "20px",
+
+                        resize: "none",
+
+                        overflowY: "auto",
+
+                        boxSizing: "border-box"
                     }}
                 />
 
+                <div
+                    className="dragon-chat-actions-bar"
+                    style={{
+
+                        display: "flex",
+
+                        alignItems: "center",
+
+                        gap: "6px",
+
+                        flexShrink: 0
+                    }}
+                >
+
+                    <button
+                        className="dragon-chat-icon-button"
+                        onClick={clearMessages}
+                        title={clearChatTitle}
+                        style={iconButtonStyle}
+                    >
+                        🗑
+                    </button>
+
+                    <button
+                        className="dragon-chat-icon-button"
+                        onClick={copyMessages}
+                        title={copyConversationTitle}
+                        style={iconButtonStyle}
+                    >
+                        📋
+                    </button>
+
+                    <button
+                        className="dragon-chat-icon-button"
+                        onClick={downloadMessages}
+                        title={downloadConversationTitle}
+                        style={iconButtonStyle}
+                    >
+                        ⬇
+                    </button>
+
+                </div>
+
                 <button
+                    className="dragon-chat-send-button"
                     onClick={sendMessage}
                     title={sendMessageTitle}
                     style={{
 
-                        width: "72px",
+                        width: "44px",
 
-                        height: "42px",
+                        height: "44px",
 
-                        borderRadius: "12px",
+                        borderRadius: "50%",
 
                         border:
-                            "1px solid rgba(255,220,170,0.15)",
+                            "1px solid rgba(216,176,122,0.58)",
 
                         background:
                             `
                             linear-gradient(
                                 to bottom,
-                                rgba(255,190,90,0.22),
-                                rgba(255,120,40,0.12)
+                                rgba(40,18,8,0.95),
+                                rgba(18,8,4,0.95)
                             )
                             `,
 
-                        color: "#ffe3b0",
+                        color: "#ffd59a",
 
-                        fontSize: "11px",
+                        fontSize: "18px",
 
                         fontWeight: "700",
-
-                        letterSpacing: "0.12em",
 
                         cursor: "pointer",
 
                         boxShadow:
-                            "0 0 18px rgba(255,180,70,0.18)",
+                            "0 0 0 rgba(216,176,122,0)",
+
+                        display: "flex",
+
+                        alignItems: "center",
+
+                        justifyContent: "center",
+
+                        transition:
+                            "border-color 180ms ease, box-shadow 180ms ease, color 180ms ease",
 
                         backdropFilter:
                             "blur(10px)",
@@ -289,10 +404,35 @@ export default function ChatInput({
                             "blur(10px)"
                     }}
                 >
-                    <T>SEND</T>
+                    ➤
                 </button>
 
             </div>
+
+            <style>
+                {`
+                .dragon-chat-icon-button:hover,
+                .dragon-chat-send-button:hover {
+                    border-color: rgba(255,213,154,0.78);
+                    color: #ffe3b0;
+                    box-shadow:
+                        0 0 16px rgba(216,176,122,0.24),
+                        inset 0 0 18px rgba(255,220,170,0.04);
+                }
+
+                @media (max-width: 520px) {
+                    .dragon-chat-actions-bar {
+                        order: 5;
+                        width: 100%;
+                        justify-content: flex-end;
+                    }
+
+                    .dragon-chat-send-button {
+                        order: 4;
+                    }
+                }
+                `}
+            </style>
 
         </div>
     );

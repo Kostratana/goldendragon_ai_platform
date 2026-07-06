@@ -476,36 +476,12 @@ export default function ChatWindow({
             }
         />
 
-        <ModeButton
-            text="MVP 1"
-            active={mode === PROJECT_MODES.MVP_1}
-            isMobile={isMobile}
-            onClick={() =>
-                selectMode(
-                    PROJECT_MODES.MVP_1,
-                    PROJECT_MODES.MVP_1
-                )
-            }
-        />
-
-        <ModeButton
-            text="MVP 2"
-            active={mode === PROJECT_MODES.MVP_2}
-            isMobile={isMobile}
-            onClick={() =>
-                selectMode(
-                    PROJECT_MODES.MVP_2,
-                    PROJECT_MODES.MVP_2
-                )
-            }
-        />
-
     </div>
 
     <div
         style={{
 
-            display: "flex",
+            display: "none",
 
             gap: "6px",
 
@@ -519,12 +495,6 @@ export default function ChatWindow({
                     : "flex-start"
         }}
     >
-
-        <ToolbarButton
-            text="CLEAR"
-            onClick={clearMessages}
-        />
-
 
         <input
             ref={fileInputRef}
@@ -742,7 +712,7 @@ export default function ChatWindow({
                                 letterSpacing: "0.08em"
                             }}
                         >
-                            <T>Murzik is thinking...</T>
+                            <T>Dragon is thinking...</T>
                         </div>
 
                     </div>
@@ -772,6 +742,9 @@ export default function ChatWindow({
     setMessage={setMessage}
 
     sendMessage={sendMessage}
+    clearMessages={clearMessages}
+    copyMessages={copyMessages}
+    downloadMessages={downloadMessages}
 
     handleUploadClick={handleUploadClick}
 

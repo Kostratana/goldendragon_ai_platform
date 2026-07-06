@@ -22,6 +22,14 @@ import {
 
 import chatMainImage from "../assets/murzik/chat-main-image.webp";
 
+import {
+    GOLD
+} from "../theme/colors";
+
+import {
+    FONT_IM_FELL
+} from "../theme/fonts";
+
 const PROJECT_MODES = {
 
     CHAT: "chat",
@@ -648,8 +656,8 @@ async function sendMessage() {
 
                     padding:
                         isMobile
-                            ? "42px 18px"
-                            : "62px 24px",
+                            ? "56px 18px"
+                            : "80px 24px",
 
                     borderTop:
                         "1px solid rgba(255,220,170,0.05)",
@@ -670,7 +678,7 @@ async function sendMessage() {
                         maxWidth:
                             isMobile
                                 ? "94vw"
-                                : "980px",
+                                : "900px",
 
                         margin: "0 auto",
 
@@ -681,25 +689,51 @@ async function sendMessage() {
                     <p
                         style={{
 
-                            color: "#d7c1a4",
+                            color:
+                                GOLD,
+
+                            fontFamily:
+                                FONT_IM_FELL,
 
                             fontSize:
                                 isMobile
-                                    ? "11px"
-                                    : "13px",
+                                    ? "20px"
+                                    : isTablet
+                                        ? "24px"
+                                        : "30px",
 
                             lineHeight:
                                 isMobile
-                                    ? 1.8
-                                    : 1.9,
+                                    ? 1.55
+                                    : 1.65,
 
-                            maxWidth: "900px",
+                            fontWeight: 600,
+
+                            letterSpacing:
+                                isMobile
+                                    ? "0"
+                                    : "0.02em",
+
+                            maxWidth:
+                                isMobile
+                                    ? "100%"
+                                    : isTablet
+                                        ? "720px"
+                                        : "860px",
 
                             marginLeft: "auto",
 
                             marginRight: "auto",
 
-                            marginBottom: 0
+                            marginBottom: 0,
+
+                            textAlign: "center",
+
+                            textShadow:
+                                `
+                                0 0 8px rgba(226,197,138,0.20),
+                                0 0 22px rgba(226,197,138,0.08)
+                                `
                         }}
                     >
                         <T
