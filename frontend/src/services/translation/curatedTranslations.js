@@ -58,6 +58,14 @@ import {
     FOOTER_TRANSLATIONS_RU
 } from "../../content/footerTranslations.ru.js";
 
+import {
+    PORTFOLIO_TRANSLATIONS_DE
+} from "../../content/portfolioTranslations.de.js";
+
+import {
+    PORTFOLIO_TRANSLATIONS_RU
+} from "../../content/portfolioTranslations.ru.js";
+
 function mergeCuratedDictionaries(
     ...dictionaries
 ) {
@@ -72,7 +80,8 @@ const CURATED_BY_LANGUAGE = {
     ru: mergeCuratedDictionaries(
         FOUNDER_TRANSLATIONS_RU,
         CHAT_TRANSLATIONS_RU,
-        FOOTER_TRANSLATIONS_RU
+        FOOTER_TRANSLATIONS_RU,
+        PORTFOLIO_TRANSLATIONS_RU
     ),
     es: mergeCuratedDictionaries(
         FOUNDER_TRANSLATIONS_ES,
@@ -87,7 +96,8 @@ const CURATED_BY_LANGUAGE = {
     de: mergeCuratedDictionaries(
         FOUNDER_TRANSLATIONS_DE,
         CHAT_TRANSLATIONS_DE,
-        FOOTER_TRANSLATIONS_DE
+        FOOTER_TRANSLATIONS_DE,
+        PORTFOLIO_TRANSLATIONS_DE
     ),
     it: mergeCuratedDictionaries(
         FOUNDER_TRANSLATIONS_IT,

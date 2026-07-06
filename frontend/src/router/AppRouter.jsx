@@ -9,6 +9,7 @@ import Navbar from "../components/navigation/Navbar";
 import Home from "../pages/Home";
 import Chat from "../pages/Chat";
 import Services from "../pages/Services";
+import Portfolio from "../pages/Portfolio";
 
 function AppRouter() {
 
@@ -47,6 +48,11 @@ function AppRouter() {
                     <Route
                         path="/services"
                         element={<Services />}
+                    />
+
+                    <Route
+                        path="/services/portfolio"
+                        element={<Portfolio />}
                     />
 
                 </Routes>
