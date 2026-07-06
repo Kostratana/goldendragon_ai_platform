@@ -418,6 +418,34 @@ export function useTranslatedText(
             return undefined;
         }
 
+        const curated =
+            getCuratedTranslation(
+                language,
+                sourceText
+            );
+
+        if (
+            typeof curated ===
+            "string"
+        ) {
+            setCachedTranslation(
+                language,
+                sourceText,
+                curated
+            );
+
+            setTranslatedText(
+                finalizeTranslatedText(
+                    curated,
+                    {},
+                    {},
+                    values
+                )
+            );
+
+            return undefined;
+        }
+
         const cached =
             getCachedTranslation(
                 language,
@@ -564,6 +592,34 @@ export function Translate({
             setTranslatedText(
                 interpolateValues(
                     template,
+                    mergedValues
+                )
+            );
+
+            return undefined;
+        }
+
+        const curated =
+            getCuratedTranslation(
+                language,
+                template
+            );
+
+        if (
+            typeof curated ===
+            "string"
+        ) {
+            setCachedTranslation(
+                language,
+                template,
+                curated
+            );
+
+            setTranslatedText(
+                finalizeTranslatedText(
+                    curated,
+                    {},
+                    {},
                     mergedValues
                 )
             );

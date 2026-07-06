@@ -1,0 +1,6 @@
+export const FOOTER_TEXT = {
+    COPYRIGHT_LINE:
+        "© 2026 GOLDEN DRAGON AI",
+    RIGHTS_RESERVED:
+        "ALL RIGHTS RESERVED"
+};

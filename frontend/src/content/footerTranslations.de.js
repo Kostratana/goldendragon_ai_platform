@@ -1,0 +1,4 @@
+export const FOOTER_TRANSLATIONS_DE = {
+    "ALL RIGHTS RESERVED":
+        "ALLE RECHTE VORBEHALTEN"
+};

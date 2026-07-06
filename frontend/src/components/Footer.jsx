@@ -1,8 +1,20 @@
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
 import {
+    FOOTER_TEXT
+} from "../content/footerTexts";
+
+import {
     T
 } from "../services/translation";
+
+import {
+    GOLD
+} from "../theme/colors";
+
+import {
+    FONT_CINZEL
+} from "../theme/fonts";
 
 export default function Footer() {
 
@@ -129,7 +141,7 @@ export default function Footer() {
 
                 <div
                     style={{
-                        color: "#c6a57d",
+                        color: GOLD,
 
                         fontSize:
                             isMobile
@@ -157,7 +169,7 @@ export default function Footer() {
                         textTransform: "uppercase",
 
                         fontFamily:
-                            "'Cinzel', serif",
+                            FONT_CINZEL,
 
                         maxWidth:
                             isMobile
@@ -165,9 +177,17 @@ export default function Footer() {
                                 : "900px"
                     }}
                 >
-                    <T>© 2026 GOLDEN DRAGON AI</T>
+                    <span data-no-translate>
+                        {
+                            FOOTER_TEXT.COPYRIGHT_LINE
+                        }
+                    </span>
                     <br />
-                    <T>ALL RIGHTS RESERVED</T>
+                    <T>
+                        {
+                            FOOTER_TEXT.RIGHTS_RESERVED
+                        }
+                    </T>
                 </div>
 
             </div>
