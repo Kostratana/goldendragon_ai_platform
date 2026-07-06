@@ -3,6 +3,15 @@ import {
     useTranslatedText
 } from "../../services/translation";
 
+import {
+    Clipboard,
+    Download,
+    Mic,
+    Paperclip,
+    SendHorizontal,
+    Trash2
+} from "lucide-react";
+
 export default function ChatInput({
 
     message,
@@ -79,31 +88,37 @@ export default function ChatInput({
             )
         )}px`;
 
+    const iconSize =
+        18;
+
+    const iconStrokeWidth =
+        1.75;
+
     const iconButtonStyle = {
 
         width: "44px",
 
         height: "44px",
 
-        borderRadius: "12px",
+        borderRadius: "50%",
 
         border:
-            "1px solid rgba(216,176,122,0.42)",
+            "1px solid rgba(216,176,122,0.48)",
 
         background:
             `
             linear-gradient(
                 to bottom,
-                rgba(40,18,8,0.95),
-                rgba(18,8,4,0.95)
+                rgba(28,15,8,0.94),
+                rgba(10,5,3,0.96)
             )
             `,
 
-        color: "#ffd59a",
+        color: "#d8b07a",
 
         cursor: "pointer",
 
-        fontSize: "18px",
+        fontSize: 0,
 
         display: "flex",
 
@@ -112,10 +127,13 @@ export default function ChatInput({
         justifyContent: "center",
 
         boxShadow:
-            "0 0 0 rgba(216,176,122,0)",
+            `
+            0 0 12px rgba(216,176,122,0.08),
+            inset 0 0 10px rgba(216,176,122,0.035)
+            `,
 
         transition:
-            "border-color 180ms ease, box-shadow 180ms ease, color 180ms ease",
+            "border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, background 180ms ease",
 
         backdropFilter: "blur(10px)",
 
@@ -209,8 +227,12 @@ export default function ChatInput({
                     style={iconButtonStyle}
                     onClick={handleUploadClick}
                     title={uploadFileTitle}
+                    aria-label={uploadFileTitle}
                 >
-                    📎
+                    <Paperclip
+                        size={iconSize}
+                        strokeWidth={iconStrokeWidth}
+                    />
                 </button>
 
                 <button
@@ -219,13 +241,16 @@ export default function ChatInput({
 
                         color:
                             voiceEnabled
-                                ? "#ffcf6a"
-                                : "#ffd59a",
+                                ? "#ffe2b2"
+                                : "#d8b07a",
 
                         boxShadow:
                             voiceEnabled
-                                ? "0 0 18px rgba(255,190,90,0.35)"
-                                : "none"
+                                ? `
+                                0 0 18px rgba(255,190,90,0.30),
+                                inset 0 0 14px rgba(255,220,170,0.06)
+                                `
+                                : iconButtonStyle.boxShadow
                     }}
                     onClick={() =>
                         setVoiceEnabled(
@@ -233,8 +258,12 @@ export default function ChatInput({
                         )
                     }
                     title={voiceTitle}
+                    aria-label={voiceTitle}
                 >
-                    🎤
+                    <Mic
+                        size={iconSize}
+                        strokeWidth={iconStrokeWidth}
+                    />
                 </button>
 
                 <textarea
@@ -328,27 +357,39 @@ export default function ChatInput({
                         className="dragon-chat-icon-button"
                         onClick={clearMessages}
                         title={clearChatTitle}
+                        aria-label={clearChatTitle}
                         style={iconButtonStyle}
                     >
-                        🗑
+                        <Trash2
+                            size={iconSize}
+                            strokeWidth={iconStrokeWidth}
+                        />
                     </button>
 
                     <button
                         className="dragon-chat-icon-button"
                         onClick={copyMessages}
                         title={copyConversationTitle}
+                        aria-label={copyConversationTitle}
                         style={iconButtonStyle}
                     >
-                        📋
+                        <Clipboard
+                            size={iconSize}
+                            strokeWidth={iconStrokeWidth}
+                        />
                     </button>
 
                     <button
                         className="dragon-chat-icon-button"
                         onClick={downloadMessages}
                         title={downloadConversationTitle}
+                        aria-label={downloadConversationTitle}
                         style={iconButtonStyle}
                     >
-                        ⬇
+                        <Download
+                            size={iconSize}
+                            strokeWidth={iconStrokeWidth}
+                        />
                     </button>
 
                 </div>
@@ -357,54 +398,24 @@ export default function ChatInput({
                     className="dragon-chat-send-button"
                     onClick={sendMessage}
                     title={sendMessageTitle}
+                    aria-label={sendMessageTitle}
                     style={{
 
-                        width: "44px",
-
-                        height: "44px",
-
-                        borderRadius: "50%",
-
-                        border:
-                            "1px solid rgba(216,176,122,0.58)",
-
-                        background:
-                            `
-                            linear-gradient(
-                                to bottom,
-                                rgba(40,18,8,0.95),
-                                rgba(18,8,4,0.95)
-                            )
-                            `,
-
-                        color: "#ffd59a",
-
-                        fontSize: "18px",
+                        ...iconButtonStyle,
 
                         fontWeight: "700",
 
-                        cursor: "pointer",
-
                         boxShadow:
-                            "0 0 0 rgba(216,176,122,0)",
-
-                        display: "flex",
-
-                        alignItems: "center",
-
-                        justifyContent: "center",
-
-                        transition:
-                            "border-color 180ms ease, box-shadow 180ms ease, color 180ms ease",
-
-                        backdropFilter:
-                            "blur(10px)",
-
-                        WebkitBackdropFilter:
-                            "blur(10px)"
+                            `
+                            0 0 16px rgba(216,176,122,0.12),
+                            inset 0 0 12px rgba(216,176,122,0.04)
+                            `
                     }}
                 >
-                    ➤
+                    <SendHorizontal
+                        size={19}
+                        strokeWidth={1.8}
+                    />
                 </button>
 
             </div>

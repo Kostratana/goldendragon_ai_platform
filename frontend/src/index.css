@@ -51,8 +51,8 @@
 .gd-ink-char {
     display: inline-block;
     position: relative;
-    animation: gdCharBurnCycle 11s ease-in-out infinite;
-    animation-delay: calc(var(--char-i) * 0.07s);
+    animation: gdCharBurnCycle var(--gd-ink-duration, 11s) ease-in-out infinite;
+    animation-delay: calc(var(--char-i) * var(--gd-ink-delay-step, 0.07s));
     will-change: opacity, clip-path, color;
 }
 

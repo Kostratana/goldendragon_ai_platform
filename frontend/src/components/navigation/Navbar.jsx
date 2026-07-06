@@ -79,6 +79,24 @@ const SOLUTIONS_LINKS = [
     }
 ];
 
+const NAV_GOLD =
+    "#d8b07a";
+
+const NAV_GOLD_ACTIVE =
+    "#ffe2b2";
+
+const NAV_IDLE_BACKGROUND =
+    "rgba(216,176,122,0.045)";
+
+const NAV_IDLE_BORDER =
+    "1px solid rgba(216,176,122,0.12)";
+
+const NAV_IDLE_SHADOW =
+    `
+    0 0 18px rgba(216,176,122,0.09),
+    inset 0 0 10px rgba(216,176,122,0.035)
+    `;
+
 if (
     import.meta.env.DEV
 ) {
@@ -285,13 +303,7 @@ export default function Navbar() {
                 className="gd-navbar-shell"
                 style={{
 
-                    position: "fixed",
-
-                    top: 0,
-
-                    left: 0,
-
-                    right: 0,
+                    position: "relative",
 
                     transform: "none",
 
@@ -319,7 +331,10 @@ export default function Navbar() {
                     pointerEvents: "none",
 
                     boxSizing:
-                        "border-box"
+                        "border-box",
+
+                    willChange:
+                        "auto"
                 }}
             >
 
@@ -502,8 +517,8 @@ export default function Navbar() {
                             color:
                                 isVoiceLoading ||
                                 voiceHovered
-                                    ? "#ffe2b2"
-                                    : "#8c8c8c",
+                                    ? NAV_GOLD_ACTIVE
+                                    : NAV_GOLD,
 
                             background:
                                 isVoiceLoading ||
@@ -515,13 +530,13 @@ export default function Navbar() {
                                         rgba(255,120,20,0.16)
                                     )
                                     `
-                                    : "rgba(255,255,255,0.015)",
+                                    : NAV_IDLE_BACKGROUND,
 
                             border:
                                 isVoiceLoading ||
                                 voiceHovered
                                     ? "1px solid rgba(255,190,90,0.22)"
-                                    : "1px solid rgba(255,255,255,0.03)",
+                                    : NAV_IDLE_BORDER,
 
                             boxShadow:
                                 isVoiceLoading ||
@@ -530,7 +545,7 @@ export default function Navbar() {
                                     0 0 34px rgba(255,140,0,0.28),
                                     inset 0 0 16px rgba(255,190,80,0.10)
                                     `
-                                    : "none"
+                                    : NAV_IDLE_SHADOW
                         }}
                     >
                         {
@@ -692,8 +707,8 @@ function SolutionsDropdown({
 
                     color:
                         active
-                            ? "#ffe2b2"
-                            : "#8c8c8c",
+                            ? NAV_GOLD_ACTIVE
+                            : NAV_GOLD,
 
                     background:
                         active
@@ -704,12 +719,12 @@ function SolutionsDropdown({
                                 rgba(255,120,20,0.14)
                             )
                             `
-                            : "rgba(255,255,255,0.015)",
+                            : NAV_IDLE_BACKGROUND,
 
                     border:
                         active
                             ? "1px solid rgba(255,170,70,0.18)"
-                            : "1px solid rgba(255,255,255,0.03)",
+                            : NAV_IDLE_BORDER,
 
                     boxShadow:
                         active
@@ -717,7 +732,7 @@ function SolutionsDropdown({
                             0 0 34px rgba(255,140,0,0.22),
                             inset 0 0 16px rgba(255,190,80,0.08)
                             `
-                            : "none"
+                            : NAV_IDLE_SHADOW
                 }}
             >
                 <T brand>AI SOLUTIONS</T>
@@ -956,8 +971,8 @@ function LanguageDropdown({
 
                     color:
                         active
-                            ? "#ffe2b2"
-                            : "#8c8c8c",
+                            ? NAV_GOLD_ACTIVE
+                            : NAV_GOLD,
 
                     background:
                         active
@@ -968,12 +983,12 @@ function LanguageDropdown({
                                 rgba(255,120,20,0.14)
                             )
                             `
-                            : "rgba(255,255,255,0.015)",
+                            : NAV_IDLE_BACKGROUND,
 
                     border:
                         active
                             ? "1px solid rgba(255,170,70,0.18)"
-                            : "1px solid rgba(255,255,255,0.03)",
+                            : NAV_IDLE_BORDER,
 
                     boxShadow:
                         active
@@ -981,7 +996,7 @@ function LanguageDropdown({
                             0 0 34px rgba(255,140,0,0.22),
                             inset 0 0 16px rgba(255,190,80,0.08)
                             `
-                            : "none"
+                            : NAV_IDLE_SHADOW
                 }}
             >
                 <span data-no-translate>
@@ -1183,8 +1198,8 @@ function ServicesDropdown({
 
                     color:
                         open
-                            ? "#ffe2b2"
-                            : "#8c8c8c",
+                            ? NAV_GOLD_ACTIVE
+                            : NAV_GOLD,
 
                     background:
                         open
@@ -1195,12 +1210,12 @@ function ServicesDropdown({
                                 rgba(255,120,20,0.14)
                             )
                             `
-                            : "rgba(255,255,255,0.015)",
+                            : NAV_IDLE_BACKGROUND,
 
                     border:
                         open
                             ? "1px solid rgba(255,170,70,0.18)"
-                            : "1px solid rgba(255,255,255,0.03)",
+                            : NAV_IDLE_BORDER,
 
                     boxShadow:
                         open
@@ -1208,7 +1223,7 @@ function ServicesDropdown({
                             0 0 34px rgba(255,140,0,0.22),
                             inset 0 0 16px rgba(255,190,80,0.08)
                             `
-                            : "none"
+                            : NAV_IDLE_SHADOW
                 }}
             >
                 <Link
@@ -1484,15 +1499,15 @@ function LanguageMenuItem({
                     "0.08em",
 
                 fontFamily:
-                    "'Cinzel', serif",
+                    "'Cinzel Decorative', 'Cinzel', serif",
 
                 whiteSpace:
                     "nowrap",
 
                 color:
                     active
-                        ? "#ffe2b2"
-                        : "#8c8c8c",
+                        ? NAV_GOLD_ACTIVE
+                        : NAV_GOLD,
 
                 background:
                     active
@@ -1521,12 +1536,12 @@ function LanguageMenuItem({
                             : "1px solid transparent",
 
                 boxShadow:
-                    hovered
+                    hovered || active
                         ? `
                         0 0 20px rgba(255,140,0,0.16),
                         inset 0 0 10px rgba(255,190,80,0.05)
                         `
-                        : "none",
+                        : "0 0 12px rgba(216,176,122,0.06)",
 
                 transition:
                     "all 0.20s ease",
@@ -1579,8 +1594,8 @@ function ChevronDown({
                 d="M2 3.5L5 6.5L8 3.5"
                 stroke={
                     active
-                        ? "#ffe2b2"
-                        : "#c9a050"
+                        ? NAV_GOLD_ACTIVE
+                        : NAV_GOLD
                 }
                 strokeWidth="1.5"
                 strokeLinecap="round"
@@ -1656,15 +1671,15 @@ function SolutionMenuItem({
                     "0.08em",
 
                 fontFamily:
-                    "'Cinzel', serif",
+                    "'Cinzel Decorative', 'Cinzel', serif",
 
                 whiteSpace:
                     "nowrap",
 
                 color:
                     active
-                        ? "#ffe2b2"
-                        : "#8c8c8c",
+                        ? NAV_GOLD_ACTIVE
+                        : NAV_GOLD,
 
                 background:
                     active
@@ -1693,12 +1708,12 @@ function SolutionMenuItem({
                             : "1px solid transparent",
 
                 boxShadow:
-                    hovered
+                    hovered || active
                         ? `
                         0 0 20px rgba(255,140,0,0.16),
                         inset 0 0 10px rgba(255,190,80,0.05)
                         `
-                        : "none",
+                        : "0 0 12px rgba(216,176,122,0.06)",
 
                 transition:
                     "all 0.20s ease"
@@ -1741,8 +1756,8 @@ function NavButton({
 
                 color:
                     active
-                        ? "#ffe2b2"
-                        : "#8c8c8c",
+                        ? NAV_GOLD_ACTIVE
+                        : NAV_GOLD,
 
                 background:
                     active
@@ -1753,12 +1768,12 @@ function NavButton({
                             rgba(255,120,20,0.14)
                         )
                         `
-                        : "rgba(255,255,255,0.015)",
+                        : NAV_IDLE_BACKGROUND,
 
                 border:
                     active
                         ? "1px solid rgba(255,170,70,0.18)"
-                        : "1px solid rgba(255,255,255,0.03)",
+                        : NAV_IDLE_BORDER,
 
                 boxShadow:
                     active
@@ -1766,7 +1781,7 @@ function NavButton({
                         0 0 34px rgba(255,140,0,0.22),
                         inset 0 0 16px rgba(255,190,80,0.08)
                         `
-                        : "none"
+                        : NAV_IDLE_SHADOW
             }}
         >
             <T brand={brand}>{text}</T>
@@ -1845,7 +1860,7 @@ function getButtonStyle(
             "all 0.20s ease",
 
         fontFamily:
-            "'Cinzel', serif",
+            "'Cinzel Decorative', 'Cinzel', serif",
 
         backdropFilter:
             "blur(8px)",
