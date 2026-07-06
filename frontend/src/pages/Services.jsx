@@ -4,6 +4,7 @@ import {
 
 import { motion } from "framer-motion";
 
+import AnimatedInkText from "../components/AnimatedInkText";
 import Footer from "../components/Footer";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
@@ -13,18 +14,30 @@ import {
 } from "../constants/links";
 
 import {
+    T,
+    useTranslatedText
+} from "../services/translation";
+
+import {
     GOLD,
     TEXT
 } from "../theme/colors";
 
 import {
     FONT_CINZEL,
+    FONT_CINZEL_DECORATIVE,
     FONT_IM_FELL
 } from "../theme/fonts";
 
-import dragonEyeImage from "../assets/murzik/chat-main-image.webp";
+import dragonEyeVideo from "../assets/murzik/murzik-eyes.mp4";
 
-const SERVICE_AREAS = [
+const HERO_TITLE =
+    "What Can We Do for You?";
+
+const HERO_SUBTITLE =
+    "We develop modern AI solutions for businesses — from research and concept design to production-ready intelligent systems.";
+
+const SERVICE_DIRECTIONS = [
     "AI Consulting",
     "AI Agents & Multi-Agent Systems",
     "Business Process Automation",
@@ -51,7 +64,7 @@ const SERVICE_AREAS = [
     "Enterprise AI Integration"
 ];
 
-const SERVICES = [
+const SERVICE_SECTIONS = [
     {
         title: "AI Consulting",
         description:
@@ -80,58 +93,86 @@ const SERVICES = [
     {
         title: "Machine Learning Models",
         description:
-            "We develop machine learning models for prediction, classification, ranking, segmentation and business intelligence."
+            "We develop machine learning models for prediction, classification, ranking, segmentation, anomaly detection and business intelligence."
     },
     {
         title: "Training Models on Custom Datasets",
         description:
-            "We prepare datasets, build training pipelines and train models on your proprietary data with measurable performance goals."
+            "We prepare datasets, clean data, structure annotations and train models on customer-specific data."
     },
     {
-        title: "Training Models from Scratch",
+        title: "Training AI Models from Scratch",
         description:
-            "We design and train models from the ground up when your use case requires a fully custom AI foundation."
+            "We design and train models from scratch when a task requires a custom architecture, domain-specific training or full control over model behavior."
     },
     {
         title: "Fine-Tuning Existing Models",
         description:
-            "We adapt existing models to your business context, improving quality, tone, accuracy and domain-specific behavior."
+            "We adapt existing models to your business domain, improve their accuracy and align them with your workflows and data."
     },
     {
-        title: "Custom Neural Network Development",
+        title: "Custom Neural Network Architectures",
         description:
-            "We develop neural architectures for specialized tasks where standard models are not precise, efficient or flexible enough."
+            "We design custom neural network architectures for specialized tasks where standard models are not sufficient."
     },
     {
         title: "RAG & LLM Solutions",
         description:
-            "We integrate language models with enterprise knowledge bases, retrieval systems and secure business data sources."
+            "We build RAG systems, enterprise knowledge bases, document search, LLM-powered assistants and generative AI tools."
     },
     {
         title: "Benchmark Development & AI Evaluation",
         description:
-            "We create benchmarks, evaluation metrics and testing workflows to measure AI quality before and after deployment."
+            "We design benchmarks, define evaluation protocols, measure ML metrics, compare models and prepare technical reports on model quality."
     },
     {
         title: "AI MVP Development",
         description:
-            "We turn AI ideas into focused MVPs that validate market value, technical feasibility and future product direction."
+            "We build fast MVPs and demos to validate ideas, attract investment and test AI product hypotheses before full-scale development."
     },
     {
-        title: "Research & Development (R&D)",
+        title: "Research & Development",
         description:
-            "We explore advanced AI concepts, prototype new approaches and help transform research into production-ready systems."
+            "We conduct AI research, prototype experimental models, test advanced architectures and turn research ideas into applied systems."
     }
 ];
 
 const WORK_STEPS = [
-    "Requirements Analysis",
-    "Solution Architecture",
-    "AI Development",
-    "Model Training",
-    "Evaluation & Benchmarking",
-    "Deployment",
-    "Support & Future Development"
+    {
+        title: "Requirements Analysis",
+        description:
+            "We clarify the business goal, technical constraints, data sources and expected result."
+    },
+    {
+        title: "Solution Architecture",
+        description:
+            "We define the AI system structure, integrations, data flow and development roadmap."
+    },
+    {
+        title: "AI Development",
+        description:
+            "We build the core intelligence, interfaces and automation logic required for the product."
+    },
+    {
+        title: "Model Training",
+        description:
+            "We prepare data, train or fine-tune models and align them with the target use case."
+    },
+    {
+        title: "Evaluation & Benchmarking",
+        description:
+            "We test model quality with benchmarks, metrics and practical performance checks."
+    },
+    {
+        title: "Deployment",
+        description:
+            "We prepare the solution for real users, production environments and business workflows."
+    },
+    {
+        title: "Support & Future Development",
+        description:
+            "We continue improving the system as your data, users and goals evolve."
+    }
 ];
 
 const WHY_ITEMS = [
@@ -152,38 +193,107 @@ export default function Services() {
         isTablet
     } = useFounderBreakpoints();
 
-    const sectionPaddingX =
+    const translatedHeroTitle =
+        useTranslatedText(
+            HERO_TITLE
+        );
+
+    const translatedHeroSubtitle =
+        useTranslatedText(
+            HERO_SUBTITLE
+        );
+
+    const pagePaddingX =
         isMobile
-            ? "max(18px, env(safe-area-inset-left, 0px))"
+            ? "max(20px, env(safe-area-inset-left, 0px))"
             : isTablet
-                ? "32px"
-                : "48px";
+                ? "44px"
+                : "64px";
 
-    const sectionPaddingY =
+    const maxTextWidth =
+        "940px";
+
+    const sectionSpacing =
         isMobile
-            ? "54px"
+            ? "78px"
             : isTablet
-                ? "70px"
-                : "88px";
+                ? "104px"
+                : "132px";
 
-    const maxContentWidth =
-        "1180px";
-
-    const sectionTitleStyle = {
+    const heroTitleStyle = {
         color: GOLD,
-        fontFamily: FONT_CINZEL,
+        fontFamily: FONT_CINZEL_DECORATIVE,
+        fontWeight: "700",
         fontSize:
             isMobile
-                ? "30px"
+                ? "34px"
                 : isTablet
-                    ? "40px"
-                    : "52px",
-        fontWeight: 700,
-        lineHeight: 1.15,
+                    ? "48px"
+                    : "64px",
+        letterSpacing:
+            isMobile
+                ? "0.02em"
+                : isTablet
+                    ? "0.05em"
+                    : "0.07em",
+        lineHeight:
+            isMobile
+                ? "1.26"
+                : "1.22",
         margin: 0,
         textAlign: "center",
         textShadow:
-            "0 0 18px rgba(216,176,122,0.26)"
+            "0 0 26px rgba(216,176,122,0.30), 0 0 58px rgba(255,140,0,0.12)"
+    };
+
+    const heroSubtitleStyle = {
+        color: TEXT,
+        fontFamily: FONT_IM_FELL,
+        fontWeight: "400",
+        fontSize:
+            isMobile
+                ? "20px"
+                : isTablet
+                    ? "23px"
+                    : "27px",
+        letterSpacing:
+            isMobile
+                ? "0.01em"
+                : "0.03em",
+        lineHeight:
+            isMobile
+                ? "1.55"
+                : "1.65",
+        margin: 0,
+        maxWidth: "820px",
+        marginInline: "auto",
+        textAlign: "center",
+        textShadow:
+            "0 0 16px rgba(216,176,122,0.16)"
+    };
+
+    const sectionTitleStyle = {
+        color: GOLD,
+        fontFamily: FONT_CINZEL_DECORATIVE,
+        fontSize:
+            isMobile
+                ? "28px"
+                : isTablet
+                    ? "36px"
+                    : "46px",
+        fontWeight: "700",
+        lineHeight: 1.25,
+        letterSpacing:
+            isMobile
+                ? "0.03em"
+                : "0.06em",
+        margin: 0,
+        textAlign:
+            isMobile
+                ? "center"
+                : "left",
+        textShadow:
+            "0 0 20px rgba(216,176,122,0.22)"
     };
 
     const paragraphStyle = {
@@ -191,27 +301,32 @@ export default function Services() {
         fontFamily: FONT_IM_FELL,
         fontSize:
             isMobile
-                ? "19px"
+                ? "20px"
                 : isTablet
-                    ? "21px"
-                    : "24px",
+                    ? "22px"
+                    : "25px",
         lineHeight:
             isMobile
-                ? 1.55
-                : 1.65,
-        margin: 0,
-        textAlign: "center"
+                ? 1.58
+                : 1.72,
+        margin: 0
     };
 
-    const cardStyle = {
-        background:
-            "linear-gradient(180deg, rgba(18,13,7,0.92), rgba(7,6,5,0.94))",
-        border:
-            "1px solid rgba(216,176,122,0.30)",
-        borderRadius: "8px",
-        boxShadow:
-            "0 18px 46px rgba(0,0,0,0.34), inset 0 0 22px rgba(216,176,122,0.045)",
-        boxSizing: "border-box"
+    const smallHeadingStyle = {
+        color: GOLD,
+        fontFamily: FONT_CINZEL,
+        fontSize:
+            isMobile
+                ? "22px"
+                : isTablet
+                    ? "25px"
+                    : "29px",
+        fontWeight: "700",
+        lineHeight: 1.32,
+        letterSpacing: "0.04em",
+        margin: 0,
+        textShadow:
+            "0 0 15px rgba(216,176,122,0.18)"
     };
 
     return (
@@ -222,7 +337,7 @@ export default function Services() {
                 maxWidth: "100vw",
                 overflowX: "hidden",
                 background:
-                    "linear-gradient(to bottom, #050505 0%, #080603 54%, #050505 100%)",
+                    "linear-gradient(to bottom, #050505 0%, #080603 48%, #050505 100%)",
                 color: "white",
                 position: "relative",
                 fontFamily: FONT_IM_FELL
@@ -240,13 +355,33 @@ export default function Services() {
                 }}
                 style={{
                     position: "absolute",
-                    top: isMobile ? "-90px" : "-160px",
-                    right: isMobile ? "-120px" : "-220px",
-                    width: isMobile ? "280px" : isTablet ? "480px" : "720px",
-                    height: isMobile ? "280px" : isTablet ? "480px" : "720px",
+                    top:
+                        isMobile
+                            ? "-110px"
+                            : "-190px",
+                    right:
+                        isMobile
+                            ? "-140px"
+                            : "-260px",
+                    width:
+                        isMobile
+                            ? "300px"
+                            : isTablet
+                                ? "520px"
+                                : "760px",
+                    height:
+                        isMobile
+                            ? "300px"
+                            : isTablet
+                                ? "520px"
+                                : "760px",
                     borderRadius: "9999px",
-                    background: "rgba(255,140,0,0.10)",
-                    filter: isMobile ? "blur(54px)" : "blur(105px)",
+                    background:
+                        "rgba(255,140,0,0.10)",
+                    filter:
+                        isMobile
+                            ? "blur(58px)"
+                            : "blur(112px)",
                     pointerEvents: "none"
                 }}
             />
@@ -258,85 +393,50 @@ export default function Services() {
                     minHeight:
                         isMobile
                             ? "auto"
-                            : "78vh",
+                            : "82vh",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     paddingTop:
                         isMobile
-                            ? "max(116px, calc(96px + env(safe-area-inset-top, 0px)))"
+                            ? "max(118px, calc(98px + env(safe-area-inset-top, 0px)))"
                             : isTablet
-                                ? "138px"
-                                : "154px",
+                                ? "142px"
+                                : "158px",
                     paddingBottom:
                         isMobile
-                            ? "58px"
-                            : "82px",
-                    paddingLeft: sectionPaddingX,
-                    paddingRight: sectionPaddingX,
+                            ? "72px"
+                            : "98px",
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
                     boxSizing: "border-box"
                 }}
             >
                 <div
                     style={{
                         width: "100%",
-                        maxWidth: maxContentWidth,
+                        maxWidth: maxTextWidth,
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         gap:
                             isMobile
-                                ? "22px"
-                                : "28px",
+                                ? "24px"
+                                : "30px",
                         textAlign: "center"
                     }}
                 >
-                    <motion.h1
-                        initial={{
-                            opacity: 0,
-                            y: 18
-                        }}
-                        animate={{
-                            opacity: 1,
-                            y: 0
-                        }}
-                        transition={{
-                            duration: 0.8,
-                            ease: "easeOut"
-                        }}
-                        style={{
-                            color: GOLD,
-                            fontFamily: FONT_CINZEL,
-                            fontSize:
-                                isMobile
-                                    ? "42px"
-                                    : isTablet
-                                        ? "62px"
-                                        : "84px",
-                            fontWeight: 700,
-                            lineHeight: 1.04,
-                            margin: 0,
-                            textShadow:
-                                "0 0 26px rgba(216,176,122,0.32), 0 0 58px rgba(255,140,0,0.12)"
-                        }}
-                    >
-                        What Can We Do for You?
-                    </motion.h1>
+                    <AnimatedInkText
+                        as="h1"
+                        style={heroTitleStyle}
+                        text={translatedHeroTitle}
+                    />
 
-                    <p
-                        style={{
-                            ...paragraphStyle,
-                            maxWidth: "920px",
-                            fontSize:
-                                isMobile
-                                    ? "21px"
-                                    : isTablet
-                                        ? "25px"
-                                        : "31px"
-                        }}
-                    >
-                        We develop modern AI solutions for businesses — from research and concept design to production-ready intelligent systems.
-                    </p>
+                    <AnimatedInkText
+                        as="p"
+                        style={heroSubtitleStyle}
+                        text={translatedHeroSubtitle}
+                    />
                 </div>
             </section>
 
@@ -344,119 +444,52 @@ export default function Services() {
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
                     boxSizing: "border-box"
                 }}
             >
                 <div
                     style={{
-                        maxWidth: maxContentWidth,
+                        maxWidth: maxTextWidth,
                         margin: "0 auto",
                         display: "flex",
                         flexDirection: "column",
                         gap:
                             isMobile
-                                ? "28px"
-                                : "34px"
-                    }}
-                >
-                    <h2 style={sectionTitleStyle}>
-                        Helping Your Business Grow with AI
-                    </h2>
-
-                    <p
-                        style={{
-                            ...paragraphStyle,
-                            maxWidth: "960px",
-                            margin: "0 auto"
-                        }}
-                    >
-                        We help companies implement artificial intelligence, automate business processes and build intelligent products that increase efficiency, reduce costs and create new business opportunities.
-                    </p>
-
-                    <p
-                        style={{
-                            ...paragraphStyle,
-                            color: GOLD,
-                            fontSize:
-                                isMobile
-                                    ? "20px"
-                                    : isTablet
-                                        ? "23px"
-                                        : "27px"
-                        }}
-                    >
-                        Choose the area that best matches your business needs:
-                    </p>
-
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "center",
-                            gap:
-                                isMobile
-                                    ? "10px"
-                                    : "12px"
-                        }}
-                    >
-                        {SERVICE_AREAS.map((service) => (
-                            <span
-                                key={service}
-                                style={{
-                                    color: GOLD,
-                                    fontFamily: FONT_CINZEL,
-                                    fontSize:
-                                        isMobile
-                                            ? "11px"
-                                            : "12px",
-                                    fontWeight: 700,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    padding:
-                                        isMobile
-                                            ? "9px 12px"
-                                            : "10px 14px",
-                                    border:
-                                        "1px solid rgba(216,176,122,0.32)",
-                                    borderRadius: "999px",
-                                    background:
-                                        "rgba(8,6,4,0.72)",
-                                    boxShadow:
-                                        "0 0 18px rgba(216,176,122,0.06)",
-                                    boxSizing: "border-box"
-                                }}
-                            >
-                                {service}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section
-                style={{
-                    position: "relative",
-                    zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
-                    boxSizing: "border-box"
-                }}
-            >
-                <div
-                    style={{
-                        maxWidth: maxContentWidth,
-                        margin: "0 auto",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap:
-                            isMobile
-                                ? "28px"
+                                ? "30px"
                                 : "38px"
                     }}
                 >
                     <h2 style={sectionTitleStyle}>
-                        Our Services
+                        <T>
+                            Our Help for Your Business
+                        </T>
                     </h2>
+
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap:
+                                isMobile
+                                    ? "18px"
+                                    : "22px"
+                        }}
+                    >
+                        <p style={paragraphStyle}>
+                            <T>
+                                We help companies implement artificial intelligence, automate business processes and build intelligent products that increase efficiency, reduce costs and create new business opportunities.
+                            </T>
+                        </p>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                Choose the direction that best matches your business needs.
+                            </T>
+                        </p>
+                    </div>
 
                     <div
                         style={{
@@ -464,158 +497,30 @@ export default function Services() {
                             gridTemplateColumns:
                                 isMobile
                                     ? "1fr"
-                                    : isTablet
-                                        ? "repeat(2, minmax(0, 1fr))"
-                                        : "repeat(3, minmax(0, 1fr))",
-                            gap:
+                                    : "repeat(2, minmax(0, 1fr))",
+                            columnGap:
                                 isMobile
-                                    ? "16px"
-                                    : "20px"
-                        }}
-                    >
-                        {SERVICES.map((service) => (
-                            <article
-                                key={service.title}
-                                style={{
-                                    ...cardStyle,
-                                    padding:
-                                        isMobile
-                                            ? "22px 18px"
-                                            : "26px 24px",
-                                    minHeight:
-                                        isMobile
-                                            ? "auto"
-                                            : "220px"
-                                }}
-                            >
-                                <h3
-                                    style={{
-                                        color: GOLD,
-                                        fontFamily: FONT_CINZEL,
-                                        fontSize:
-                                            isMobile
-                                                ? "20px"
-                                                : "22px",
-                                        lineHeight: 1.25,
-                                        margin: "0 0 14px",
-                                        textShadow:
-                                            "0 0 14px rgba(216,176,122,0.18)"
-                                    }}
-                                >
-                                    {service.title}
-                                </h3>
-
-                                <p
-                                    style={{
-                                        color: TEXT,
-                                        fontFamily: FONT_IM_FELL,
-                                        fontSize:
-                                            isMobile
-                                                ? "18px"
-                                                : "19px",
-                                        lineHeight: 1.55,
-                                        margin: 0
-                                    }}
-                                >
-                                    {service.description}
-                                </p>
-                            </article>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section
-                style={{
-                    position: "relative",
-                    zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
-                    boxSizing: "border-box"
-                }}
-            >
-                <div
-                    style={{
-                        maxWidth: maxContentWidth,
-                        margin: "0 auto",
-                        display: "grid",
-                        gridTemplateColumns:
-                            isMobile
-                                ? "1fr"
-                                : "minmax(0, 0.9fr) minmax(0, 1.1fr)",
-                        gap:
-                            isMobile
-                                ? "28px"
-                                : isTablet
-                                    ? "34px"
-                                    : "48px",
-                        alignItems: "start"
-                    }}
-                >
-                    <h2
-                        style={{
-                            ...sectionTitleStyle,
-                            textAlign:
+                                    ? "0"
+                                    : "56px",
+                            rowGap:
                                 isMobile
-                                    ? "center"
-                                    : "left"
+                                    ? "10px"
+                                    : "12px",
+                            color: GOLD,
+                            fontFamily: FONT_CINZEL,
+                            fontSize:
+                                isMobile
+                                    ? "17px"
+                                    : "18px",
+                            lineHeight: 1.55,
+                            letterSpacing: "0.04em"
                         }}
                     >
-                        How We Work
-                    </h2>
-
-                    <div
-                        style={{
-                            display: "grid",
-                            gap: "14px"
-                        }}
-                    >
-                        {WORK_STEPS.map((step, index) => (
-                            <div
-                                key={step}
-                                style={{
-                                    ...cardStyle,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "16px",
-                                    padding:
-                                        isMobile
-                                            ? "16px"
-                                            : "18px 20px"
-                                }}
-                            >
-                                <span
-                                    style={{
-                                        flex: "0 0 auto",
-                                        width: "34px",
-                                        height: "34px",
-                                        borderRadius: "50%",
-                                        display: "inline-flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        color: GOLD,
-                                        border:
-                                            "1px solid rgba(216,176,122,0.46)",
-                                        fontFamily: FONT_CINZEL,
-                                        fontSize: "13px",
-                                        fontWeight: 700
-                                    }}
-                                >
-                                    {index + 1}
-                                </span>
-
-                                <span
-                                    style={{
-                                        color: TEXT,
-                                        fontFamily: FONT_IM_FELL,
-                                        fontSize:
-                                            isMobile
-                                                ? "18px"
-                                                : "21px",
-                                        lineHeight: 1.35
-                                    }}
-                                >
-                                    {step}
-                                </span>
+                        {SERVICE_DIRECTIONS.map((service) => (
+                            <div key={service}>
+                                <T>
+                                    {service}
+                                </T>
                             </div>
                         ))}
                     </div>
@@ -626,24 +531,149 @@ export default function Services() {
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
                     boxSizing: "border-box"
                 }}
             >
                 <div
                     style={{
-                        maxWidth: maxContentWidth,
+                        maxWidth: maxTextWidth,
                         margin: "0 auto",
                         display: "flex",
                         flexDirection: "column",
                         gap:
                             isMobile
-                                ? "28px"
-                                : "36px"
+                                ? "48px"
+                                : "60px"
+                    }}
+                >
+                    {SERVICE_SECTIONS.map((service) => (
+                        <article
+                            key={service.title}
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap:
+                                    isMobile
+                                        ? "12px"
+                                        : "16px"
+                            }}
+                        >
+                            <h2 style={smallHeadingStyle}>
+                                <T>
+                                    {service.title}
+                                </T>
+                            </h2>
+
+                            <p style={paragraphStyle}>
+                                <T>
+                                    {service.description}
+                                </T>
+                            </p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section
+                style={{
+                    position: "relative",
+                    zIndex: 2,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
+                    boxSizing: "border-box"
+                }}
+            >
+                <div
+                    style={{
+                        maxWidth: maxTextWidth,
+                        margin: "0 auto",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap:
+                            isMobile
+                                ? "30px"
+                                : "40px"
                     }}
                 >
                     <h2 style={sectionTitleStyle}>
-                        Why Golden Dragon AI Studio
+                        <T>
+                            How We Work
+                        </T>
+                    </h2>
+
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap:
+                                isMobile
+                                    ? "24px"
+                                    : "30px"
+                        }}
+                    >
+                        {WORK_STEPS.map((step) => (
+                            <div
+                                key={step.title}
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns:
+                                        isMobile
+                                            ? "1fr"
+                                            : "minmax(220px, 0.45fr) minmax(0, 1fr)",
+                                    gap:
+                                        isMobile
+                                            ? "8px"
+                                            : "30px",
+                                    alignItems: "baseline"
+                                }}
+                            >
+                                <h3 style={smallHeadingStyle}>
+                                    <T>
+                                        {step.title}
+                                    </T>
+                                </h3>
+
+                                <p style={paragraphStyle}>
+                                    <T>
+                                        {step.description}
+                                    </T>
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section
+                style={{
+                    position: "relative",
+                    zIndex: 2,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
+                    boxSizing: "border-box"
+                }}
+            >
+                <div
+                    style={{
+                        maxWidth: maxTextWidth,
+                        margin: "0 auto",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap:
+                            isMobile
+                                ? "30px"
+                                : "40px"
+                    }}
+                >
+                    <h2 style={sectionTitleStyle}>
+                        <T>
+                            Why Golden Dragon AI Studio
+                        </T>
                     </h2>
 
                     <div
@@ -652,37 +682,26 @@ export default function Services() {
                             gridTemplateColumns:
                                 isMobile
                                     ? "1fr"
-                                    : isTablet
-                                        ? "repeat(2, minmax(0, 1fr))"
-                                        : "repeat(4, minmax(0, 1fr))",
-                            gap:
+                                    : "repeat(2, minmax(0, 1fr))",
+                            columnGap: "56px",
+                            rowGap:
                                 isMobile
                                     ? "12px"
-                                    : "16px"
+                                    : "16px",
+                            color: TEXT,
+                            fontFamily: FONT_IM_FELL,
+                            fontSize:
+                                isMobile
+                                    ? "20px"
+                                    : "23px",
+                            lineHeight: 1.55
                         }}
                     >
                         {WHY_ITEMS.map((item) => (
-                            <div
-                                key={item}
-                                style={{
-                                    ...cardStyle,
-                                    color: GOLD,
-                                    fontFamily: FONT_CINZEL,
-                                    fontSize:
-                                        isMobile
-                                            ? "15px"
-                                            : "16px",
-                                    fontWeight: 700,
-                                    lineHeight: 1.35,
-                                    letterSpacing: "0.04em",
-                                    textAlign: "center",
-                                    padding:
-                                        isMobile
-                                            ? "16px"
-                                            : "18px"
-                                }}
-                            >
-                                {item}
+                            <div key={item}>
+                                <T>
+                                    {item}
+                                </T>
                             </div>
                         ))}
                     </div>
@@ -693,29 +712,40 @@ export default function Services() {
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
                     boxSizing: "border-box"
                 }}
             >
                 <div
                     style={{
-                        maxWidth: "920px",
+                        maxWidth: maxTextWidth,
                         margin: "0 auto",
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "center",
                         gap:
                             isMobile
-                                ? "20px"
-                                : "24px"
+                                ? "22px"
+                                : "28px"
                     }}
                 >
                     <h2 style={sectionTitleStyle}>
-                        Start Your Project
+                        <T>
+                            Start Your Project
+                        </T>
                     </h2>
 
                     <p style={paragraphStyle}>
-                        Tell us what you want to build, automate or improve. We will help you define the best AI direction and turn your idea into a practical solution.
+                        <T>
+                            Tell us about your task.
+                        </T>
+                    </p>
+
+                    <p style={paragraphStyle}>
+                        <T>
+                            We will help you define the optimal AI solution, prepare a project concept and choose the most effective implementation path.
+                        </T>
                     </p>
                 </div>
             </section>
@@ -724,69 +754,62 @@ export default function Services() {
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
                     boxSizing: "border-box"
                 }}
             >
                 <div
                     style={{
-                        maxWidth: maxContentWidth,
+                        maxWidth: maxTextWidth,
                         margin: "0 auto",
                         display: "grid",
                         gridTemplateColumns:
                             isMobile
                                 ? "1fr"
-                                : "repeat(2, minmax(0, 1fr))",
+                                : "minmax(0, 0.7fr) minmax(0, 1fr)",
                         gap:
                             isMobile
-                                ? "20px"
-                                : "24px",
-                        alignItems: "stretch"
+                                ? "44px"
+                                : "64px",
+                        alignItems: "center"
                     }}
                 >
                     <div
                         style={{
-                            ...cardStyle,
-                            padding:
-                                isMobile
-                                    ? "26px 20px"
-                                    : "34px",
                             display: "flex",
                             flexDirection: "column",
-                            justifyContent: "center",
-                            gap: "16px",
-                            textAlign: "center"
+                            gap: "18px"
                         }}
                     >
-                        <h2
-                            style={{
-                                ...sectionTitleStyle,
-                                fontSize:
-                                    isMobile
-                                        ? "28px"
-                                        : isTablet
-                                            ? "34px"
-                                            : "42px"
-                            }}
-                        >
-                            Email
+                        <h2 style={sectionTitleStyle}>
+                            <T>
+                                Email
+                            </T>
                         </h2>
 
                         <a
                             href={CONTACT_LINKS.EMAIL}
                             target="_blank"
                             rel="noopener noreferrer"
+                            data-no-translate
                             style={{
                                 color: GOLD,
                                 fontFamily: FONT_CINZEL,
                                 fontSize:
                                     isMobile
-                                        ? "16px"
-                                        : "18px",
-                                fontWeight: 700,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                textDecoration: "none"
+                                        ? "17px"
+                                        : "19px",
+                                lineHeight: 1.45,
+                                letterSpacing: "0.04em",
+                                textDecoration:
+                                    "underline",
+                                textDecorationColor:
+                                    "rgba(216,176,122,0.42)",
+                                textUnderlineOffset:
+                                    "6px",
+                                overflowWrap: "anywhere"
                             }}
                         >
                             srumyantseva7@gmail.com
@@ -795,16 +818,20 @@ export default function Services() {
 
                     <div
                         style={{
-                            ...cardStyle,
-                            padding:
-                                isMobile
-                                    ? "26px 20px"
-                                    : "34px",
                             display: "flex",
                             flexDirection: "column",
-                            alignItems: "center",
-                            gap: "18px",
-                            textAlign: "center"
+                            alignItems:
+                                isMobile
+                                    ? "center"
+                                    : "flex-start",
+                            gap:
+                                isMobile
+                                    ? "18px"
+                                    : "22px",
+                            textAlign:
+                                isMobile
+                                    ? "center"
+                                    : "left"
                         }}
                     >
                         <Link
@@ -814,27 +841,32 @@ export default function Services() {
                                 display: "block",
                                 width:
                                     isMobile
-                                        ? "190px"
-                                        : "230px",
+                                        ? "184px"
+                                        : isTablet
+                                            ? "210px"
+                                            : "238px",
                                 maxWidth: "100%",
-                                borderRadius: "50%",
-                                border:
-                                    "1px solid rgba(216,176,122,0.50)",
-                                overflow: "hidden",
-                                boxShadow:
-                                    "0 0 30px rgba(216,176,122,0.18)",
-                                lineHeight: 0
+                                lineHeight: 0,
+                                filter:
+                                    "drop-shadow(0 0 30px rgba(216,176,122,0.24))"
                             }}
                         >
-                            <img
-                                src={dragonEyeImage}
-                                alt="Dragon Chat"
-                                draggable={false}
+                            <video
+                                src={dragonEyeVideo}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
                                 style={{
                                     display: "block",
                                     width: "100%",
                                     aspectRatio: "1 / 1",
-                                    objectFit: "cover"
+                                    objectFit: "cover",
+                                    borderRadius:
+                                        isMobile
+                                            ? "18px"
+                                            : "24px"
                                 }}
                             />
                         </Link>
@@ -842,19 +874,21 @@ export default function Services() {
                         <h2
                             style={{
                                 ...sectionTitleStyle,
-                                fontSize:
+                                textAlign:
                                     isMobile
-                                        ? "28px"
-                                        : isTablet
-                                            ? "34px"
-                                            : "42px"
+                                        ? "center"
+                                        : "left"
                             }}
                         >
-                            Dragon Chat
+                            <T brand>
+                                Dragon Chat
+                            </T>
                         </h2>
 
                         <p style={paragraphStyle}>
-                            Describe your project and Dragon will help you find the best AI solution.
+                            <T>
+                                Describe your project and Dragon will help you find the best AI solution.
+                            </T>
                         </p>
                     </div>
                 </div>
@@ -864,26 +898,31 @@ export default function Services() {
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    padding: `${sectionPaddingY} ${sectionPaddingX}`,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom:
+                        isMobile
+                            ? "70px"
+                            : "94px",
                     boxSizing: "border-box"
                 }}
             >
                 <div
                     style={{
-                        maxWidth: "780px",
+                        maxWidth: maxTextWidth,
                         margin: "0 auto",
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "center",
                         gap:
                             isMobile
                                 ? "22px"
-                                : "28px",
-                        textAlign: "center"
+                                : "28px"
                     }}
                 >
                     <h2 style={sectionTitleStyle}>
-                        Documents
+                        <T>
+                            Documents
+                        </T>
                     </h2>
 
                     <div
@@ -893,51 +932,33 @@ export default function Services() {
                                 isMobile
                                     ? "column"
                                     : "row",
-                            gap: "14px",
-                            width:
+                            gap:
                                 isMobile
-                                    ? "100%"
-                                    : "auto",
-                            justifyContent: "center"
+                                    ? "14px"
+                                    : "28px",
+                            alignItems:
+                                isMobile
+                                    ? "flex-start"
+                                    : "center"
                         }}
                     >
-                        {["Service Agreement", "NDA"].map((document) => (
-                            <a
-                                key={document}
-                                href="#"
-                                style={{
-                                    color: GOLD,
-                                    fontFamily: FONT_CINZEL,
-                                    fontSize:
-                                        isMobile
-                                            ? "14px"
-                                            : "15px",
-                                    fontWeight: 700,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    textDecoration: "none",
-                                    padding: "14px 20px",
-                                    minHeight: "48px",
-                                    minWidth:
-                                        isMobile
-                                            ? "100%"
-                                            : "220px",
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    border:
-                                        "1px solid rgba(216,176,122,0.48)",
-                                    borderRadius: "8px",
-                                    background:
-                                        "rgba(7,6,5,0.82)",
-                                    boxShadow:
-                                        "0 0 18px rgba(216,176,122,0.08)",
-                                    boxSizing: "border-box"
-                                }}
-                            >
-                                {document}
-                            </a>
-                        ))}
+                        <a
+                            href="#"
+                            style={documentLinkStyle(isMobile)}
+                        >
+                            <T>
+                                Service Agreement
+                            </T>
+                        </a>
+
+                        <a
+                            href="#"
+                            style={documentLinkStyle(isMobile)}
+                        >
+                            <T brand>
+                                NDA
+                            </T>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -946,4 +967,25 @@ export default function Services() {
 
         </main>
     );
+}
+
+function documentLinkStyle(
+    isMobile
+) {
+
+    return {
+        color: GOLD,
+        fontFamily: FONT_CINZEL,
+        fontSize:
+            isMobile
+                ? "17px"
+                : "18px",
+        lineHeight: 1.45,
+        letterSpacing: "0.06em",
+        textTransform: "uppercase",
+        textDecoration: "underline",
+        textDecorationColor:
+            "rgba(216,176,122,0.42)",
+        textUnderlineOffset: "7px"
+    };
 }
