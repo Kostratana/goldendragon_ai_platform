@@ -437,50 +437,6 @@ export default function ChatWindow({
     <div
         style={{
 
-            display: "flex",
-
-            gap: "6px",
-
-            flexWrap: "wrap",
-
-            alignItems: "center",
-
-            justifyContent:
-                isMobile
-                    ? "center"
-                    : "flex-start"
-        }}
-    >
-
-        <ModeButton
-            text="CHAT"
-            active={mode === PROJECT_MODES.CHAT}
-            isMobile={isMobile}
-            onClick={() =>
-                selectMode(
-                    PROJECT_MODES.CHAT,
-                    PROJECT_MODES.CHAT
-                )
-            }
-        />
-
-        <ModeButton
-            text="LOGGER"
-            active={mode === PROJECT_MODES.LOGGER}
-            isMobile={isMobile}
-            onClick={() =>
-                selectMode(
-                    PROJECT_MODES.LOGGER,
-                    PROJECT_MODES.LOGGER
-                )
-            }
-        />
-
-    </div>
-
-    <div
-        style={{
-
             display: "none",
 
             gap: "6px",

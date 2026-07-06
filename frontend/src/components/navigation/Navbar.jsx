@@ -119,6 +119,9 @@ export default function Navbar() {
     const [solutionsOpen, setSolutionsOpen] =
         useState(false);
 
+    const [servicesOpen, setServicesOpen] =
+        useState(false);
+
     const [languageOpen, setLanguageOpen] =
         useState(false);
 
@@ -282,6 +285,16 @@ export default function Navbar() {
                 className="gd-navbar-shell"
                 style={{
 
+                    position: "fixed",
+
+                    top: 0,
+
+                    left: 0,
+
+                    right: 0,
+
+                    transform: "none",
+
                     display: "flex",
 
                     justifyContent: "center",
@@ -395,6 +408,13 @@ export default function Navbar() {
                         pathname={pathname}
                         open={solutionsOpen}
                         onOpenChange={setSolutionsOpen}
+                    />
+
+                    <ServicesDropdown
+                        isMobile={isMobile}
+                        isTablet={isTablet}
+                        open={servicesOpen}
+                        onOpenChange={setServicesOpen}
                     />
 
                     <LanguageDropdown
@@ -874,9 +894,7 @@ function LanguageDropdown({
 
     function handleTriggerClick() {
 
-        if (isMobile) {
-            onOpenChange(!open);
-        }
+        onOpenChange(!open);
     }
 
     function handleLanguageSelect(
@@ -1060,6 +1078,217 @@ function LanguageDropdown({
                                 }
                             )
                         }
+
+                        </div>
+                    </div>
+                )
+            }
+
+        </div>
+    );
+}
+
+function ServicesDropdown({
+    isMobile,
+    isTablet,
+    open,
+    onOpenChange
+}) {
+
+    const containerRef =
+        useRef(null);
+
+    useEffect(() => {
+
+        if (!open || !isMobile) {
+            return;
+        }
+
+        function handleClickOutside(
+            event
+        ) {
+
+            if (
+                containerRef.current &&
+                !containerRef.current.contains(
+                    event.target
+                )
+            ) {
+
+                onOpenChange(false);
+            }
+        }
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+        return () => {
+
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+        };
+
+    }, [open, isMobile, onOpenChange]);
+
+    function handleMouseEnter() {
+
+        if (!isMobile) {
+            onOpenChange(true);
+        }
+    }
+
+    function handleMouseLeave() {
+
+        if (!isMobile) {
+            onOpenChange(false);
+        }
+    }
+
+    function handleTriggerClick() {
+
+        onOpenChange(!open);
+    }
+
+    return (
+
+        <div
+            ref={containerRef}
+
+            style={{
+                position: "relative",
+                flexShrink: 0
+            }}
+
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+
+            <button
+                type="button"
+                onClick={handleTriggerClick}
+                aria-expanded={open}
+                aria-haspopup="menu"
+
+                style={{
+
+                    ...getButtonStyle(
+                        isMobile,
+                        isTablet
+                    ),
+
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    justifyContent: "center",
+
+                    color:
+                        open
+                            ? "#ffe2b2"
+                            : "#8c8c8c",
+
+                    background:
+                        open
+                            ? `
+                            linear-gradient(
+                                to bottom,
+                                rgba(255,170,70,0.22),
+                                rgba(255,120,20,0.14)
+                            )
+                            `
+                            : "rgba(255,255,255,0.015)",
+
+                    border:
+                        open
+                            ? "1px solid rgba(255,170,70,0.18)"
+                            : "1px solid rgba(255,255,255,0.03)",
+
+                    boxShadow:
+                        open
+                            ? `
+                            0 0 34px rgba(255,140,0,0.22),
+                            inset 0 0 16px rgba(255,190,80,0.08)
+                            `
+                            : "none"
+                }}
+            >
+                <span data-no-translate>
+                    SERVICES
+                </span>
+                <ChevronDown
+                    open={open}
+                    active={open}
+                />
+            </button>
+
+            {
+                open && (
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "100%",
+                            left: "50%",
+                            transform:
+                                "translateX(-50%)",
+                            paddingTop: "10px",
+                            minWidth:
+                                isMobile
+                                    ? "180px"
+                                    : "220px",
+                            zIndex: 999999
+                        }}
+                    >
+                        <div
+                            role="menu"
+
+                            style={{
+
+                                padding: "8px",
+
+                                borderRadius: "12px",
+
+                                background:
+                                    `
+                                linear-gradient(
+                                    to bottom,
+                                    rgba(10,10,10,0.92),
+                                    rgba(6,6,6,0.88)
+                                )
+                                `,
+
+                                border:
+                                    "1px solid rgba(255,140,0,0.08)",
+
+                                backdropFilter:
+                                    "blur(16px)",
+
+                                WebkitBackdropFilter:
+                                    "blur(16px)",
+
+                                boxShadow:
+                                    `
+                                0 0 60px rgba(255,140,0,0.08),
+                                inset 0 0 18px rgba(255,140,0,0.03)
+                                `,
+
+                                animation:
+                                    "navDropdownOpen 200ms ease-out forwards"
+                            }}
+                        >
+
+                            <SolutionMenuItem
+                                label="Portfolio"
+                                to="#"
+                                active={false}
+                                isMobile={isMobile}
+                                onNavigate={() =>
+                                    onOpenChange(false)
+                                }
+                            />
 
                         </div>
                     </div>
@@ -1345,10 +1574,24 @@ function SolutionMenuItem({
     const [hovered, setHovered] =
         useState(false);
 
+    const MenuLink =
+        to === "#"
+            ? "a"
+            : Link;
+
+    const menuLinkProps =
+        to === "#"
+            ? {
+                href: to
+            }
+            : {
+                to
+            };
+
     return (
 
-        <Link
-            to={to}
+        <MenuLink
+            {...menuLinkProps}
             role="menuitem"
 
             onClick={onNavigate}
@@ -1435,7 +1678,7 @@ function SolutionMenuItem({
             }}
         >
             <T brand>{label}</T>
-        </Link>
+        </MenuLink>
     );
 }
 
