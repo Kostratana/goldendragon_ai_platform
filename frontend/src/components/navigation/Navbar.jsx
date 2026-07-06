@@ -1163,16 +1163,9 @@ function ServicesDropdown({
                 flexShrink: 0
             }}
 
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
         >
 
-            <button
-                type="button"
-                onClick={handleTriggerClick}
-                aria-expanded={open}
-                aria-haspopup="menu"
-
+            <div
                 style={{
 
                     ...getButtonStyle(
@@ -1185,6 +1178,8 @@ function ServicesDropdown({
                     alignItems: "center",
 
                     justifyContent: "center",
+
+                    gap: "6px",
 
                     color:
                         open
@@ -1216,14 +1211,46 @@ function ServicesDropdown({
                             : "none"
                 }}
             >
-                <span data-no-translate>
+                <Link
+                    to="/services"
+                    data-no-translate
+                    style={{
+                        color: "inherit",
+                        textDecoration: "none"
+                    }}
+                >
                     SERVICES
-                </span>
-                <ChevronDown
-                    open={open}
-                    active={open}
-                />
-            </button>
+                </Link>
+
+                <button
+                    type="button"
+                    onClick={handleTriggerClick}
+                    aria-expanded={open}
+                    aria-haspopup="menu"
+                    aria-label="Open services menu"
+                    data-no-translate
+
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "18px",
+                        height: "100%",
+                        padding: 0,
+                        margin: 0,
+                        border: "none",
+                        background: "transparent",
+                        color: "inherit",
+                        cursor: "pointer",
+                        outline: "none"
+                    }}
+                >
+                    <ChevronDown
+                        open={open}
+                        active={open}
+                    />
+                </button>
+            </div>
 
             {
                 open && (
@@ -1282,7 +1309,7 @@ function ServicesDropdown({
 
                             <SolutionMenuItem
                                 label="Portfolio"
-                                to="#"
+                                to="/services/portfolio"
                                 active={false}
                                 isMobile={isMobile}
                                 onNavigate={() =>
