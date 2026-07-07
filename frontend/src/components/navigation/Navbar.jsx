@@ -686,12 +686,7 @@ function SolutionsDropdown({
                 `}
             </style>
 
-            <button
-                type="button"
-                onClick={handleTriggerClick}
-                aria-expanded={open}
-                aria-haspopup="menu"
-
+            <div
                 style={{
 
                     ...getButtonStyle(
@@ -735,12 +730,49 @@ function SolutionsDropdown({
                             : NAV_IDLE_SHADOW
                 }}
             >
-                <T brand>AI SOLUTIONS</T>
+                <Link
+                    to="/solutions"
+                    data-no-translate
+                    onClick={() =>
+                        onOpenChange(false)
+                    }
+                    style={{
+                        color: "inherit",
+                        textDecoration: "none"
+                    }}
+                >
+                    AI SOLUTIONS
+                </Link>
+
+                <button
+                    type="button"
+                    onClick={handleTriggerClick}
+                    aria-expanded={open}
+                    aria-haspopup="menu"
+                    aria-label="Open AI solutions menu"
+                    data-no-translate
+
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "18px",
+                        height: "100%",
+                        padding: 0,
+                        margin: 0,
+                        border: "none",
+                        background: "transparent",
+                        color: "inherit",
+                        cursor: "pointer",
+                        outline: "none"
+                    }}
+                >
                 <ChevronDown
                     open={open}
                     active={active}
                 />
-            </button>
+                </button>
+            </div>
 
             {
                 open && (
