@@ -70,8 +70,8 @@ const SOLUTIONS_LINKS = [
         to: "/solutions/underwater-ai"
     },
     {
-        label: "Whale Hunter AI",
-        to: "/solutions/whale-hunter"
+        label: "Quantum Trading AI",
+        to: "/solutions/quantum-trading-ai"
     },
     {
         label: "Private Shopper AI",

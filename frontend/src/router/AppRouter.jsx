@@ -14,6 +14,7 @@ import AISolutions from "../pages/AISolutions";
 import HealthSupportAI from "../pages/HealthSupportAI";
 import EquineHealthAI from "../pages/EquineHealthAI";
 import UnderwaterInspectionAI from "../pages/UnderwaterInspectionAI";
+import QuantumTradingAI from "../pages/QuantumTradingAI";
 
 function AppRouter() {
 
@@ -77,6 +78,11 @@ function AppRouter() {
                     <Route
                         path="/solutions/underwater-ai"
                         element={<UnderwaterInspectionAI />}
+                    />
+
+                    <Route
+                        path="/solutions/quantum-trading-ai"
+                        element={<QuantumTradingAI />}
                     />
 
                 </Routes>
