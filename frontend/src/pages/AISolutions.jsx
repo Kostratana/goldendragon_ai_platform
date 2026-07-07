@@ -114,10 +114,7 @@ export default function AISolutions() {
 
     const translatedHeroSubtitle =
         useTranslatedText(
-            HERO_SUBTITLE,
-            {
-                brand: true
-            }
+            HERO_SUBTITLE
         );
 
     const pagePaddingX =
@@ -404,7 +401,7 @@ export default function AISolutions() {
                                 key={paragraph}
                                 style={paragraphStyle}
                             >
-                                <T brand>
+                                <T>
                                     {paragraph}
                                 </T>
                             </p>
@@ -594,7 +591,7 @@ export default function AISolutions() {
                                 key={paragraph}
                                 style={paragraphStyle}
                             >
-                                <T brand>
+                                <T>
                                     {paragraph}
                                 </T>
                             </p>
