@@ -47,55 +47,31 @@ const SECTIONS = [
     {
         title: "Project Overview",
         paragraphs: [
-            "Health Support AI is an intelligent healthcare assistant designed to help users make healthier nutritional decisions through artificial intelligence, computer vision and personalized health analysis.",
-            "The platform combines food recognition, ingredient analysis, health assessment and intelligent recommendations into a single AI assistant focused on preventive healthcare."
+            "Health Support AI combines food recognition, ingredient analysis and personalized health assessment in one preventive healthcare assistant."
         ]
     },
     {
         title: "Food Ingredient Analysis",
         paragraphs: [
-            "Users scan food packaging or upload product images directly into the chat.",
-            "The AI automatically detects ingredients, identifies potentially harmful food additives, explains each ingredient in simple language and evaluates possible health risks.",
-            "The assistant recommends healthier alternatives and helps users make informed purchasing decisions before purchasing food products."
+            "Users scan packaging or upload product images, then the AI explains ingredients, flags harmful additives and recommends healthier alternatives before purchase."
         ]
     },
     {
         title: "Personal Health Assessment",
         paragraphs: [
-            "The assistant creates an individual health profile using an intelligent questionnaire.",
-            "Based on the answers, the AI evaluates the user's health profile and prepares personalized nutritional recommendations."
-        ],
-        listIntro:
-            "The questionnaire analyzes:",
-        listItems: [
-            "lifestyle",
-            "nutrition",
-            "symptoms",
-            "daily habits",
-            "allergies",
-            "personal preferences"
+            "An intelligent questionnaire builds a health profile from lifestyle, nutrition, symptoms, habits, allergies and personal preferences."
         ]
     },
     {
         title: "Body Symmetry & Inflammation Analysis",
         paragraphs: [
-            "Using Computer Vision, the platform analyzes body symmetry from smartphone images.",
-            "The AI combines Computer Vision results with questionnaire responses to generate intelligent health insights and personalized nutrition recommendations."
-        ],
-        listIntro:
-            "Future multimodal analysis combines:",
-        listItems: [
-            "body symmetry",
-            "posture",
-            "movement analysis",
-            "infrared imaging concepts",
-            "inflammation localization"
+            "Computer Vision analyzes body symmetry from smartphone images and supports future posture, movement and inflammation insight workflows."
         ]
     },
     {
         title: "Core Mission",
         paragraphs: [
-            "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand nutritional choices and receive intelligent AI-powered recommendations supporting preventive healthcare."
+            "The mission is to help people understand food choices faster and receive AI-powered recommendations that support preventive healthcare."
         ]
     }
 ];
@@ -119,7 +95,6 @@ export default function HealthSupportAI() {
     const {
         isMobile: isChatMobile,
         isTablet: isChatTablet,
-        chatBox,
         startDrag,
         startTopLeftResize,
         startTopRightResize,
@@ -186,6 +161,69 @@ export default function HealthSupportAI() {
     const audioRuntimeRef =
         useRef(null);
 
+    const chatFrameRef =
+        useRef(null);
+
+    const createEmbeddedChatBox = () => {
+
+        const viewportWidth =
+            window.innerWidth;
+
+        const viewportHeight =
+            window.innerHeight;
+
+        const framePadding =
+            isMobile
+                ? 24
+                : 32;
+
+        const width =
+            Math.round(
+                Math.min(
+                    viewportWidth -
+                        (isMobile ? 40 : isTablet ? 88 : 128) -
+                        framePadding,
+                    isMobile
+                        ? viewportWidth - 64
+                        : isTablet
+                            ? 820
+                            : 980
+                )
+            );
+
+        const height =
+            Math.round(
+                Math.min(
+                    viewportHeight *
+                        (isMobile ? 0.64 : 0.74),
+                    isMobile
+                        ? 620
+                        : isTablet
+                            ? 760
+                            : 820
+                )
+            );
+
+        return {
+            width:
+                Math.max(
+                    isMobile ? 320 : 560,
+                    width
+                ),
+            height:
+                Math.max(
+                    isMobile ? 460 : 620,
+                    height
+                )
+        };
+    };
+
+    const [embeddedChatBox, setEmbeddedChatBox] =
+        useState(createEmbeddedChatBox);
+
+    const [chatFrameSize, setChatFrameSize] =
+        useState(null);
+
     const pagePaddingX =
         isMobile
             ? "max(20px, env(safe-area-inset-left, 0px))"
@@ -198,10 +236,10 @@ export default function HealthSupportAI() {
 
     const sectionSpacing =
         isMobile
-            ? "70px"
+            ? "54px"
             : isTablet
-                ? "92px"
-                : "112px";
+                ? "68px"
+                : "78px";
 
     const heroTitleStyle = {
         color: GOLD,
@@ -291,35 +329,6 @@ export default function HealthSupportAI() {
         textAlign: "center",
         textShadow:
             "0 0 15px rgba(216,176,122,0.18)"
-    };
-
-    const listIntroStyle = {
-        ...paragraphStyle,
-        color: GOLD,
-        fontSize:
-            isMobile
-                ? "17px"
-                : isTablet
-                    ? "19px"
-                    : "21px"
-    };
-
-    const listStyle = {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap:
-            isMobile
-                ? "8px"
-                : "10px",
-        color: TEXT,
-        fontFamily: FONT_IM_FELL,
-        fontSize:
-            isMobile
-                ? "18px"
-                : "21px",
-        lineHeight: 1.65,
-        textAlign: "center"
     };
 
     function stopMurzikVoice() {
@@ -494,6 +503,165 @@ export default function HealthSupportAI() {
         stopMurzikVoice();
     }
 
+    function updateEmbeddedChatSize(
+        frameWidth,
+        frameHeight
+    ) {
+
+        const framePadding =
+            isMobile
+                ? 24
+                : 32;
+
+        setEmbeddedChatBox({
+            width:
+                Math.max(
+                    isMobile ? 320 : 560,
+                    Math.round(
+                        frameWidth -
+                            framePadding
+                    )
+                ),
+            height:
+                Math.max(
+                    isMobile ? 460 : 620,
+                    Math.round(
+                        frameHeight -
+                            framePadding
+                    )
+                )
+        });
+    }
+
+    function startChatFrameResize(event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        const frame =
+            chatFrameRef.current;
+
+        if (!frame) {
+            return;
+        }
+
+        const rect =
+            frame.getBoundingClientRect();
+
+        const startX =
+            event.clientX;
+
+        const startY =
+            event.clientY;
+
+        const startWidth =
+            rect.width;
+
+        const startHeight =
+            rect.height;
+
+        const minWidth =
+            isMobile
+                ? Math.min(
+                    window.innerWidth - 40,
+                    344
+                )
+                : 620;
+
+        const maxWidth =
+            Math.max(
+                minWidth,
+                Math.min(
+                    window.innerWidth -
+                        (isMobile ? 40 : isTablet ? 88 : 128),
+                    isMobile
+                        ? window.innerWidth - 40
+                        : isTablet
+                            ? 760
+                            : 1120
+                )
+            );
+
+        const minHeight =
+            isMobile
+                ? 520
+                : 620;
+
+        const maxHeight =
+            Math.max(
+                minHeight,
+                Math.round(
+                    window.innerHeight *
+                        (isMobile ? 0.82 : 0.9)
+                )
+            );
+
+        function handlePointerMove(moveEvent) {
+
+            const nextWidth =
+                Math.max(
+                    minWidth,
+                    Math.min(
+                        maxWidth,
+                        startWidth +
+                            moveEvent.clientX -
+                            startX
+                    )
+                );
+
+            const nextHeight =
+                Math.max(
+                    minHeight,
+                    Math.min(
+                        maxHeight,
+                        startHeight +
+                            moveEvent.clientY -
+                            startY
+                    )
+                );
+
+            setChatFrameSize({
+                width:
+                    Math.round(
+                        nextWidth
+                    ),
+                height:
+                    Math.round(
+                        nextHeight
+                    )
+            });
+
+            updateEmbeddedChatSize(
+                nextWidth,
+                nextHeight
+            );
+        }
+
+        function handlePointerUp() {
+
+            window.removeEventListener(
+                "pointermove",
+                handlePointerMove
+            );
+
+            window.removeEventListener(
+                "pointerup",
+                handlePointerUp
+            );
+        }
+
+        window.addEventListener(
+            "pointermove",
+            handlePointerMove
+        );
+
+        window.addEventListener(
+            "pointerup",
+            handlePointerUp
+        );
+    }
+
     useEffect(() => {
 
         if (messagesRef.current) {
@@ -503,6 +671,86 @@ export default function HealthSupportAI() {
         }
 
     }, [messages]);
+
+    useEffect(() => {
+
+        setEmbeddedChatBox(
+            createEmbeddedChatBox()
+        );
+
+        setChatFrameSize(null);
+
+    }, [
+        isMobile,
+        isTablet
+    ]);
+
+    useEffect(() => {
+
+        if (
+            !chatFrameRef.current ||
+            typeof ResizeObserver === "undefined"
+        ) {
+            return undefined;
+        }
+
+        const observer =
+            new ResizeObserver(
+                ([entry]) => {
+
+                    const nextWidth =
+                        Math.round(
+                            entry.contentRect.width
+                        );
+
+                    const nextHeight =
+                        Math.round(
+                            entry.contentRect.height
+                        );
+
+                    setEmbeddedChatBox(prev => {
+
+                        if (
+                            Math.abs(
+                                prev.width -
+                                    nextWidth
+                            ) < 2 &&
+                            Math.abs(
+                                prev.height -
+                                    nextHeight
+                            ) < 2
+                        ) {
+                            return prev;
+                        }
+
+                        return {
+                            width:
+                                Math.max(
+                                    isMobile ? 320 : 560,
+                                    nextWidth
+                                ),
+                            height:
+                                Math.max(
+                                    isMobile ? 460 : 620,
+                                    nextHeight
+                                )
+                        };
+                    });
+                }
+            );
+
+        observer.observe(
+            chatFrameRef.current
+        );
+
+        return () => {
+
+            observer.disconnect();
+        };
+
+    }, [
+        isMobile
+    ]);
 
     return (
         <main
@@ -568,20 +816,24 @@ export default function HealthSupportAI() {
                     minHeight:
                         isMobile
                             ? "auto"
-                            : "82vh",
+                            : isTablet
+                                ? "64vh"
+                                : "60vh",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     paddingTop:
                         isMobile
-                            ? "max(118px, calc(98px + env(safe-area-inset-top, 0px)))"
+                            ? "max(92px, calc(78px + env(safe-area-inset-top, 0px)))"
                             : isTablet
-                                ? "142px"
-                                : "158px",
+                                ? "112px"
+                                : "118px",
                     paddingBottom:
                         isMobile
-                            ? "72px"
-                            : "98px",
+                            ? "48px"
+                            : isTablet
+                                ? "62px"
+                                : "66px",
                     paddingLeft: pagePaddingX,
                     paddingRight: pagePaddingX,
                     boxSizing: "border-box"
@@ -633,7 +885,10 @@ export default function HealthSupportAI() {
                     style={{
                         display: "block",
                         width: "100%",
-                        maxWidth: "900px",
+                        maxWidth:
+                            isMobile
+                                ? "100%"
+                                : "680px",
                         margin: "0 auto",
                         borderRadius:
                             isMobile
@@ -667,7 +922,7 @@ export default function HealthSupportAI() {
                         gap:
                             isMobile
                                 ? "54px"
-                                : "68px"
+                                : "48px"
                     }}
                 >
                     {SECTIONS.map((section) => (
@@ -701,60 +956,161 @@ export default function HealthSupportAI() {
                                 </p>
                             ))}
 
-                            {section.listItems && (
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        gap:
-                                            isMobile
-                                                ? "12px"
-                                                : "14px",
-                                        marginTop:
-                                            isMobile
-                                                ? "2px"
-                                                : "4px"
-                                    }}
-                                >
-                                    <p style={listIntroStyle}>
-                                        <T>
-                                            {section.listIntro}
-                                        </T>
-                                    </p>
-
-                                    <div style={listStyle}>
-                                        {section.listItems.map((item) => (
-                                            <div
-                                                key={item}
-                                                style={{
-                                                    display: "flex",
-                                                    alignItems: "baseline",
-                                                    justifyContent: "center",
-                                                    gap: "10px",
-                                                    width: "100%"
-                                                }}
-                                            >
-                                                <span
-                                                    aria-hidden="true"
-                                                    style={{
-                                                        color: GOLD,
-                                                        flex: "0 0 auto"
-                                                    }}
-                                                >
-                                                    •
-                                                </span>
-
-                                                <T>
-                                                    {item}
-                                                </T>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
                         </article>
                     ))}
+                </div>
+            </section>
+
+            <section
+                style={{
+                    position: "relative",
+                    zIndex: 2,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
+                    boxSizing: "border-box",
+                    display: "flex",
+                    justifyContent: "center",
+                    overflowX: "hidden"
+                }}
+            >
+                <div
+                    ref={chatFrameRef}
+                    style={{
+                        width:
+                            chatFrameSize
+                                ? `${chatFrameSize.width}px`
+                                : isMobile
+                                ? "100%"
+                                : "min(100%, 1040px)",
+                        height:
+                            chatFrameSize
+                                ? `${chatFrameSize.height}px`
+                                : isMobile
+                                ? "64vh"
+                                : isTablet
+                                    ? "72vh"
+                                    : "74vh",
+                        minWidth:
+                            isMobile
+                                ? "min(100%, 344px)"
+                                : "min(100%, 620px)",
+                        minHeight:
+                            isMobile
+                                ? "520px"
+                                : "620px",
+                        maxWidth: "100%",
+                        maxHeight:
+                            isMobile
+                                ? "78vh"
+                                : "86vh",
+                        resize: "both",
+                        overflow: "auto",
+                        borderRadius:
+                            isMobile
+                                ? "26px"
+                                : "34px",
+                        border:
+                            "1px solid rgba(216,176,122,0.32)",
+                        background:
+                            `
+                            linear-gradient(
+                                180deg,
+                                rgba(11,7,4,0.92),
+                                rgba(5,3,2,0.96)
+                            )
+                            `,
+                        boxShadow:
+                            `
+                            0 0 34px rgba(216,176,122,0.14),
+                            0 0 90px rgba(255,140,0,0.08),
+                            inset 0 0 24px rgba(216,176,122,0.04)
+                            `,
+                        padding:
+                            isMobile
+                                ? "12px"
+                                : "16px",
+                        boxSizing: "border-box",
+                        position: "relative"
+                    }}
+                >
+                    <ChatWindow
+                        mode={mode}
+                        setMode={setMode}
+                        activeProject={activeProject}
+                        setActiveProject={setActiveProject}
+                        message={message}
+                        setMessage={setMessage}
+                        uploadedFile={uploadedFile}
+                        setUploadedFile={setUploadedFile}
+                        messages={messages}
+                        messagesRef={messagesRef}
+                        sendMessage={sendMessage}
+                        clearMessages={clearMessages}
+                        copyMessages={copyMessages}
+                        downloadMessages={downloadMessages}
+                        isThinking={isThinking}
+                        isMobile={isChatMobile}
+                        isTablet={isChatTablet}
+                        chatBox={embeddedChatBox}
+                        startDrag={startDrag}
+                        startTopLeftResize={startTopLeftResize}
+                        startTopRightResize={startTopRightResize}
+                        startBottomLeftResize={startBottomLeftResize}
+                        startBottomRightResize={startBottomRightResize}
+                        startRightResize={startRightResize}
+                        startBottomResize={startBottomResize}
+                        voiceEnabled={voiceEnabled}
+                        setVoiceEnabled={setVoiceEnabled}
+                        stopMurzikVoice={stopMurzikVoice}
+                    />
+
+                    <div
+                        aria-hidden="true"
+                        onPointerDown={startChatFrameResize}
+                        style={{
+                            position: "absolute",
+                            right:
+                                isMobile
+                                    ? "8px"
+                                    : "10px",
+                            bottom:
+                                isMobile
+                                    ? "8px"
+                                    : "10px",
+                            width:
+                                isMobile
+                                    ? "24px"
+                                    : "28px",
+                            height:
+                                isMobile
+                                    ? "24px"
+                                    : "28px",
+                            cursor: "nwse-resize",
+                            zIndex: 50,
+                            borderRight:
+                                "2px solid rgba(216,176,122,0.58)",
+                            borderBottom:
+                                "2px solid rgba(216,176,122,0.58)",
+                            borderBottomRightRadius:
+                                isMobile
+                                    ? "10px"
+                                    : "12px",
+                            background:
+                                `
+                                linear-gradient(
+                                    135deg,
+                                    transparent 0%,
+                                    transparent 48%,
+                                    rgba(216,176,122,0.12) 49%,
+                                    rgba(216,176,122,0.22) 100%
+                                )
+                                `,
+                            boxShadow:
+                                "0 0 16px rgba(216,176,122,0.18)",
+                            touchAction: "none"
+                        }}
+                    />
                 </div>
             </section>
 
@@ -846,53 +1202,6 @@ export default function HealthSupportAI() {
                         </T>
                     </p>
                 </div>
-            </section>
-
-            <section
-                style={{
-                    position: "relative",
-                    zIndex: 2,
-                    paddingLeft: pagePaddingX,
-                    paddingRight: pagePaddingX,
-                    paddingBottom:
-                        isMobile
-                            ? "70px"
-                            : "94px",
-                    boxSizing: "border-box",
-                    display: "flex",
-                    justifyContent: "center"
-                }}
-            >
-                <ChatWindow
-                    mode={mode}
-                    setMode={setMode}
-                    activeProject={activeProject}
-                    setActiveProject={setActiveProject}
-                    message={message}
-                    setMessage={setMessage}
-                    uploadedFile={uploadedFile}
-                    setUploadedFile={setUploadedFile}
-                    messages={messages}
-                    messagesRef={messagesRef}
-                    sendMessage={sendMessage}
-                    clearMessages={clearMessages}
-                    copyMessages={copyMessages}
-                    downloadMessages={downloadMessages}
-                    isThinking={isThinking}
-                    isMobile={isChatMobile}
-                    isTablet={isChatTablet}
-                    chatBox={chatBox}
-                    startDrag={startDrag}
-                    startTopLeftResize={startTopLeftResize}
-                    startTopRightResize={startTopRightResize}
-                    startBottomLeftResize={startBottomLeftResize}
-                    startBottomRightResize={startBottomRightResize}
-                    startRightResize={startRightResize}
-                    startBottomResize={startBottomResize}
-                    voiceEnabled={voiceEnabled}
-                    setVoiceEnabled={setVoiceEnabled}
-                    stopMurzikVoice={stopMurzikVoice}
-                />
             </section>
 
             <Footer />
