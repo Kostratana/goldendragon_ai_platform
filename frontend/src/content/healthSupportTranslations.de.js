@@ -17,47 +17,80 @@ export const HEALTH_SUPPORT_TRANSLATIONS_DE = {
     "Users scan food packaging or upload product images directly into the chat.":
         "Nutzer scannen Lebensmittelverpackungen oder laden Produktbilder direkt in den Chat hoch.",
 
-    "The AI automatically detects ingredients, identifies potentially harmful food additives, explains their purpose in simple language and evaluates possible health risks.":
-        "Die AI erkennt automatisch Zutaten, identifiziert potenziell schädliche Lebensmittelzusatzstoffe, erklärt ihren Zweck in einfacher Sprache und bewertet mögliche Gesundheitsrisiken.",
+    "The AI automatically detects ingredients, identifies potentially harmful food additives, explains each ingredient in simple language and evaluates possible health risks.":
+        "Die AI erkennt automatisch Zutaten, identifiziert potenziell schädliche Lebensmittelzusatzstoffe, erklärt jede Zutat in einfacher Sprache und bewertet mögliche Gesundheitsrisiken.",
 
-    "The assistant then recommends healthier alternatives and helps users make informed purchasing decisions before buying food products.":
-        "Der Assistent empfiehlt anschließend gesündere Alternativen und hilft Nutzern, vor dem Kauf von Lebensmitteln informierte Entscheidungen zu treffen.",
+    "The assistant recommends healthier alternatives and helps users make informed purchasing decisions before purchasing food products.":
+        "Der Assistent empfiehlt gesündere Alternativen und hilft Nutzern, vor dem Kauf von Lebensmitteln informierte Entscheidungen zu treffen.",
 
     "Personal Health Assessment":
         "Persönliche Gesundheitsbewertung",
 
-    "The assistant creates an individual health profile through an intelligent questionnaire.":
-        "Der Assistent erstellt durch einen intelligenten Fragebogen ein individuelles Gesundheitsprofil.",
+    "The assistant creates an individual health profile using an intelligent questionnaire.":
+        "Der Assistent erstellt mithilfe eines intelligenten Fragebogens ein individuelles Gesundheitsprofil.",
 
-    "Based on the user's answers, lifestyle, nutrition, symptoms and personal preferences, the AI evaluates the current health condition and prepares personalized nutritional recommendations.":
-        "Basierend auf Antworten, Lebensstil, Ernährung, Symptomen und persönlichen Präferenzen bewertet die AI den aktuellen Gesundheitszustand und erstellt personalisierte Ernährungsempfehlungen.",
+    "The questionnaire analyzes:":
+        "Der Fragebogen analysiert:",
 
-    "Every recommendation is tailored specifically to the individual user.":
-        "Jede Empfehlung wird gezielt auf den einzelnen Nutzer zugeschnitten.",
+    "lifestyle":
+        "Lebensstil",
+
+    "nutrition":
+        "Ernährung",
+
+    "symptoms":
+        "Symptome",
+
+    "daily habits":
+        "tägliche Gewohnheiten",
+
+    "allergies":
+        "Allergien",
+
+    "personal preferences":
+        "persönliche Präferenzen",
+
+    "Based on the answers, the AI evaluates the user's health profile and prepares personalized nutritional recommendations.":
+        "Auf Basis der Antworten bewertet die AI das Gesundheitsprofil des Nutzers und erstellt personalisierte Ernährungsempfehlungen.",
 
     "Body Symmetry & Inflammation Analysis":
         "Analyse von Körpersymmetrie und Entzündung",
 
-    "Using Computer Vision, the platform analyzes body symmetry through smartphone images.":
+    "Using Computer Vision, the platform analyzes body symmetry from smartphone images.":
         "Mit Computer Vision analysiert die Plattform Körpersymmetrie anhand von Smartphone-Bildern.",
 
-    "Future multimodal analysis combines body posture, movement patterns and infrared imaging concepts to detect possible signs of inflammation.":
-        "Zukünftige multimodale Analyse kombiniert Körperhaltung, Bewegungsmuster und Konzepte der Infrarotbildgebung, um mögliche Anzeichen von Entzündungen zu erkennen.",
+    "Future multimodal analysis combines:":
+        "Zukünftige multimodale Analyse kombiniert:",
 
-    "The AI combines visual analysis with questionnaire results to generate personalized health insights and nutritional recommendations.":
-        "Die AI kombiniert visuelle Analyse mit Fragebogenergebnissen, um personalisierte health insights und Ernährungsempfehlungen zu generieren.",
+    "body symmetry":
+        "Körpersymmetrie",
+
+    "posture":
+        "Körperhaltung",
+
+    "movement analysis":
+        "Bewegungsanalyse",
+
+    "infrared imaging concepts":
+        "Konzepte der Infrarotbildgebung",
+
+    "inflammation localization":
+        "Lokalisierung von Entzündungen",
+
+    "The AI combines Computer Vision results with questionnaire responses to generate intelligent health insights and personalized nutrition recommendations.":
+        "Die AI kombiniert Computer-Vision-Ergebnisse mit Fragebogenantworten, um intelligente health insights und personalisierte Ernährungsempfehlungen zu generieren.",
 
     "Core Mission":
         "Kernmission",
 
-    "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand their nutritional choices and receive personalized AI-powered health recommendations that support long-term preventive healthcare.":
-        "Das Hauptziel von Health Support AI ist es, Menschen dabei zu helfen, schädliche Lebensmittelzutaten vor dem Kauf zu erkennen, Ernährungsentscheidungen besser zu verstehen und personalisierte AI-powered Gesundheitsempfehlungen zu erhalten, die langfristige preventive healthcare unterstützen.",
+    "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand nutritional choices and receive intelligent AI-powered recommendations supporting preventive healthcare.":
+        "Das Hauptziel von Health Support AI ist es, Menschen dabei zu helfen, schädliche Lebensmittelzutaten vor dem Kauf zu erkennen, Ernährungsentscheidungen besser zu verstehen und intelligente AI-powered Empfehlungen zu erhalten, die preventive healthcare unterstützen.",
 
-    "Current Development":
-        "Aktuelle Entwicklung",
+    "Current Platform":
+        "Aktuelle Plattform",
 
-    "The current platform infrastructure includes:":
-        "Die aktuelle Plattforminfrastruktur umfasst:",
+    "Current infrastructure already implemented:":
+        "Aktuell bereits implementierte Infrastruktur:",
 
     "Google Cloud backend":
         "Google Cloud Backend",
@@ -77,6 +110,6 @@ export const HEALTH_SUPPORT_TRANSLATIONS_DE = {
     "Product knowledge pipeline":
         "Product Knowledge Pipeline",
 
-    "The platform continues to evolve toward a fully integrated intelligent healthcare assistant.":
+    "The platform continues evolving toward a fully integrated intelligent healthcare assistant.":
         "Die Plattform entwickelt sich weiter zu einem vollständig integrierten intelligenten Healthcare Assistant."
 };

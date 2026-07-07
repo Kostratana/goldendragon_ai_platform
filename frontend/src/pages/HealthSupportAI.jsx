@@ -47,7 +47,7 @@ const SECTIONS = [
     {
         title: "Project Overview",
         paragraphs: [
-            "Health Support AI is an intelligent healthcare assistant designed to help people make healthier nutritional decisions through artificial intelligence, computer vision and personalized health analysis.",
+            "Health Support AI is an intelligent healthcare assistant designed to help users make healthier nutritional decisions through artificial intelligence, computer vision and personalized health analysis.",
             "The platform combines food recognition, ingredient analysis, health assessment and intelligent recommendations into a single AI assistant focused on preventive healthcare."
         ]
     },
@@ -55,30 +55,47 @@ const SECTIONS = [
         title: "Food Ingredient Analysis",
         paragraphs: [
             "Users scan food packaging or upload product images directly into the chat.",
-            "The AI automatically detects ingredients, identifies potentially harmful additives, explains each ingredient in clear language and evaluates possible health risks.",
-            "The assistant recommends healthier alternatives and helps users make informed purchasing decisions before buying food products."
+            "The AI automatically detects ingredients, identifies potentially harmful food additives, explains each ingredient in simple language and evaluates possible health risks.",
+            "The assistant recommends healthier alternatives and helps users make informed purchasing decisions before purchasing food products."
         ]
     },
     {
         title: "Personal Health Assessment",
         paragraphs: [
-            "The assistant creates an individual health profile through an intelligent questionnaire.",
-            "Using the user's answers, lifestyle, nutrition, symptoms and personal preferences, the AI evaluates the current health condition and prepares personalized nutritional recommendations.",
-            "Every recommendation is tailored specifically to the individual user."
+            "The assistant creates an individual health profile using an intelligent questionnaire.",
+            "Based on the answers, the AI evaluates the user's health profile and prepares personalized nutritional recommendations."
+        ],
+        listIntro:
+            "The questionnaire analyzes:",
+        listItems: [
+            "lifestyle",
+            "nutrition",
+            "symptoms",
+            "daily habits",
+            "allergies",
+            "personal preferences"
         ]
     },
     {
         title: "Body Symmetry & Inflammation Analysis",
         paragraphs: [
-            "Using Computer Vision, the platform analyzes body symmetry through smartphone images.",
-            "Future multimodal analysis combines body posture, movement patterns and infrared imaging concepts to detect possible signs of inflammation.",
-            "The AI combines visual analysis with questionnaire results to generate personalized health insights and nutrition recommendations."
+            "Using Computer Vision, the platform analyzes body symmetry from smartphone images.",
+            "The AI combines Computer Vision results with questionnaire responses to generate intelligent health insights and personalized nutrition recommendations."
+        ],
+        listIntro:
+            "Future multimodal analysis combines:",
+        listItems: [
+            "body symmetry",
+            "posture",
+            "movement analysis",
+            "infrared imaging concepts",
+            "inflammation localization"
         ]
     },
     {
         title: "Core Mission",
         paragraphs: [
-            "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand nutritional choices and receive intelligent AI-powered recommendations that support preventive healthcare."
+            "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand nutritional choices and receive intelligent AI-powered recommendations supporting preventive healthcare."
         ]
     }
 ];
@@ -274,6 +291,35 @@ export default function HealthSupportAI() {
         textAlign: "center",
         textShadow:
             "0 0 15px rgba(216,176,122,0.18)"
+    };
+
+    const listIntroStyle = {
+        ...paragraphStyle,
+        color: GOLD,
+        fontSize:
+            isMobile
+                ? "17px"
+                : isTablet
+                    ? "19px"
+                    : "21px"
+    };
+
+    const listStyle = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap:
+            isMobile
+                ? "8px"
+                : "10px",
+        color: TEXT,
+        fontFamily: FONT_IM_FELL,
+        fontSize:
+            isMobile
+                ? "18px"
+                : "21px",
+        lineHeight: 1.65,
+        textAlign: "center"
     };
 
     function stopMurzikVoice() {
@@ -654,6 +700,59 @@ export default function HealthSupportAI() {
                                     </T>
                                 </p>
                             ))}
+
+                            {section.listItems && (
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        gap:
+                                            isMobile
+                                                ? "12px"
+                                                : "14px",
+                                        marginTop:
+                                            isMobile
+                                                ? "2px"
+                                                : "4px"
+                                    }}
+                                >
+                                    <p style={listIntroStyle}>
+                                        <T>
+                                            {section.listIntro}
+                                        </T>
+                                    </p>
+
+                                    <div style={listStyle}>
+                                        {section.listItems.map((item) => (
+                                            <div
+                                                key={item}
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "baseline",
+                                                    justifyContent: "center",
+                                                    gap: "10px",
+                                                    width: "100%"
+                                                }}
+                                            >
+                                                <span
+                                                    aria-hidden="true"
+                                                    style={{
+                                                        color: GOLD,
+                                                        flex: "0 0 auto"
+                                                    }}
+                                                >
+                                                    •
+                                                </span>
+
+                                                <T>
+                                                    {item}
+                                                </T>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </article>
                     ))}
                 </div>
@@ -684,13 +783,13 @@ export default function HealthSupportAI() {
                 >
                     <h2 style={smallHeadingStyle}>
                         <T>
-                            Current Platform Infrastructure
+                            Current Platform
                         </T>
                     </h2>
 
                     <p style={paragraphStyle}>
                         <T>
-                            The current platform already includes:
+                            Current infrastructure already implemented:
                         </T>
                     </p>
 

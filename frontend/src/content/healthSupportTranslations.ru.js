@@ -17,47 +17,80 @@ export const HEALTH_SUPPORT_TRANSLATIONS_RU = {
     "Users scan food packaging or upload product images directly into the chat.":
         "Пользователи сканируют упаковку продуктов или загружают изображения товаров прямо в чат.",
 
-    "The AI automatically detects ingredients, identifies potentially harmful food additives, explains their purpose in simple language and evaluates possible health risks.":
-        "AI автоматически определяет ингредиенты, выявляет потенциально вредные пищевые добавки, простым языком объясняет их назначение и оценивает возможные риски для здоровья.",
+    "The AI automatically detects ingredients, identifies potentially harmful food additives, explains each ingredient in simple language and evaluates possible health risks.":
+        "AI автоматически определяет ингредиенты, выявляет потенциально вредные пищевые добавки, простым языком объясняет каждый ингредиент и оценивает возможные риски для здоровья.",
 
-    "The assistant then recommends healthier alternatives and helps users make informed purchasing decisions before buying food products.":
-        "Затем ассистент рекомендует более здоровые альтернативы и помогает пользователям принимать осознанные решения до покупки продуктов.",
+    "The assistant recommends healthier alternatives and helps users make informed purchasing decisions before purchasing food products.":
+        "Ассистент рекомендует более здоровые альтернативы и помогает пользователям принимать осознанные решения перед покупкой продуктов.",
 
     "Personal Health Assessment":
         "Персональная оценка здоровья",
 
-    "The assistant creates an individual health profile through an intelligent questionnaire.":
-        "Ассистент создаёт индивидуальный health profile через интеллектуальный опросник.",
+    "The assistant creates an individual health profile using an intelligent questionnaire.":
+        "Ассистент создаёт индивидуальный health profile с помощью интеллектуального опросника.",
 
-    "Based on the user's answers, lifestyle, nutrition, symptoms and personal preferences, the AI evaluates the current health condition and prepares personalized nutritional recommendations.":
-        "На основе ответов пользователя, образа жизни, питания, симптомов и личных предпочтений AI оценивает текущее состояние здоровья и готовит персонализированные рекомендации по питанию.",
+    "The questionnaire analyzes:":
+        "Опросник анализирует:",
 
-    "Every recommendation is tailored specifically to the individual user.":
-        "Каждая рекомендация адаптируется под конкретного пользователя.",
+    "lifestyle":
+        "образ жизни",
+
+    "nutrition":
+        "питание",
+
+    "symptoms":
+        "симптомы",
+
+    "daily habits":
+        "ежедневные привычки",
+
+    "allergies":
+        "аллергии",
+
+    "personal preferences":
+        "личные предпочтения",
+
+    "Based on the answers, the AI evaluates the user's health profile and prepares personalized nutritional recommendations.":
+        "На основе ответов AI оценивает health profile пользователя и готовит персонализированные рекомендации по питанию.",
 
     "Body Symmetry & Inflammation Analysis":
         "Анализ симметрии тела и воспаления",
 
-    "Using Computer Vision, the platform analyzes body symmetry through smartphone images.":
+    "Using Computer Vision, the platform analyzes body symmetry from smartphone images.":
         "С помощью Computer Vision платформа анализирует симметрию тела по изображениям со смартфона.",
 
-    "Future multimodal analysis combines body posture, movement patterns and infrared imaging concepts to detect possible signs of inflammation.":
-        "Будущий multimodal analysis объединяет posture, movement patterns и концепции infrared imaging для выявления возможных признаков воспаления.",
+    "Future multimodal analysis combines:":
+        "Будущий multimodal analysis объединяет:",
 
-    "The AI combines visual analysis with questionnaire results to generate personalized health insights and nutritional recommendations.":
-        "AI объединяет визуальный анализ с результатами опросника, чтобы формировать персонализированные health insights и рекомендации по питанию.",
+    "body symmetry":
+        "симметрию тела",
+
+    "posture":
+        "осанку",
+
+    "movement analysis":
+        "анализ движений",
+
+    "infrared imaging concepts":
+        "концепции infrared imaging",
+
+    "inflammation localization":
+        "локализацию воспаления",
+
+    "The AI combines Computer Vision results with questionnaire responses to generate intelligent health insights and personalized nutrition recommendations.":
+        "AI объединяет результаты Computer Vision с ответами опросника, чтобы формировать интеллектуальные health insights и персонализированные рекомендации по питанию.",
 
     "Core Mission":
         "Основная миссия",
 
-    "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand their nutritional choices and receive personalized AI-powered health recommendations that support long-term preventive healthcare.":
-        "Главная цель Health Support AI — помогать людям выявлять вредные пищевые ингредиенты до покупки, лучше понимать свой выбор в питании и получать персонализированные AI-powered рекомендации для долгосрочной preventive healthcare.",
+    "The primary goal of Health Support AI is to help people identify harmful food ingredients before purchase, better understand nutritional choices and receive intelligent AI-powered recommendations supporting preventive healthcare.":
+        "Главная цель Health Support AI — помогать людям выявлять вредные пищевые ингредиенты до покупки, лучше понимать выбор в питании и получать интеллектуальные AI-powered рекомендации, поддерживающие preventive healthcare.",
 
-    "Current Development":
-        "Текущее развитие",
+    "Current Platform":
+        "Текущая платформа",
 
-    "The current platform infrastructure includes:":
-        "Текущая инфраструктура платформы включает:",
+    "Current infrastructure already implemented:":
+        "Текущая инфраструктура уже реализована:",
 
     "Google Cloud backend":
         "Google Cloud backend",
@@ -77,6 +110,6 @@ export const HEALTH_SUPPORT_TRANSLATIONS_RU = {
     "Product knowledge pipeline":
         "Product knowledge pipeline",
 
-    "The platform continues to evolve toward a fully integrated intelligent healthcare assistant.":
+    "The platform continues evolving toward a fully integrated intelligent healthcare assistant.":
         "Платформа продолжает развиваться в сторону полностью интегрированного интеллектуального healthcare assistant."
 };
