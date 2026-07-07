@@ -143,51 +143,98 @@ export default function Footer() {
                     style={{
                         color: GOLD,
 
-                        fontSize:
-                            isMobile
-                                ? "10px"
-                                : isTablet
-                                    ? "11px"
-                                    : "12px",
-
-                        fontWeight: "700",
-
-                        letterSpacing:
-                            isMobile
-                                ? "0.12em"
-                                : isTablet
-                                    ? "0.18em"
-                                    : "0.22em",
-
-                        lineHeight:
-                            isMobile
-                                ? "1.9"
-                                : isTablet
-                                    ? "2"
-                                    : "2.1",
-
-                        textTransform: "uppercase",
-
                         fontFamily:
                             FONT_CINZEL,
 
                         maxWidth:
                             isMobile
                                 ? "100%"
-                                : "900px"
+                                : isTablet
+                                    ? "760px"
+                                    : "960px"
                     }}
                 >
-                    <span data-no-translate>
+                    <div
+                        style={{
+                            fontSize:
+                                isMobile
+                                    ? "10px"
+                                    : isTablet
+                                        ? "11px"
+                                        : "12px",
+
+                            fontWeight: "700",
+
+                            letterSpacing:
+                                isMobile
+                                    ? "0.12em"
+                                    : isTablet
+                                        ? "0.18em"
+                                        : "0.22em",
+
+                            lineHeight:
+                                isMobile
+                                    ? "1.8"
+                                    : "2",
+
+                            textTransform: "uppercase"
+                        }}
+                    >
+                        <span data-no-translate>
+                            {
+                                FOOTER_TEXT.COPYRIGHT_LINE
+                            }
+                        </span>
+                        <br />
+                        <T>
+                            {
+                                FOOTER_TEXT.RIGHTS_RESERVED
+                            }
+                        </T>
+                    </div>
+
+                    <p
+                        data-no-translate
+                        style={{
+                            margin:
+                                isMobile
+                                    ? "18px auto 0"
+                                    : "22px auto 0",
+
+                            maxWidth:
+                                isMobile
+                                    ? "100%"
+                                    : "860px",
+
+                            color:
+                                "rgba(245, 198, 121, 0.78)",
+
+                            fontSize:
+                                isMobile
+                                    ? "10px"
+                                    : isTablet
+                                        ? "11px"
+                                        : "12px",
+
+                            fontWeight: "500",
+
+                            letterSpacing:
+                                isMobile
+                                    ? "0.02em"
+                                    : "0.04em",
+
+                            lineHeight:
+                                isMobile
+                                    ? "1.7"
+                                    : "1.85",
+
+                            textTransform: "none"
+                        }}
+                    >
                         {
-                            FOOTER_TEXT.COPYRIGHT_LINE
+                            FOOTER_TEXT.IP_PROTECTION_NOTICE
                         }
-                    </span>
-                    <br />
-                    <T>
-                        {
-                            FOOTER_TEXT.RIGHTS_RESERVED
-                        }
-                    </T>
+                    </p>
                 </div>
 
             </div>
