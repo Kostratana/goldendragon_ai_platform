@@ -82,7 +82,7 @@ const AVAILABLE_SOLUTIONS = [
         to: "/solutions/animal-health"
     },
     {
-        label: "Underwater AI",
+        label: "Underwater Inspection AI",
         to: "/solutions/underwater-ai"
     },
     {

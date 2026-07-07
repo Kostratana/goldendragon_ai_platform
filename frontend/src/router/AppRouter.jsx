@@ -13,6 +13,7 @@ import Portfolio from "../pages/Portfolio";
 import AISolutions from "../pages/AISolutions";
 import HealthSupportAI from "../pages/HealthSupportAI";
 import EquineHealthAI from "../pages/EquineHealthAI";
+import UnderwaterInspectionAI from "../pages/UnderwaterInspectionAI";
 
 function AppRouter() {
 
@@ -71,6 +72,11 @@ function AppRouter() {
                     <Route
                         path="/solutions/animal-health"
                         element={<EquineHealthAI />}
+                    />
+
+                    <Route
+                        path="/solutions/underwater-ai"
+                        element={<UnderwaterInspectionAI />}
                     />
 
                 </Routes>

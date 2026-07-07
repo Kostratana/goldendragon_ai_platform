@@ -67,6 +67,14 @@ import {
 } from "../../content/healthSupportTranslations.ru.js";
 
 import {
+    UNDERWATER_INSPECTION_TRANSLATIONS_DE
+} from "../../content/underwaterInspectionTranslations.de.js";
+
+import {
+    UNDERWATER_INSPECTION_TRANSLATIONS_RU
+} from "../../content/underwaterInspectionTranslations.ru.js";
+
+import {
     PORTFOLIO_TRANSLATIONS_DE
 } from "../../content/portfolioTranslations.de.js";
 
@@ -90,6 +98,7 @@ const CURATED_BY_LANGUAGE = {
         CHAT_TRANSLATIONS_RU,
         FOOTER_TRANSLATIONS_RU,
         HEALTH_SUPPORT_TRANSLATIONS_RU,
+        UNDERWATER_INSPECTION_TRANSLATIONS_RU,
         PORTFOLIO_TRANSLATIONS_RU
     ),
     es: mergeCuratedDictionaries(
@@ -107,6 +116,7 @@ const CURATED_BY_LANGUAGE = {
         CHAT_TRANSLATIONS_DE,
         FOOTER_TRANSLATIONS_DE,
         HEALTH_SUPPORT_TRANSLATIONS_DE,
+        UNDERWATER_INSPECTION_TRANSLATIONS_DE,
         PORTFOLIO_TRANSLATIONS_DE
     ),
     it: mergeCuratedDictionaries(
