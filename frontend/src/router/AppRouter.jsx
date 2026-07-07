@@ -10,6 +10,7 @@ import Home from "../pages/Home";
 import Chat from "../pages/Chat";
 import Services from "../pages/Services";
 import Portfolio from "../pages/Portfolio";
+import HealthSupportAI from "../pages/HealthSupportAI";
 
 function AppRouter() {
 
@@ -53,6 +54,11 @@ function AppRouter() {
                     <Route
                         path="/services/portfolio"
                         element={<Portfolio />}
+                    />
+
+                    <Route
+                        path="/solutions/health-support-ai"
+                        element={<HealthSupportAI />}
                     />
 
                 </Routes>

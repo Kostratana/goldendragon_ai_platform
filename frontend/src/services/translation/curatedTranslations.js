@@ -59,6 +59,14 @@ import {
 } from "../../content/footerTranslations.ru.js";
 
 import {
+    HEALTH_SUPPORT_TRANSLATIONS_DE
+} from "../../content/healthSupportTranslations.de.js";
+
+import {
+    HEALTH_SUPPORT_TRANSLATIONS_RU
+} from "../../content/healthSupportTranslations.ru.js";
+
+import {
     PORTFOLIO_TRANSLATIONS_DE
 } from "../../content/portfolioTranslations.de.js";
 
@@ -81,6 +89,7 @@ const CURATED_BY_LANGUAGE = {
         FOUNDER_TRANSLATIONS_RU,
         CHAT_TRANSLATIONS_RU,
         FOOTER_TRANSLATIONS_RU,
+        HEALTH_SUPPORT_TRANSLATIONS_RU,
         PORTFOLIO_TRANSLATIONS_RU
     ),
     es: mergeCuratedDictionaries(
@@ -97,6 +106,7 @@ const CURATED_BY_LANGUAGE = {
         FOUNDER_TRANSLATIONS_DE,
         CHAT_TRANSLATIONS_DE,
         FOOTER_TRANSLATIONS_DE,
+        HEALTH_SUPPORT_TRANSLATIONS_DE,
         PORTFOLIO_TRANSLATIONS_DE
     ),
     it: mergeCuratedDictionaries(

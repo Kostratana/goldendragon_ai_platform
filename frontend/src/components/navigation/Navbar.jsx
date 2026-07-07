@@ -59,7 +59,7 @@ inside JSX.
 const SOLUTIONS_LINKS = [
     {
         label: "Health Support AI",
-        to: "/solutions/health-ai"
+        to: "/solutions/health-support-ai"
     },
     {
         label: "Animal Health Detection",
