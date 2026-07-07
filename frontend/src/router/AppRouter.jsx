@@ -12,6 +12,7 @@ import Services from "../pages/Services";
 import Portfolio from "../pages/Portfolio";
 import AISolutions from "../pages/AISolutions";
 import HealthSupportAI from "../pages/HealthSupportAI";
+import EquineHealthAI from "../pages/EquineHealthAI";
 
 function AppRouter() {
 
@@ -65,6 +66,11 @@ function AppRouter() {
                     <Route
                         path="/solutions/health-support-ai"
                         element={<HealthSupportAI />}
+                    />
+
+                    <Route
+                        path="/solutions/animal-health"
+                        element={<EquineHealthAI />}
                     />
 
                 </Routes>

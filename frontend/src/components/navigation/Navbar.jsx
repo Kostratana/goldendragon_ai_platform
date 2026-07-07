@@ -62,7 +62,7 @@ const SOLUTIONS_LINKS = [
         to: "/solutions/health-support-ai"
     },
     {
-        label: "Animal Health Detection",
+        label: "Equine Health AI",
         to: "/solutions/animal-health"
     },
     {
