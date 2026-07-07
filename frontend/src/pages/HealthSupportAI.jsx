@@ -43,36 +43,31 @@ const PROJECT_MODES = {
     CHAT: "chat"
 };
 
-const SECTIONS = [
+const PROJECT_DESCRIPTION = [
     {
         title: "Project Overview",
-        paragraphs: [
-            "Health Support AI combines food recognition, ingredient analysis and personalized health assessment in one preventive healthcare assistant."
-        ]
+        text:
+            "Health Support AI is an intelligent healthcare assistant for preventive nutrition and personalized health support."
     },
     {
         title: "Food Ingredient Analysis",
-        paragraphs: [
-            "Users scan packaging or upload product images, then the AI explains ingredients, flags harmful additives and recommends healthier alternatives before purchase."
-        ]
+        text:
+            "Users simply scan food packaging or upload a product image into the chat. The AI automatically recognizes ingredients, detects potentially harmful food additives, explains their purpose in clear language, evaluates possible health risks and recommends healthier alternatives before the product is purchased. The objective is to help people make informed nutritional decisions directly in the store."
     },
     {
         title: "Personal Health Assessment",
-        paragraphs: [
-            "An intelligent questionnaire builds a health profile from lifestyle, nutrition, symptoms, habits, allergies and personal preferences."
-        ]
+        text:
+            "The platform creates an individual health profile through an intelligent questionnaire covering lifestyle, nutrition, daily habits, symptoms, allergies and personal preferences. Based on this information, the AI evaluates the user's current condition and prepares personalized nutrition recommendations tailored to individual health goals rather than generic dietary advice."
     },
     {
         title: "Body Symmetry & Inflammation Analysis",
-        paragraphs: [
-            "Computer Vision analyzes body symmetry from smartphone images and supports future posture, movement and inflammation insight workflows."
-        ]
+        text:
+            "Health Support AI extends nutritional analysis with Computer Vision. Using smartphone images, the system analyzes body symmetry and posture, while the planned multimodal pipeline combines movement analysis with infrared imaging concepts to identify potential signs of inflammation. Visual analysis is combined with questionnaire results to generate more personalized health insights and nutritional recommendations."
     },
     {
         title: "Core Mission",
-        paragraphs: [
-            "The mission is to help people understand food choices faster and receive AI-powered recommendations that support preventive healthcare."
-        ]
+        text:
+            "The primary mission of Health Support AI is to help people identify harmful food ingredients before purchase, better understand the impact of nutrition on long-term health and receive intelligent AI-powered recommendations that support preventive healthcare. Instead of reacting to health problems after they occur, the platform encourages healthier everyday decisions through accessible AI assistance."
     }
 ];
 
@@ -80,8 +75,8 @@ const CURRENT_DEVELOPMENT_ITEMS = [
     "Google Cloud backend",
     "Retrieval-Augmented Generation (RAG)",
     "Supabase database",
-    "Prompt system",
-    "AI orchestration",
+    "Prompt orchestration system",
+    "AI orchestration pipeline",
     "Product knowledge pipeline"
 ];
 
@@ -186,8 +181,8 @@ export default function HealthSupportAI() {
                     isMobile
                         ? viewportWidth - 64
                         : isTablet
-                            ? 820
-                            : 980
+                            ? 680
+                            : 860
                 )
             );
 
@@ -577,12 +572,12 @@ export default function HealthSupportAI() {
                 minWidth,
                 Math.min(
                     window.innerWidth -
-                        (isMobile ? 40 : isTablet ? 88 : 128),
+                        (isMobile ? 40 : isTablet ? 88 : 96),
                     isMobile
                         ? window.innerWidth - 40
                         : isTablet
-                            ? 760
-                            : 1120
+                            ? 820
+                            : 1180
                 )
             );
 
@@ -691,25 +686,25 @@ export default function HealthSupportAI() {
 
         const baseStyle = {
             position: "absolute",
-            zIndex: 60,
+            zIndex: 300,
             touchAction: "none",
             background: "transparent"
         };
 
         const edgeOffset =
             isMobile
-                ? "6px"
-                : "8px";
+                ? "4px"
+                : "6px";
 
         const edgeSize =
             isMobile
-                ? "14px"
-                : "16px";
+                ? "22px"
+                : "24px";
 
         const cornerSize =
             isMobile
-                ? "28px"
-                : "32px";
+                ? "34px"
+                : "38px";
 
         const cornerAccent = {
             borderColor:
@@ -724,28 +719,36 @@ export default function HealthSupportAI() {
                 left: cornerSize,
                 right: cornerSize,
                 height: edgeSize,
-                cursor: "ns-resize"
+                cursor: "ns-resize",
+                borderTop:
+                    "1px solid rgba(216,176,122,0.18)"
             },
             right: {
                 top: cornerSize,
                 right: 0,
                 bottom: cornerSize,
                 width: edgeSize,
-                cursor: "ew-resize"
+                cursor: "ew-resize",
+                borderRight:
+                    "1px solid rgba(216,176,122,0.22)"
             },
             bottom: {
                 bottom: 0,
                 left: cornerSize,
                 right: cornerSize,
                 height: edgeSize,
-                cursor: "ns-resize"
+                cursor: "ns-resize",
+                borderBottom:
+                    "1px solid rgba(216,176,122,0.22)"
             },
             left: {
                 top: cornerSize,
                 left: 0,
                 bottom: cornerSize,
                 width: edgeSize,
-                cursor: "ew-resize"
+                cursor: "ew-resize",
+                borderLeft:
+                    "1px solid rgba(216,176,122,0.18)"
             },
             "top-left": {
                 top: edgeOffset,
@@ -1082,8 +1085,10 @@ export default function HealthSupportAI() {
                             chatFrameSize
                                 ? `${chatFrameSize.width}px`
                                 : isMobile
-                                ? "100%"
-                                : "min(100%, 1040px)",
+                                    ? "92%"
+                                    : isTablet
+                                        ? "min(92%, 760px)"
+                                        : "min(88%, 960px)",
                         height:
                             chatFrameSize
                                 ? `${chatFrameSize.height}px`
@@ -1217,8 +1222,8 @@ export default function HealthSupportAI() {
                                 : "48px"
                     }}
                 >
-                    {SECTIONS.map((section) => (
-                        <article
+                    {PROJECT_DESCRIPTION.map((section) => (
+                        <div
                             key={section.title}
                             style={{
                                 display: "flex",
@@ -1226,8 +1231,8 @@ export default function HealthSupportAI() {
                                 alignItems: "center",
                                 gap:
                                     isMobile
-                                        ? "18px"
-                                        : "22px",
+                                        ? "12px"
+                                        : "14px",
                                 textAlign: "center"
                             }}
                         >
@@ -1237,18 +1242,12 @@ export default function HealthSupportAI() {
                                 </T>
                             </h2>
 
-                            {section.paragraphs.map((paragraph) => (
-                                <p
-                                    key={paragraph}
-                                    style={paragraphStyle}
-                                >
-                                    <T>
-                                        {paragraph}
-                                    </T>
-                                </p>
-                            ))}
-
-                        </article>
+                            <p style={paragraphStyle}>
+                                <T>
+                                    {section.text}
+                                </T>
+                            </p>
+                        </div>
                     ))}
                 </div>
             </section>
@@ -1284,7 +1283,7 @@ export default function HealthSupportAI() {
 
                     <p style={paragraphStyle}>
                         <T>
-                            Current infrastructure already implemented:
+                            The current platform already includes a production-oriented AI infrastructure consisting of:
                         </T>
                     </p>
 
@@ -1337,7 +1336,7 @@ export default function HealthSupportAI() {
 
                     <p style={paragraphStyle}>
                         <T>
-                            The platform continues evolving toward a fully integrated intelligent healthcare assistant.
+                            The platform is designed as a scalable foundation for a fully integrated intelligent healthcare assistant, with future expansion toward multimodal health analysis, personalized nutrition and preventive health support.
                         </T>
                     </p>
                 </div>
