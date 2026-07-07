@@ -533,7 +533,10 @@ export default function HealthSupportAI() {
         });
     }
 
-    function startChatFrameResize(event) {
+    function startChatFrameResize(
+        event,
+        direction
+    ) {
 
         event.preventDefault();
 
@@ -599,14 +602,35 @@ export default function HealthSupportAI() {
 
         function handlePointerMove(moveEvent) {
 
+            const deltaX =
+                moveEvent.clientX -
+                startX;
+
+            const deltaY =
+                moveEvent.clientY -
+                startY;
+
+            const widthDelta =
+                direction.includes("right")
+                    ? deltaX
+                    : direction.includes("left")
+                        ? -deltaX
+                        : 0;
+
+            const heightDelta =
+                direction.includes("bottom")
+                    ? deltaY
+                    : direction.includes("top")
+                        ? -deltaY
+                        : 0;
+
             const nextWidth =
                 Math.max(
                     minWidth,
                     Math.min(
                         maxWidth,
                         startWidth +
-                            moveEvent.clientX -
-                            startX
+                            widthDelta
                     )
                 );
 
@@ -616,8 +640,7 @@ export default function HealthSupportAI() {
                     Math.min(
                         maxHeight,
                         startHeight +
-                            moveEvent.clientY -
-                            startY
+                            heightDelta
                     )
                 );
 
@@ -660,6 +683,142 @@ export default function HealthSupportAI() {
             "pointerup",
             handlePointerUp
         );
+    }
+
+    function getChatFrameResizeHandleStyle(
+        direction
+    ) {
+
+        const baseStyle = {
+            position: "absolute",
+            zIndex: 60,
+            touchAction: "none",
+            background: "transparent"
+        };
+
+        const edgeOffset =
+            isMobile
+                ? "6px"
+                : "8px";
+
+        const edgeSize =
+            isMobile
+                ? "14px"
+                : "16px";
+
+        const cornerSize =
+            isMobile
+                ? "28px"
+                : "32px";
+
+        const cornerAccent = {
+            borderColor:
+                "rgba(216,176,122,0.58)",
+            boxShadow:
+                "0 0 16px rgba(216,176,122,0.16)"
+        };
+
+        const styles = {
+            top: {
+                top: 0,
+                left: cornerSize,
+                right: cornerSize,
+                height: edgeSize,
+                cursor: "ns-resize"
+            },
+            right: {
+                top: cornerSize,
+                right: 0,
+                bottom: cornerSize,
+                width: edgeSize,
+                cursor: "ew-resize"
+            },
+            bottom: {
+                bottom: 0,
+                left: cornerSize,
+                right: cornerSize,
+                height: edgeSize,
+                cursor: "ns-resize"
+            },
+            left: {
+                top: cornerSize,
+                left: 0,
+                bottom: cornerSize,
+                width: edgeSize,
+                cursor: "ew-resize"
+            },
+            "top-left": {
+                top: edgeOffset,
+                left: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nwse-resize",
+                borderTop: "2px solid",
+                borderLeft: "2px solid",
+                borderTopLeftRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                ...cornerAccent
+            },
+            "top-right": {
+                top: edgeOffset,
+                right: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nesw-resize",
+                borderTop: "2px solid",
+                borderRight: "2px solid",
+                borderTopRightRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                ...cornerAccent
+            },
+            "bottom-left": {
+                bottom: edgeOffset,
+                left: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nesw-resize",
+                borderBottom: "2px solid",
+                borderLeft: "2px solid",
+                borderBottomLeftRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                ...cornerAccent
+            },
+            "bottom-right": {
+                bottom: edgeOffset,
+                right: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nwse-resize",
+                borderBottom: "2px solid",
+                borderRight: "2px solid",
+                borderBottomRightRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                background:
+                    `
+                    linear-gradient(
+                        135deg,
+                        transparent 0%,
+                        transparent 48%,
+                        rgba(216,176,122,0.12) 49%,
+                        rgba(216,176,122,0.22) 100%
+                    )
+                    `,
+                ...cornerAccent
+            }
+        };
+
+        return {
+            ...baseStyle,
+            ...styles[direction]
+        };
     }
 
     useEffect(() => {
@@ -910,64 +1069,6 @@ export default function HealthSupportAI() {
                     paddingLeft: pagePaddingX,
                     paddingRight: pagePaddingX,
                     paddingBottom: sectionSpacing,
-                    boxSizing: "border-box"
-                }}
-            >
-                <div
-                    style={{
-                        maxWidth: maxTextWidth,
-                        margin: "0 auto",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap:
-                            isMobile
-                                ? "54px"
-                                : "48px"
-                    }}
-                >
-                    {SECTIONS.map((section) => (
-                        <article
-                            key={section.title}
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                gap:
-                                    isMobile
-                                        ? "18px"
-                                        : "22px",
-                                textAlign: "center"
-                            }}
-                        >
-                            <h2 style={smallHeadingStyle}>
-                                <T>
-                                    {section.title}
-                                </T>
-                            </h2>
-
-                            {section.paragraphs.map((paragraph) => (
-                                <p
-                                    key={paragraph}
-                                    style={paragraphStyle}
-                                >
-                                    <T>
-                                        {paragraph}
-                                    </T>
-                                </p>
-                            ))}
-
-                        </article>
-                    ))}
-                </div>
-            </section>
-
-            <section
-                style={{
-                    position: "relative",
-                    zIndex: 2,
-                    paddingLeft: pagePaddingX,
-                    paddingRight: pagePaddingX,
-                    paddingBottom: sectionSpacing,
                     boxSizing: "border-box",
                     display: "flex",
                     justifyContent: "center",
@@ -1065,52 +1166,90 @@ export default function HealthSupportAI() {
                         stopMurzikVoice={stopMurzikVoice}
                     />
 
-                    <div
-                        aria-hidden="true"
-                        onPointerDown={startChatFrameResize}
-                        style={{
-                            position: "absolute",
-                            right:
-                                isMobile
-                                    ? "8px"
-                                    : "10px",
-                            bottom:
-                                isMobile
-                                    ? "8px"
-                                    : "10px",
-                            width:
-                                isMobile
-                                    ? "24px"
-                                    : "28px",
-                            height:
-                                isMobile
-                                    ? "24px"
-                                    : "28px",
-                            cursor: "nwse-resize",
-                            zIndex: 50,
-                            borderRight:
-                                "2px solid rgba(216,176,122,0.58)",
-                            borderBottom:
-                                "2px solid rgba(216,176,122,0.58)",
-                            borderBottomRightRadius:
-                                isMobile
-                                    ? "10px"
-                                    : "12px",
-                            background:
-                                `
-                                linear-gradient(
-                                    135deg,
-                                    transparent 0%,
-                                    transparent 48%,
-                                    rgba(216,176,122,0.12) 49%,
-                                    rgba(216,176,122,0.22) 100%
+                    {[
+                        "top",
+                        "right",
+                        "bottom",
+                        "left",
+                        "top-left",
+                        "top-right",
+                        "bottom-left",
+                        "bottom-right"
+                    ].map((direction) => (
+                        <div
+                            key={direction}
+                            aria-hidden="true"
+                            onPointerDown={(event) =>
+                                startChatFrameResize(
+                                    event,
+                                    direction
                                 )
-                                `,
-                            boxShadow:
-                                "0 0 16px rgba(216,176,122,0.18)",
-                            touchAction: "none"
-                        }}
-                    />
+                            }
+                            style={
+                                getChatFrameResizeHandleStyle(
+                                    direction
+                                )
+                            }
+                        />
+                    ))}
+                </div>
+            </section>
+
+            <section
+                style={{
+                    position: "relative",
+                    zIndex: 2,
+                    paddingLeft: pagePaddingX,
+                    paddingRight: pagePaddingX,
+                    paddingBottom: sectionSpacing,
+                    boxSizing: "border-box"
+                }}
+            >
+                <div
+                    style={{
+                        maxWidth: maxTextWidth,
+                        margin: "0 auto",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap:
+                            isMobile
+                                ? "54px"
+                                : "48px"
+                    }}
+                >
+                    {SECTIONS.map((section) => (
+                        <article
+                            key={section.title}
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                gap:
+                                    isMobile
+                                        ? "18px"
+                                        : "22px",
+                                textAlign: "center"
+                            }}
+                        >
+                            <h2 style={smallHeadingStyle}>
+                                <T>
+                                    {section.title}
+                                </T>
+                            </h2>
+
+                            {section.paragraphs.map((paragraph) => (
+                                <p
+                                    key={paragraph}
+                                    style={paragraphStyle}
+                                >
+                                    <T>
+                                        {paragraph}
+                                    </T>
+                                </p>
+                            ))}
+
+                        </article>
+                    ))}
                 </div>
             </section>
 
