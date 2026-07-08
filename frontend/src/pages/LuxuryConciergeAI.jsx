@@ -31,13 +31,13 @@ import {
     FONT_IM_FELL
 } from "../theme/fonts";
 
-import privateShopperBanner from "../assets/private-shopper-banner.png";
+import luxuryConciergeBanner from "../assets/luxury-concierge-banner.png";
 
 const HERO_TITLE =
-    "Private Shopper AI";
+    "Golden Dragon Luxury Concierge AI";
 
 const HERO_SUBTITLE =
-    "An intelligent AI concierge for personalized product discovery, premium shopping assistance and adaptive lifestyle recommendations.";
+    "Private AI concierge for luxury shopping, exclusive product discovery, antique sourcing and personalized premium lifestyle services worldwide.";
 
 const PROJECT_MODES = {
     CHAT: "chat"
@@ -47,47 +47,64 @@ const PROJECT_SECTIONS = [
     {
         title: "Project Overview",
         paragraphs: [
-            "Private Shopper AI is an intelligent concierge platform being developed to assist users with personalized product discovery, premium shopping decisions and lifestyle-oriented recommendations through artificial intelligence.",
-            "The system combines conversational AI, multimodal product understanding, preference modeling and recommendation intelligence to help users find products that match their needs, taste, context and budget.",
-            "The platform is designed as a flexible AI shopping assistant that can evolve across fashion, beauty, home, travel, gifts, luxury goods and personalized commerce experiences."
+            "Golden Dragon Luxury Concierge AI is an intelligent private concierge platform designed to help clients discover rare, exclusive and difficult-to-find luxury products around the world.",
+            "The platform combines artificial intelligence, semantic search, recommendation systems and personalized concierge technologies to simplify access to exceptional products and premium shopping experiences."
         ]
     },
     {
-        title: "Personalized Shopping Concierge",
+        title: "Luxury Product Discovery",
         paragraphs: [
-            "The first public layer of the platform focuses on conversational shopping guidance.",
-            "Users can describe what they are looking for, share preferences, define constraints and receive curated recommendations adapted to their individual goals.",
-            "The assistant is designed to reduce decision fatigue by narrowing broad product choices into a more relevant and personalized selection."
+            "The AI intelligently searches across international luxury markets to locate rare products that are difficult to find through traditional shopping.",
+            "Examples include:"
+        ],
+        items: [
+            "rare fashion collections",
+            "limited editions",
+            "emerging designers",
+            "luxury boutiques",
+            "haute couture",
+            "fine jewelry",
+            "luxury watches",
+            "antiques",
+            "collectibles",
+            "historical artifacts",
+            "one-of-a-kind objects"
         ]
     },
     {
-        title: "Product Discovery & Recommendations",
+        title: "Personal AI Concierge",
         paragraphs: [
-            "Private Shopper AI evaluates product attributes, use cases, customer preferences, visual style, pricing context and practical requirements to support intelligent product discovery.",
-            "The platform can compare options, explain trade-offs and recommend alternatives that better match the user's intent.",
-            "The long-term vision includes adaptive recommendations that improve as the assistant learns more about each user's taste and shopping behavior."
+            "The assistant understands personal preferences, collecting interests, design tastes and purchasing goals.",
+            "Instead of returning thousands of search results, the AI prepares highly personalized recommendations based on rarity, authenticity, quality and customer interests."
         ]
     },
     {
-        title: "Multimodal Commerce Intelligence",
+        title: "Global Luxury Intelligence",
         paragraphs: [
-            "The platform is designed to support multimodal analysis across text, product images, style references, catalogs and structured product data.",
-            "Computer Vision and language models can work together to understand visual preferences, compare products and identify items that fit a requested aesthetic or functional need.",
-            "This multimodal layer enables more natural shopping workflows than keyword search alone."
+            "Future platform capabilities include intelligent sourcing, authenticated luxury marketplaces, private collector discovery, premium concierge services and personalized acquisition assistance worldwide."
         ]
     },
     {
-        title: "Adaptive Preference Modeling",
+        title: "Technology Platform",
         paragraphs: [
-            "Private Shopper AI is being developed with adaptive preference modeling that can refine recommendations based on user feedback, previous selections, style patterns and contextual shopping goals.",
-            "The assistant can support both fast product discovery and more deliberate premium shopping journeys where personalization, explanation and trust are essential.",
-            "The goal is to make digital shopping feel more like working with a knowledgeable personal concierge."
+            "The platform is designed around:"
+        ],
+        items: [
+            "Artificial Intelligence",
+            "Semantic Search",
+            "Recommendation Systems",
+            "Knowledge Graphs",
+            "Large Language Models",
+            "Retrieval-Augmented Generation (RAG)",
+            "Personalized AI Assistants",
+            "Intelligent Product Discovery",
+            "Multimodal AI"
         ]
     },
     {
         title: "Current Development",
         paragraphs: [
-            "The current platform infrastructure includes:"
+            "Current platform infrastructure includes:"
         ],
         items: [
             "Google Cloud backend",
@@ -95,23 +112,29 @@ const PROJECT_SECTIONS = [
             "Supabase database",
             "AI orchestration",
             "Prompt system",
-            "Product knowledge pipeline",
-            "Preference modeling pipeline",
-            "Recommendation intelligence",
-            "Multimodal product analysis"
+            "Intelligent product knowledge base",
+            "Semantic search pipeline",
+            "Personalized recommendation engine"
         ]
     },
     {
         title: "Future Development",
         paragraphs: [
-            "Private Shopper AI is designed as a scalable AI commerce platform with future expansion into personalized catalogs, premium concierge workflows, multimodal style analysis and intelligent purchasing support.",
-            "Additional commercial integrations, proprietary recommendation logic and advanced personalization layers remain part of the long-term roadmap and are not publicly disclosed.",
-            "The platform demonstrates Golden Dragon AI Studio's ability to design intelligent assistants for consumer commerce, lifestyle technology and custom enterprise shopping experiences."
+            "Golden Dragon Luxury Concierge AI is being developed as a multi-layer intelligent luxury platform.",
+            "Future capabilities include advanced personalization, authenticated luxury verification, intelligent sourcing, multimodal product understanding and premium AI lifestyle services.",
+            "The public presentation intentionally introduces only the first architectural layer.",
+            "Detailed algorithms, recommendation models, supplier intelligence, search technologies and future platform architecture remain confidential and are protected as the intellectual property of Golden Dragon AI Studio under Non-Disclosure Agreements (NDA)."
+        ]
+    },
+    {
+        title: "Core Mission",
+        paragraphs: [
+            "The mission of Golden Dragon Luxury Concierge AI is to simplify access to exceptional luxury products through intelligent search, personalized recommendations and AI-powered concierge services while preserving exclusivity, authenticity and premium customer experience."
         ]
     }
 ];
 
-export default function PrivateShopperAI() {
+export default function LuxuryConciergeAI() {
 
     const {
         isMobile,
@@ -1071,7 +1094,7 @@ export default function PrivateShopperAI() {
                 }}
             >
                 <img
-                    src={privateShopperBanner}
+                    src={luxuryConciergeBanner}
                     alt={translatedProjectBannerAlt}
                     loading="eager"
                     decoding="async"

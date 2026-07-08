@@ -15,7 +15,8 @@ import HealthSupportAI from "../pages/HealthSupportAI";
 import EquineHealthAI from "../pages/EquineHealthAI";
 import UnderwaterInspectionAI from "../pages/UnderwaterInspectionAI";
 import QuantumTradingAI from "../pages/QuantumTradingAI";
-import PrivateShopperAI from "../pages/PrivateShopperAI";
+import LuxuryConciergeAI from "../pages/LuxuryConciergeAI";
+import News from "../pages/News";
 
 function AppRouter() {
 
@@ -87,8 +88,13 @@ function AppRouter() {
                     />
 
                     <Route
-                        path="/solutions/private-shopper"
-                        element={<PrivateShopperAI />}
+                        path="/solutions/luxury-concierge-ai"
+                        element={<LuxuryConciergeAI />}
+                    />
+
+                    <Route
+                        path="/news"
+                        element={<News />}
                     />
 
                 </Routes>

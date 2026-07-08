@@ -94,6 +94,18 @@ import {
     QUANTUM_TRADING_TRANSLATIONS_RU
 } from "../../content/quantumTradingTranslations.ru.js";
 
+import {
+    LUXURY_CONCIERGE_TRANSLATIONS_DE
+} from "../../content/luxuryConciergeTranslations.de.js";
+
+import {
+    LUXURY_CONCIERGE_TRANSLATIONS_FR
+} from "../../content/luxuryConciergeTranslations.fr.js";
+
+import {
+    LUXURY_CONCIERGE_TRANSLATIONS_RU
+} from "../../content/luxuryConciergeTranslations.ru.js";
+
 function mergeCuratedDictionaries(
     ...dictionaries
 ) {
@@ -112,6 +124,7 @@ const CURATED_BY_LANGUAGE = {
         HEALTH_SUPPORT_TRANSLATIONS_RU,
         UNDERWATER_INSPECTION_TRANSLATIONS_RU,
         QUANTUM_TRADING_TRANSLATIONS_RU,
+        LUXURY_CONCIERGE_TRANSLATIONS_RU,
         PORTFOLIO_TRANSLATIONS_RU
     ),
     es: mergeCuratedDictionaries(
@@ -123,7 +136,8 @@ const CURATED_BY_LANGUAGE = {
         FOUNDER_TRANSLATIONS_FR,
         CHAT_TRANSLATIONS_FR,
         FOOTER_TRANSLATIONS_FR,
-        QUANTUM_TRADING_TRANSLATIONS_FR
+        QUANTUM_TRADING_TRANSLATIONS_FR,
+        LUXURY_CONCIERGE_TRANSLATIONS_FR
     ),
     de: mergeCuratedDictionaries(
         FOUNDER_TRANSLATIONS_DE,
@@ -132,6 +146,7 @@ const CURATED_BY_LANGUAGE = {
         HEALTH_SUPPORT_TRANSLATIONS_DE,
         UNDERWATER_INSPECTION_TRANSLATIONS_DE,
         QUANTUM_TRADING_TRANSLATIONS_DE,
+        LUXURY_CONCIERGE_TRANSLATIONS_DE,
         PORTFOLIO_TRANSLATIONS_DE
     ),
     it: mergeCuratedDictionaries(

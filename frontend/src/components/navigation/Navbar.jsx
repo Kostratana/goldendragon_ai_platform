@@ -74,8 +74,8 @@ const SOLUTIONS_LINKS = [
         to: "/solutions/quantum-trading-ai"
     },
     {
-        label: "Private Shopper AI",
-        to: "/solutions/private-shopper"
+        label: "Luxury Concierge AI",
+        to: "/solutions/luxury-concierge-ai"
     }
 ];
 
@@ -447,6 +447,14 @@ export default function Navbar() {
                         text="DRAGON CHAT"
                         brand
                         active={isChatActive}
+                        isMobile={isMobile}
+                        isTablet={isTablet}
+                    />
+
+                    <NavButton
+                        to="/news"
+                        text="NEWS"
+                        active={pathname === "/news"}
                         isMobile={isMobile}
                         isTablet={isTablet}
                     />

@@ -90,8 +90,8 @@ const AVAILABLE_SOLUTIONS = [
         to: "/solutions/quantum-trading-ai"
     },
     {
-        label: "Private Shopper AI",
-        to: "/solutions/private-shopper"
+        label: "Luxury Concierge AI",
+        to: "/solutions/luxury-concierge-ai"
     }
 ];
 
