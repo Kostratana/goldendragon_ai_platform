@@ -76,7 +76,8 @@ export function resolveTranslation(
             cached,
             {},
             {},
-            values
+            values,
+            language
         );
     }
 
@@ -94,7 +95,8 @@ export function resolveTranslation(
             curated,
             {},
             {},
-            values
+            values,
+            language
         );
     }
 
@@ -182,7 +184,8 @@ export function TranslationProvider({
                         cached,
                         {},
                         {},
-                        values
+                        values,
+                        language
                     );
                 }
 
@@ -206,7 +209,8 @@ export function TranslationProvider({
                         curated,
                         {},
                         {},
-                        values
+                        values,
+                        language
                     );
                 }
 
@@ -241,7 +245,8 @@ export function TranslationProvider({
                             translated,
                             placeholders,
                             brands,
-                            null
+                            null,
+                            language
                         )
                     );
 
@@ -249,7 +254,8 @@ export function TranslationProvider({
                         translated,
                         placeholders,
                         brands,
-                        values
+                        values,
+                        language
                     );
 
                 } finally {
@@ -439,7 +445,8 @@ export function useTranslatedText(
                     curated,
                     {},
                     {},
-                    values
+                    values,
+                    language
                 )
             );
 
@@ -461,7 +468,8 @@ export function useTranslatedText(
                     cached,
                     {},
                     {},
-                    values
+                    values,
+                    language
                 )
             );
 
@@ -620,7 +628,8 @@ export function Translate({
                     curated,
                     {},
                     {},
-                    mergedValues
+                    mergedValues,
+                    language
                 )
             );
 
@@ -642,7 +651,8 @@ export function Translate({
                     cached,
                     {},
                     {},
-                    mergedValues
+                    mergedValues,
+                    language
                 )
             );
 

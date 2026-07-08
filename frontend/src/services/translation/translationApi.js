@@ -80,7 +80,24 @@ async function requestTranslations(
         );
     }
 
-    return payload.translations;
+    return payload.translations.map(
+        (translation, index) => {
+
+            if (
+                typeof translation ===
+                    "string" &&
+                translation
+                    .toUpperCase()
+                    .includes(
+                        "MYMEMORY WARNING"
+                    )
+            ) {
+                return texts[index];
+            }
+
+            return translation;
+        }
+    );
 }
 
 export async function translateTexts(

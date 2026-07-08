@@ -107,6 +107,69 @@ export default function Chat() {
         currentUserLanguage
     } = useLanguage();
 
+    const chatFrameRef =
+        useRef(null);
+
+    const createEmbeddedChatBox = () => {
+
+        const viewportWidth =
+            window.innerWidth;
+
+        const viewportHeight =
+            window.innerHeight;
+
+        const framePadding =
+            isMobile
+                ? 24
+                : 32;
+
+        const width =
+            Math.round(
+                Math.min(
+                    viewportWidth -
+                        (isMobile ? 40 : isTablet ? 88 : 128) -
+                        framePadding,
+                    isMobile
+                        ? viewportWidth - 64
+                        : isTablet
+                            ? 680
+                            : 860
+                )
+            );
+
+        const height =
+            Math.round(
+                Math.min(
+                    viewportHeight *
+                        (isMobile ? 0.64 : 0.74),
+                    isMobile
+                        ? 620
+                        : isTablet
+                            ? 760
+                            : 820
+                )
+            );
+
+        return {
+            width:
+                Math.max(
+                    isMobile ? 320 : 560,
+                    width
+                ),
+            height:
+                Math.max(
+                    isMobile ? 460 : 620,
+                    height
+                )
+        };
+    };
+
+    const [embeddedChatBox, setEmbeddedChatBox] =
+        useState(createEmbeddedChatBox);
+
+    const [chatFrameSize, setChatFrameSize] =
+        useState(null);
+
     const [messages, setMessages] =
         useState([
             {
@@ -337,6 +400,334 @@ async function sendMessage() {
         setMessages([]);
 
         stopMurzikVoice();
+    }
+
+    function updateEmbeddedChatSize(
+        frameWidth,
+        frameHeight
+    ) {
+
+        const framePadding =
+            isMobile
+                ? 24
+                : 32;
+
+        setEmbeddedChatBox({
+            width:
+                Math.max(
+                    isMobile ? 320 : 560,
+                    Math.round(
+                        frameWidth -
+                            framePadding
+                    )
+                ),
+            height:
+                Math.max(
+                    isMobile ? 460 : 620,
+                    Math.round(
+                        frameHeight -
+                            framePadding
+                    )
+                )
+        });
+    }
+
+    function startChatFrameResize(
+        event,
+        direction
+    ) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        const frame =
+            chatFrameRef.current;
+
+        if (!frame) {
+            return;
+        }
+
+        const rect =
+            frame.getBoundingClientRect();
+
+        const startX =
+            event.clientX;
+
+        const startY =
+            event.clientY;
+
+        const startWidth =
+            rect.width;
+
+        const startHeight =
+            rect.height;
+
+        const minWidth =
+            isMobile
+                ? Math.min(
+                    window.innerWidth - 40,
+                    344
+                )
+                : 620;
+
+        const maxWidth =
+            Math.max(
+                minWidth,
+                Math.min(
+                    window.innerWidth -
+                        (isMobile ? 40 : isTablet ? 88 : 96),
+                    isMobile
+                        ? window.innerWidth - 40
+                        : isTablet
+                            ? 820
+                            : 1180
+                )
+            );
+
+        const minHeight =
+            isMobile
+                ? 520
+                : 620;
+
+        const maxHeight =
+            Math.max(
+                minHeight,
+                Math.round(
+                    window.innerHeight *
+                        (isMobile ? 0.82 : 0.9)
+                )
+            );
+
+        function handlePointerMove(
+            moveEvent
+        ) {
+
+            const deltaX =
+                moveEvent.clientX -
+                startX;
+
+            const deltaY =
+                moveEvent.clientY -
+                startY;
+
+            const widthDelta =
+                direction.includes("right")
+                    ? deltaX
+                    : direction.includes("left")
+                        ? -deltaX
+                        : 0;
+
+            const heightDelta =
+                direction.includes("bottom")
+                    ? deltaY
+                    : direction.includes("top")
+                        ? -deltaY
+                        : 0;
+
+            const nextWidth =
+                Math.max(
+                    minWidth,
+                    Math.min(
+                        maxWidth,
+                        startWidth +
+                            widthDelta
+                    )
+                );
+
+            const nextHeight =
+                Math.max(
+                    minHeight,
+                    Math.min(
+                        maxHeight,
+                        startHeight +
+                            heightDelta
+                    )
+                );
+
+            setChatFrameSize({
+                width:
+                    Math.round(
+                        nextWidth
+                    ),
+                height:
+                    Math.round(
+                        nextHeight
+                    )
+            });
+
+            updateEmbeddedChatSize(
+                nextWidth,
+                nextHeight
+            );
+        }
+
+        function handlePointerUp() {
+
+            window.removeEventListener(
+                "pointermove",
+                handlePointerMove
+            );
+
+            window.removeEventListener(
+                "pointerup",
+                handlePointerUp
+            );
+        }
+
+        window.addEventListener(
+            "pointermove",
+            handlePointerMove
+        );
+
+        window.addEventListener(
+            "pointerup",
+            handlePointerUp
+        );
+    }
+
+    function getChatFrameResizeHandleStyle(
+        direction
+    ) {
+
+        const baseStyle = {
+            position: "absolute",
+            zIndex: 300,
+            touchAction: "none",
+            background: "transparent"
+        };
+
+        const edgeOffset =
+            isMobile
+                ? "4px"
+                : "6px";
+
+        const edgeSize =
+            isMobile
+                ? "22px"
+                : "24px";
+
+        const cornerSize =
+            isMobile
+                ? "34px"
+                : "38px";
+
+        const cornerAccent = {
+            borderColor:
+                "rgba(216,176,122,0.58)",
+            boxShadow:
+                "0 0 16px rgba(216,176,122,0.16)"
+        };
+
+        const styles = {
+            top: {
+                top: 0,
+                left: cornerSize,
+                right: cornerSize,
+                height: edgeSize,
+                cursor: "ns-resize",
+                borderTop:
+                    "1px solid rgba(216,176,122,0.18)"
+            },
+            right: {
+                top: cornerSize,
+                right: 0,
+                bottom: cornerSize,
+                width: edgeSize,
+                cursor: "ew-resize",
+                borderRight:
+                    "1px solid rgba(216,176,122,0.22)"
+            },
+            bottom: {
+                bottom: 0,
+                left: cornerSize,
+                right: cornerSize,
+                height: edgeSize,
+                cursor: "ns-resize",
+                borderBottom:
+                    "1px solid rgba(216,176,122,0.22)"
+            },
+            left: {
+                top: cornerSize,
+                left: 0,
+                bottom: cornerSize,
+                width: edgeSize,
+                cursor: "ew-resize",
+                borderLeft:
+                    "1px solid rgba(216,176,122,0.18)"
+            },
+            "top-left": {
+                top: edgeOffset,
+                left: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nwse-resize",
+                borderTop: "2px solid",
+                borderLeft: "2px solid",
+                borderTopLeftRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                ...cornerAccent
+            },
+            "top-right": {
+                top: edgeOffset,
+                right: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nesw-resize",
+                borderTop: "2px solid",
+                borderRight: "2px solid",
+                borderTopRightRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                ...cornerAccent
+            },
+            "bottom-left": {
+                bottom: edgeOffset,
+                left: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nesw-resize",
+                borderBottom: "2px solid",
+                borderLeft: "2px solid",
+                borderBottomLeftRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                ...cornerAccent
+            },
+            "bottom-right": {
+                bottom: edgeOffset,
+                right: edgeOffset,
+                width: cornerSize,
+                height: cornerSize,
+                cursor: "nwse-resize",
+                borderBottom: "2px solid",
+                borderRight: "2px solid",
+                borderBottomRightRadius:
+                    isMobile
+                        ? "10px"
+                        : "12px",
+                background:
+                    `
+                    linear-gradient(
+                        135deg,
+                        transparent 0%,
+                        transparent 48%,
+                        rgba(216,176,122,0.12) 49%,
+                        rgba(216,176,122,0.22) 100%
+                    )
+                    `,
+                ...cornerAccent
+            }
+        };
+
+        return {
+            ...baseStyle,
+            ...styles[direction]
+        };
     }
 
     useEffect(() => {
@@ -581,6 +972,7 @@ async function sendMessage() {
                 {/* CHAT WINDOW */}
 
                 <div
+                    ref={chatFrameRef}
                     style={{
 
                         position: "absolute",
@@ -597,7 +989,77 @@ async function sendMessage() {
                         transform:
                             "translateX(-50%)",
 
-                        zIndex: 10
+                        zIndex: 10,
+
+                        width:
+                            chatFrameSize
+                                ? `${chatFrameSize.width}px`
+                                : isMobile
+                                    ? "92%"
+                                    : isTablet
+                                        ? "min(92%, 760px)"
+                                        : "min(88%, 960px)",
+
+                        height:
+                            chatFrameSize
+                                ? `${chatFrameSize.height}px`
+                                : isMobile
+                                    ? "64vh"
+                                    : isTablet
+                                        ? "72vh"
+                                        : "74vh",
+
+                        minWidth:
+                            isMobile
+                                ? "min(100%, 344px)"
+                                : "min(100%, 620px)",
+
+                        minHeight:
+                            isMobile
+                                ? "520px"
+                                : "620px",
+
+                        maxWidth: "100%",
+
+                        maxHeight:
+                            isMobile
+                                ? "78vh"
+                                : "86vh",
+
+                        resize: "both",
+
+                        overflow: "auto",
+
+                        borderRadius:
+                            isMobile
+                                ? "26px"
+                                : "34px",
+
+                        border:
+                            "1px solid rgba(216,176,122,0.32)",
+
+                        background:
+                            `
+                            linear-gradient(
+                                180deg,
+                                rgba(11,7,4,0.92),
+                                rgba(5,3,2,0.96)
+                            )
+                            `,
+
+                        boxShadow:
+                            `
+                            0 0 34px rgba(216,176,122,0.14),
+                            0 0 90px rgba(255,140,0,0.08),
+                            inset 0 0 24px rgba(216,176,122,0.04)
+                            `,
+
+                        padding:
+                            isMobile
+                                ? "12px"
+                                : "16px",
+
+                        boxSizing: "border-box"
                     }}
                 >
 
@@ -625,7 +1087,7 @@ async function sendMessage() {
                         isMobile={isMobile}
                         isTablet={isTablet}
 
-                        chatBox={chatBox}
+                        chatBox={embeddedChatBox}
 
                         startDrag={startDrag}
 
@@ -642,6 +1104,33 @@ async function sendMessage() {
                         setVoiceEnabled={setVoiceEnabled}
                         stopMurzikVoice={stopMurzikVoice}
                     />
+
+                    {[
+                        "top",
+                        "right",
+                        "bottom",
+                        "left",
+                        "top-left",
+                        "top-right",
+                        "bottom-left",
+                        "bottom-right"
+                    ].map((direction) => (
+                        <div
+                            key={direction}
+                            aria-hidden="true"
+                            onPointerDown={(event) =>
+                                startChatFrameResize(
+                                    event,
+                                    direction
+                                )
+                            }
+                            style={
+                                getChatFrameResizeHandleStyle(
+                                    direction
+                                )
+                            }
+                        />
+                    ))}
 
                 </div>
 

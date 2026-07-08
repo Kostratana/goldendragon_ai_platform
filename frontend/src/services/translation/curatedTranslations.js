@@ -39,6 +39,10 @@ import {
 } from "../../content/chatTranslations.ru.js";
 
 import {
+    COMMON_TRANSLATIONS_RU
+} from "../../content/commonTranslations.ru.js";
+
+import {
     FOOTER_TRANSLATIONS_DE
 } from "../../content/footerTranslations.de.js";
 
@@ -118,6 +122,7 @@ function mergeCuratedDictionaries(
 
 const CURATED_BY_LANGUAGE = {
     ru: mergeCuratedDictionaries(
+        COMMON_TRANSLATIONS_RU,
         FOUNDER_TRANSLATIONS_RU,
         CHAT_TRANSLATIONS_RU,
         FOOTER_TRANSLATIONS_RU,
