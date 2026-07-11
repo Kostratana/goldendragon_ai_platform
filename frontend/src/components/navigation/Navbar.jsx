@@ -1286,8 +1286,10 @@ function getDropdownShellStyle(
         return {
             position: "fixed",
             top: "max(104px, calc(92px + env(safe-area-inset-top, 0px)))",
-            left: "max(10px, env(safe-area-inset-left, 0px))",
-            right: "max(10px, env(safe-area-inset-right, 0px))",
+            left: "50%",
+            width: "min(340px, calc(100vw - 20px))",
+            maxWidth: "calc(100vw - 20px)",
+            transform: "translateX(-50%)",
             zIndex: 999999,
             boxSizing: "border-box"
         };
@@ -1336,10 +1338,18 @@ function getDropdownPanelStyle(
             isMobile
                 ? "calc(100dvh - 124px)"
                 : "none",
+        width:
+            isMobile
+                ? "100%"
+                : "auto",
         overflowY:
             isMobile
                 ? "auto"
                 : "visible",
+        overscrollBehavior:
+            isMobile
+                ? "contain"
+                : "auto",
         WebkitOverflowScrolling:
             "touch",
         boxSizing:

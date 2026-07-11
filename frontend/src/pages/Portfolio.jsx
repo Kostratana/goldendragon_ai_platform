@@ -11,6 +11,7 @@ import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
 import {
     T,
+    useLanguage,
     useTranslatedText
 } from "../services/translation";
 
@@ -85,6 +86,13 @@ export default function Portfolio() {
         isTablet
     } = useFounderBreakpoints();
 
+    const {
+        language
+    } = useLanguage();
+
+    const isRussian =
+        language === "ru";
+
     const translatedHeroTitle =
         useTranslatedText(
             HERO_TITLE
@@ -112,6 +120,20 @@ export default function Portfolio() {
                 ? "92px"
                 : "112px";
 
+    const heroTitleLines =
+        isRussian
+            ? isMobile
+                ? [
+                    "Избранные",
+                    "инженерные",
+                    "ИИ-проекты"
+                ]
+                : [
+                    "Избранные инженерные",
+                    "ИИ-проекты"
+                ]
+            : null;
+
     const heroTitleStyle = {
         color: GOLD,
         fontFamily: FONT_CINZEL_DECORATIVE,
@@ -136,6 +158,12 @@ export default function Portfolio() {
         "--gd-ink-duration": "22s",
         "--gd-ink-delay-step": "0.10s",
         textAlign: "center",
+        textWrap: "balance",
+        overflowWrap: "break-word",
+        hyphens:
+            isRussian
+                ? "auto"
+                : "manual",
         textShadow:
             "0 0 26px rgba(216,176,122,0.30), 0 0 58px rgba(255,140,0,0.12)"
     };
@@ -162,6 +190,12 @@ export default function Portfolio() {
         maxWidth: "820px",
         marginInline: "auto",
         textAlign: "center",
+        textWrap: "pretty",
+        overflowWrap: "break-word",
+        hyphens:
+            isRussian
+                ? "auto"
+                : "manual",
         textShadow:
             "0 0 16px rgba(216,176,122,0.16)"
     };
@@ -183,6 +217,8 @@ export default function Portfolio() {
                 : "0.06em",
         margin: 0,
         textAlign: "center",
+        textWrap: "balance",
+        overflowWrap: "break-word",
         textShadow:
             "0 0 20px rgba(216,176,122,0.22)"
     };
@@ -201,7 +237,14 @@ export default function Portfolio() {
                 ? 1.75
                 : 1.82,
         letterSpacing: "0.01em",
-        margin: 0
+        margin: 0,
+        maxWidth: "100%",
+        textWrap: "pretty",
+        overflowWrap: "break-word",
+        hyphens:
+            isRussian
+                ? "auto"
+                : "manual"
     };
 
     const smallHeadingStyle = {
@@ -218,6 +261,8 @@ export default function Portfolio() {
         letterSpacing: "0.04em",
         margin: 0,
         textAlign: "center",
+        textWrap: "balance",
+        overflowWrap: "break-word",
         textShadow:
             "0 0 15px rgba(216,176,122,0.18)"
     };
@@ -231,7 +276,9 @@ export default function Portfolio() {
                 : "19px",
         lineHeight: 1.65,
         letterSpacing: "0.02em",
-        margin: 0
+        margin: 0,
+        maxWidth: "100%",
+        overflowWrap: "anywhere"
     };
 
     return (
@@ -335,6 +382,7 @@ export default function Portfolio() {
                         as="h1"
                         style={heroTitleStyle}
                         text={translatedHeroTitle}
+                        lines={heroTitleLines}
                     />
 
                     <AnimatedInkText
