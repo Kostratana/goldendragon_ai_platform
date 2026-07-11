@@ -30,7 +30,7 @@ export const COMMON_TRANSLATIONS_RU = {
         "Стратегия и консалтинг в области ИИ",
 
     "We help companies understand where AI creates real value, define priorities and turn ambitious ideas into a clear implementation path.":
-        "Мы помогаем компаниям понять, где ИИ создает реальную ценность, определить приоритеты и превратить амбициозные идеи в понятный путь реализации.",
+        "Мы помогаем компаниям понять, где ИИ создает реальную ценность, определить приоритеты и превратить амбициозные идеи в понятный план внедрения.",
 
     "AI Consulting":
         "Консалтинг по ИИ",
@@ -51,7 +51,7 @@ export const COMMON_TRANSLATIONS_RU = {
         "Мы проектируем, создаем и обучаем интеллектуальные системы под ваш продукт, данные и бизнес-процессы.",
 
     "Custom AI Models":
-        "Индивидуальные модели ИИ",
+        "Кастомные ИИ-модели",
 
     "Machine Learning Models":
         "Модели машинного обучения",
@@ -60,7 +60,7 @@ export const COMMON_TRANSLATIONS_RU = {
         "Дообучение существующих моделей",
 
     "Training Models on Custom Datasets":
-        "Обучение моделей на пользовательских наборах данных",
+        "Обучение моделей на данных клиента",
 
     "Training AI Models from Scratch":
         "Обучение моделей ИИ с нуля",
@@ -72,7 +72,7 @@ export const COMMON_TRANSLATIONS_RU = {
         "LLM и генеративный ИИ",
 
     "We integrate language models, knowledge bases and generative tools into practical business workflows.":
-        "Мы интегрируем языковые модели, базы знаний и генеративные инструменты в практические бизнес-процессы.",
+        "Мы интегрируем языковые модели, базы знаний и генеративные инструменты в реальные бизнес-процессы.",
 
     "RAG Systems":
         "RAG-системы",
@@ -168,7 +168,7 @@ export const COMMON_TRANSLATIONS_RU = {
         "Развертывание",
 
     "We prepare the solution for real users, production environments and business workflows.":
-        "Мы готовим решение для реальных пользователей, промышленной среды и бизнес-процессов.",
+        "Мы готовим решение к работе с реальными пользователями, production-средой и бизнес-процессами.",
 
     "Support & Future Development":
         "Поддержка и дальнейшее развитие",
@@ -244,6 +244,30 @@ export const COMMON_TRANSLATIONS_RU = {
 
     "Several projects presented in this showcase are being developed as long-term technology platforms with significant commercial potential.":
         "Несколько проектов в этой витрине развиваются как долгосрочные технологические платформы с серьезным коммерческим потенциалом.",
+
+    "Included:":
+        "Включает:",
+
+    "How We Work":
+        "Как мы работаем",
+
+    "Start Your Project":
+        "Начните проект",
+
+    "Tell us about your task.":
+        "Расскажите нам о вашей задаче.",
+
+    "We will help you define the optimal AI solution, prepare a project concept and choose the most effective implementation path.":
+        "Мы поможем определить оптимальное ИИ-решение, подготовить концепцию проекта и выбрать самый эффективный путь внедрения.",
+
+    "Describe your project and Dragon will help you find the best AI solution.":
+        "Опишите проект, и Dragon поможет подобрать лучшее ИИ-решение.",
+
+    "Documents":
+        "Документы",
+
+    "Service Agreement":
+        "Договор на оказание услуг",
 
     "We welcome discussions with strategic partners and investors interested in supporting the development and global commercialization of next-generation AI products.":
         "Мы открыты к обсуждению сотрудничества со стратегическими партнерами и инвесторами, заинтересованными в развитии и глобальной коммерциализации ИИ-продуктов нового поколения.",

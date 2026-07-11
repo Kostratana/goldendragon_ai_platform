@@ -71,6 +71,10 @@ import {
 } from "../../content/healthSupportTranslations.ru.js";
 
 import {
+    EQUINE_HEALTH_TRANSLATIONS_RU
+} from "../../content/equineHealthTranslations.ru.js";
+
+import {
     UNDERWATER_INSPECTION_TRANSLATIONS_DE
 } from "../../content/underwaterInspectionTranslations.de.js";
 
@@ -127,6 +131,7 @@ const CURATED_BY_LANGUAGE = {
         CHAT_TRANSLATIONS_RU,
         FOOTER_TRANSLATIONS_RU,
         HEALTH_SUPPORT_TRANSLATIONS_RU,
+        EQUINE_HEALTH_TRANSLATIONS_RU,
         UNDERWATER_INSPECTION_TRANSLATIONS_RU,
         QUANTUM_TRADING_TRANSLATIONS_RU,
         LUXURY_CONCIERGE_TRANSLATIONS_RU,

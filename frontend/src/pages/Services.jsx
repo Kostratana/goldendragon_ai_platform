@@ -15,6 +15,7 @@ import {
 
 import {
     T,
+    useLanguage,
     useTranslatedText
 } from "../services/translation";
 
@@ -165,6 +166,13 @@ export default function Services() {
         isTablet
     } = useFounderBreakpoints();
 
+    const {
+        language
+    } = useLanguage();
+
+    const isRussian =
+        language === "ru";
+
     const translatedHeroTitle =
         useTranslatedText(
             HERO_TITLE
@@ -216,6 +224,8 @@ export default function Services() {
         "--gd-ink-duration": "22s",
         "--gd-ink-delay-step": "0.10s",
         textAlign: "center",
+        overflowWrap: "anywhere",
+        hyphens: "auto",
         textShadow:
             "0 0 26px rgba(216,176,122,0.30), 0 0 58px rgba(255,140,0,0.12)"
     };
@@ -242,6 +252,12 @@ export default function Services() {
         maxWidth: "820px",
         marginInline: "auto",
         textAlign: "center",
+        textWrap: "pretty",
+        overflowWrap: "break-word",
+        hyphens:
+            isRussian
+                ? "auto"
+                : "manual",
         textShadow:
             "0 0 16px rgba(216,176,122,0.16)"
     };
@@ -264,6 +280,8 @@ export default function Services() {
         margin: 0,
         textAlign:
             "center",
+        textWrap: "balance",
+        overflowWrap: "break-word",
         textShadow:
             "0 0 20px rgba(216,176,122,0.22)"
     };
@@ -282,7 +300,14 @@ export default function Services() {
                 ? 1.75
                 : 1.82,
         letterSpacing: "0.01em",
-        margin: 0
+        margin: 0,
+        maxWidth: "100%",
+        textWrap: "pretty",
+        overflowWrap: "break-word",
+        hyphens:
+            isRussian
+                ? "auto"
+                : "manual"
     };
 
     const smallHeadingStyle = {
@@ -299,6 +324,8 @@ export default function Services() {
         letterSpacing: "0.04em",
         margin: 0,
         textAlign: "center",
+        textWrap: "balance",
+        overflowWrap: "break-word",
         textShadow:
             "0 0 15px rgba(216,176,122,0.18)"
     };
@@ -1015,8 +1042,8 @@ export default function Services() {
                             textAlign: "center"
                         }}
                     >
-                        <a
-                            href="#"
+                        <span
+                            aria-disabled="true"
                             style={documentLinkStyle(isMobile)}
                         >
                             <span aria-hidden="true">
@@ -1026,10 +1053,10 @@ export default function Services() {
                             <T>
                                 Service Agreement
                             </T>
-                        </a>
+                        </span>
 
-                        <a
-                            href="#"
+                        <span
+                            aria-disabled="true"
                             style={documentLinkStyle(isMobile)}
                         >
                             <span aria-hidden="true">
@@ -1039,7 +1066,7 @@ export default function Services() {
                             <T brand>
                                 NDA
                             </T>
-                        </a>
+                        </span>
                     </div>
                 </div>
             </section>
@@ -1067,6 +1094,7 @@ function documentLinkStyle(
         textDecoration: "underline",
         textDecorationColor:
             "rgba(216,176,122,0.42)",
-        textUnderlineOffset: "7px"
+        textUnderlineOffset: "7px",
+        cursor: "default"
     };
 }

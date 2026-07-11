@@ -684,11 +684,11 @@ function SolutionsDropdown({
                     @keyframes navDropdownOpen {
                         from {
                             opacity: 0;
-                            transform: translateX(-50%) translateY(-6px);
+                            transform: translateY(-6px);
                         }
                         to {
                             opacity: 1;
-                            transform: translateX(-50%) translateY(0);
+                            transform: translateY(0);
                         }
                     }
                 `}
@@ -785,56 +785,17 @@ function SolutionsDropdown({
             {
                 open && (
                     <div
-                        style={{
-                            position: "absolute",
-                            top: "100%",
-                            left: "50%",
-                            transform:
-                                "translateX(-50%)",
-                            paddingTop: "10px",
-                            minWidth:
-                                isMobile
-                                    ? "240px"
-                                    : "300px",
-                            zIndex: 999999
-                        }}
+                        style={getDropdownShellStyle(
+                            isMobile,
+                            "300px"
+                        )}
                     >
                         <div
                             role="menu"
 
-                            style={{
-
-                                padding: "8px",
-
-                                borderRadius: "12px",
-
-                                background:
-                                    `
-                                linear-gradient(
-                                    to bottom,
-                                    rgba(10,10,10,0.92),
-                                    rgba(6,6,6,0.88)
-                                )
-                                `,
-
-                                border:
-                                    "1px solid rgba(255,140,0,0.08)",
-
-                                backdropFilter:
-                                    "blur(16px)",
-
-                                WebkitBackdropFilter:
-                                    "blur(16px)",
-
-                                boxShadow:
-                                    `
-                                0 0 60px rgba(255,140,0,0.08),
-                                inset 0 0 18px rgba(255,140,0,0.03)
-                                `,
-
-                                animation:
-                                    "navDropdownOpen 200ms ease-out forwards"
-                            }}
+                            style={getDropdownPanelStyle(
+                                isMobile
+                            )}
                         >
 
                         {
@@ -980,11 +941,11 @@ function LanguageDropdown({
                     @keyframes navDropdownOpen {
                         from {
                             opacity: 0;
-                            transform: translateX(-50%) translateY(-6px);
+                            transform: translateY(-6px);
                         }
                         to {
                             opacity: 1;
-                            transform: translateX(-50%) translateY(0);
+                            transform: translateY(0);
                         }
                     }
                 `}
@@ -1051,56 +1012,17 @@ function LanguageDropdown({
             {
                 open && (
                     <div
-                        style={{
-                            position: "absolute",
-                            top: "100%",
-                            left: "50%",
-                            transform:
-                                "translateX(-50%)",
-                            paddingTop: "10px",
-                            minWidth:
-                                isMobile
-                                    ? "240px"
-                                    : "300px",
-                            zIndex: 999999
-                        }}
+                        style={getDropdownShellStyle(
+                            isMobile,
+                            "300px"
+                        )}
                     >
                         <div
                             role="menu"
 
-                            style={{
-
-                                padding: "8px",
-
-                                borderRadius: "12px",
-
-                                background:
-                                    `
-                                linear-gradient(
-                                    to bottom,
-                                    rgba(10,10,10,0.92),
-                                    rgba(6,6,6,0.88)
-                                )
-                                `,
-
-                                border:
-                                    "1px solid rgba(255,140,0,0.08)",
-
-                                backdropFilter:
-                                    "blur(16px)",
-
-                                WebkitBackdropFilter:
-                                    "blur(16px)",
-
-                                boxShadow:
-                                    `
-                                0 0 60px rgba(255,140,0,0.08),
-                                inset 0 0 18px rgba(255,140,0,0.03)
-                                `,
-
-                                animation:
-                                    "navDropdownOpen 200ms ease-out forwards"
-                            }}
+                            style={getDropdownPanelStyle(
+                                isMobile
+                            )}
                         >
 
                         {
@@ -1218,6 +1140,9 @@ function ServicesDropdown({
                 flexShrink: 0
             }}
 
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+
         >
 
             <div
@@ -1310,56 +1235,17 @@ function ServicesDropdown({
             {
                 open && (
                     <div
-                        style={{
-                            position: "absolute",
-                            top: "100%",
-                            left: "50%",
-                            transform:
-                                "translateX(-50%)",
-                            paddingTop: "10px",
-                            minWidth:
-                                isMobile
-                                    ? "180px"
-                                    : "220px",
-                            zIndex: 999999
-                        }}
+                        style={getDropdownShellStyle(
+                            isMobile,
+                            "220px"
+                        )}
                     >
                         <div
                             role="menu"
 
-                            style={{
-
-                                padding: "8px",
-
-                                borderRadius: "12px",
-
-                                background:
-                                    `
-                                linear-gradient(
-                                    to bottom,
-                                    rgba(10,10,10,0.92),
-                                    rgba(6,6,6,0.88)
-                                )
-                                `,
-
-                                border:
-                                    "1px solid rgba(255,140,0,0.08)",
-
-                                backdropFilter:
-                                    "blur(16px)",
-
-                                WebkitBackdropFilter:
-                                    "blur(16px)",
-
-                                boxShadow:
-                                    `
-                                0 0 60px rgba(255,140,0,0.08),
-                                inset 0 0 18px rgba(255,140,0,0.03)
-                                `,
-
-                                animation:
-                                    "navDropdownOpen 200ms ease-out forwards"
-                            }}
+                            style={getDropdownPanelStyle(
+                                isMobile
+                            )}
                         >
 
                             <SolutionMenuItem
@@ -1388,6 +1274,77 @@ function getDropdownMenuFontSize(
     return isMobile
         ? "10px"
         : "11px";
+}
+
+function getDropdownShellStyle(
+    isMobile,
+    desktopMinWidth
+) {
+
+    if (isMobile) {
+
+        return {
+            position: "fixed",
+            top: "max(104px, calc(92px + env(safe-area-inset-top, 0px)))",
+            left: "max(10px, env(safe-area-inset-left, 0px))",
+            right: "max(10px, env(safe-area-inset-right, 0px))",
+            zIndex: 999999,
+            boxSizing: "border-box"
+        };
+    }
+
+    return {
+        position: "absolute",
+        top: "100%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        paddingTop: "10px",
+        minWidth: desktopMinWidth,
+        zIndex: 999999
+    };
+}
+
+function getDropdownPanelStyle(
+    isMobile
+) {
+
+    return {
+        padding: "8px",
+        borderRadius: "12px",
+        background:
+            `
+            linear-gradient(
+                to bottom,
+                rgba(10,10,10,0.94),
+                rgba(6,6,6,0.90)
+            )
+            `,
+        border:
+            "1px solid rgba(255,140,0,0.08)",
+        backdropFilter:
+            "blur(16px)",
+        WebkitBackdropFilter:
+            "blur(16px)",
+        boxShadow:
+            `
+            0 0 60px rgba(255,140,0,0.08),
+            inset 0 0 18px rgba(255,140,0,0.03)
+            `,
+        animation:
+            "navDropdownOpen 200ms ease-out forwards",
+        maxHeight:
+            isMobile
+                ? "calc(100dvh - 124px)"
+                : "none",
+        overflowY:
+            isMobile
+                ? "auto"
+                : "visible",
+        WebkitOverflowScrolling:
+            "touch",
+        boxSizing:
+            "border-box"
+    };
 }
 
 function LanguageFlag({

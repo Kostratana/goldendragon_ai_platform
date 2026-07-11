@@ -1,6 +1,6 @@
 export const UNDERWATER_INSPECTION_TRANSLATIONS_RU = {
     "AI-powered underwater inspection, hull defect detection and marine infrastructure assessment using computer vision, robotics and multimodal intelligence.":
-        "AI-powered подводная инспекция, обнаружение дефектов корпуса и оценка морской инфраструктуры с использованием Computer Vision, робототехники и multimodal intelligence.",
+        "Подводная инспекция на базе ИИ, обнаружение дефектов корпуса и оценка морской инфраструктуры с использованием компьютерного зрения, робототехники и мультимодального интеллекта.",
 
     "Project Overview":
         "Обзор проекта",
@@ -9,7 +9,7 @@ export const UNDERWATER_INSPECTION_TRANSLATIONS_RU = {
         "Underwater Inspection AI — интеллектуальная инспекционная платформа, разрабатываемая для автоматизированной оценки состояния судов, яхт, корпусов и морской инфраструктуры.",
 
     "The system combines Computer Vision, Deep Learning, robotics-oriented inspection workflows and multimodal AI to detect structural defects, corrosion, damage patterns and visual anomalies in underwater environments.":
-        "Система объединяет Computer Vision, Deep Learning, robotics-oriented inspection workflows и multimodal AI для выявления структурных дефектов, коррозии, паттернов повреждений и визуальных аномалий в подводной среде.",
+        "Система объединяет компьютерное зрение, deep learning, инспекционные процессы для роботизированных систем и мультимодальный ИИ для выявления структурных дефектов, коррозии, характерных повреждений и визуальных аномалий в подводной среде.",
 
     "The goal is to make underwater technical inspection more accurate, scalable and accessible while reducing the need for fully manual visual assessment.":
         "Цель платформы — сделать подводную техническую инспекцию более точной, масштабируемой и доступной, уменьшая необходимость полностью ручной визуальной оценки.",
@@ -21,7 +21,7 @@ export const UNDERWATER_INSPECTION_TRANSLATIONS_RU = {
         "Первый публичный слой платформы сфокусирован на автоматизированной инспекции корпуса.",
 
     "Using underwater imagery or video collected by divers, drones or robotic inspection systems, the AI analyzes the surface of marine structures and detects possible defects, corrosion zones, cracks, deformation, biofouling and other visible signs of structural degradation.":
-        "Используя подводные изображения или видео, полученные дайверами, дронами или роботизированными инспекционными системами, AI анализирует поверхность морских конструкций и выявляет возможные дефекты, зоны коррозии, трещины, деформации, биообрастание и другие видимые признаки структурной деградации.",
+        "Используя подводные изображения или видео, полученные дайверами, дронами или роботизированными инспекционными системами, ИИ анализирует поверхность морских конструкций и выявляет возможные дефекты, зоны коррозии, трещины, деформации, биообрастание и другие видимые признаки структурной деградации.",
 
     "The system is designed to assist technical specialists by highlighting areas that require closer review.":
         "Система предназначена для помощи техническим специалистам, выделяя зоны, требующие более внимательной проверки.",
@@ -33,7 +33,7 @@ export const UNDERWATER_INSPECTION_TRANSLATIONS_RU = {
         "Underwater Inspection AI оценивает визуальные паттерны, связанные с коррозией, деградацией покрытия, физическими повреждениями и износом материалов.",
 
     "Computer Vision models help classify suspicious regions, estimate the severity of visible deterioration and support structured reporting for maintenance planning.":
-        "Модели Computer Vision помогают классифицировать подозрительные области, оценивать степень видимого износа и поддерживать структурированную отчетность для планирования обслуживания.",
+        "Модели компьютерного зрения помогают классифицировать подозрительные области, оценивать степень видимого износа и формировать структурированную отчетность для планирования обслуживания.",
 
     "The platform is designed to improve consistency in inspection workflows and support earlier detection of technical issues.":
         "Платформа предназначена для повышения согласованности инспекционных процессов и поддержки более раннего выявления технических проблем.",
@@ -45,52 +45,52 @@ export const UNDERWATER_INSPECTION_TRANSLATIONS_RU = {
         "Платформа проектируется с учетом будущей интеграции подводных дронов и роботизированных инспекционных систем.",
 
     "AI-assisted navigation, visual anomaly detection and structured inspection pipelines can support semi-autonomous or autonomous survey workflows for hulls, yachts, piers, ports and underwater infrastructure.":
-        "AI-assisted навигация, обнаружение визуальных аномалий и структурированные inspection pipelines могут поддерживать полуавтономные или автономные обследования корпусов, яхт, пирсов, портов и подводной инфраструктуры.",
+        "Навигация с поддержкой ИИ, обнаружение визуальных аномалий и структурированные инспекционные конвейеры могут поддерживать полуавтономные и автономные обследования корпусов, яхт, пирсов, портов и подводной инфраструктуры.",
 
     "The long-term vision includes intelligent inspection routes, automatic defect localization and AI-assisted maintenance decision support.":
-        "Долгосрочное видение включает интеллектуальные маршруты инспекции, автоматическую локализацию дефектов и AI-assisted поддержку решений по обслуживанию.",
+        "Долгосрочное видение включает интеллектуальные маршруты инспекции, автоматическую локализацию дефектов и поддержку решений по обслуживанию на базе ИИ.",
 
     "Multimodal Marine Intelligence":
         "Мультимодальная морская аналитика",
 
     "Future development includes multimodal analysis combining underwater video, images, sonar concepts, metadata, environmental context and inspection history.":
-        "Будущее развитие включает multimodal analysis, объединяющий подводное видео, изображения, sonar concepts, метаданные, контекст среды и историю инспекций.",
+        "Будущее развитие включает мультимодальный анализ, объединяющий подводное видео, изображения, концепции сонарных данных, метаданные, контекст среды и историю инспекций.",
 
     "This enables more comprehensive condition assessment and supports predictive maintenance for vessels and marine assets.":
-        "Это обеспечивает более комплексную оценку состояния и поддерживает predictive maintenance для судов и морских активов.",
+        "Это обеспечивает более комплексную оценку состояния и поддерживает предиктивное обслуживание судов и морских объектов.",
 
     "Detailed architecture, proprietary inspection workflows and advanced autonomy layers remain confidential under NDA.":
-        "Детальная архитектура, proprietary inspection workflows и продвинутые уровни автономности остаются конфиденциальными по NDA.",
+        "Детальная архитектура, собственные инспекционные процессы и продвинутые уровни автономности остаются конфиденциальными по NDA.",
 
     "Technology Stack":
         "Технологический стек",
 
     "The current development combines several AI and engineering technologies:":
-        "Текущая разработка объединяет несколько AI- и инженерных технологий:",
+        "Текущая разработка объединяет несколько ИИ- и инженерных технологий:",
 
     "Robotics-Oriented Inspection":
-        "Robotics-Oriented Inspection",
+        "Роботизированная инспекция",
 
     "Underwater Image Analysis":
-        "Underwater Image Analysis",
+        "Анализ подводных изображений",
 
     "Object Detection":
-        "Object Detection",
+        "Обнаружение объектов",
 
     "Image Segmentation":
-        "Image Segmentation",
+        "Сегментация изображений",
 
     "Anomaly Detection":
-        "Anomaly Detection",
+        "Обнаружение аномалий",
 
     "Corrosion Assessment":
-        "Corrosion Assessment",
+        "Оценка коррозии",
 
     "Predictive Maintenance":
-        "Predictive Maintenance",
+        "Предиктивное обслуживание",
 
     "Autonomous Inspection Pipelines":
-        "Autonomous Inspection Pipelines",
+        "Автономные инспекционные конвейеры",
 
     "Current Development":
         "Текущее развитие",
@@ -99,19 +99,19 @@ export const UNDERWATER_INSPECTION_TRANSLATIONS_RU = {
         "Текущая инфраструктура платформы включает:",
 
     "Marine inspection knowledge pipeline":
-        "Marine inspection knowledge pipeline",
+        "конвейер базы знаний для морской инспекции",
 
     "The platform is being developed as a scalable AI-assisted inspection system for marine infrastructure, hull assessment and future underwater robotic diagnostics.":
-        "Платформа развивается как масштабируемая AI-assisted инспекционная система для морской инфраструктуры, оценки корпусов и будущей подводной роботизированной диагностики.",
+        "Платформа развивается как масштабируемая инспекционная система с поддержкой ИИ для морской инфраструктуры, оценки корпусов и будущей подводной роботизированной диагностики.",
 
     "Future Development":
         "Будущее развитие",
 
     "Underwater Inspection AI is designed as a multi-layer platform with future expansion into autonomous underwater inspection, advanced defect localization, integration with robotic systems and predictive maintenance intelligence.":
-        "Underwater Inspection AI проектируется как многоуровневая платформа с будущим расширением в автономную подводную инспекцию, продвинутую локализацию дефектов, интеграцию с роботизированными системами и predictive maintenance intelligence.",
+        "Underwater Inspection AI проектируется как многоуровневая платформа с будущим расширением в автономную подводную инспекцию, продвинутую локализацию дефектов, интеграцию с роботизированными системами и интеллектуальное предиктивное обслуживание.",
 
     "To protect the project's intellectual property and future commercial strategy, the detailed architecture, proprietary algorithms, datasets and long-term roadmap are not publicly disclosed and remain confidential under Non-Disclosure Agreements (NDA).":
-        "Для защиты интеллектуальной собственности проекта и будущей коммерческой стратегии детальная архитектура, proprietary algorithms, datasets и долгосрочная roadmap не раскрываются публично и остаются конфиденциальными по Non-Disclosure Agreements (NDA).",
+        "Для защиты интеллектуальной собственности проекта и будущей коммерческой стратегии детальная архитектура, собственные алгоритмы, наборы данных и долгосрочная дорожная карта не раскрываются публично и остаются конфиденциальными по соглашениям о неразглашении (NDA).",
 
     "Core Mission":
         "Основная миссия",
