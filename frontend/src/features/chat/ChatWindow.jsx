@@ -179,6 +179,16 @@ export default function ChatWindow({
                 );
             }
 
+            formData.append(
+                "use_supabase",
+                "true"
+            );
+
+            formData.append(
+                "compact",
+                "true"
+            );
+
             try {
 
                 const response =
@@ -190,15 +200,25 @@ export default function ChatWindow({
                         }
                     );
 
-                if (!response.ok) {
-
-                    throw new Error(
-                        `Upload failed: ${response.status}`
-                    );
-                }
-
                 const result =
                     await response.json();
+
+                if (!response.ok) {
+
+                    if (onUploadResult) {
+
+                        onUploadResult(
+                            result,
+                            file,
+                            {
+                                messageId: uploadMessageId,
+                                imagePreview: previewUrl
+                            }
+                        );
+                    }
+
+                    return;
+                }
 
                 setUploadedFile(
                     result.uploaded_file ||

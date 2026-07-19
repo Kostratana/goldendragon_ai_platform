@@ -273,6 +273,9 @@ export default function HealthSupportAI() {
     const [lastUploadContext, setLastUploadContext] =
         useState(null);
 
+    const chatRequestGenerationRef =
+        useRef(0);
+
     const [uploadedFile, setUploadedFile] =
         useState(null);
 
@@ -544,6 +547,9 @@ export default function HealthSupportAI() {
         const userMessage =
             message;
 
+        const requestGeneration =
+            chatRequestGenerationRef.current;
+
         const requestLanguage =
             detectRequestLanguage(
                 userMessage,
@@ -622,6 +628,11 @@ export default function HealthSupportAI() {
             const data =
                 await response.json();
 
+            if (requestGeneration !== chatRequestGenerationRef.current) {
+
+                return;
+            }
+
             const responseText =
                 data.formatted_response ||
                 data.response ||
@@ -637,6 +648,11 @@ export default function HealthSupportAI() {
             ]);
 
         } catch (error) {
+
+            if (requestGeneration !== chatRequestGenerationRef.current) {
+
+                return;
+            }
 
             console.error(
                 "Murzik backend error:",
@@ -810,8 +826,14 @@ export default function HealthSupportAI() {
 
     function handleUploadResult(result, file, meta = {}) {
 
+        if (result.status === "uploading") {
+
+            chatRequestGenerationRef.current += 1;
+        }
+
         const responseText =
             result.formatted_response ||
+            result.error?.message ||
             result.response ||
             result.message ||
             "The product image was uploaded, but no analysis text was returned.";
@@ -1605,9 +1627,7 @@ export default function HealthSupportAI() {
                                 : "Analyze this product from the ingredient label photo and reply in English."
                         }
                         uploadLanguage={
-                            lastRequestLanguage === "ru"
-                                ? "rus+eng"
-                                : "eng"
+                            "eng+spa+rus"
                         }
                         onUploadResult={handleUploadResult}
                     />
