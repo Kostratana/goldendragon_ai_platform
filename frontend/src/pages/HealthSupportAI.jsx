@@ -76,14 +76,50 @@ function detectRequestLanguage(text, fallbackLanguage) {
         : "en";
 }
 
-function localizedChatContext(userMessage, requestLanguage) {
+function localizedChatContext(userMessage, requestLanguage, uploadContext = null) {
+
+    const productContext =
+        uploadContext
+            ? `\n\nLast uploaded product image context:\nFile: ${uploadContext.fileName || "uploaded image"}\nDetected ingredients: ${uploadContext.ingredients || "not reliable"}\nLast analysis: ${uploadContext.summary || "not available"}`
+            : "";
 
     if (requestLanguage === "ru") {
 
-        return `Вы отвечаете внутри страницы Health Support AI MVP 1. Пользователь тестирует анализ пищевых продуктов по фото упаковки. Отвечайте строго на русском языке. Сообщение пользователя: ${userMessage}`;
+        return `Вы отвечаете внутри страницы Health Support AI MVP 1. Пользователь тестирует анализ пищевых продуктов по фото упаковки. Если пользователь спрашивает про этот продукт, используйте контекст последнего загруженного изображения. Отвечайте строго на русском языке.${productContext}\n\nСообщение пользователя: ${userMessage}`;
     }
 
-    return `You are answering inside the Health Support AI MVP 1 page. The user is testing food product analysis from package photos. Reply strictly in English. User message: ${userMessage}`;
+    return `You are answering inside the Health Support AI MVP 1 page. The user is testing food product analysis from package photos. If the user asks about this product, use the last uploaded image context. Reply strictly in English.${productContext}\n\nUser message: ${userMessage}`;
+}
+
+function isProductFollowUp(text) {
+
+    return /(тут|здесь|этот|продукт|майонез|состав|ингредиент|вред|добавк|покуп|label|product|ingredient|harmful|additive|buy|safe|mayonnaise)/i.test(
+        String(text || "")
+    );
+}
+
+function buildFollowUpPromptPayload(uploadContext, userMessage, requestLanguage) {
+
+    if (!uploadContext?.promptPayload?.system_prompt) {
+
+        return null;
+    }
+
+    const userPrompt =
+        [
+            requestLanguage === "ru"
+                ? "Ответь на вопрос пользователя по последнему анализу продукта. Используй только этот контекст. Не говори, что фото не загружено."
+                : "Answer the user's question using the last product analysis only. Do not say no image was uploaded.",
+            `File: ${uploadContext.fileName || "uploaded image"}`,
+            `Detected ingredients: ${uploadContext.ingredients || "not reliable"}`,
+            `Last analysis: ${uploadContext.summary || "not available"}`,
+            `User question: ${userMessage}`
+        ].join("\n\n");
+
+    return {
+        system_prompt: uploadContext.promptPayload.system_prompt,
+        user_prompt: userPrompt
+    };
 }
 
 const MVP_WELCOME_RU =
@@ -233,6 +269,9 @@ export default function HealthSupportAI() {
                 ? "ru"
                 : "en"
         );
+
+    const [lastUploadContext, setLastUploadContext] =
+        useState(null);
 
     const [uploadedFile, setUploadedFile] =
         useState(null);
@@ -513,6 +552,15 @@ export default function HealthSupportAI() {
 
         setLastRequestLanguage(requestLanguage);
 
+        const followUpPromptPayload =
+            lastUploadContext && isProductFollowUp(userMessage)
+                ? buildFollowUpPromptPayload(
+                    lastUploadContext,
+                    userMessage,
+                    requestLanguage
+                )
+                : null;
+
         setMessages(prev => [
             ...prev,
             {
@@ -540,12 +588,25 @@ export default function HealthSupportAI() {
                         body: JSON.stringify({
 
                             message:
-                                localizedChatContext(
-                                    userMessage,
-                                    requestLanguage
-                                ),
+                                followUpPromptPayload
+                                    ? (
+                                        requestLanguage === "ru"
+                                            ? "Ответь на вопрос по последнему анализу продукта. Ответь строго на русском языке."
+                                            : "Answer the question about the last product analysis. Reply strictly in English."
+                                    )
+                                    : localizedChatContext(
+                                        userMessage,
+                                        requestLanguage,
+                                        lastUploadContext
+                                    ),
 
-                            session_id: `health-support-ai-${requestLanguage}`
+                            session_id: `health-support-ai-${requestLanguage}`,
+
+                            ...(
+                                followUpPromptPayload
+                                    ? { llm_prompts: followUpPromptPayload }
+                                    : {}
+                            )
 
                         })
                     }
@@ -717,6 +778,36 @@ export default function HealthSupportAI() {
     }
 
 
+    function buildUploadContext(result, file, responseText) {
+
+        const ocr =
+            result.ocr || {};
+
+        const analysis =
+            result.analysis || {};
+
+        const ingredients =
+            Array.isArray(ocr.ingredients)
+                ? ocr.ingredients.slice(0, 20).join(", ")
+                : "";
+
+        return {
+            fileName: file?.name || result.uploaded_file?.filename || "",
+            ingredients,
+            promptPayload: result.llm_prompts || null,
+            summary:
+                [
+                    analysis.verdict ? `Verdict: ${analysis.verdict}` : "",
+                    analysis.confidence !== undefined ? `Confidence: ${analysis.confidence}` : "",
+                    responseText
+                ]
+                    .filter(Boolean)
+                    .join(". ")
+                    .slice(0, 1400)
+        };
+    }
+
+
     function handleUploadResult(result, file, meta = {}) {
 
         const responseText =
@@ -752,6 +843,14 @@ export default function HealthSupportAI() {
 
         const statusText =
             responseText;
+
+        setLastUploadContext(
+            buildUploadContext(
+                result,
+                file,
+                responseText
+            )
+        );
 
         setMessages(prev => {
 
@@ -812,6 +911,8 @@ export default function HealthSupportAI() {
         });
 
         setUploadedFile(null);
+
+        setLastUploadContext(null);
 
         setMessages([
             {
