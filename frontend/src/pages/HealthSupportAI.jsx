@@ -56,6 +56,33 @@ function isRussianLanguage(language) {
         .startsWith("ru");
 }
 
+function detectRequestLanguage(text, fallbackLanguage) {
+
+    if (/[А-Яа-яЁё]/.test(String(text || ""))) {
+
+        return "ru";
+    }
+
+    if (/[A-Za-z]/.test(String(text || ""))) {
+
+        return "en";
+    }
+
+    return isRussianLanguage(fallbackLanguage)
+        ? "ru"
+        : "en";
+}
+
+function localizedChatContext(userMessage, requestLanguage) {
+
+    if (requestLanguage === "ru") {
+
+        return `Вы отвечаете внутри страницы Health Support AI MVP 1. Пользователь тестирует анализ пищевых продуктов по фото упаковки. Отвечайте строго на русском языке. Сообщение пользователя: ${userMessage}`;
+    }
+
+    return `You are answering inside the Health Support AI MVP 1 page. The user is testing food product analysis from package photos. Reply strictly in English. User message: ${userMessage}`;
+}
+
 const MVP_WELCOME_RU =
     `Здравствуйте. Это MVP 1 Health Support AI: первый тестовый модуль Golden Dragon AI для анализа продуктов питания по фото упаковки.
 
@@ -468,6 +495,12 @@ export default function HealthSupportAI() {
         const userMessage =
             message;
 
+        const requestLanguage =
+            detectRequestLanguage(
+                userMessage,
+                currentUserLanguage
+            );
+
         setMessages(prev => [
             ...prev,
             {
@@ -495,9 +528,12 @@ export default function HealthSupportAI() {
                         body: JSON.stringify({
 
                             message:
-                                `Health Support AI MVP1 page context. The user is testing food product analysis from package photos. Reply in the user's language. User message: ${userMessage}`,
+                                localizedChatContext(
+                                    userMessage,
+                                    requestLanguage
+                                ),
 
-                            session_id: "health-support-ai"
+                            session_id: `health-support-ai-${requestLanguage}`
 
                         })
                     }
@@ -564,6 +600,12 @@ export default function HealthSupportAI() {
             return;
         }
 
+        const requestLanguage =
+            detectRequestLanguage(
+                fallbackText,
+                currentUserLanguage
+            );
+
         setIsThinking(true);
 
         try {
@@ -580,10 +622,10 @@ export default function HealthSupportAI() {
 
                         body: JSON.stringify({
                             message:
-                                isRussianLanguage(currentUserLanguage)
-                                    ? "Объясни результат анализа продукта понятным языком."
-                                    : "Explain the product analysis result clearly.",
-                            session_id: `health-support-ai-${statusMessageId}`,
+                                requestLanguage === "ru"
+                                    ? "Объясни результат анализа продукта понятным языком. Ответь строго на русском языке."
+                                    : "Explain the product analysis result clearly. Reply strictly in English.",
+                            session_id: `health-support-ai-${requestLanguage}-${statusMessageId}`,
                             llm_prompts: promptPayload
                         })
                     }
