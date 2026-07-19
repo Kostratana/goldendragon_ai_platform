@@ -43,11 +43,11 @@ const PROJECT_MODES = {
     CHAT: "mvp1_food_safety_ai"
 };
 
-const FOOD_AI_UPLOAD_ENDPOINT =
-    "https://murzik-food-ai-7trlqc7hcq-uc.a.run.app/api/upload";
+const DRAGON_CHAT_ENDPOINT =
+    "https://golden-dragon-backend-91075651557.us-central1.run.app/api/chat";
 
-const FOOD_AI_ANALYZE_ENDPOINT =
-    "https://murzik-food-ai-7trlqc7hcq-uc.a.run.app/api/analyze";
+const FOOD_AI_UPLOAD_ENDPOINT =
+    "https://murzik-food-ai-91075651557.us-central1.run.app/api/upload";
 
 function isRussianLanguage(language) {
 
@@ -484,7 +484,7 @@ export default function HealthSupportAI() {
 
             const response =
                 await fetch(
-                    FOOD_AI_ANALYZE_ENDPOINT,
+                    DRAGON_CHAT_ENDPOINT,
                     {
                         method: "POST",
 
@@ -494,16 +494,10 @@ export default function HealthSupportAI() {
 
                         body: JSON.stringify({
 
-                            text: userMessage,
+                            message:
+                                `Health Support AI MVP1 page context. The user is testing food product analysis from package photos. Reply in the user's language. User message: ${userMessage}`,
 
-                            user_question: userMessage,
-
-                            use_supabase: true,
-
-                            lang:
-                                isRussianLanguage(currentUserLanguage)
-                                    ? "eng+rus"
-                                    : "eng"
+                            session_id: "health-support-ai"
 
                         })
                     }
@@ -554,6 +548,97 @@ export default function HealthSupportAI() {
     }
 
 
+    async function requestDragonMvpAnswer(
+        result,
+        statusMessageId,
+        fallbackText
+    ) {
+
+        const promptPayload =
+            result.llm_prompts || {};
+
+        if (
+            !promptPayload.system_prompt ||
+            !promptPayload.user_prompt
+        ) {
+            return;
+        }
+
+        setIsThinking(true);
+
+        try {
+
+            const response =
+                await fetch(
+                    DRAGON_CHAT_ENDPOINT,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            message:
+                                isRussianLanguage(currentUserLanguage)
+                                    ? "Объясни результат анализа продукта понятным языком."
+                                    : "Explain the product analysis result clearly.",
+                            session_id: `health-support-ai-${statusMessageId}`,
+                            llm_prompts: promptPayload
+                        })
+                    }
+                );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Dragon backend error: ${response.status}`
+                );
+            }
+
+            const data =
+                await response.json();
+
+            const dragonText =
+                data.answer ||
+                data.response ||
+                data.message ||
+                fallbackText;
+
+            setMessages(prev =>
+                prev.map(item =>
+                    item.id === statusMessageId
+                        ? {
+                            ...item,
+                            text: dragonText
+                        }
+                        : item
+                )
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Dragon prompt handoff error:",
+                error
+            );
+
+            setMessages(prev =>
+                prev.map(item =>
+                    item.id === statusMessageId
+                        ? {
+                            ...item,
+                            text: fallbackText
+                        }
+                        : item
+                )
+            );
+        }
+
+        setIsThinking(false);
+    }
+
+
     function handleUploadResult(result, file, meta = {}) {
 
         const responseText =
@@ -587,6 +672,15 @@ export default function HealthSupportAI() {
             return;
         }
 
+        const statusText =
+            result.llm_prompts
+                ? (
+                    isRussianLanguage(currentUserLanguage)
+                        ? "Анализ готов. Формирую понятный ответ модели..."
+                        : "Analysis is ready. Preparing a clear model response..."
+                )
+                : responseText;
+
         setMessages(prev => {
 
             const nextMessages =
@@ -599,7 +693,7 @@ export default function HealthSupportAI() {
 
                     return {
                         ...item,
-                        text: responseText
+                        text: statusText
                     };
                 });
 
@@ -623,10 +717,16 @@ export default function HealthSupportAI() {
                 {
                     id: `${messageId}-status`,
                     role: "assistant",
-                    text: responseText
+                    text: statusText
                 }
             ];
         });
+
+        requestDragonMvpAnswer(
+            result,
+            `${messageId}-status`,
+            responseText
+        );
     }
 
     function clearMessages() {
