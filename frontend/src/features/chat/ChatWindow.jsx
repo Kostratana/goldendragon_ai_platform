@@ -62,9 +62,7 @@ export default function ChatWindow({
     voiceEnabled,
     setVoiceEnabled,
 
-    stopMurzikVoice,
-
-    uploadEndpoint
+    stopMurzikVoice
 
 }) {
 
@@ -87,23 +85,6 @@ export default function ChatWindow({
         }
     }
 
-    function readFileAsDataUrl(file) {
-
-        return new Promise((resolve, reject) => {
-
-            const reader =
-                new FileReader();
-
-            reader.onload = () =>
-                resolve(reader.result);
-
-            reader.onerror = () =>
-                reject(reader.error);
-
-            reader.readAsDataURL(file);
-        });
-    }
-
     async function handleFileUpload(event) {
 
         const files =
@@ -115,31 +96,24 @@ export default function ChatWindow({
             return;
         }
 
-        if (!uploadEndpoint) {
-            alert("Image upload is not configured for this chat.");
-            return;
-        }
-
         for (const file of files) {
+
+            const formData =
+                new FormData();
+
+            formData.append(
+                "file",
+                file
+            );
 
             try {
 
-                const dataUrl =
-                    await readFileAsDataUrl(file);
-
                 const response =
                     await fetch(
-                        uploadEndpoint,
+                        "http://127.0.0.1:8000/upload",
                         {
                             method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                filename: file.name,
-                                content_type: file.type,
-                                data_base64: dataUrl
-                            })
+                            body: formData
                         }
                     );
 
@@ -154,20 +128,18 @@ export default function ChatWindow({
                     await response.json();
 
                 setUploadedFile(
-                    result.image_path ||
-                    result.path ||
-                    ""
+                    result.path
                 );
 
                 console.log(
-                    "Dragon upload result:",
+                    "Murzik upload result:",
                     result
                 );
 
             } catch (error) {
 
                 console.error(
-                    "Dragon upload error:",
+                    "Murzik upload error:",
                     error
                 );
 
@@ -637,38 +609,6 @@ export default function ChatWindow({
                                         isMobile
                                             ? "6px"
                                             : "10px"
-                                }}
-                            />
-
-                        )}
-
-                        {item.image && (
-
-                            <img
-                                src={item.image}
-                                alt={item.imageAlt || ""}
-                                loading="lazy"
-                                decoding="async"
-                                style={{
-                                    display: "block",
-                                    width: "100%",
-                                    maxWidth:
-                                        isMobile
-                                            ? "240px"
-                                            : "360px",
-                                    borderRadius:
-                                        isMobile
-                                            ? "12px"
-                                            : "16px",
-                                    marginBottom:
-                                        isMobile
-                                            ? "8px"
-                                            : "12px",
-                                    border:
-                                        "1px solid rgba(255,220,170,0.12)",
-                                    boxShadow:
-                                        "0 0 24px rgba(216,176,122,0.14)",
-                                    objectFit: "cover"
                                 }}
                             />
 

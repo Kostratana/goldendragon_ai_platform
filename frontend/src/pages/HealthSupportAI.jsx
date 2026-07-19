@@ -32,7 +32,6 @@ import {
 } from "../theme/fonts";
 
 import foodMurzikImage from "../assets/food_murzik.png";
-import ingredientLabelExampleImage from "../assets/examples/ingredient-label-example.jpg";
 
 const HERO_TITLE =
     "Health Support AI";
@@ -43,12 +42,6 @@ const HERO_SUBTITLE =
 const PROJECT_MODES = {
     CHAT: "chat"
 };
-
-const DRAGON_CHAT_API_URL =
-    "https://murzik-chat-backend.vercel.app/api/chat";
-
-const FOOD_AI_API_URL =
-    "https://murzik-food-ai-91075651557.us-central1.run.app";
 
 const PROJECT_DESCRIPTION = [
     {
@@ -86,71 +79,6 @@ const CURRENT_DEVELOPMENT_ITEMS = [
     "AI orchestration pipeline",
     "Product knowledge pipeline"
 ];
-
-const MVP_WELCOME_MESSAGES = {
-    ru:
-        `Здравствуйте! Я Dragon Health Support AI — MVP 1.
-
-Это первый тестовый модуль Golden Dragon AI для проверки продуктов питания по фото упаковки. Он создан, чтобы протестировать извлечение ингредиентов с изображения, детекцию вредных или сомнительных добавок и рекомендации по покупке.
-
-Как пользоваться:
-1. Найдите на упаковке сторону, где написан состав продукта.
-2. Сделайте четкое фото списка ингредиентов.
-3. Внизу окна чата нажмите значок скрепки.
-4. Выберите изображение с телефона или компьютера и загрузите его в чат.
-5. Можно добавить вопрос: “Проверь состав”, “Стоит ли покупать?”, “Есть ли тут вредные добавки?”.
-
-Как сделать фото лучше:
-- держите камеру параллельно упаковке;
-- снимайте при хорошем свете;
-- избегайте бликов;
-- не обрезайте состав;
-- если текст очень мелкий, сделайте 2–3 фото частями.
-
-После загрузки я постараюсь распознать ингредиенты и объяснить:
-- насколько продукт выглядит безопасным;
-- какие добавки там есть;
-- как они могут влиять на здоровье;
-- что в составе хорошего;
-- что выглядит сомнительным;
-- есть ли E-номера, химические красители, подсластители, консерванты или добавки, которые могут быть связаны с насекомыми.
-
-Ниже пример фото упаковки. На нем состав виден, но текст мелкий и упаковка изогнута. Для лучшего OCR лучше приблизить именно список ингредиентов и снять его ровнее.`,
-    en:
-        `Hello! I am Dragon Health Support AI — MVP 1.
-
-This is the first Golden Dragon AI test module for checking food products from package photos. It is designed to test ingredient extraction from images, detection of harmful or questionable additives and purchase recommendations.
-
-How to use it:
-1. Find the side of the package with the ingredient list.
-2. Take a clear photo of the ingredients.
-3. Press the paperclip icon at the bottom of the chat window.
-4. Select an image from your phone or computer and upload it into the chat.
-5. You can also add a question such as: “Check this ingredient list”, “Should I buy this?”, “Are there harmful additives?”.
-
-Photo tips:
-- keep the camera parallel to the package;
-- use good lighting;
-- avoid glare;
-- do not crop the ingredient list;
-- if the text is very small, take 2–3 close-up photos in parts.
-
-After upload, I will try to recognize the ingredients and explain:
-- how safe the product appears;
-- what additives are present;
-- how they may affect health;
-- what looks good in the ingredients;
-- what looks questionable;
-- whether there are E-numbers, chemical colorants, sweeteners, preservatives or additives that may be insect-derived.
-
-Example photo below: the label is visible, but the text is small and the package is curved. For better OCR, move closer to the ingredient list and keep the package flatter.`
-};
-
-function getMvpWelcomeMessage(language) {
-    return language === "ru"
-        ? MVP_WELCOME_MESSAGES.ru
-        : MVP_WELCOME_MESSAGES.en;
-}
 
 export default function HealthSupportAI() {
 
@@ -209,12 +137,7 @@ export default function HealthSupportAI() {
         useState([
             {
                 role: "assistant",
-                text: getMvpWelcomeMessage(
-                    currentUserLanguage
-                ),
-                image: ingredientLabelExampleImage,
-                imageAlt:
-                    "Example food package ingredient label"
+                text: "Welcome."
             }
         ]);
 
@@ -503,30 +426,9 @@ export default function HealthSupportAI() {
 
         try {
 
-            const endpoint =
-                uploadedFile
-                    ? `${FOOD_AI_API_URL}/api/analyze`
-                    : DRAGON_CHAT_API_URL;
-
-            const payload =
-                uploadedFile
-                    ? {
-                        text: userMessage,
-                        image_path: uploadedFile,
-                        user_question: userMessage,
-                        use_supabase: true,
-                        lang: "eng+rus"
-                    }
-                    : {
-                        message: userMessage,
-                        mode: activeProject,
-                        language:
-                            currentUserLanguage
-                    };
-
             const response =
                 await fetch(
-                    endpoint,
+                    "https://murzik-chat-backend.vercel.app/api/chat",
                     {
                         method: "POST",
 
@@ -534,7 +436,16 @@ export default function HealthSupportAI() {
                             "Content-Type": "application/json"
                         },
 
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({
+
+                            message: userMessage,
+
+                            mode: activeProject,
+
+                            language:
+                                currentUserLanguage
+
+                        })
                     }
                 );
 
@@ -549,10 +460,8 @@ export default function HealthSupportAI() {
                 await response.json();
 
             const responseText =
-                data.formatted_response ||
                 data.response ||
-                data.answer ||
-                "Dragon returned an empty response.";
+                "Murzik returned an empty response.";
 
             setMessages(prev => [
                 ...prev,
@@ -1260,7 +1169,6 @@ export default function HealthSupportAI() {
                         voiceEnabled={voiceEnabled}
                         setVoiceEnabled={setVoiceEnabled}
                         stopMurzikVoice={stopMurzikVoice}
-                        uploadEndpoint={`${FOOD_AI_API_URL}/api/upload`}
                     />
 
                     {[
