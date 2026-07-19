@@ -3,6 +3,8 @@ import {
     useRef
 } from "react";
 
+import ReactMarkdown from "react-markdown";
+
 import murzikEyes from "../../assets/murzik/murzik-eyes.mp4";
 
 import ChatInput from "./ChatInput";
@@ -89,6 +91,21 @@ export default function ChatWindow({
         }
     }
 
+    function clearChatWindow() {
+
+        messages.forEach(item => {
+
+            if (item.imagePreview) {
+
+                URL.revokeObjectURL(item.imagePreview);
+            }
+        });
+
+        setUploadedFile(null);
+
+        clearMessages();
+    }
+
     async function handleFileUpload(event) {
 
         const files =
@@ -107,6 +124,11 @@ export default function ChatWindow({
                     ? URL.createObjectURL(file)
                     : "";
 
+            const uploadStatusText =
+                String(uploadLanguage || "").includes("rus")
+                    ? "Изображение принято.\n\nВыполняю OCR, извлекаю ингредиенты и сверяю состав с базой знаний. Это может занять несколько секунд."
+                    : "Image received.\n\nRunning OCR, extracting ingredients and checking the label against the knowledge base. This may take a few seconds.";
+
             const uploadMessageId =
                 `upload-${Date.now()}-${file.name}`;
 
@@ -118,7 +140,7 @@ export default function ChatWindow({
                     {
                         status: "uploading",
                         formatted_response:
-                            "Изображение принято. Сейчас выполняю OCR, извлекаю ингредиенты и сверяю состав с базой знаний.",
+                            uploadStatusText,
                         uploaded_file: {
                             filename: file.name,
                             content_type: file.type,
@@ -211,6 +233,22 @@ export default function ChatWindow({
                 alert(
                     `Upload error: ${error.message}`
                 );
+
+                if (onUploadResult) {
+
+                    onUploadResult(
+                        {
+                            status: "error",
+                            formatted_response:
+                                `Не удалось отправить изображение: ${error.message}`
+                        },
+                        file,
+                        {
+                            messageId: uploadMessageId,
+                            imagePreview: previewUrl
+                        }
+                    );
+                }
             }
         }
 
@@ -722,7 +760,74 @@ export default function ChatWindow({
                                 overflowWrap: "anywhere"
                             }}
                         >
-                            <T>{item.text}</T>
+                            <ReactMarkdown
+                                components={{
+                                    p: ({ children }) => (
+                                        <p
+                                            style={{
+                                                margin: "0 0 10px"
+                                            }}
+                                        >
+                                            {children}
+                                        </p>
+                                    ),
+                                    ul: ({ children }) => (
+                                        <ul
+                                            style={{
+                                                margin: "0 0 10px",
+                                                paddingLeft: "18px"
+                                            }}
+                                        >
+                                            {children}
+                                        </ul>
+                                    ),
+                                    ol: ({ children }) => (
+                                        <ol
+                                            style={{
+                                                margin: "0 0 10px",
+                                                paddingLeft: "18px"
+                                            }}
+                                        >
+                                            {children}
+                                        </ol>
+                                    ),
+                                    h2: ({ children }) => (
+                                        <div
+                                            style={{
+                                                color: "#ffe2b2",
+                                                fontSize: isMobile ? "14px" : "17px",
+                                                fontWeight: 700,
+                                                marginBottom: "10px"
+                                            }}
+                                        >
+                                            {children}
+                                        </div>
+                                    ),
+                                    h3: ({ children }) => (
+                                        <div
+                                            style={{
+                                                color: "#ffd59a",
+                                                fontSize: isMobile ? "12px" : "15px",
+                                                fontWeight: 700,
+                                                margin: "12px 0 6px"
+                                            }}
+                                        >
+                                            {children}
+                                        </div>
+                                    ),
+                                    strong: ({ children }) => (
+                                        <strong
+                                            style={{
+                                                color: "#ffe2b2"
+                                            }}
+                                        >
+                                            {children}
+                                        </strong>
+                                    )
+                                }}
+                            >
+                                {item.text || ""}
+                            </ReactMarkdown>
                         </div>
 
                     </div>
@@ -769,28 +874,13 @@ export default function ChatWindow({
 
             </div>
 
-            {
-                uploadedFile && (
-
-                    <div
-                        style={{
-                            color: "#ffd59a",
-                            padding: "8px",
-                            fontSize: "12px"
-                        }}
-                    >
-                        📎 {uploadedFile}
-                    </div>
-
-                )
-            }
 <ChatInput
 
     message={message}
     setMessage={setMessage}
 
     sendMessage={sendMessage}
-    clearMessages={clearMessages}
+    clearMessages={clearChatWindow}
     copyMessages={copyMessages}
     downloadMessages={downloadMessages}
 
@@ -800,12 +890,6 @@ export default function ChatWindow({
     setVoiceEnabled={setVoiceEnabled}
 
     stopMurzikVoice={stopMurzikVoice}
-
-    uploadedFile={uploadedFile}
-
-    uploadStatus={"Ready"}
-
-    uploadProgress={100}
 
 />
 

@@ -631,7 +631,25 @@ export default function HealthSupportAI() {
 
     function clearMessages() {
 
-        setMessages([]);
+        messages.forEach(item => {
+
+            if (item.imagePreview) {
+
+                URL.revokeObjectURL(item.imagePreview);
+            }
+        });
+
+        setUploadedFile(null);
+
+        setMessages([
+            {
+                role: "assistant",
+                text:
+                    isRussianLanguage(currentUserLanguage)
+                        ? MVP_WELCOME_RU
+                        : MVP_WELCOME_EN
+            }
+        ]);
 
         stopMurzikVoice();
     }

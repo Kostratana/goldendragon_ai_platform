@@ -8,8 +8,7 @@ import {
     Download,
     Mic,
     Paperclip,
-    SendHorizontal,
-    Trash2
+    SendHorizontal
 } from "lucide-react";
 
 export default function ChatInput({
@@ -25,13 +24,7 @@ export default function ChatInput({
     handleUploadClick,
 
     voiceEnabled,
-    setVoiceEnabled,
-
-    uploadedFile,
-
-    uploadStatus,
-
-    uploadProgress
+    setVoiceEnabled
 
 }) {
 
@@ -155,59 +148,6 @@ export default function ChatInput({
                 paddingTop: "10px"
             }}
         >
-
-            {
-                uploadedFile && (
-
-                    <div
-                        style={{
-
-                            display: "flex",
-
-                            flexDirection: "column",
-
-                            gap: "4px",
-
-                            padding: "10px",
-
-                            borderRadius: "12px",
-
-                            border:
-                                "1px solid rgba(255,220,170,0.08)",
-
-                            background:
-                                "rgba(255,180,80,0.05)",
-
-                            color: "#ffd59a",
-
-                            fontSize: "12px"
-                        }}
-                    >
-
-                        <div>
-                            📎 {
-                                uploadedFile.filename ||
-                                uploadedFile.path ||
-                                "file"
-                            }
-                        </div>
-
-                        <div>
-                            <T>Status:</T>
-                            {" "}
-                            {uploadStatus}
-                        </div>
-
-                        <div>
-                            <T>Progress:</T>
-                            {" "}
-                            {uploadProgress}%
-                        </div>
-
-                    </div>
-
-                )
-            }
 
             <div
                 className="dragon-chat-input-row"
@@ -358,12 +298,16 @@ export default function ChatInput({
                         onClick={clearMessages}
                         title={clearChatTitle}
                         aria-label={clearChatTitle}
-                        style={iconButtonStyle}
+                        style={{
+                            ...iconButtonStyle,
+                            width: "68px",
+                            borderRadius: "999px",
+                            fontSize: "12px",
+                            letterSpacing: "0.04em",
+                            fontWeight: 600
+                        }}
                     >
-                        <Trash2
-                            size={iconSize}
-                            strokeWidth={iconStrokeWidth}
-                        />
+                        <T>Clear</T>
                     </button>
 
                     <button
