@@ -46,6 +46,9 @@ const PROJECT_MODES = {
 const FOOD_AI_UPLOAD_ENDPOINT =
     "https://murzik-food-ai-7trlqc7hcq-uc.a.run.app/api/upload";
 
+const FOOD_AI_ANALYZE_ENDPOINT =
+    "https://murzik-food-ai-7trlqc7hcq-uc.a.run.app/api/analyze";
+
 function isRussianLanguage(language) {
 
     return String(language || "")
@@ -481,7 +484,7 @@ export default function HealthSupportAI() {
 
             const response =
                 await fetch(
-                    "https://murzik-chat-backend.vercel.app/api/chat",
+                    FOOD_AI_ANALYZE_ENDPOINT,
                     {
                         method: "POST",
 
@@ -491,12 +494,16 @@ export default function HealthSupportAI() {
 
                         body: JSON.stringify({
 
-                            message: userMessage,
+                            text: userMessage,
 
-                            mode: activeProject,
+                            user_question: userMessage,
 
-                            language:
-                                currentUserLanguage
+                            use_supabase: true,
+
+                            lang:
+                                isRussianLanguage(currentUserLanguage)
+                                    ? "eng+rus"
+                                    : "eng"
 
                         })
                     }
@@ -513,7 +520,9 @@ export default function HealthSupportAI() {
                 await response.json();
 
             const responseText =
+                data.formatted_response ||
                 data.response ||
+                data.message ||
                 "Murzik returned an empty response.";
 
             setMessages(prev => [
@@ -545,7 +554,7 @@ export default function HealthSupportAI() {
     }
 
 
-    function handleUploadResult(result, file) {
+    function handleUploadResult(result, file, meta = {}) {
 
         const responseText =
             result.formatted_response ||
@@ -553,17 +562,71 @@ export default function HealthSupportAI() {
             result.message ||
             "The product image was uploaded, but no analysis text was returned.";
 
-        setMessages(prev => [
-            ...prev,
-            {
-                role: "user",
-                text: `Uploaded product image: ${file.name}`
-            },
-            {
-                role: "assistant",
-                text: responseText
+        const messageId =
+            meta.messageId ||
+            `upload-${Date.now()}-${file.name}`;
+
+        if (result.status === "uploading") {
+
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: `${messageId}-file`,
+                    role: "user",
+                    text: `Загружено изображение продукта: ${file.name}`,
+                    fileName: file.name,
+                    imagePreview: meta.imagePreview || ""
+                },
+                {
+                    id: `${messageId}-status`,
+                    role: "assistant",
+                    text: responseText
+                }
+            ]);
+
+            return;
+        }
+
+        setMessages(prev => {
+
+            const nextMessages =
+                prev.map(item => {
+
+                    if (item.id !== `${messageId}-status`) {
+
+                        return item;
+                    }
+
+                    return {
+                        ...item,
+                        text: responseText
+                    };
+                });
+
+            const statusFound =
+                nextMessages.some(item => item.id === `${messageId}-status`);
+
+            if (statusFound) {
+
+                return nextMessages;
             }
-        ]);
+
+            return [
+                ...nextMessages,
+                {
+                    id: `${messageId}-file`,
+                    role: "user",
+                    text: `Загружено изображение продукта: ${file.name}`,
+                    fileName: file.name,
+                    imagePreview: meta.imagePreview || ""
+                },
+                {
+                    id: `${messageId}-status`,
+                    role: "assistant",
+                    text: responseText
+                }
+            ];
+        });
     }
 
     function clearMessages() {

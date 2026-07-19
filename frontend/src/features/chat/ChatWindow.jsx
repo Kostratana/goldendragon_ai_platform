@@ -1,7 +1,6 @@
 import {
     useState,
-    useRef,
-    useEffect
+    useRef
 } from "react";
 
 import murzikEyes from "../../assets/murzik/murzik-eyes.mp4";
@@ -103,6 +102,37 @@ export default function ChatWindow({
 
         for (const file of files) {
 
+            const previewUrl =
+                file.type.startsWith("image/")
+                    ? URL.createObjectURL(file)
+                    : "";
+
+            const uploadMessageId =
+                `upload-${Date.now()}-${file.name}`;
+
+            setUploadedFile(file.name);
+
+            if (onUploadResult) {
+
+                onUploadResult(
+                    {
+                        status: "uploading",
+                        formatted_response:
+                            "Изображение принято. Сейчас выполняю OCR, извлекаю ингредиенты и сверяю состав с базой знаний.",
+                        uploaded_file: {
+                            filename: file.name,
+                            content_type: file.type,
+                            received: true
+                        }
+                    },
+                    file,
+                    {
+                        messageId: uploadMessageId,
+                        imagePreview: previewUrl
+                    }
+                );
+            }
+
             const formData =
                 new FormData();
 
@@ -158,7 +188,11 @@ export default function ChatWindow({
 
                     onUploadResult(
                         result,
-                        file
+                        file,
+                        {
+                            messageId: uploadMessageId,
+                            imagePreview: previewUrl
+                        }
                     );
                 }
 
@@ -643,6 +677,31 @@ export default function ChatWindow({
 
                         )}
 
+                        {item.imagePreview && (
+
+                            <img
+                                src={item.imagePreview}
+                                alt={item.fileName || "Uploaded product label"}
+                                style={{
+                                    display: "block",
+                                    width: "100%",
+                                    maxWidth:
+                                        isMobile
+                                            ? "220px"
+                                            : "280px",
+                                    maxHeight:
+                                        isMobile
+                                            ? "180px"
+                                            : "220px",
+                                    objectFit: "cover",
+                                    borderRadius: "12px",
+                                    marginBottom: "10px",
+                                    border: "1px solid rgba(255,220,170,0.18)"
+                                }}
+                            />
+
+                        )}
+
                         <div
                             style={{
 
@@ -656,7 +715,11 @@ export default function ChatWindow({
                                 lineHeight:
                                     isMobile
                                         ? "1.45"
-                                        : "1.6"
+                                        : "1.6",
+
+                                whiteSpace: "pre-wrap",
+
+                                overflowWrap: "anywhere"
                             }}
                         >
                             <T>{item.text}</T>
