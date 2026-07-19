@@ -49,6 +49,9 @@ const DRAGON_CHAT_ENDPOINT =
 const FOOD_AI_UPLOAD_ENDPOINT =
     "https://murzik-food-ai-91075651557.us-central1.run.app/api/upload";
 
+const DRAGON_MVP_HANDOFF_TIMEOUT_MS =
+    12000;
+
 function isRussianLanguage(language) {
 
     return String(language || "")
@@ -223,6 +226,13 @@ export default function HealthSupportAI() {
                         : MVP_WELCOME_EN
             }
         ]);
+
+    const [lastRequestLanguage, setLastRequestLanguage] =
+        useState(
+            isRussianLanguage(currentUserLanguage)
+                ? "ru"
+                : "en"
+        );
 
     const [uploadedFile, setUploadedFile] =
         useState(null);
@@ -501,6 +511,8 @@ export default function HealthSupportAI() {
                 currentUserLanguage
             );
 
+        setLastRequestLanguage(requestLanguage);
+
         setMessages(prev => [
             ...prev,
             {
@@ -584,6 +596,29 @@ export default function HealthSupportAI() {
     }
 
 
+    function fetchWithTimeout(url, options, timeoutMs) {
+
+        const controller =
+            new AbortController();
+
+        const timeout =
+            window.setTimeout(
+                () => controller.abort(),
+                timeoutMs
+            );
+
+        return fetch(
+            url,
+            {
+                ...options,
+                signal: controller.signal
+            }
+        ).finally(() => {
+            window.clearTimeout(timeout);
+        });
+    }
+
+
     async function requestDragonMvpAnswer(
         result,
         statusMessageId,
@@ -611,7 +646,7 @@ export default function HealthSupportAI() {
         try {
 
             const response =
-                await fetch(
+                await fetchWithTimeout(
                     DRAGON_CHAT_ENDPOINT,
                     {
                         method: "POST",
@@ -628,7 +663,8 @@ export default function HealthSupportAI() {
                             session_id: `health-support-ai-${requestLanguage}-${statusMessageId}`,
                             llm_prompts: promptPayload
                         })
-                    }
+                    },
+                    DRAGON_MVP_HANDOFF_TIMEOUT_MS
                 );
 
             if (!response.ok) {
@@ -715,13 +751,7 @@ export default function HealthSupportAI() {
         }
 
         const statusText =
-            result.llm_prompts
-                ? (
-                    isRussianLanguage(currentUserLanguage)
-                        ? "Анализ готов. Формирую понятный ответ модели..."
-                        : "Analysis is ready. Preparing a clear model response..."
-                )
-                : responseText;
+            responseText;
 
         setMessages(prev => {
 
@@ -1469,13 +1499,13 @@ export default function HealthSupportAI() {
                         stopMurzikVoice={stopMurzikVoice}
                         uploadEndpoint={FOOD_AI_UPLOAD_ENDPOINT}
                         uploadQuestion={
-                            isRussianLanguage(currentUserLanguage)
-                                ? "Проанализируй этот продукт по фото состава."
-                                : "Analyze this product from the ingredient label photo."
+                            lastRequestLanguage === "ru"
+                                ? "Проанализируй этот продукт по фото состава и ответь на русском языке."
+                                : "Analyze this product from the ingredient label photo and reply in English."
                         }
                         uploadLanguage={
-                            isRussianLanguage(currentUserLanguage)
-                                ? "eng+rus"
+                            lastRequestLanguage === "ru"
+                                ? "rus+eng"
                                 : "eng"
                         }
                         onUploadResult={handleUploadResult}
