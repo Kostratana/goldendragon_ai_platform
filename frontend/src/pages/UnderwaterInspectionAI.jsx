@@ -482,7 +482,7 @@ export default function UnderwaterInspectionAI() {
 
             const response =
                 await fetch(
-                    "https://murzik-chat-backend.vercel.app/api/chat",
+                    "https://golden-dragon-backend-91075651557.us-central1.run.app/api/chat",
                     {
                         method: "POST",
 
