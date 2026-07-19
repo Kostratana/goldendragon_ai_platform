@@ -40,8 +40,58 @@ const HERO_SUBTITLE =
     "An intelligent AI assistant helping people make healthier food choices through computer vision, nutritional intelligence and personalized health analysis.";
 
 const PROJECT_MODES = {
-    CHAT: "chat"
+    CHAT: "mvp1_food_safety_ai"
 };
+
+const FOOD_AI_UPLOAD_ENDPOINT =
+    "https://murzik-food-ai-7trlqc7hcq-uc.a.run.app/api/upload";
+
+function isRussianLanguage(language) {
+
+    return String(language || "")
+        .toLowerCase()
+        .startsWith("ru");
+}
+
+const MVP_WELCOME_RU =
+    `Здравствуйте. Это MVP 1 Health Support AI: первый тестовый модуль Golden Dragon AI для анализа продуктов питания по фото упаковки.
+
+Что можно проверить сейчас:
+- извлечение ингредиентов с изображения;
+- поиск вредных или сомнительных добавок;
+- E-номера, красители, подсластители, консерванты, эмульгаторы и загустители;
+- возможные следы аллергенов и спорных компонентов;
+- рекомендации перед покупкой продукта.
+
+Как протестировать:
+1. Нажмите значок скрепки.
+2. Загрузите фото состава продукта, где виден список ingredients/ингредиентов.
+3. Лучше фотографировать без цифрового зума, при хорошем рассеянном свете, без бликов, держа камеру параллельно упаковке.
+4. Если упаковка большая или текст мелкий, загрузите несколько фото разных частей состава.
+
+После загрузки я извлеку текст, проверю ингредиенты по базе знаний и Supabase RAG, покажу найденные совпадения, объясню, что в продукте хорошего, что сомнительно, есть ли искусственные красители, химические добавки, спорные компоненты или ингредиенты животного/насекомого происхождения, если такие данные есть в контексте.
+
+Результаты являются информационным анализом продукта и не заменяют консультацию врача, диетолога или другого профильного специалиста.`;
+
+const MVP_WELCOME_EN =
+    `Welcome. This is MVP 1 Health Support AI: the first Golden Dragon AI test module for food product analysis from package photos.
+
+What you can test now:
+- ingredient extraction from images;
+- detection of harmful or questionable additives;
+- E-numbers, colorants, sweeteners, preservatives, emulsifiers and thickeners;
+- possible allergens and questionable components;
+- purchase-oriented product recommendations.
+
+How to test it:
+1. Click the paperclip icon.
+2. Upload a clear photo of the ingredient list.
+3. Avoid digital zoom, use daylight or soft light, avoid glare and keep the camera parallel to the package.
+4. If the package is large or the text is tiny, upload several photos of different ingredient sections.
+
+After upload, I will extract the text, check the ingredients against the knowledge base and Supabase RAG, show the matched findings, explain what looks acceptable, what is questionable, and whether there are artificial colors, chemical additives, controversial ingredients or animal/insect-derived components when that information is available in the context.
+
+The result is informational product analysis and does not replace advice from a doctor, dietitian or other qualified specialist.`;
 
 const PROJECT_DESCRIPTION = [
     {
@@ -137,7 +187,10 @@ export default function HealthSupportAI() {
         useState([
             {
                 role: "assistant",
-                text: "Welcome."
+                text:
+                    isRussianLanguage(currentUserLanguage)
+                        ? MVP_WELCOME_RU
+                        : MVP_WELCOME_EN
             }
         ]);
 
@@ -489,6 +542,28 @@ export default function HealthSupportAI() {
         }
 
         setIsThinking(false);
+    }
+
+
+    function handleUploadResult(result, file) {
+
+        const responseText =
+            result.formatted_response ||
+            result.response ||
+            result.message ||
+            "The product image was uploaded, but no analysis text was returned.";
+
+        setMessages(prev => [
+            ...prev,
+            {
+                role: "user",
+                text: `Uploaded product image: ${file.name}`
+            },
+            {
+                role: "assistant",
+                text: responseText
+            }
+        ]);
     }
 
     function clearMessages() {
@@ -1169,6 +1244,18 @@ export default function HealthSupportAI() {
                         voiceEnabled={voiceEnabled}
                         setVoiceEnabled={setVoiceEnabled}
                         stopMurzikVoice={stopMurzikVoice}
+                        uploadEndpoint={FOOD_AI_UPLOAD_ENDPOINT}
+                        uploadQuestion={
+                            isRussianLanguage(currentUserLanguage)
+                                ? "Проанализируй этот продукт по фото состава."
+                                : "Analyze this product from the ingredient label photo."
+                        }
+                        uploadLanguage={
+                            isRussianLanguage(currentUserLanguage)
+                                ? "eng+rus"
+                                : "eng"
+                        }
+                        onUploadResult={handleUploadResult}
                     />
 
                     {[

@@ -62,7 +62,12 @@ export default function ChatWindow({
     voiceEnabled,
     setVoiceEnabled,
 
-    stopMurzikVoice
+    stopMurzikVoice,
+
+    uploadEndpoint,
+    uploadQuestion,
+    uploadLanguage,
+    onUploadResult
 
 }) {
 
@@ -106,11 +111,27 @@ export default function ChatWindow({
                 file
             );
 
+            if (uploadQuestion) {
+
+                formData.append(
+                    "user_question",
+                    uploadQuestion
+                );
+            }
+
+            if (uploadLanguage) {
+
+                formData.append(
+                    "lang",
+                    uploadLanguage
+                );
+            }
+
             try {
 
                 const response =
                     await fetch(
-                        "http://127.0.0.1:8000/upload",
+                        uploadEndpoint || "http://127.0.0.1:8000/upload",
                         {
                             method: "POST",
                             body: formData
@@ -128,8 +149,18 @@ export default function ChatWindow({
                     await response.json();
 
                 setUploadedFile(
-                    result.path
+                    result.uploaded_file ||
+                    result.path ||
+                    file.name
                 );
+
+                if (onUploadResult) {
+
+                    onUploadResult(
+                        result,
+                        file
+                    );
+                }
 
                 console.log(
                     "Murzik upload result:",
@@ -149,9 +180,7 @@ export default function ChatWindow({
             }
         }
 
-        alert(
-            `Uploaded files: ${files.length}`
-        );
+        event.target.value = "";
     }
 
     function handleUploadClick() {
