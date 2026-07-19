@@ -455,7 +455,7 @@ export default function QuantumTradingAI() {
 
             const response =
                 await fetch(
-                    "https://golden-dragon-backend-91075651557.us-central1.run.app/api/chat",
+                    "https://murzik-chat-backend.vercel.app/api/chat",
                     {
                         method: "POST",
 
