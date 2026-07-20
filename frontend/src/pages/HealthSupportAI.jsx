@@ -76,7 +76,7 @@ function detectRequestLanguage(text, fallbackLanguage) {
 function localizedChatContext(userMessage, requestLanguage, uploadContext = null) {
 
     const productContext =
-        uploadContext
+        uploadContext?.hasReliableAnalysis
             ? `\n\nLast uploaded product image context:\nFile: ${uploadContext.fileName || "uploaded image"}\nDetected ingredients: ${uploadContext.ingredients || "not reliable"}\nLast analysis: ${uploadContext.summary || "not available"}`
             : "";
 
@@ -95,9 +95,16 @@ function isProductFollowUp(text) {
     );
 }
 
+function isGeneralKnowledgeQuestion(text) {
+
+    return /(что ты знаешь|какие номера|какие названия|название имеют|расскажи.*вообще|без фото|не про фото|in general|what do you know|which numbers|which names)/i.test(
+        String(text || "")
+    );
+}
+
 function buildFollowUpPromptPayload(uploadContext, userMessage, requestLanguage) {
 
-    if (!uploadContext?.promptPayload?.system_prompt) {
+    if (!uploadContext?.hasReliableAnalysis || !uploadContext?.promptPayload?.system_prompt) {
 
         return null;
     }
@@ -683,10 +690,18 @@ export default function HealthSupportAI() {
                 ? ocr.ingredients.slice(0, 20).join(", ")
                 : "";
 
+        const hasReliableAnalysis =
+            result.status === "ok" &&
+            Boolean(ingredients) &&
+            !/(not reliable|не смог надежно|too long|слишком много времени|не удалось надежно|недостаточно)/i.test(
+                String(responseText || "")
+            );
+
         return {
             fileName: file?.name || result.uploaded_file?.filename || "",
             ingredients,
-            promptPayload: result.llm_prompts || null,
+            hasReliableAnalysis,
+            promptPayload: hasReliableAnalysis ? result.llm_prompts || null : null,
             summary:
                 [
                     analysis.verdict ? `Verdict: ${analysis.verdict}` : "",
@@ -742,12 +757,17 @@ export default function HealthSupportAI() {
         const statusText =
             responseText;
 
-        setLastUploadContext(
+        const uploadContext =
             buildUploadContext(
                 result,
                 file,
                 responseText
-            )
+            );
+
+        setLastUploadContext(
+            uploadContext.hasReliableAnalysis
+                ? uploadContext
+                : null
         );
 
         setMessages(prev => {
