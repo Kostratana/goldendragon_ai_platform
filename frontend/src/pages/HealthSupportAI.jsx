@@ -1627,7 +1627,7 @@ export default function HealthSupportAI() {
                                 : "Analyze this product from the ingredient label photo and reply in English."
                         }
                         uploadLanguage={
-                            "eng+spa+rus"
+                            "eng+spa"
                         }
                         onUploadResult={handleUploadResult}
                     />
