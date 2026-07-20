@@ -667,9 +667,13 @@ export default function HealthSupportAI() {
                         `ERROR: ${error.message}`
                 }
             ]);
-        }
+        } finally {
 
-        setIsThinking(false);
+            if (requestGeneration === chatRequestGenerationRef.current) {
+
+                setIsThinking(false);
+            }
+        }
     }
 
 
@@ -829,6 +833,8 @@ export default function HealthSupportAI() {
         if (result.status === "uploading") {
 
             chatRequestGenerationRef.current += 1;
+
+            setIsThinking(false);
         }
 
         const responseText =
