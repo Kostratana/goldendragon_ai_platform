@@ -20,6 +20,31 @@ const PROJECT_MODES = {
     LOGGER: "logger"
 };
 
+const FOOD_UPLOAD_TIMEOUT_MS =
+    45000;
+
+function fetchWithTimeout(url, options, timeoutMs) {
+
+    const controller =
+        new AbortController();
+
+    const timeout =
+        window.setTimeout(
+            () => controller.abort(),
+            timeoutMs
+        );
+
+    return fetch(
+        url,
+        {
+            ...options,
+            signal: controller.signal
+        }
+    ).finally(() => {
+        window.clearTimeout(timeout);
+    });
+}
+
 export default function ChatWindow({
 
     mode,
@@ -192,12 +217,13 @@ export default function ChatWindow({
             try {
 
                 const response =
-                    await fetch(
+                    await fetchWithTimeout(
                         uploadEndpoint || "http://127.0.0.1:8000/upload",
                         {
                             method: "POST",
                             body: formData
-                        }
+                        },
+                        FOOD_UPLOAD_TIMEOUT_MS
                     );
 
                 const result =
@@ -250,17 +276,22 @@ export default function ChatWindow({
                     error
                 );
 
-                alert(
-                    `Upload error: ${error.message}`
-                );
-
                 if (onUploadResult) {
+
+                    const timeoutMessage =
+                        error.name === "AbortError"
+                            ? (
+                                String(uploadLanguage || "").includes("rus")
+                                    ? "Анализ занял слишком много времени. Попробуйте загрузить более крупное и чёткое фото только стороны упаковки с составом."
+                                    : "Analysis is taking too long. Please upload a sharper close-up photo of only the ingredient label."
+                            )
+                            : `Не удалось отправить изображение: ${error.message}`;
 
                     onUploadResult(
                         {
                             status: "error",
                             formatted_response:
-                                `Не удалось отправить изображение: ${error.message}`
+                                timeoutMessage
                         },
                         file,
                         {
