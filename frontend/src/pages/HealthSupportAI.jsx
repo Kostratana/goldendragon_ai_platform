@@ -49,9 +49,6 @@ const DRAGON_CHAT_ENDPOINT =
 const FOOD_AI_UPLOAD_ENDPOINT =
     "https://murzik-food-ai-91075651557.us-central1.run.app/api/upload";
 
-const DRAGON_MVP_HANDOFF_TIMEOUT_MS =
-    12000;
-
 function isRussianLanguage(language) {
 
     return String(language || "")
@@ -673,127 +670,6 @@ export default function HealthSupportAI() {
     }
 
 
-    function fetchWithTimeout(url, options, timeoutMs) {
-
-        const controller =
-            new AbortController();
-
-        const timeout =
-            window.setTimeout(
-                () => controller.abort(),
-                timeoutMs
-            );
-
-        return fetch(
-            url,
-            {
-                ...options,
-                signal: controller.signal
-            }
-        ).finally(() => {
-            window.clearTimeout(timeout);
-        });
-    }
-
-
-    async function requestDragonMvpAnswer(
-        result,
-        statusMessageId,
-        fallbackText
-    ) {
-
-        const promptPayload =
-            result.llm_prompts || {};
-
-        if (
-            !promptPayload.system_prompt ||
-            !promptPayload.user_prompt
-        ) {
-            return;
-        }
-
-        const requestLanguage =
-            detectRequestLanguage(
-                fallbackText,
-                currentUserLanguage
-            );
-
-        setIsThinking(true);
-
-        try {
-
-            const response =
-                await fetchWithTimeout(
-                    DRAGON_CHAT_ENDPOINT,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-
-                        body: JSON.stringify({
-                            message:
-                                requestLanguage === "ru"
-                                    ? "Объясни результат анализа продукта понятным языком. Ответь строго на русском языке."
-                                    : "Explain the product analysis result clearly. Reply strictly in English.",
-                            session_id: `health-support-ai-${requestLanguage}-${statusMessageId}`,
-                            llm_prompts: promptPayload
-                        })
-                    },
-                    DRAGON_MVP_HANDOFF_TIMEOUT_MS
-                );
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `Dragon backend error: ${response.status}`
-                );
-            }
-
-            const data =
-                await response.json();
-
-            const dragonText =
-                data.answer ||
-                data.response ||
-                data.message ||
-                fallbackText;
-
-            setMessages(prev =>
-                prev.map(item =>
-                    item.id === statusMessageId
-                        ? {
-                            ...item,
-                            text: dragonText
-                        }
-                        : item
-                )
-            );
-
-        } catch (error) {
-
-            console.error(
-                "Dragon prompt handoff error:",
-                error
-            );
-
-            setMessages(prev =>
-                prev.map(item =>
-                    item.id === statusMessageId
-                        ? {
-                            ...item,
-                            text: fallbackText
-                        }
-                        : item
-                )
-            );
-        }
-
-        setIsThinking(false);
-    }
-
-
     function buildUploadContext(result, file, responseText) {
 
         const ocr =
@@ -914,12 +790,6 @@ export default function HealthSupportAI() {
                 }
             ];
         });
-
-        requestDragonMvpAnswer(
-            result,
-            `${messageId}-status`,
-            responseText
-        );
     }
 
     function clearMessages() {
