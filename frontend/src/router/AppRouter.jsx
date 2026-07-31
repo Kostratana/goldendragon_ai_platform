@@ -1,8 +1,11 @@
 import {
     BrowserRouter,
     Routes,
-    Route
+    Route,
+    useLocation
 } from "react-router-dom";
+
+import { useEffect } from "react";
 
 import Navbar from "../components/navigation/Navbar";
 
@@ -18,11 +21,42 @@ import QuantumTradingAI from "../pages/QuantumTradingAI";
 import LuxuryConciergeAI from "../pages/LuxuryConciergeAI";
 import News from "../pages/News";
 
+import { getSeoData } from "../config/seoConfig";
+
+function PageMetadata() {
+
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+
+        const metadata = getSeoData(pathname);
+
+        document.title = metadata.title;
+
+        document
+            .querySelector('meta[name="description"]')
+            ?.setAttribute("content", metadata.description);
+
+        document
+            .querySelector('link[rel="canonical"]')
+            ?.setAttribute("href", metadata.canonical);
+
+        document
+            .querySelector('meta[property="og:url"]')
+            ?.setAttribute("content", metadata.canonical);
+
+    }, [pathname]);
+
+    return null;
+}
+
 function AppRouter() {
 
     return (
 
         <BrowserRouter>
+
+            <PageMetadata />
 
             {/* FIXED GLOBAL NAVBAR */}
 
