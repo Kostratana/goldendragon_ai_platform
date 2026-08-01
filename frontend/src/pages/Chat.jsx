@@ -44,7 +44,7 @@ const PROJECT_SLOTS = {
 };
 
 const CONTACT_FORM_ENDPOINT =
-    "https://formsubmit.co/ajax/4c9e4ee27d7c983ad0fe530d7e6b9767";
+    "/api/contact";
 
 const INITIAL_LEAD_FORM = {
     fullName: "",
@@ -496,24 +496,16 @@ async function sendMessage() {
                             Accept: "application/json"
                         },
                         body: JSON.stringify({
-                            "Client Name":
+                            fullName:
                                 leadForm.fullName,
-                            "Client Email":
+                            email:
                                 leadForm.email,
-                            "Client Phone":
+                            phone:
                                 leadForm.phone || "Not provided",
-                            "Client Message":
+                            message:
                                 leadForm.message,
-                            "Source Page":
-                                window.location.href,
-                            _replyto:
-                                leadForm.email,
-                            _subject:
-                                "New message from Golden Dragon AI Studio website",
-                            _template:
-                                "table",
-                            _captcha:
-                                "false"
+                            sourcePage:
+                                window.location.href
                         })
                     }
                 );
@@ -1494,6 +1486,7 @@ async function sendMessage() {
                         </div>
 
                         <button
+                            className="dragon-contact-submit"
                             type="submit"
                             disabled={isLeadSubmitting}
                             style={{
@@ -1609,6 +1602,23 @@ async function sendMessage() {
                     box-shadow:
                         0 0 20px rgba(216,176,122,0.18),
                         inset 0 1px 0 rgba(255,255,255,0.04) !important;
+                }
+
+                .dragon-contact-submit,
+                .dragon-contact-submit:hover,
+                .dragon-contact-submit:focus,
+                .dragon-contact-submit:active {
+                    color: rgba(255,239,206,0.96) !important;
+                    background:
+                        linear-gradient(
+                            180deg,
+                            rgba(216,176,122,0.28),
+                            rgba(216,176,122,0.14)
+                        ) !important;
+                    border-color: rgba(216,176,122,0.58) !important;
+                    box-shadow:
+                        0 0 24px rgba(216,176,122,0.22),
+                        inset 0 1px 0 rgba(255,255,255,0.14) !important;
                 }
 
                 @keyframes portalPulse {
