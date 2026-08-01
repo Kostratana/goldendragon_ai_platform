@@ -11,7 +11,6 @@ import useDragResize from "../hooks/useDragResize";
 import ChatWindow from "../features/chat/ChatWindow";
 
 import {
-    T,
     useLanguage,
     useTranslatedText
 } from "../services/translation";
@@ -21,10 +20,6 @@ import chatMainImage from "../assets/murzik/chat-main-image.webp";
 import {
     GOLD
 } from "../theme/colors";
-
-import {
-    FONT_IM_FELL
-} from "../theme/fonts";
 
 const PROJECT_MODES = {
 
@@ -877,11 +872,11 @@ async function sendMessage() {
         width: "100%",
         boxSizing: "border-box",
         border:
-            "1px solid rgba(216,176,122,0.18)",
+            "1px solid rgba(216,176,122,0.34)",
         borderRadius: "12px",
         background:
-            "rgba(255,255,255,0.026)",
-        color: "rgba(255,247,232,0.94)",
+            "rgba(10,7,4,0.58)",
+        color: "rgba(232,202,152,0.96)",
         padding:
             isMobile
                 ? "13px 14px"
@@ -890,7 +885,10 @@ async function sendMessage() {
         lineHeight: 1.45,
         outline: "none",
         boxShadow:
-            "inset 0 1px 0 rgba(255,255,255,0.025)"
+            `
+            0 0 14px rgba(216,176,122,0.08),
+            inset 0 1px 0 rgba(255,255,255,0.03)
+            `
     };
 
     useEffect(() => {
@@ -1339,6 +1337,7 @@ async function sendMessage() {
                 >
 
                     <form
+                        className="dragon-contact-form"
                         onSubmit={submitLeadForm}
                         style={{
                             width: "100%",
@@ -1352,7 +1351,7 @@ async function sendMessage() {
                             textAlign: "left",
 
                             border:
-                                "1px solid rgba(216,176,122,0.24)",
+                                "1px solid rgba(216,176,122,0.44)",
 
                             borderRadius:
                                 isMobile
@@ -1370,9 +1369,10 @@ async function sendMessage() {
 
                             boxShadow:
                                 `
-                                0 0 34px rgba(216,176,122,0.12),
+                                0 0 0 1px rgba(216,176,122,0.07),
+                                0 0 42px rgba(216,176,122,0.22),
                                 0 18px 48px rgba(0,0,0,0.26),
-                                inset 0 1px 0 rgba(255,255,255,0.035)
+                                inset 0 1px 0 rgba(255,255,255,0.045)
                                 `,
 
                             padding:
@@ -1381,6 +1381,27 @@ async function sendMessage() {
                                     : "26px"
                         }}
                     >
+
+                        <div
+                            style={{
+                                color:
+                                    "rgba(216,176,122,0.86)",
+                                fontSize:
+                                    "14px",
+                                lineHeight:
+                                    1.4,
+                                fontWeight:
+                                    500,
+                                letterSpacing:
+                                    "0.02em",
+                                textAlign:
+                                    "center",
+                                margin:
+                                    "0 0 16px"
+                            }}
+                        >
+                            contact us
+                        </div>
 
                         <div
                             style={{
@@ -1487,8 +1508,8 @@ async function sendMessage() {
                                     `
                                     linear-gradient(
                                         180deg,
-                                        rgba(216,176,122,0.20),
-                                        rgba(216,176,122,0.10)
+                                        rgba(216,176,122,0.24),
+                                        rgba(216,176,122,0.12)
                                     )
                                     `,
                                 fontSize:
@@ -1504,8 +1525,8 @@ async function sendMessage() {
                                         : 1,
                                 boxShadow:
                                     `
-                                    0 0 18px rgba(216,176,122,0.12),
-                                    inset 0 1px 0 rgba(255,255,255,0.12)
+                                    0 0 22px rgba(216,176,122,0.20),
+                                    inset 0 1px 0 rgba(255,255,255,0.14)
                                     `
                             }}
                         >
@@ -1572,6 +1593,20 @@ async function sendMessage() {
 
             <style>
                 {`
+                .dragon-contact-form input::placeholder,
+                .dragon-contact-form textarea::placeholder {
+                    color: rgba(216,176,122,0.62);
+                    opacity: 1;
+                }
+
+                .dragon-contact-form input:focus,
+                .dragon-contact-form textarea:focus {
+                    border-color: rgba(216,176,122,0.62) !important;
+                    box-shadow:
+                        0 0 20px rgba(216,176,122,0.18),
+                        inset 0 1px 0 rgba(255,255,255,0.04) !important;
+                }
+
                 @keyframes portalPulse {
 
                     0% {
