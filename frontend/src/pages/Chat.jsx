@@ -43,6 +43,9 @@ const PROJECT_SLOTS = {
     mvp2: "mvp2_horse_health_ai"
 };
 
+const CONTACT_FORM_ENDPOINT =
+    "https://formsubmit.co/ajax/4c9e4ee27d7c983ad0fe530d7e6b9767";
+
 const INITIAL_LEAD_FORM = {
     fullName: "",
     email: "",
@@ -179,6 +182,12 @@ export default function Chat() {
     const [leadForm, setLeadForm] =
         useState(INITIAL_LEAD_FORM);
 
+    const [leadFormStatus, setLeadFormStatus] =
+        useState("");
+
+    const [isLeadSubmitting, setIsLeadSubmitting] =
+        useState(false);
+
     const fullNamePlaceholder =
         useTranslatedText(
             "First and last name"
@@ -200,7 +209,21 @@ export default function Chat() {
         );
 
     const submitButtonText =
-        useTranslatedText("Send");
+        useTranslatedText(
+            isLeadSubmitting
+                ? "Sending..."
+                : "Send"
+        );
+
+    const successMessageText =
+        useTranslatedText(
+            "Thank you. Your message has been sent."
+        );
+
+    const errorMessageText =
+        useTranslatedText(
+            "The message could not be sent. Please try again."
+        );
 
     /*
     FUTURE BACKEND XTTS STOP
@@ -436,6 +459,72 @@ async function sendMessage() {
             [field]: value
         }));
 
+        if (leadFormStatus) {
+            setLeadFormStatus("");
+        }
+    }
+
+    async function submitLeadForm(
+        event
+    ) {
+
+        event.preventDefault();
+
+        if (isLeadSubmitting) {
+            return;
+        }
+
+        const formData =
+            new FormData(event.currentTarget);
+
+        setIsLeadSubmitting(true);
+        setLeadFormStatus("");
+
+        try {
+
+            const response =
+                await fetch(
+                    CONTACT_FORM_ENDPOINT,
+                    {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json"
+                        },
+                        body: formData
+                    }
+                );
+
+            const result =
+                await response.json().catch(
+                    () => ({})
+                );
+
+            if (
+                !response.ok ||
+                result.success === "false"
+            ) {
+                throw new Error(
+                    result.message ||
+                    `FormSubmit error: ${response.status}`
+                );
+            }
+
+            setLeadForm(INITIAL_LEAD_FORM);
+            setLeadFormStatus("success");
+
+        } catch (error) {
+
+            console.error(
+                "Contact form submit error:",
+                error
+            );
+
+            setLeadFormStatus("error");
+
+        } finally {
+
+            setIsLeadSubmitting(false);
+        }
     }
 
     function updateEmbeddedChatSize(
@@ -775,6 +864,10 @@ async function sendMessage() {
         background:
             "rgba(10,7,4,0.58)",
         color: "rgba(232,202,152,0.96)",
+        WebkitTextFillColor:
+            "rgba(232,202,152,0.96)",
+        caretColor:
+            "rgba(232,202,152,0.96)",
         padding:
             isMobile
                 ? "13px 14px"
@@ -1238,6 +1331,7 @@ async function sendMessage() {
                         className="dragon-contact-form"
                         action="https://formsubmit.co/4c9e4ee27d7c983ad0fe530d7e6b9767"
                         method="POST"
+                        onSubmit={submitLeadForm}
                         style={{
                             "--input-background": "#090604",
 
@@ -1423,6 +1517,7 @@ async function sendMessage() {
                         <button
                             className="dragon-contact-submit"
                             type="submit"
+                            disabled={isLeadSubmitting}
                             style={{
                                 width:
                                     "100%",
@@ -1446,8 +1541,14 @@ async function sendMessage() {
                                 fontSize:
                                     "14px",
                                 fontWeight: 600,
-                                cursor: "pointer",
-                                opacity: 1,
+                                cursor:
+                                    isLeadSubmitting
+                                        ? "wait"
+                                        : "pointer",
+                                opacity:
+                                    isLeadSubmitting
+                                        ? 0.78
+                                        : 1,
                                 boxShadow:
                                     `
                                     0 0 22px rgba(216,176,122,0.20),
@@ -1457,6 +1558,53 @@ async function sendMessage() {
                         >
                             {submitButtonText}
                         </button>
+
+                        {leadFormStatus && (
+                            <div
+                                role={
+                                    leadFormStatus ===
+                                        "success"
+                                        ? "status"
+                                        : "alert"
+                                }
+                                style={{
+                                    marginTop:
+                                        "14px",
+                                    border:
+                                        leadFormStatus ===
+                                            "success"
+                                            ? "1px solid rgba(216,176,122,0.22)"
+                                            : "1px solid rgba(255,210,190,0.22)",
+                                    borderRadius:
+                                        "14px",
+                                    background:
+                                        leadFormStatus ===
+                                            "success"
+                                            ? "rgba(216,176,122,0.07)"
+                                            : "rgba(255,120,80,0.06)",
+                                    color:
+                                        leadFormStatus ===
+                                            "success"
+                                            ? "rgba(232,202,152,0.92)"
+                                            : "rgba(255,210,190,0.92)",
+                                    padding:
+                                        "11px 13px",
+                                    fontSize:
+                                        "13px",
+                                    lineHeight:
+                                        1.5,
+                                    textAlign:
+                                        "center"
+                                }}
+                            >
+                                {
+                                    leadFormStatus ===
+                                        "success"
+                                        ? successMessageText
+                                        : errorMessageText
+                                }
+                            </div>
+                        )}
 
                     </form>
 
@@ -1486,7 +1634,7 @@ async function sendMessage() {
                 .dragon-contact-form input:-webkit-autofill:hover,
                 .dragon-contact-form input:-webkit-autofill:focus,
                 .dragon-contact-form textarea:-webkit-autofill {
-                    -webkit-text-fill-color: inherit;
+                    -webkit-text-fill-color: rgba(232,202,152,0.96) !important;
                     -webkit-box-shadow:
                         0 0 0 1000px var(--input-background) inset,
                         0 0 20px rgba(216,176,122,0.18) !important;
