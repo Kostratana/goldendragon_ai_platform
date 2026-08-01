@@ -1332,7 +1332,7 @@ async function sendMessage() {
                         <input
                             type="hidden"
                             name="_template"
-                            value="table"
+                            value="basic"
                         />
 
                         <input
