@@ -44,7 +44,7 @@ const PROJECT_SLOTS = {
 };
 
 const CONTACT_FORM_ENDPOINT =
-    "https://formsubmit.co/ajax/srumyantseva7@gmail.com";
+    "https://formsubmit.co/ajax/4c9e4ee27d7c983ad0fe530d7e6b9767";
 
 const INITIAL_LEAD_FORM = {
     fullName: "",
@@ -496,16 +496,20 @@ async function sendMessage() {
                             Accept: "application/json"
                         },
                         body: JSON.stringify({
-                            name:
+                            "Client Name":
                                 leadForm.fullName,
-                            email:
+                            "Client Email":
                                 leadForm.email,
-                            phone:
+                            "Client Phone":
                                 leadForm.phone || "Not provided",
-                            message:
+                            "Client Message":
                                 leadForm.message,
+                            "Source Page":
+                                window.location.href,
+                            _replyto:
+                                leadForm.email,
                             _subject:
-                                "New Golden Dragon AI Studio request",
+                                "New message from Golden Dragon AI Studio website",
                             _template:
                                 "table",
                             _captcha:
