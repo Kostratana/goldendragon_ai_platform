@@ -6,3 +6,4 @@ dist
 .vercel
 pyproject.toml
 uv.lock
+__pycache__/
