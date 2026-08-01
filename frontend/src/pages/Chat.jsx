@@ -48,53 +48,14 @@ const PROJECT_SLOTS = {
     mvp2: "mvp2_horse_health_ai"
 };
 
-const PROJECT_TYPE_OPTIONS = [
-    "AI Agent",
-    "AI Assistant",
-    "Large Language Model (LLM)",
-    "Computer Vision",
-    "Machine Learning",
-    "AI Automation",
-    "RAG System",
-    "Custom AI Software",
-    "AI Consulting",
-    "Other"
-];
-
-const BUDGET_OPTIONS = [
-    "Under $1,000",
-    "$1,000–5,000",
-    "$5,000–10,000",
-    "$10,000–25,000",
-    "Over $25,000",
-    "Prefer not to say"
-];
-
-const TIMELINE_OPTIONS = [
-    "ASAP",
-    "Within 1 Month",
-    "2–3 Months",
-    "Flexible"
-];
-
-const TRUST_ITEMS = [
-    "AI Agents",
-    "Large Language Models",
-    "Computer Vision",
-    "Machine Learning"
-];
+const CONTACT_FORM_ENDPOINT =
+    "https://formsubmit.co/ajax/srumyantseva7@gmail.com";
 
 const INITIAL_LEAD_FORM = {
-    projectIdea: "",
     fullName: "",
-    company: "",
-    country: "",
     email: "",
     phone: "",
-    website: "",
-    projectType: PROJECT_TYPE_OPTIONS[0],
-    budget: BUDGET_OPTIONS[0],
-    timeline: TIMELINE_OPTIONS[0]
+    message: ""
 };
 
 export default function Chat() {
@@ -229,9 +190,47 @@ export default function Chat() {
     const [isLeadSubmitted, setIsLeadSubmitted] =
         useState(false);
 
-    const projectIdeaPlaceholder =
+    const [isLeadSubmitting, setIsLeadSubmitting] =
+        useState(false);
+
+    const [leadSubmitError, setLeadSubmitError] =
+        useState("");
+
+    const fullNamePlaceholder =
         useTranslatedText(
-            "Describe your project, business challenge, automation idea, AI assistant, computer vision system, or any intelligent solution you would like to build..."
+            "First and last name"
+        );
+
+    const phonePlaceholder =
+        useTranslatedText(
+            "Phone (optional)"
+        );
+
+    const emailPlaceholder =
+        useTranslatedText(
+            "Email"
+        );
+
+    const messagePlaceholder =
+        useTranslatedText(
+            "Short message"
+        );
+
+    const submitButtonText =
+        useTranslatedText(
+            isLeadSubmitting
+                ? "Sending..."
+                : "Send"
+        );
+
+    const successMessageText =
+        useTranslatedText(
+            "Thank you. Your message has been sent."
+        );
+
+    const errorMessageText =
+        useTranslatedText(
+            "The message could not be sent. Please try again."
         );
 
     /*
@@ -471,15 +470,79 @@ async function sendMessage() {
         if (isLeadSubmitted) {
             setIsLeadSubmitted(false);
         }
+
+        if (leadSubmitError) {
+            setLeadSubmitError("");
+        }
     }
 
-    function submitLeadForm(
+    async function submitLeadForm(
         event
     ) {
 
         event.preventDefault();
 
-        setIsLeadSubmitted(true);
+        if (isLeadSubmitting) {
+            return;
+        }
+
+        setIsLeadSubmitting(true);
+        setLeadSubmitError("");
+
+        try {
+
+            const response =
+                await fetch(
+                    CONTACT_FORM_ENDPOINT,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json"
+                        },
+                        body: JSON.stringify({
+                            name:
+                                leadForm.fullName,
+                            email:
+                                leadForm.email,
+                            phone:
+                                leadForm.phone || "Not provided",
+                            message:
+                                leadForm.message,
+                            _subject:
+                                "New Golden Dragon AI Studio request",
+                            _template:
+                                "table",
+                            _captcha:
+                                "false"
+                        })
+                    }
+                );
+
+            if (!response.ok) {
+                throw new Error(
+                    `Contact form error: ${response.status}`
+                );
+            }
+
+            setLeadForm(INITIAL_LEAD_FORM);
+            setIsLeadSubmitted(true);
+
+        } catch (error) {
+
+            console.error(
+                "Contact form submit error:",
+                error
+            );
+
+            setLeadSubmitError(
+                errorMessageText
+            );
+
+        } finally {
+
+            setIsLeadSubmitting(false);
+        }
     }
 
     function updateEmbeddedChatSize(
@@ -828,20 +891,6 @@ async function sendMessage() {
         outline: "none",
         boxShadow:
             "inset 0 1px 0 rgba(255,255,255,0.025)"
-    };
-
-    const contactLabelStyle = {
-        display: "block",
-        marginBottom: "9px",
-        color: "rgba(232,202,152,0.78)",
-        fontSize: "13px",
-        lineHeight: 1.35,
-        fontWeight: 500
-    };
-
-    const requiredMarkStyle = {
-        color: GOLD,
-        marginLeft: "4px"
     };
 
     useEffect(() => {
@@ -1259,8 +1308,8 @@ async function sendMessage() {
 
                     padding:
                         isMobile
-                            ? "72px 18px 64px"
-                            : "104px 24px 92px",
+                            ? "58px 18px 62px"
+                            : "78px 24px 82px",
 
                     borderTop:
                         "1px solid rgba(255,220,170,0.05)",
@@ -1281,7 +1330,7 @@ async function sendMessage() {
                         maxWidth:
                             isMobile
                                 ? "94vw"
-                                : "980px",
+                                : "460px",
 
                         margin: "0 auto",
 
@@ -1289,91 +1338,13 @@ async function sendMessage() {
                     }}
                 >
 
-                    <div
-                        style={{
-                            maxWidth:
-                                isMobile
-                                    ? "100%"
-                                    : "760px",
-
-                            margin:
-                                "0 auto 56px",
-
-                            textAlign: "center"
-                        }}
-                    >
-
-                        <h2
-                            style={{
-                                color:
-                                    GOLD,
-
-                                fontFamily:
-                                    FONT_IM_FELL,
-
-                                fontSize:
-                                    isMobile
-                                        ? "34px"
-                                        : isTablet
-                                            ? "42px"
-                                            : "52px",
-
-                                lineHeight: 1.05,
-
-                                fontWeight: 600,
-
-                                margin:
-                                    "0 0 20px",
-
-                                textShadow:
-                                    `
-                                    0 0 12px rgba(226,197,138,0.20),
-                                    0 0 32px rgba(226,197,138,0.10)
-                                    `
-                            }}
-                        >
-                            <T>
-                                Start Your AI Project
-                            </T>
-                        </h2>
-
-                        <p
-                            style={{
-                                color:
-                                    "rgba(232,213,184,0.74)",
-
-                                fontSize:
-                                    isMobile
-                                        ? "16px"
-                                        : "18px",
-
-                                lineHeight: 1.7,
-
-                                margin:
-                                    "0 auto",
-
-                                maxWidth:
-                                    "680px"
-                            }}
-                        >
-                            <T>
-                                Ready to transform your ideas into intelligent technology?
-                            </T>
-                            {" "}
-                            <T>
-                                Tell us about your project and our team will contact you to discuss the best AI solution for your business.
-                            </T>
-                        </p>
-
-                    </div>
-
                     <form
                         onSubmit={submitLeadForm}
                         style={{
                             width: "100%",
 
                             maxWidth:
-                                "900px",
+                                "460px",
 
                             margin:
                                 "0 auto",
@@ -1381,315 +1352,164 @@ async function sendMessage() {
                             textAlign: "left",
 
                             border:
-                                "1px solid rgba(216,176,122,0.16)",
+                                "1px solid rgba(216,176,122,0.24)",
 
                             borderRadius:
                                 isMobile
-                                    ? "22px"
-                                    : "24px",
+                                    ? "20px"
+                                    : "22px",
 
                             background:
                                 `
                                 linear-gradient(
                                     180deg,
-                                    rgba(12,9,6,0.62),
-                                    rgba(6,5,4,0.78)
+                                    rgba(12,9,6,0.50),
+                                    rgba(4,4,4,0.74)
                                 )
                                 `,
 
                             boxShadow:
                                 `
-                                0 18px 54px rgba(0,0,0,0.22),
+                                0 0 34px rgba(216,176,122,0.12),
+                                0 18px 48px rgba(0,0,0,0.26),
                                 inset 0 1px 0 rgba(255,255,255,0.035)
                                 `,
 
                             padding:
                                 isMobile
-                                    ? "22px"
-                                    : "34px"
+                                    ? "20px"
+                                    : "26px"
                         }}
                     >
 
                         <div
                             style={{
-                                marginBottom:
-                                    "26px"
-                            }}
-                        >
-
-                            <h3
-                                style={{
-                                    color:
-                                        "rgba(255,242,218,0.92)",
-
-                                    fontSize:
-                                        isMobile
-                                            ? "22px"
-                                            : "28px",
-
-                                    lineHeight: 1.2,
-
-                                    fontWeight: 600,
-
-                                    margin:
-                                        "0 0 10px"
-                                }}
-                            >
-                                <T>
-                                    What would you like to build?
-                                </T>
-                            </h3>
-
-                            <p
-                                style={{
-                                    color:
-                                        "rgba(232,213,184,0.66)",
-
-                                    fontSize:
-                                        "15px",
-
-                                    lineHeight: 1.65,
-
-                                    margin:
-                                        "0"
-                                }}
-                            >
-                                <T>
-                                    Describe your idea in a few sentences.
-                                </T>
-                                {" "}
-                                <T>
-                                    We'll help transform it into an intelligent AI solution.
-                                </T>
-                            </p>
-
-                        </div>
-
-                        <label
-                            style={contactLabelStyle}
-                            htmlFor="projectIdea"
-                        >
-                            <T>
-                                Project idea
-                            </T>
-                            <span style={requiredMarkStyle}>
-                                *
-                            </span>
-                        </label>
-
-                        <textarea
-                            id="projectIdea"
-                            required
-                            value={leadForm.projectIdea}
-                            onChange={(event) =>
-                                updateLeadForm(
-                                    "projectIdea",
-                                    event.target.value
-                                )
-                            }
-                            placeholder={projectIdeaPlaceholder}
-                            rows={isMobile ? 7 : 8}
-                            style={{
-                                ...contactInputStyle,
-                                minHeight:
-                                    isMobile
-                                        ? "190px"
-                                        : "220px",
-                                resize:
-                                    "vertical",
-                                marginBottom:
-                                    "26px"
-                            }}
-                        />
-
-                        <div
-                            style={{
                                 display: "grid",
-                                gridTemplateColumns:
-                                    isMobile
-                                        ? "1fr"
-                                        : "repeat(2, minmax(0, 1fr))",
+                                gridTemplateColumns: "1fr",
                                 gap:
-                                    isMobile
-                                        ? "18px"
-                                        : "22px",
+                                    "13px",
                                 marginBottom:
-                                    "24px"
+                                    "16px"
                             }}
                         >
 
-                            {[
-                                {
-                                    id: "fullName",
-                                    label: "Full Name",
-                                    required: true,
-                                    type: "text"
-                                },
-                                {
-                                    id: "company",
-                                    label: "Company",
-                                    required: false,
-                                    type: "text"
-                                },
-                                {
-                                    id: "country",
-                                    label: "Country",
-                                    required: false,
-                                    type: "text"
-                                },
-                                {
-                                    id: "email",
-                                    label: "Email",
-                                    required: true,
-                                    type: "email"
-                                },
-                                {
-                                    id: "phone",
-                                    label: "Phone",
-                                    required: false,
-                                    type: "tel"
-                                },
-                                {
-                                    id: "website",
-                                    label: "Website",
-                                    required: false,
-                                    type: "url"
+                            <input
+                                id="fullName"
+                                name="name"
+                                required
+                                type="text"
+                                value={leadForm.fullName}
+                                onChange={(event) =>
+                                    updateLeadForm(
+                                        "fullName",
+                                        event.target.value
+                                    )
                                 }
-                            ].map((field) => (
+                                placeholder={fullNamePlaceholder}
+                                aria-label={fullNamePlaceholder}
+                                style={contactInputStyle}
+                            />
 
-                                <div key={field.id}>
-                                    <label
-                                        style={contactLabelStyle}
-                                        htmlFor={field.id}
-                                    >
-                                        <T>
-                                            {field.label}
-                                        </T>
-                                        {field.required && (
-                                            <span style={requiredMarkStyle}>
-                                                *
-                                            </span>
-                                        )}
-                                    </label>
-
-                                    <input
-                                        id={field.id}
-                                        required={field.required}
-                                        type={field.type}
-                                        value={leadForm[field.id]}
-                                        onChange={(event) =>
-                                            updateLeadForm(
-                                                field.id,
-                                                event.target.value
-                                            )
-                                        }
-                                        style={contactInputStyle}
-                                    />
-                                </div>
-
-                            ))}
-
-                            {[
-                                {
-                                    id: "projectType",
-                                    label: "Project Type",
-                                    options: PROJECT_TYPE_OPTIONS
-                                },
-                                {
-                                    id: "budget",
-                                    label: "Estimated Budget",
-                                    options: BUDGET_OPTIONS
-                                },
-                                {
-                                    id: "timeline",
-                                    label: "Timeline",
-                                    options: TIMELINE_OPTIONS
+                            <input
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                value={leadForm.phone}
+                                onChange={(event) =>
+                                    updateLeadForm(
+                                        "phone",
+                                        event.target.value
+                                    )
                                 }
-                            ].map((field) => (
+                                placeholder={phonePlaceholder}
+                                aria-label={phonePlaceholder}
+                                style={contactInputStyle}
+                            />
 
-                                <div key={field.id}>
-                                    <label
-                                        style={contactLabelStyle}
-                                        htmlFor={field.id}
-                                    >
-                                        <T>
-                                            {field.label}
-                                        </T>
-                                    </label>
+                            <input
+                                id="email"
+                                name="email"
+                                required
+                                type="email"
+                                value={leadForm.email}
+                                onChange={(event) =>
+                                    updateLeadForm(
+                                        "email",
+                                        event.target.value
+                                    )
+                                }
+                                placeholder={emailPlaceholder}
+                                aria-label={emailPlaceholder}
+                                style={contactInputStyle}
+                            />
 
-                                    <select
-                                        id={field.id}
-                                        value={leadForm[field.id]}
-                                        onChange={(event) =>
-                                            updateLeadForm(
-                                                field.id,
-                                                event.target.value
-                                            )
-                                        }
-                                        style={{
-                                            ...contactInputStyle,
-                                            appearance: "none"
-                                        }}
-                                    >
-                                        {field.options.map((option) => (
-                                            <option
-                                                key={option}
-                                                value={option}
-                                                style={{
-                                                    color: "#101010"
-                                                }}
-                                            >
-                                                <T>
-                                                    {option}
-                                                </T>
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                            ))}
+                            <textarea
+                                id="message"
+                                name="message"
+                                required
+                                value={leadForm.message}
+                                onChange={(event) =>
+                                    updateLeadForm(
+                                        "message",
+                                        event.target.value
+                                    )
+                                }
+                                placeholder={messagePlaceholder}
+                                aria-label={messagePlaceholder}
+                                rows={4}
+                                style={{
+                                    ...contactInputStyle,
+                                    minHeight:
+                                        "112px",
+                                    resize:
+                                        "vertical"
+                                }}
+                            />
 
                         </div>
 
                         <button
                             type="submit"
+                            disabled={isLeadSubmitting}
                             style={{
                                 width:
-                                    isMobile
-                                        ? "100%"
-                                        : "auto",
+                                    "100%",
                                 minWidth:
-                                    isMobile
-                                        ? "100%"
-                                        : "260px",
-                                border: "none",
+                                    "100%",
+                                border:
+                                    "1px solid rgba(216,176,122,0.46)",
                                 borderRadius: "999px",
                                 padding:
-                                    "14px 26px",
+                                    "12px 24px",
                                 color:
-                                    "#120b04",
+                                    "rgba(255,239,206,0.94)",
                                 background:
                                     `
                                     linear-gradient(
-                                        135deg,
-                                        #f3d49a,
-                                        #d8b07a
+                                        180deg,
+                                        rgba(216,176,122,0.20),
+                                        rgba(216,176,122,0.10)
                                     )
                                     `,
                                 fontSize:
-                                    "15px",
+                                    "14px",
                                 fontWeight: 600,
-                                cursor: "pointer",
+                                cursor:
+                                    isLeadSubmitting
+                                        ? "wait"
+                                        : "pointer",
+                                opacity:
+                                    isLeadSubmitting
+                                        ? 0.72
+                                        : 1,
                                 boxShadow:
                                     `
-                                    0 10px 24px rgba(216,176,122,0.16),
-                                    inset 0 1px 0 rgba(255,255,255,0.24)
+                                    0 0 18px rgba(216,176,122,0.12),
+                                    inset 0 1px 0 rgba(255,255,255,0.12)
                                     `
                             }}
                         >
-                            <T>
-                                Start My AI Project
-                            </T>
+                            {submitButtonText}
                         </button>
 
                         {isLeadSubmitted && (
@@ -1706,139 +1526,43 @@ async function sendMessage() {
                                         "rgba(216,176,122,0.055)",
                                     padding:
                                         isMobile
-                                            ? "18px"
-                                            : "22px",
+                                            ? "12px"
+                                            : "14px",
                                     color:
-                                        "rgba(255,247,232,0.9)"
+                                        "rgba(255,247,232,0.82)",
+                                    fontSize:
+                                        "13px",
+                                    lineHeight:
+                                        1.55,
+                                    textAlign:
+                                        "center"
                                 }}
                             >
-                                <h3
-                                    style={{
-                                        margin:
-                                            "0 0 8px",
-                                        color:
-                                            GOLD,
-                                        fontSize:
-                                            "22px",
-                                        lineHeight:
-                                            1.25
-                                    }}
-                                >
-                                    <T>
-                                        Thank You!
-                                    </T>
-                                </h3>
+                                {successMessageText}
+                            </div>
+                        )}
 
-                                <p
-                                    style={{
-                                        margin:
-                                            "0",
-                                        fontSize:
-                                            "15px",
-                                        lineHeight:
-                                            1.7
-                                    }}
-                                >
-                                    <T>
-                                        Your request has been successfully received.
-                                    </T>
-                                    {" "}
-                                    <T>
-                                        Our team will review your project and contact you as soon as possible.
-                                    </T>
-                                </p>
+                        {leadSubmitError && (
+                            <div
+                                role="alert"
+                                style={{
+                                    marginTop:
+                                        "14px",
+                                    color:
+                                        "rgba(255,210,190,0.86)",
+                                    fontSize:
+                                        "13px",
+                                    lineHeight:
+                                        1.55,
+                                    textAlign:
+                                        "center"
+                                }}
+                            >
+                                {leadSubmitError}
                             </div>
                         )}
 
                     </form>
-
-                    <div
-                        style={{
-                            marginTop:
-                                isMobile
-                                    ? "56px"
-                                    : "72px",
-                            textAlign:
-                                "center"
-                        }}
-                    >
-
-                        <h2
-                            style={{
-                                color:
-                                    GOLD,
-                                fontFamily:
-                                    FONT_IM_FELL,
-                                fontSize:
-                                    isMobile
-                                        ? "30px"
-                                        : "40px",
-                                lineHeight:
-                                    1.15,
-                                fontWeight:
-                                    600,
-                                margin:
-                                    "0 0 28px"
-                            }}
-                        >
-                            <T>
-                                Why Golden Dragon AI Studio?
-                            </T>
-                        </h2>
-
-                        <div
-                            style={{
-                                display: "grid",
-                                gridTemplateColumns:
-                                    isMobile
-                                        ? "1fr"
-                                        : isTablet
-                                            ? "repeat(2, minmax(0, 1fr))"
-                                            : "repeat(4, minmax(0, 1fr))",
-                                gap:
-                                    "16px"
-                            }}
-                        >
-                            {TRUST_ITEMS.map((item) => (
-                                <div
-                                    key={item}
-                                    style={{
-                                        border:
-                                            "1px solid rgba(216,176,122,0.13)",
-                                        borderRadius:
-                                            "12px",
-                                        background:
-                                            "rgba(255,255,255,0.02)",
-                                        color:
-                                            "rgba(255,242,218,0.88)",
-                                        padding:
-                                            "18px 16px",
-                                        fontSize:
-                                            "15px",
-                                        fontWeight:
-                                            600,
-                                        lineHeight:
-                                            1.35
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            color:
-                                                GOLD,
-                                            marginRight:
-                                                "8px"
-                                        }}
-                                    >
-                                        ✓
-                                    </span>
-                                    <T>
-                                        {item}
-                                    </T>
-                                </div>
-                            ))}
-                        </div>
-
-                    </div>
 
                 </div>
 

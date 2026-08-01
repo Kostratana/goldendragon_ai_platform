@@ -88,5 +88,19 @@ export const CHAT_TRANSLATIONS_RU = {
     "AI Agents":
         "AI-агенты",
     "Large Language Models":
-        "Большие языковые модели"
+        "Большие языковые модели",
+    "First and last name":
+        "Имя и фамилия",
+    "Phone (optional)":
+        "Телефон (необязательно)",
+    "Short message":
+        "Краткое сообщение",
+    "Send":
+        "Отправить",
+    "Sending...":
+        "Отправка...",
+    "Thank you. Your message has been sent.":
+        "Спасибо. Ваше сообщение отправлено.",
+    "The message could not be sent. Please try again.":
+        "Сообщение не удалось отправить. Пожалуйста, попробуйте еще раз."
 };
