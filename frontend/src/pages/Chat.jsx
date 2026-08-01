@@ -43,9 +43,6 @@ const PROJECT_SLOTS = {
     mvp2: "mvp2_horse_health_ai"
 };
 
-const CONTACT_FORM_ENDPOINT =
-    "/api/contact";
-
 const INITIAL_LEAD_FORM = {
     fullName: "",
     email: "",
@@ -182,15 +179,6 @@ export default function Chat() {
     const [leadForm, setLeadForm] =
         useState(INITIAL_LEAD_FORM);
 
-    const [isLeadSubmitted, setIsLeadSubmitted] =
-        useState(false);
-
-    const [isLeadSubmitting, setIsLeadSubmitting] =
-        useState(false);
-
-    const [leadSubmitError, setLeadSubmitError] =
-        useState("");
-
     const fullNamePlaceholder =
         useTranslatedText(
             "First and last name"
@@ -212,21 +200,7 @@ export default function Chat() {
         );
 
     const submitButtonText =
-        useTranslatedText(
-            isLeadSubmitting
-                ? "Sending..."
-                : "Send"
-        );
-
-    const successMessageText =
-        useTranslatedText(
-            "Thank you. Your message has been sent."
-        );
-
-    const errorMessageText =
-        useTranslatedText(
-            "The message could not be sent. Please try again."
-        );
+        useTranslatedText("Send");
 
     /*
     FUTURE BACKEND XTTS STOP
@@ -462,78 +436,6 @@ async function sendMessage() {
             [field]: value
         }));
 
-        if (isLeadSubmitted) {
-            setIsLeadSubmitted(false);
-        }
-
-        if (leadSubmitError) {
-            setLeadSubmitError("");
-        }
-    }
-
-    async function submitLeadForm(
-        event
-    ) {
-
-        event.preventDefault();
-
-        if (isLeadSubmitting) {
-            return;
-        }
-
-        setIsLeadSubmitting(true);
-        setLeadSubmitError("");
-
-        try {
-
-            const response =
-                await fetch(
-                    CONTACT_FORM_ENDPOINT,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json"
-                        },
-                        body: JSON.stringify({
-                            fullName:
-                                leadForm.fullName,
-                            email:
-                                leadForm.email,
-                            phone:
-                                leadForm.phone || "Not provided",
-                            message:
-                                leadForm.message,
-                            sourcePage:
-                                window.location.href
-                        })
-                    }
-                );
-
-            if (!response.ok) {
-                throw new Error(
-                    `Contact form error: ${response.status}`
-                );
-            }
-
-            setLeadForm(INITIAL_LEAD_FORM);
-            setIsLeadSubmitted(true);
-
-        } catch (error) {
-
-            console.error(
-                "Contact form submit error:",
-                error
-            );
-
-            setLeadSubmitError(
-                errorMessageText
-            );
-
-        } finally {
-
-            setIsLeadSubmitting(false);
-        }
     }
 
     function updateEmbeddedChatSize(
@@ -1334,8 +1236,11 @@ async function sendMessage() {
 
                     <form
                         className="dragon-contact-form"
-                        onSubmit={submitLeadForm}
+                        action="https://formsubmit.co/4c9e4ee27d7c983ad0fe530d7e6b9767"
+                        method="POST"
                         style={{
+                            "--input-background": "#090604",
+
                             width: "100%",
 
                             maxWidth:
@@ -1377,6 +1282,36 @@ async function sendMessage() {
                                     : "26px"
                         }}
                     >
+
+                        <input
+                            type="hidden"
+                            name="_subject"
+                            value="Golden Dragon AI Studio website contact"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="_template"
+                            value="table"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="_captcha"
+                            value="false"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="_next"
+                            value="https://www.goldendragonai.com/chat"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="site"
+                            value="Golden Dragon AI Studio website"
+                        />
 
                         <div
                             style={{
@@ -1488,7 +1423,6 @@ async function sendMessage() {
                         <button
                             className="dragon-contact-submit"
                             type="submit"
-                            disabled={isLeadSubmitting}
                             style={{
                                 width:
                                     "100%",
@@ -1512,14 +1446,8 @@ async function sendMessage() {
                                 fontSize:
                                     "14px",
                                 fontWeight: 600,
-                                cursor:
-                                    isLeadSubmitting
-                                        ? "wait"
-                                        : "pointer",
-                                opacity:
-                                    isLeadSubmitting
-                                        ? 0.72
-                                        : 1,
+                                cursor: "pointer",
+                                opacity: 1,
                                 boxShadow:
                                     `
                                     0 0 22px rgba(216,176,122,0.20),
@@ -1529,56 +1457,6 @@ async function sendMessage() {
                         >
                             {submitButtonText}
                         </button>
-
-                        {isLeadSubmitted && (
-                            <div
-                                role="status"
-                                style={{
-                                    marginTop:
-                                        "28px",
-                                    border:
-                                        "1px solid rgba(216,176,122,0.18)",
-                                    borderRadius:
-                                        "16px",
-                                    background:
-                                        "rgba(216,176,122,0.055)",
-                                    padding:
-                                        isMobile
-                                            ? "12px"
-                                            : "14px",
-                                    color:
-                                        "rgba(255,247,232,0.82)",
-                                    fontSize:
-                                        "13px",
-                                    lineHeight:
-                                        1.55,
-                                    textAlign:
-                                        "center"
-                                }}
-                            >
-                                {successMessageText}
-                            </div>
-                        )}
-
-                        {leadSubmitError && (
-                            <div
-                                role="alert"
-                                style={{
-                                    marginTop:
-                                        "14px",
-                                    color:
-                                        "rgba(255,210,190,0.86)",
-                                    fontSize:
-                                        "13px",
-                                    lineHeight:
-                                        1.55,
-                                    textAlign:
-                                        "center"
-                                }}
-                            >
-                                {leadSubmitError}
-                            </div>
-                        )}
 
                     </form>
 
@@ -1602,6 +1480,19 @@ async function sendMessage() {
                     box-shadow:
                         0 0 20px rgba(216,176,122,0.18),
                         inset 0 1px 0 rgba(255,255,255,0.04) !important;
+                }
+
+                .dragon-contact-form input:-webkit-autofill,
+                .dragon-contact-form input:-webkit-autofill:hover,
+                .dragon-contact-form input:-webkit-autofill:focus,
+                .dragon-contact-form textarea:-webkit-autofill {
+                    -webkit-text-fill-color: inherit;
+                    -webkit-box-shadow:
+                        0 0 0 1000px var(--input-background) inset,
+                        0 0 20px rgba(216,176,122,0.18) !important;
+                    caret-color: rgba(232,202,152,0.96);
+                    transition:
+                        background-color 9999s ease-in-out 0s;
                 }
 
                 .dragon-contact-submit,
