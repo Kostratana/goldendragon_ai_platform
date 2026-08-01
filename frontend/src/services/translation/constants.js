@@ -50,6 +50,11 @@ export const SUPPORTED_LANGUAGES = [
         code: "it",
         nativeName: "Italiano",
         flag: "it"
+    },
+    {
+        code: "lb",
+        nativeName: "Lëtzebuergesch",
+        flag: "lu"
     }
 ];
 

@@ -1444,6 +1444,17 @@ function LanguageFlag({
         );
     }
 
+    if (flag === "lu") {
+
+        return (
+            <svg {...shared}>
+                <rect width="16" height="3.67" y="0" fill="#EF3340" />
+                <rect width="16" height="3.67" y="3.67" fill="#FFFFFF" />
+                <rect width="16" height="3.66" y="7.34" fill="#00A3E0" />
+            </svg>
+        );
+    }
+
     return null;
 }
 

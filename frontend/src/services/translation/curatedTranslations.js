@@ -15,6 +15,10 @@ import {
 } from "../../content/founderTranslations.it.js";
 
 import {
+    FOUNDER_TRANSLATIONS_LB
+} from "../../content/founderTranslations.lb.js";
+
+import {
     FOUNDER_TRANSLATIONS_RU
 } from "../../content/founderTranslations.ru.js";
 
@@ -35,8 +39,16 @@ import {
 } from "../../content/chatTranslations.it.js";
 
 import {
+    CHAT_TRANSLATIONS_LB
+} from "../../content/chatTranslations.lb.js";
+
+import {
     CHAT_TRANSLATIONS_RU
 } from "../../content/chatTranslations.ru.js";
+
+import {
+    COMMON_TRANSLATIONS_LB
+} from "../../content/commonTranslations.lb.js";
 
 import {
     COMMON_TRANSLATIONS_RU
@@ -57,6 +69,10 @@ import {
 import {
     FOOTER_TRANSLATIONS_IT
 } from "../../content/footerTranslations.it.js";
+
+import {
+    FOOTER_TRANSLATIONS_LB
+} from "../../content/footerTranslations.lb.js";
 
 import {
     FOOTER_TRANSLATIONS_RU
@@ -163,6 +179,12 @@ const CURATED_BY_LANGUAGE = {
         FOUNDER_TRANSLATIONS_IT,
         CHAT_TRANSLATIONS_IT,
         FOOTER_TRANSLATIONS_IT
+    ),
+    lb: mergeCuratedDictionaries(
+        COMMON_TRANSLATIONS_LB,
+        FOUNDER_TRANSLATIONS_LB,
+        CHAT_TRANSLATIONS_LB,
+        FOOTER_TRANSLATIONS_LB
     )
 };
 

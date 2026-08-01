@@ -1,0 +1,4 @@
+export const FOOTER_TRANSLATIONS_LB = {
+    "ALL RIGHTS RESERVED":
+        "ALL RECHTER VIRBEHALEN"
+};

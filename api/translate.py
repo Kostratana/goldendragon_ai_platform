@@ -21,7 +21,8 @@ ALLOWED_TARGET_LANGUAGES = {
     "es",
     "fr",
     "de",
-    "it"
+    "it",
+    "lb"
 }
 
 
