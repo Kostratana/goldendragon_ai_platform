@@ -185,7 +185,7 @@ export default function Chat() {
     const [leadFormStatus, setLeadFormStatus] =
         useState("");
 
-    const [isLeadSubmitting, setIsLeadSubmitting] =
+    const [contactFormSubmitted, setContactFormSubmitted] =
         useState(false);
 
     const fullNamePlaceholder =
@@ -209,20 +209,11 @@ export default function Chat() {
         );
 
     const submitButtonText =
-        useTranslatedText(
-            isLeadSubmitting
-                ? "Sending..."
-                : "Send"
-        );
+        useTranslatedText("Send");
 
     const successMessageText =
         useTranslatedText(
             "Thank you. Your message has been sent."
-        );
-
-    const errorMessageText =
-        useTranslatedText(
-            "The message could not be sent. Please try again."
         );
 
     /*
@@ -464,53 +455,21 @@ async function sendMessage() {
         }
     }
 
-    async function submitLeadForm(
-        event
-    ) {
+    function submitLeadForm() {
 
-        event.preventDefault();
+        setContactFormSubmitted(true);
+        setLeadFormStatus("");
+    }
 
-        if (isLeadSubmitting) {
+    function handleContactSubmitFrameLoad() {
+
+        if (!contactFormSubmitted) {
             return;
         }
 
-        const formData =
-            new FormData(event.currentTarget);
-
-        const payload =
-            new URLSearchParams(formData);
-
-        setIsLeadSubmitting(true);
-        setLeadFormStatus("");
-
-        try {
-
-            const response =
-                await fetch(
-                    CONTACT_FORM_ENDPOINT,
-                    {
-                        method: "POST",
-                        mode: "no-cors",
-                        body: payload
-                    }
-                );
-
-            setLeadForm(INITIAL_LEAD_FORM);
-            setLeadFormStatus("success");
-
-        } catch (error) {
-
-            console.error(
-                "Contact form submit error:",
-                error
-            );
-
-            setLeadFormStatus("error");
-
-        } finally {
-
-            setIsLeadSubmitting(false);
-        }
+        setLeadForm(INITIAL_LEAD_FORM);
+        setLeadFormStatus("success");
+        setContactFormSubmitted(false);
     }
 
     function updateEmbeddedChatSize(
@@ -1317,6 +1276,7 @@ async function sendMessage() {
                         className="dragon-contact-form"
                         action={CONTACT_FORM_ENDPOINT}
                         method="POST"
+                        target="contact-submit-frame"
                         onSubmit={submitLeadForm}
                         style={{
                             "--input-background": "#090604",
@@ -1509,7 +1469,6 @@ async function sendMessage() {
                         <button
                             className="dragon-contact-submit"
                             type="submit"
-                            disabled={isLeadSubmitting}
                             style={{
                                 width:
                                     "100%",
@@ -1533,14 +1492,8 @@ async function sendMessage() {
                                 fontSize:
                                     "14px",
                                 fontWeight: 600,
-                                cursor:
-                                    isLeadSubmitting
-                                        ? "wait"
-                                        : "pointer",
-                                opacity:
-                                    isLeadSubmitting
-                                        ? 0.78
-                                        : 1,
+                                cursor: "pointer",
+                                opacity: 1,
                                 boxShadow:
                                     `
                                     0 0 22px rgba(216,176,122,0.20),
@@ -1551,34 +1504,20 @@ async function sendMessage() {
                             {submitButtonText}
                         </button>
 
-                        {leadFormStatus && (
+                        {leadFormStatus === "success" && (
                             <div
-                                role={
-                                    leadFormStatus ===
-                                        "success"
-                                        ? "status"
-                                        : "alert"
-                                }
+                                role="status"
                                 style={{
                                     marginTop:
                                         "14px",
                                     border:
-                                        leadFormStatus ===
-                                            "success"
-                                            ? "1px solid rgba(216,176,122,0.22)"
-                                            : "1px solid rgba(255,210,190,0.22)",
+                                        "1px solid rgba(216,176,122,0.22)",
                                     borderRadius:
                                         "14px",
                                     background:
-                                        leadFormStatus ===
-                                            "success"
-                                            ? "rgba(216,176,122,0.07)"
-                                            : "rgba(255,120,80,0.06)",
+                                        "rgba(216,176,122,0.07)",
                                     color:
-                                        leadFormStatus ===
-                                            "success"
-                                            ? "rgba(232,202,152,0.92)"
-                                            : "rgba(255,210,190,0.92)",
+                                        "rgba(232,202,152,0.92)",
                                     padding:
                                         "11px 13px",
                                     fontSize:
@@ -1589,16 +1528,21 @@ async function sendMessage() {
                                         "center"
                                 }}
                             >
-                                {
-                                    leadFormStatus ===
-                                        "success"
-                                        ? successMessageText
-                                        : errorMessageText
-                                }
+                                {successMessageText}
                             </div>
                         )}
 
                     </form>
+
+                    <iframe
+                        title="Contact form submission"
+                        name="contact-submit-frame"
+                        onLoad={handleContactSubmitFrameLoad}
+                        style={{
+                            display:
+                                "none"
+                        }}
+                    />
 
                 </div>
 
