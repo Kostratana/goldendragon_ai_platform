@@ -93,6 +93,8 @@ export const CHAT_TRANSLATIONS_RU = {
         "Имя и фамилия",
     "Phone (optional)":
         "Телефон (необязательно)",
+    "Message":
+        "Сообщение",
     "Short message":
         "Краткое сообщение",
     "Send":

@@ -205,7 +205,7 @@ export default function Chat() {
 
     const messagePlaceholder =
         useTranslatedText(
-            "Short message"
+            "Message"
         );
 
     const submitButtonText =
