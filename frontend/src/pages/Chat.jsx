@@ -44,7 +44,7 @@ const PROJECT_SLOTS = {
 };
 
 const CONTACT_FORM_ENDPOINT =
-    "https://formsubmit.co/ajax/4c9e4ee27d7c983ad0fe530d7e6b9767";
+    "https://formsubmit.co/4c9e4ee27d7c983ad0fe530d7e6b9767";
 
 const INITIAL_LEAD_FORM = {
     fullName: "",
@@ -477,6 +477,9 @@ async function sendMessage() {
         const formData =
             new FormData(event.currentTarget);
 
+        const payload =
+            new URLSearchParams(formData);
+
         setIsLeadSubmitting(true);
         setLeadFormStatus("");
 
@@ -487,27 +490,10 @@ async function sendMessage() {
                     CONTACT_FORM_ENDPOINT,
                     {
                         method: "POST",
-                        headers: {
-                            Accept: "application/json"
-                        },
-                        body: formData
+                        mode: "no-cors",
+                        body: payload
                     }
                 );
-
-            const result =
-                await response.json().catch(
-                    () => ({})
-                );
-
-            if (
-                !response.ok ||
-                result.success === "false"
-            ) {
-                throw new Error(
-                    result.message ||
-                    `FormSubmit error: ${response.status}`
-                );
-            }
 
             setLeadForm(INITIAL_LEAD_FORM);
             setLeadFormStatus("success");
@@ -1329,7 +1315,7 @@ async function sendMessage() {
 
                     <form
                         className="dragon-contact-form"
-                        action="https://formsubmit.co/4c9e4ee27d7c983ad0fe530d7e6b9767"
+                        action={CONTACT_FORM_ENDPOINT}
                         method="POST"
                         onSubmit={submitLeadForm}
                         style={{
@@ -1399,6 +1385,12 @@ async function sendMessage() {
                             type="hidden"
                             name="_next"
                             value="https://www.goldendragonai.com/chat"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="_replyto"
+                            value={leadForm.email}
                         />
 
                         <input
