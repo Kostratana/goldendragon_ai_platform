@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 
-import agentsArchitectureImage from "../assets/agents-wide.png";
+import agentsArchitectureImage from "../assets/agents.png";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
@@ -33,7 +33,7 @@ export default function News() {
                 : "64px";
 
     const contentMaxWidth =
-        "1120px";
+        "1320px";
 
     const imageMaxWidth =
         "100%";
