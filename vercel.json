@@ -12,6 +12,48 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/favicon.png",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/favicon-falcon-eye.png",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/favicon-falcon-eye.ico",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/favicon-falcon-eye-v2.png",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/favicon-falcon-eye-v2.ico",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/favicon-falcon-eye-v3.png",
+      "destination": "/favicon.ico",
+      "permanent": false
+    },
+    {
+      "source": "/favicon-falcon-eye-v3.ico",
+      "destination": "/favicon.ico",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",
