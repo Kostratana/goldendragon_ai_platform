@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 
-import agentsArchitectureImage from "../assets/agents.png";
+import agentsArchitectureImage from "../assets/agents-wide.png";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
@@ -33,14 +33,10 @@ export default function News() {
                 : "64px";
 
     const contentMaxWidth =
-        "1040px";
+        "1120px";
 
     const imageMaxWidth =
-        isMobile
-            ? "340px"
-            : isTablet
-                ? "640px"
-                : "760px";
+        "100%";
 
     const textMaxWidth =
         "920px";
