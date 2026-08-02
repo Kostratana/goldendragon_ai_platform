@@ -36,7 +36,7 @@ export default function News() {
         "1040px";
 
     const textMaxWidth =
-        "820px";
+        "760px";
 
     const sectionPaddingTop =
         isMobile
@@ -50,19 +50,19 @@ export default function News() {
         fontFamily: FONT_CINZEL_DECORATIVE,
         fontSize:
             isMobile
-                ? "28px"
+                ? "22px"
                 : isTablet
-                    ? "38px"
-                    : "48px",
+                    ? "28px"
+                    : "34px",
         fontWeight: "700",
         letterSpacing:
             isMobile
-                ? "0.02em"
-                : "0.05em",
+                ? "0.01em"
+                : "0.035em",
         lineHeight:
             isMobile
-                ? 1.24
-                : 1.2,
+                ? 1.3
+                : 1.24,
         margin: 0,
         textAlign: "center",
         textShadow:
@@ -74,19 +74,19 @@ export default function News() {
         fontFamily: FONT_IM_FELL,
         fontSize:
             isMobile
-                ? "19px"
+                ? "16px"
                 : isTablet
-                    ? "22px"
-                    : "25px",
+                    ? "18px"
+                    : "20px",
         fontWeight: "400",
         letterSpacing:
             isMobile
-                ? "0.01em"
-                : "0.025em",
+                ? "0"
+                : "0.012em",
         lineHeight:
             isMobile
-                ? 1.56
-                : 1.64,
+                ? 1.48
+                : 1.54,
         margin: 0,
         textAlign: "center",
         textShadow:
@@ -123,8 +123,8 @@ export default function News() {
                     paddingTop: sectionPaddingTop,
                     paddingBottom:
                         isMobile
-                            ? "78px"
-                            : "108px",
+                            ? "58px"
+                            : "82px",
                     paddingLeft: pagePaddingX,
                     paddingRight: pagePaddingX,
                     boxSizing: "border-box"
@@ -140,8 +140,8 @@ export default function News() {
                         alignItems: "center",
                         gap:
                             isMobile
-                                ? "34px"
-                                : "46px"
+                                ? "24px"
+                                : "32px"
                     }}
                 >
                     <img
@@ -174,8 +174,8 @@ export default function News() {
                             alignItems: "center",
                             gap:
                                 isMobile
-                                    ? "18px"
-                                    : "22px"
+                                    ? "12px"
+                                    : "15px"
                         }}
                     >
                         <h1 style={headingStyle}>
