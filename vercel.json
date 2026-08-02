@@ -3,6 +3,24 @@
   "outputDirectory": "frontend/dist",
   "headers": [
     {
+      "source": "/favicon-falcon-eye-v2.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/favicon-falcon-eye-v2.ico",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
       "source": "/favicon-falcon-eye.png",
       "headers": [
         {
