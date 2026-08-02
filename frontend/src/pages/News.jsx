@@ -37,17 +37,17 @@ export default function News() {
 
     const imageMaxWidth =
         isMobile
-            ? "260px"
+            ? "340px"
             : isTablet
-                ? "320px"
-                : "360px";
+                ? "640px"
+                : "760px";
 
     const textMaxWidth =
         "920px";
 
     const sectionPaddingTop =
         isMobile
-            ? "76px"
+            ? "18px"
             : isTablet
                 ? "24px"
                 : "22px";

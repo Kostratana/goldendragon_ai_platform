@@ -303,7 +303,7 @@ export default function Navbar() {
                 className="gd-navbar-shell"
                 style={{
 
-                    position: "fixed",
+                    position: "relative",
 
                     top: 0,
 
@@ -588,18 +588,6 @@ export default function Navbar() {
                     : null
             }
 
-            <div
-                style={{
-                    height:
-                        isMobile
-                            ? "82px"
-                            : isTablet
-                                ? "90px"
-                                : "96px",
-
-                    width: "100%"
-                }}
-            />
         </>
     );
 }
