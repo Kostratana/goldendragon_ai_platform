@@ -1,59 +1,6 @@
 {
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
-  "headers": [
-    {
-      "source": "/favicon.ico",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store, max-age=0"
-        }
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/favicon.png",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/apple-touch-icon.png",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/favicon-falcon-eye.png",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/favicon-falcon-eye.ico",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/favicon-falcon-eye-v2.png",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/favicon-falcon-eye-v2.ico",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/favicon-falcon-eye-v3.png",
-      "destination": "/favicon.ico",
-      "permanent": false
-    },
-    {
-      "source": "/favicon-falcon-eye-v3.ico",
-      "destination": "/favicon.ico",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",
