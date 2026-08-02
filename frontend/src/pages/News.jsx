@@ -1,13 +1,11 @@
-import { motion } from "framer-motion";
-
-import AnimatedInkText from "../components/AnimatedInkText";
 import Footer from "../components/Footer";
+
+import agentsArchitectureImage from "../assets/agents.png";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
 import {
-    T,
-    useTranslatedText
+    T
 } from "../services/translation";
 
 import {
@@ -20,28 +18,12 @@ import {
     FONT_IM_FELL
 } from "../theme/fonts";
 
-const HERO_TITLE =
-    "News";
-
-const HERO_SUBTITLE =
-    "Latest updates, research, product releases and development news from Golden Dragon AI Studio.";
-
 export default function News() {
 
     const {
         isMobile,
         isTablet
     } = useFounderBreakpoints();
-
-    const translatedHeroTitle =
-        useTranslatedText(
-            HERO_TITLE
-        );
-
-    const translatedHeroSubtitle =
-        useTranslatedText(
-            HERO_SUBTITLE
-        );
 
     const pagePaddingX =
         isMobile
@@ -50,82 +32,73 @@ export default function News() {
                 ? "44px"
                 : "64px";
 
-    const maxTextWidth =
+    const contentMaxWidth =
+        "1040px";
+
+    const textMaxWidth =
         "820px";
 
-    const heroTitleStyle = {
+    const sectionPaddingTop =
+        isMobile
+            ? "max(118px, calc(98px + env(safe-area-inset-top, 0px)))"
+            : isTablet
+                ? "142px"
+                : "158px";
+
+    const headingStyle = {
         color: GOLD,
         fontFamily: FONT_CINZEL_DECORATIVE,
-        fontWeight: "700",
         fontSize:
             isMobile
-                ? "31px"
+                ? "28px"
                 : isTablet
-                    ? "44px"
-                    : "58px",
+                    ? "38px"
+                    : "48px",
+        fontWeight: "700",
         letterSpacing:
             isMobile
                 ? "0.02em"
-                : isTablet
-                    ? "0.05em"
-                    : "0.07em",
+                : "0.05em",
         lineHeight:
             isMobile
-                ? "1.26"
-                : "1.22",
+                ? 1.24
+                : 1.2,
         margin: 0,
-        "--gd-ink-duration": "22s",
-        "--gd-ink-delay-step": "0.10s",
         textAlign: "center",
         textShadow:
-            "0 0 26px rgba(216,176,122,0.30), 0 0 58px rgba(255,140,0,0.12)"
+            "0 0 24px rgba(216,176,122,0.28), 0 0 52px rgba(255,140,0,0.10)"
     };
 
-    const heroSubtitleStyle = {
+    const paragraphStyle = {
         color: TEXT,
         fontFamily: FONT_IM_FELL,
-        fontWeight: "400",
         fontSize:
             isMobile
-                ? "20px"
+                ? "19px"
                 : isTablet
-                    ? "23px"
-                    : "27px",
+                    ? "22px"
+                    : "25px",
+        fontWeight: "400",
         letterSpacing:
             isMobile
                 ? "0.01em"
-                : "0.03em",
+                : "0.025em",
         lineHeight:
             isMobile
-                ? "1.55"
-                : "1.65",
+                ? 1.56
+                : 1.64,
         margin: 0,
-        maxWidth: maxTextWidth,
-        marginInline: "auto",
         textAlign: "center",
         textShadow:
-            "0 0 16px rgba(216,176,122,0.16)"
+            "0 0 16px rgba(216,176,122,0.14)"
     };
 
-    const bodyTextStyle = {
+    const contactStyle = {
+        ...paragraphStyle,
         color: GOLD,
-        fontFamily: FONT_CINZEL_DECORATIVE,
-        fontSize:
-            isMobile
-                ? "25px"
-                : isTablet
-                    ? "31px"
-                    : "38px",
         fontWeight: "700",
-        lineHeight: 1.25,
-        letterSpacing:
-            isMobile
-                ? "0.03em"
-                : "0.06em",
-        margin: 0,
-        textAlign: "center",
         textShadow:
-            "0 0 20px rgba(216,176,122,0.22)"
+            "0 0 18px rgba(216,176,122,0.22)"
     };
 
     return (
@@ -143,69 +116,15 @@ export default function News() {
             }}
         >
 
-            <motion.div
-                animate={{
-                    opacity: [0.08, 0.14, 0.08]
-                }}
-                transition={{
-                    duration: 12,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                style={{
-                    position: "absolute",
-                    top:
-                        isMobile
-                            ? "-110px"
-                            : "-190px",
-                    right:
-                        isMobile
-                            ? "-140px"
-                            : "-260px",
-                    width:
-                        isMobile
-                            ? "300px"
-                            : isTablet
-                                ? "520px"
-                                : "760px",
-                    height:
-                        isMobile
-                            ? "300px"
-                            : isTablet
-                                ? "520px"
-                                : "760px",
-                    borderRadius: "9999px",
-                    background:
-                        "rgba(255,140,0,0.10)",
-                    filter:
-                        isMobile
-                            ? "blur(58px)"
-                            : "blur(112px)",
-                    pointerEvents: "none"
-                }}
-            />
-
             <section
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    minHeight:
-                        isMobile
-                            ? "auto"
-                            : "66vh",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingTop:
-                        isMobile
-                            ? "max(118px, calc(98px + env(safe-area-inset-top, 0px)))"
-                            : isTablet
-                                ? "142px"
-                                : "158px",
+                    paddingTop: sectionPaddingTop,
                     paddingBottom:
                         isMobile
-                            ? "64px"
-                            : "86px",
+                            ? "78px"
+                            : "108px",
                     paddingLeft: pagePaddingX,
                     paddingRight: pagePaddingX,
                     boxSizing: "border-box"
@@ -214,49 +133,82 @@ export default function News() {
                 <div
                     style={{
                         width: "100%",
-                        maxWidth: maxTextWidth,
+                        maxWidth: contentMaxWidth,
+                        margin: "0 auto",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         gap:
                             isMobile
-                                ? "24px"
-                                : "30px",
-                        textAlign: "center"
+                                ? "34px"
+                                : "46px"
                     }}
                 >
-                    <AnimatedInkText
-                        as="h1"
-                        style={heroTitleStyle}
-                        text={translatedHeroTitle}
+                    <img
+                        src={agentsArchitectureImage}
+                        alt="AI Agent architecture"
+                        style={{
+                            display: "block",
+                            width: "100%",
+                            height: "auto",
+                            objectFit: "contain",
+                            borderRadius:
+                                isMobile
+                                    ? "18px"
+                                    : "24px",
+                            boxShadow:
+                                `
+                                0 0 0 1px rgba(216,176,122,0.16),
+                                0 24px 64px rgba(0,0,0,0.42),
+                                0 0 54px rgba(216,176,122,0.16)
+                                `
+                        }}
                     />
 
-                    <AnimatedInkText
-                        as="p"
-                        style={heroSubtitleStyle}
-                        text={translatedHeroSubtitle}
-                    />
+                    <div
+                        style={{
+                            width: "100%",
+                            maxWidth: textMaxWidth,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap:
+                                isMobile
+                                    ? "18px"
+                                    : "22px"
+                        }}
+                    >
+                        <h1 style={headingStyle}>
+                            <T>
+                                Build the Right AI Agent for Your Business
+                            </T>
+                        </h1>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                Every business is unique, and your AI solution should be too.
+                            </T>
+                        </p>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                At Golden Dragon AI Studio, we design custom AI Agents tailored to your business goals, workflows, and data. Whether you need intelligent assistants, enterprise knowledge systems, automation, computer vision, or multi-agent platforms, we can create a solution that fits your organization.
+                            </T>
+                        </p>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                Let's discuss your ideas and discover how AI can automate processes, reduce costs, save time, and improve productivity.
+                            </T>
+                        </p>
+
+                        <p style={contactStyle}>
+                            <T>
+                                Contact us to start designing your AI solution.
+                            </T>
+                        </p>
+                    </div>
                 </div>
-            </section>
-
-            <section
-                style={{
-                    position: "relative",
-                    zIndex: 2,
-                    paddingLeft: pagePaddingX,
-                    paddingRight: pagePaddingX,
-                    paddingBottom:
-                        isMobile
-                            ? "86px"
-                            : "112px",
-                    boxSizing: "border-box"
-                }}
-            >
-                <h2 style={bodyTextStyle}>
-                    <T>
-                        Coming Soon
-                    </T>
-                </h2>
             </section>
 
             <Footer />
