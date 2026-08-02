@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 
-import agentsArchitectureImage from "../assets/agents.png";
+import agentsArchitectureImage from "../assets/agents-news.png";
 import tradingImage from "../assets/pub_trade.png";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
