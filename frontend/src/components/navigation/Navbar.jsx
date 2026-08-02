@@ -303,7 +303,15 @@ export default function Navbar() {
                 className="gd-navbar-shell"
                 style={{
 
-                    position: "relative",
+                    position: "fixed",
+
+                    top: 0,
+
+                    left: 0,
+
+                    right: 0,
+
+                    zIndex: 999999,
 
                     transform: "none",
 
