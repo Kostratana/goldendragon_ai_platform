@@ -37,20 +37,20 @@ export default function News() {
 
     const imageMaxWidth =
         isMobile
-            ? "340px"
+            ? "260px"
             : isTablet
-                ? "520px"
-                : "620px";
+                ? "320px"
+                : "360px";
 
     const textMaxWidth =
         "920px";
 
     const sectionPaddingTop =
         isMobile
-            ? "max(102px, calc(88px + env(safe-area-inset-top, 0px)))"
+            ? "24px"
             : isTablet
-                ? "112px"
-                : "118px";
+                ? "24px"
+                : "22px";
 
     const headingStyle = {
         color: GOLD,
@@ -130,8 +130,8 @@ export default function News() {
                     paddingTop: sectionPaddingTop,
                     paddingBottom:
                         isMobile
-                            ? "42px"
-                            : "56px",
+                            ? "32px"
+                            : "38px",
                     paddingLeft: pagePaddingX,
                     paddingRight: pagePaddingX,
                     boxSizing: "border-box"
@@ -147,8 +147,8 @@ export default function News() {
                         alignItems: "center",
                         gap:
                             isMobile
-                                ? "14px"
-                                : "18px"
+                                ? "10px"
+                                : "12px"
                     }}
                 >
                     <img
