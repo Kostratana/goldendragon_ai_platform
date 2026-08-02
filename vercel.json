@@ -3,6 +3,33 @@
   "outputDirectory": "frontend/dist",
   "headers": [
     {
+      "source": "/favicon-falcon-eye-v3.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/favicon-falcon-eye-v3.ico",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
       "source": "/favicon-falcon-eye-v2.png",
       "headers": [
         {
