@@ -36,7 +36,7 @@ export default function News() {
         "1040px";
 
     const textMaxWidth =
-        "760px";
+        "940px";
 
     const sectionPaddingTop =
         isMobile
@@ -50,19 +50,19 @@ export default function News() {
         fontFamily: FONT_CINZEL_DECORATIVE,
         fontSize:
             isMobile
-                ? "22px"
+                ? "20px"
                 : isTablet
-                    ? "28px"
-                    : "34px",
+                    ? "24px"
+                    : "28px",
         fontWeight: "700",
         letterSpacing:
             isMobile
-                ? "0.01em"
-                : "0.035em",
+                ? "0"
+                : "0.02em",
         lineHeight:
             isMobile
-                ? 1.3
-                : 1.24,
+                ? 1.22
+                : 1.18,
         margin: 0,
         textAlign: "center",
         textShadow:
@@ -74,10 +74,10 @@ export default function News() {
         fontFamily: FONT_IM_FELL,
         fontSize:
             isMobile
-                ? "16px"
+                ? "15px"
                 : isTablet
-                    ? "18px"
-                    : "20px",
+                    ? "16px"
+                    : "17px",
         fontWeight: "400",
         letterSpacing:
             isMobile
@@ -85,8 +85,8 @@ export default function News() {
                 : "0.012em",
         lineHeight:
             isMobile
-                ? 1.48
-                : 1.54,
+                ? 1.38
+                : 1.42,
         margin: 0,
         textAlign: "center",
         textShadow:
@@ -174,8 +174,8 @@ export default function News() {
                             alignItems: "center",
                             gap:
                                 isMobile
-                                    ? "12px"
-                                    : "15px"
+                                    ? "8px"
+                                    : "10px"
                         }}
                     >
                         <h1 style={headingStyle}>
