@@ -47,7 +47,7 @@ export default function News() {
 
     const sectionPaddingTop =
         isMobile
-            ? "24px"
+            ? "76px"
             : isTablet
                 ? "24px"
                 : "22px";
