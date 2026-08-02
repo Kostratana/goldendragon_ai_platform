@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 
 import agentsArchitectureImage from "../assets/agents.png";
+import tradingImage from "../assets/pub_trade.png";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
@@ -104,6 +105,36 @@ export default function News() {
             "0 0 18px rgba(216,176,122,0.22)"
     };
 
+    const imageStyle = {
+        display: "block",
+        width: "100%",
+        maxWidth: imageMaxWidth,
+        height: "auto",
+        objectFit: "contain",
+        borderRadius:
+            isMobile
+                ? "18px"
+                : "24px",
+        boxShadow:
+            `
+            0 0 0 1px rgba(216,176,122,0.16),
+            0 24px 64px rgba(0,0,0,0.42),
+            0 0 54px rgba(216,176,122,0.16)
+            `
+    };
+
+    const textBlockStyle = {
+        width: "100%",
+        maxWidth: textMaxWidth,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap:
+            isMobile
+                ? "8px"
+                : "10px"
+    };
+
     return (
         <main
             style={{
@@ -150,38 +181,10 @@ export default function News() {
                     <img
                         src={agentsArchitectureImage}
                         alt="AI Agent architecture"
-                        style={{
-                            display: "block",
-                            width: "100%",
-                            maxWidth: imageMaxWidth,
-                            height: "auto",
-                            objectFit: "contain",
-                            borderRadius:
-                                isMobile
-                                    ? "18px"
-                                    : "24px",
-                            boxShadow:
-                                `
-                                0 0 0 1px rgba(216,176,122,0.16),
-                                0 24px 64px rgba(0,0,0,0.42),
-                                0 0 54px rgba(216,176,122,0.16)
-                                `
-                        }}
+                        style={imageStyle}
                     />
 
-                    <div
-                        style={{
-                            width: "100%",
-                            maxWidth: textMaxWidth,
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            gap:
-                                isMobile
-                                    ? "8px"
-                                    : "10px"
-                        }}
-                    >
+                    <div style={textBlockStyle}>
                         <h1 style={headingStyle}>
                             <T>
                                 Build the Right AI Agent for Your Business
@@ -209,6 +212,44 @@ export default function News() {
                         <p style={contactStyle}>
                             <T>
                                 Contact us to start designing your AI solution.
+                            </T>
+                        </p>
+                    </div>
+
+                    <img
+                        src={tradingImage}
+                        alt="AI trading assistant"
+                        style={{
+                            ...imageStyle,
+                            marginTop:
+                                isMobile
+                                    ? "12px"
+                                    : "16px"
+                        }}
+                    />
+
+                    <div style={textBlockStyle}>
+                        <h2 style={headingStyle}>
+                            <T>
+                                Do You Trade?
+                            </T>
+                        </h2>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                Would you like to improve your trading performance and spend less time monitoring the market?
+                            </T>
+                        </p>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                The Dragon can help you analyze the market, identify trading opportunities, support your decision-making, and manage an AI trading robot built around your own strategies and risk management rules.
+                            </T>
+                        </p>
+
+                        <p style={paragraphStyle}>
+                            <T>
+                                If you're looking for a custom AI trading solution, let's discuss your ideas and build the right system for your trading style.
                             </T>
                         </p>
                     </div>
