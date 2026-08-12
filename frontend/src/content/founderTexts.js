@@ -112,10 +112,10 @@ export const FOUNDER_TEXT = {
         "Let's transform your ideas into intelligent technology.",
 
     FOUNDER_ROLE:
-        "Founder • AI Engineer",
+        "Founder • AI Systems Architect • AI/ML Engineer",
 
     FOUNDER_OWNER:
-        "Owner of {{studio}}",
+        "{{studio}}",
 
     BUTTON_EMAIL:
         "Email"

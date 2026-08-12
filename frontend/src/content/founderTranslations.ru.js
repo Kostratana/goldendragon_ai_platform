@@ -101,11 +101,11 @@ export const FOUNDER_TRANSLATIONS_RU = {
     "Let's transform your ideas into intelligent technology.":
         "Давайте превратим ваши идеи в интеллектуальные технологии.",
 
-    "Founder • AI Engineer":
-        "Основатель • AI-инженер",
+    "Founder • AI Systems Architect • AI/ML Engineer":
+        "Основатель • Архитектор AI-систем • AI/ML-инженер",
 
-    "Owner of {{studio}}":
-        "Владелец {{studio}}",
+    "{{studio}}":
+        "{{studio}}",
 
     "Email":
         "Email"
