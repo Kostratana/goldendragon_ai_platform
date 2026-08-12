@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "node scripts/generate-route-html.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

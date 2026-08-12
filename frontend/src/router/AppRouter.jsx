@@ -45,6 +45,26 @@ function PageMetadata() {
             .querySelector('meta[property="og:url"]')
             ?.setAttribute("content", metadata.canonical);
 
+        document
+            .querySelector('meta[property="og:title"]')
+            ?.setAttribute("content", metadata.ogTitle);
+
+        document
+            .querySelector('meta[property="og:description"]')
+            ?.setAttribute("content", metadata.ogDescription);
+
+        document
+            .querySelector('meta[property="og:type"]')
+            ?.setAttribute("content", metadata.ogType);
+
+        document
+            .querySelector('meta[name="twitter:title"]')
+            ?.setAttribute("content", metadata.twitterTitle);
+
+        document
+            .querySelector('meta[name="twitter:description"]')
+            ?.setAttribute("content", metadata.twitterDescription);
+
     }, [pathname]);
 
     return null;
