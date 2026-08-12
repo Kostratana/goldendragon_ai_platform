@@ -1,5 +1,11 @@
 {
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/api/health-support/upload",
+      "destination": "https://murzik-food-ai-91075651557.us-central1.run.app/api/upload"
+    }
+  ]
 }

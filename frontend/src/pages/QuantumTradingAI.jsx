@@ -353,7 +353,7 @@ export default function QuantumTradingAI() {
             "0 0 15px rgba(216,176,122,0.18)"
     };
 
-    function stopMurzikVoice() {
+    function stopAssistantVoice() {
 
         try {
 
@@ -370,7 +370,7 @@ export default function QuantumTradingAI() {
         } catch (error) {
 
             console.error(
-                "Murzik stop runtime error:",
+                "Assistant stop runtime error:",
                 error
             );
         }
@@ -419,7 +419,7 @@ export default function QuantumTradingAI() {
         link.href = url;
 
         link.download =
-            "murzik-chat.txt";
+            "golden-dragon-chat.txt";
 
         document.body.appendChild(link);
 
@@ -488,7 +488,7 @@ export default function QuantumTradingAI() {
 
             const responseText =
                 data.response ||
-                "Murzik returned an empty response.";
+                "The AI assistant returned an empty response.";
 
             setMessages(prev => [
                 ...prev,
@@ -501,7 +501,7 @@ export default function QuantumTradingAI() {
         } catch (error) {
 
             console.error(
-                "Murzik backend error:",
+                "Assistant backend error:",
                 error
             );
 
@@ -522,7 +522,7 @@ export default function QuantumTradingAI() {
 
         setMessages([]);
 
-        stopMurzikVoice();
+        stopAssistantVoice();
     }
 
     function updateEmbeddedChatSize(
@@ -1195,7 +1195,6 @@ export default function QuantumTradingAI() {
                         startBottomResize={startBottomResize}
                         voiceEnabled={voiceEnabled}
                         setVoiceEnabled={setVoiceEnabled}
-                        stopMurzikVoice={stopMurzikVoice}
                     />
 
                     {[

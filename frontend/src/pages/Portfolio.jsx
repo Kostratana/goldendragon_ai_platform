@@ -26,7 +26,7 @@ import {
     FONT_IM_FELL
 } from "../theme/fonts";
 
-import dragonEyeVideo from "../assets/murzik/murzik-eyes.mp4";
+import dragonEyeVideo from "../assets/assistant-eyes.mp4";
 
 const HERO_TITLE =
     "Selected AI Engineering Projects";

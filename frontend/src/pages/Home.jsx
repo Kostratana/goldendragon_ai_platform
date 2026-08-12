@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 import useFounderBreakpoints from "../hooks/useFounderBreakpoints";
 
-import murzikImage from "../assets/murzik/murzik-main.webp";
+import goldenDragonImage from "../assets/golden-dragon-main.webp";
 
 export default function Home() {
 
@@ -368,7 +368,7 @@ export default function Home() {
                             >
 
                                 <img
-                                    src={murzikImage}
+                                    src={goldenDragonImage}
                                     alt="Golden Dragon AI Studio"
                                     draggable={false}
                                     loading="eager"
@@ -457,7 +457,7 @@ export default function Home() {
                                     }}
                                 >
                                     <source
-                                        src="/videos/murzik-smoke-v2.mp4"
+                                        src="/videos/golden-dragon-smoke-v2.mp4"
                                         type="video/mp4"
                                     />
                                 </video>

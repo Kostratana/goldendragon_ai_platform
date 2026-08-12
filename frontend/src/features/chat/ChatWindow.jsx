@@ -5,7 +5,7 @@ import {
 
 import ReactMarkdown from "react-markdown";
 
-import murzikEyes from "../../assets/murzik/murzik-eyes.mp4";
+import assistantEyes from "../../assets/assistant-eyes.mp4";
 
 import ChatInput from "./ChatInput";
 
@@ -87,8 +87,6 @@ export default function ChatWindow({
 
     voiceEnabled,
     setVoiceEnabled,
-
-    stopMurzikVoice,
 
     uploadEndpoint,
     uploadQuestion,
@@ -265,14 +263,14 @@ export default function ChatWindow({
                 }
 
                 console.log(
-                    "Murzik upload result:",
+                    "Assistant upload result:",
                     result
                 );
 
             } catch (error) {
 
                 console.error(
-                    "Murzik upload error:",
+                    "Assistant upload error:",
                     error
                 );
 
@@ -548,7 +546,7 @@ export default function ChatWindow({
 
                             animation:
                                 `
-                                murzikSpark${index % 4}
+                                assistantSpark${index % 4}
                                 ${3.4 + index * 0.14}s
                                 linear
                                 infinite
@@ -732,7 +730,7 @@ export default function ChatWindow({
                         {item.role === "assistant" && (
 
                             <video
-                                src={murzikEyes}
+                                src={assistantEyes}
                                 autoPlay
                                 muted
                                 loop
@@ -940,13 +938,11 @@ export default function ChatWindow({
     voiceEnabled={voiceEnabled}
     setVoiceEnabled={setVoiceEnabled}
 
-    stopMurzikVoice={stopMurzikVoice}
-
 />
 
             <style>
                 {`
-                @keyframes murzikSpark0 {
+                @keyframes assistantSpark0 {
 
                     0% {
                         transform:
@@ -971,7 +967,7 @@ export default function ChatWindow({
                     }
                 }
 
-                @keyframes murzikSpark1 {
+                @keyframes assistantSpark1 {
 
                     0% {
                         transform:
@@ -996,7 +992,7 @@ export default function ChatWindow({
                     }
                 }
 
-                @keyframes murzikSpark2 {
+                @keyframes assistantSpark2 {
 
                     0% {
                         transform:
@@ -1021,7 +1017,7 @@ export default function ChatWindow({
                     }
                 }
 
-                @keyframes murzikSpark3 {
+                @keyframes assistantSpark3 {
 
                     0% {
                         transform:

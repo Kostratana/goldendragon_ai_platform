@@ -70,8 +70,6 @@ export const BRAND_TERMS =
         "Dragon Chat",
         "AI SOLUTIONS",
         "DRAGON CHAT",
-        "Murzik",
-        "MURZIK",
         "GitHub",
         "LinkedIn"
     ]);

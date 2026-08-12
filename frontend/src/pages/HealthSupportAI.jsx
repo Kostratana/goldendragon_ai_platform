@@ -31,7 +31,7 @@ import {
     FONT_IM_FELL
 } from "../theme/fonts";
 
-import foodMurzikImage from "../assets/food_murzik.png";
+import healthSupportImage from "../assets/health-support-ai.png";
 
 const HERO_TITLE =
     "Health Support AI";
@@ -47,7 +47,7 @@ const DRAGON_CHAT_ENDPOINT =
     "https://golden-dragon-backend-91075651557.us-central1.run.app/api/chat";
 
 const FOOD_AI_UPLOAD_ENDPOINT =
-    "https://murzik-food-ai-91075651557.us-central1.run.app/api/upload";
+    "/api/health-support/upload";
 
 function isRussianLanguage(language) {
 
@@ -465,7 +465,7 @@ export default function HealthSupportAI() {
             "0 0 15px rgba(216,176,122,0.18)"
     };
 
-    function stopMurzikVoice() {
+    function stopAssistantVoice() {
 
         try {
 
@@ -482,7 +482,7 @@ export default function HealthSupportAI() {
         } catch (error) {
 
             console.error(
-                "Murzik stop runtime error:",
+                "Assistant stop runtime error:",
                 error
             );
         }
@@ -531,7 +531,7 @@ export default function HealthSupportAI() {
         link.href = url;
 
         link.download =
-            "murzik-chat.txt";
+            "golden-dragon-chat.txt";
 
         document.body.appendChild(link);
 
@@ -641,7 +641,7 @@ export default function HealthSupportAI() {
                 data.formatted_response ||
                 data.response ||
                 data.message ||
-                "Murzik returned an empty response.";
+                "The AI assistant returned an empty response.";
 
             setMessages(prev => [
                 ...prev,
@@ -659,7 +659,7 @@ export default function HealthSupportAI() {
             }
 
             console.error(
-                "Murzik backend error:",
+                "Assistant backend error:",
                 error
             );
 
@@ -836,7 +836,7 @@ export default function HealthSupportAI() {
             }
         ]);
 
-        stopMurzikVoice();
+        stopAssistantVoice();
     }
 
     function updateEmbeddedChatSize(
@@ -1381,7 +1381,7 @@ export default function HealthSupportAI() {
                 }}
             >
                 <img
-                    src={foodMurzikImage}
+                    src={healthSupportImage}
                     alt={translatedProjectBannerAlt}
                     loading="eager"
                     decoding="async"
@@ -1392,6 +1392,8 @@ export default function HealthSupportAI() {
                             isMobile
                                 ? "100%"
                                 : "680px",
+                        aspectRatio: "1796 / 876",
+                        objectFit: "cover",
                         margin: "0 auto",
                         borderRadius:
                             isMobile
@@ -1509,7 +1511,6 @@ export default function HealthSupportAI() {
                         startBottomResize={startBottomResize}
                         voiceEnabled={voiceEnabled}
                         setVoiceEnabled={setVoiceEnabled}
-                        stopMurzikVoice={stopMurzikVoice}
                         uploadEndpoint={FOOD_AI_UPLOAD_ENDPOINT}
                         uploadQuestion={
                             lastRequestLanguage === "ru"

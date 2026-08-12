@@ -372,7 +372,7 @@ export default function EquineHealthAI() {
             "0 0 15px rgba(216,176,122,0.18)"
     };
 
-    function stopMurzikVoice() {
+    function stopAssistantVoice() {
 
         try {
 
@@ -389,7 +389,7 @@ export default function EquineHealthAI() {
         } catch (error) {
 
             console.error(
-                "Murzik stop runtime error:",
+                "Assistant stop runtime error:",
                 error
             );
         }
@@ -438,7 +438,7 @@ export default function EquineHealthAI() {
         link.href = url;
 
         link.download =
-            "murzik-chat.txt";
+            "golden-dragon-chat.txt";
 
         document.body.appendChild(link);
 
@@ -507,7 +507,7 @@ export default function EquineHealthAI() {
 
             const responseText =
                 data.response ||
-                "Murzik returned an empty response.";
+                "The AI assistant returned an empty response.";
 
             setMessages(prev => [
                 ...prev,
@@ -520,7 +520,7 @@ export default function EquineHealthAI() {
         } catch (error) {
 
             console.error(
-                "Murzik backend error:",
+                "Assistant backend error:",
                 error
             );
 
@@ -541,7 +541,7 @@ export default function EquineHealthAI() {
 
         setMessages([]);
 
-        stopMurzikVoice();
+        stopAssistantVoice();
     }
 
     function updateEmbeddedChatSize(
@@ -1214,7 +1214,6 @@ export default function EquineHealthAI() {
                         startBottomResize={startBottomResize}
                         voiceEnabled={voiceEnabled}
                         setVoiceEnabled={setVoiceEnabled}
-                        stopMurzikVoice={stopMurzikVoice}
                     />
 
                     {[

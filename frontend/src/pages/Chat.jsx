@@ -220,7 +220,7 @@ export default function Chat() {
     FUTURE BACKEND XTTS STOP
     */
 
-    function stopMurzikVoice() {
+    function stopAssistantVoice() {
 
         try {
 
@@ -237,7 +237,7 @@ export default function Chat() {
         } catch (error) {
 
             console.error(
-                "Murzik stop runtime error:",
+                "Assistant stop runtime error:",
                 error
             );
         }
@@ -247,7 +247,7 @@ export default function Chat() {
     FUTURE BACKEND XTTS AUDIO STREAM
     */
 
-    async function playMurzikAudio(
+    async function playAssistantAudio(
         audioUrl
     ) {
 
@@ -257,7 +257,7 @@ export default function Chat() {
                 return;
             }
 
-            stopMurzikVoice();
+            stopAssistantVoice();
 
             audioRuntimeRef.current =
                 new Audio(audioUrl);
@@ -273,7 +273,7 @@ export default function Chat() {
         } catch (error) {
 
             console.error(
-                "Murzik audio runtime error:",
+                "Assistant audio runtime error:",
                 error
             );
         }
@@ -322,7 +322,7 @@ function downloadMessages() {
     link.href = url;
 
     link.download =
-        "murzik-chat.txt";
+        "golden-dragon-chat.txt";
 
     document.body.appendChild(link);
 
@@ -392,7 +392,7 @@ async function sendMessage() {
 
         let responseText =
             data.response ||
-            "Murzik returned an empty response.";
+            "The AI assistant returned an empty response.";
 
         setMessages(prev => [
             ...prev,
@@ -407,7 +407,7 @@ async function sendMessage() {
 
         Example:
 
-        playMurzikAudio(
+        playAssistantAudio(
             backendAudioUrl
         );
         */
@@ -415,7 +415,7 @@ async function sendMessage() {
     } catch (error) {
 
     console.error(
-        "Murzik backend error:",
+        "Assistant backend error:",
         error
     );
 
@@ -437,7 +437,7 @@ async function sendMessage() {
 
         setMessages([]);
 
-        stopMurzikVoice();
+        stopAssistantVoice();
     }
 
     function updateLeadForm(
@@ -891,7 +891,7 @@ async function sendMessage() {
 
                 <img
                     src={chatMainImage}
-                    alt="Murzik"
+                    alt="Golden Dragon AI assistant"
                     loading="eager"
                     decoding="async"
                     style={{
@@ -1199,7 +1199,6 @@ async function sendMessage() {
 
                         voiceEnabled={voiceEnabled}
                         setVoiceEnabled={setVoiceEnabled}
-                        stopMurzikVoice={stopMurzikVoice}
                     />
 
                     {[
